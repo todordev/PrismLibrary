@@ -110,7 +110,9 @@ class Kunena implements ProfilesInterface
     {
         $link = "";
 
-        if (isset($this->profiles[$userId])) {
+        if (!isset($this->profiles[$userId])) {
+            $link = \JUri::root() . "media/kunena/avatars/" . $this->avatarSizes["small"]["noimage"];
+        } else {
             // Get avatar size.
             if (!empty($this->profiles[$userId]->avatar)) {
                 $folder = (!array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes["small"]["folder"] : $this->avatarSizes[$size]["folder"];
@@ -122,7 +124,6 @@ class Kunena implements ProfilesInterface
                     $link = \JUri::root() . "media/kunena/avatars/" . $noimage;
                 }
             }
-
         }
 
         return $link;

@@ -39,7 +39,8 @@ abstract class TableImmutable implements TableInterface
 
     abstract public function load($keys, $options = array());
     
-    final public function store() {
+    final public function store()
+    {
         throw new \Exception(\JText::sprintf("LIB_PRISM_ERROR_IMMUTABLE_OBJECT_STORE", get_class($this)));
     }
 

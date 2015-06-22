@@ -33,6 +33,9 @@ class Constants
     const ENABLED = 1;
     const DISABLED = 0;
 
+    const VERIFIED     = 1;
+    const NOT_VERIFIED = 0;
+
     // Mail modes - html and plain text.
     const MAIL_MODE_HTML  = true;
     const MAIL_MODE_PLAIN = false;

@@ -166,7 +166,7 @@ class File
      */
     public function addRemover(RemoverInterface $remover, $reset = false)
     {
-        if (!empty($reset)) {
+        if ($reset) {
             $this->removers = array();
         }
 

@@ -45,8 +45,8 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStylesheet(JUri::root() . 'libraries/prism/ui/css/jquery.pnotify.css');
-        $document->addScript(JUri::root() . 'libraries/prism/ui/js/jquery.pnotify.min.js');
+        $document->addStylesheet(JUri::root() . 'libraries/Prism/ui/pnotify/css/jquery.pnotify.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/pnotify/js/jquery.pnotify.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -71,8 +71,8 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStylesheet(JUri::root() . 'libraries/prism/ui/bootstrap2/css/bootstrap-editable.css');
-        $document->addScript(JUri::root() . 'libraries/prism/ui/bootstrap2/js/bootstrap-editable.js');
+        $document->addStylesheet(JUri::root() . 'libraries/Prism/ui/bootstrap2/editable/css/bootstrap-editable.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap2/editable/js/bootstrap-editable.js');
 
         self::$loaded[__METHOD__] = true;
 
@@ -98,8 +98,8 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStylesheet(JUri::root() . 'libraries/prism/ui/bootstrap3/css/bootstrap-editable.css');
-        $document->addScript(JUri::root() . 'libraries/prism/ui/bootstrap3/js/bootstrap-editable.js');
+        $document->addStylesheet(JUri::root() . 'libraries/Prism/ui/bootstrap3/editable/css/bootstrap-editable.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/editable/js/bootstrap-editable.js');
 
         self::$loaded[__METHOD__] = true;
 
@@ -125,7 +125,7 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addScript(JUri::root() . 'libraries/prism/ui/js/bootstrap-maxlength.min.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap-maxlength.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -148,8 +148,8 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStylesheet(JUri::root() . 'libraries/prism/ui/css/bootstrap-fileuploadstyle.min.css');
-        $document->addScript(JUri::root() . 'libraries/prism/ui/js/bootstrap-fileuploadstyle.min.js');
+        $document->addStylesheet(JUri::root() . 'libraries/Prism/ui/fileuploadstyle/css/bootstrap-fileuploadstyle.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/fileuploadstyle/js/bootstrap-fileuploadstyle.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -174,7 +174,7 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addScript(JUri::root() . 'libraries/prism/ui/bootstrap2/js/bootstrap-filestyle.min.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap2/bootstrap-filestyle.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -199,13 +199,67 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addScript(JUri::root() . 'libraries/prism/ui/bootstrap3/js/bootstrap-filestyle.min.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/bootstrap-filestyle.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
 
     /**
-     * Include Bootstrap 3 Typehead library.
+     * Include Bootstrap Fileinput library (BS v3).
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('prism.ui.bootstrap3Fileinput');
+     * </code>
+     *
+     * @link https://github.com/kartik-v/bootstrap-fileinput Documentation of Bootstrap Fileinput
+     */
+    public static function bootstrap3Fileinput()
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/fileinput/css/fileinput.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/fileinput/js/fileinput.min.js');
+
+        self::$loaded[__METHOD__] = true;
+    }
+
+    /**
+     * Include Bootstrap Datetime Picker Library (BS v3).
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('prism.ui.bootstrapDatepicker');
+     * </code>
+     *
+     * @link http://eonasdan.github.io/bootstrap-datetimepicker/ Documentation of Bootstrap Datepicker
+     */
+    public static function bootstrapDatepicker()
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/datetimepicker/js/moment-with-locales.min.js');
+
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/datetimepicker/css/bootstrap-datetimepicker.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/datetimepicker/js/bootstrap-datetimepicker.min.js');
+
+        self::$loaded[__METHOD__] = true;
+    }
+
+    /**
+     * Include Bootstrap 3 Typeahead library.
      *
      * <code>
      * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
@@ -213,7 +267,7 @@ abstract class PrismUI
      * JHtml::_('prism.ui.bootstrapTypeahead');
      * </code>
      *
-     * @link https://github.com/bassjobsen/Bootstrap-3-Typeahead Documentation of Bootstrap 3 Typehead
+     * @link https://github.com/twitter/typeahead.js Documentation of Bootstrap 3 Typeahead
      */
     public static function bootstrapTypeahead()
     {
@@ -223,7 +277,8 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addScript(JUri::root() . 'libraries/prism/ui/js/bootstrap-typeahead.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/typeahead/css/typeahead.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/typeahead/js/typeahead.bundle.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -248,7 +303,7 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addScript(JUri::root() . 'libraries/prism/ui/js/parsley.min.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/parsley.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -271,7 +326,7 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addScript(JUri::root() . 'libraries/prism/ui/js/joomla/helper.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/joomla/helper.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -295,11 +350,12 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addStylesheet(JUri::root() . 'libraries/prism/ui/css/jquery.fileupload-ui.css');
+        $document->addStylesheet(JUri::root() . 'libraries/Prism/ui/fileupload/css/jquery.fileupload.css');
+//        $document->addStylesheet(JUri::root() . 'libraries/Prism/ui/fileupload/css/jquery.fileupload-ui.css');
 
-        $document->addScript(JUri::root() . 'libraries/prism/ui/js/fileupload/jquery.ui.widget.js');
-        $document->addScript(JUri::root() . 'libraries/prism/ui/js/fileupload/jquery.iframe-transport.js');
-        $document->addScript(JUri::root() . 'libraries/prism/ui/js/fileupload/jquery.fileupload.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/fileupload/js/jquery.ui.widget.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/fileupload/js/jquery.iframe-transport.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/fileupload/js/jquery.fileupload.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -327,7 +383,7 @@ abstract class PrismUI
         $document = JFactory::getDocument();
 
         if (!$cdn) {
-            $document->addScript(JUri::root() . 'libraries/prism/ui/js/d3/d3.min.js');
+            $document->addScript(JUri::root() . 'libraries/Prism/ui/d3/js/d3.min.js');
         } else {
             $document->addScript("//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js");
         }
@@ -355,8 +411,8 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addScript(JUri::root() . 'libraries/prism/ui/js/cropper.min.js');
-        $document->addStyleSheet(JUri::root() . 'libraries/prism/ui/css/cropper.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/cropper/js/cropper.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/cropper/css/cropper.min.css');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -378,8 +434,85 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addScript(JUri::root() . 'libraries/prism/ui/js/joomla/list.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/joomla/list.js');
 
         self::$loaded[__METHOD__] = true;
+    }
+
+    /**
+     * Displays a calendar control field based on Twitter Bootstrap 3
+     *
+     * @param   string  $value    The date value
+     * @param   string  $name     The name of the text field
+     * @param   string  $id       The id of the text field
+     * @param   string  $format   The date format
+     * @param   mixed   $attributes  Additional HTML attributes
+     *
+     * @return  string  HTML markup for a calendar field
+     *
+     * @since   1.5
+     * @see http://eonasdan.github.io/bootstrap-datetimepicker/
+     */
+    public static function calendar($value, $name, $id, $format = 'Y-m-d', $attributes = null)
+    {
+        static $done;
+
+        if ($done === null) {
+            $done = array();
+        }
+
+        $readonly = isset($attributes['readonly']) && $attributes['readonly'] == 'readonly';
+        $disabled = isset($attributes['disabled']) && $attributes['disabled'] == 'disabled';
+
+        if (is_array($attributes)) {
+            $attributes['class'] = isset($attributes['class']) ? $attributes['class'] : 'form-control';
+            $attributes['class'] = trim($attributes['class'] . ' hasTooltip');
+
+            $attributes = JArrayHelper::toString($attributes);
+        }
+
+        // Format value when not nulldate ('0000-00-00 00:00:00'), otherwise blank it as it would result in 1970-01-01.
+        if ((int) $value && $value != JFactory::getDbo()->getNullDate()) {
+            $date = new DateTime($value, new DateTimeZone('UTC'));
+            $inputvalue = $date->format($format);
+        } else {
+            $inputvalue = '';
+        }
+
+        // Load the calendar behavior
+        JHtml::_('prism.ui.bootstrapDatepicker');
+        $languageTag = JFactory::getLanguage()->getTag();
+        $locale = substr($languageTag, 0, 2);
+
+        // Only display the triggers once for each control.
+        if (!in_array($id, $done)) {
+
+            $calendarDateFormat = CrowdfundingHelper::getDateFormat(true);
+
+            $document = JFactory::getDocument();
+            $document
+                ->addScriptDeclaration(
+                    'jQuery(document).ready(function($) {
+                        jQuery("#'.$id.'_datepicker").datetimepicker({
+                            format: "'.$calendarDateFormat.'",
+                            locale: "'.Joomla\String\String::strtolower($locale).'",
+                            allowInputToggle: true
+                        });
+                    });'
+                );
+
+            $done[] = $id;
+        }
+
+        // Hide button using inline styles for readonly/disabled fields
+        $btn_style	= ($readonly || $disabled) ? ' style="display:none;"' : '';
+
+        return '<div class="input-group date" id="'.$id.'_datepicker">
+                    <input type="text" title="' . ($inputvalue ? JHtml::_("date", $value, null, null) : "").'"
+                    name="' . $name . '" id="' . $id . '" value="' . htmlspecialchars($inputvalue, ENT_COMPAT, 'UTF-8') . '" ' . $attributes . ' />
+                    <span class="input-group-addon" id="' . $id . '_img">
+                        <span class="glyphicon glyphicon-calendar" id="' . $id . '_icon"' . $btn_style . '></span>
+                    </span>
+                </div>';
     }
 }

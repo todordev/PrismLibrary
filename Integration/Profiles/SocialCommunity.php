@@ -130,6 +130,8 @@ class SocialCommunity implements ProfilesInterface
     {
         $link = "";
         if (!isset($this->profiles[$userId])) {
+            $link   = \JUri::root() . "media/com_socialcommunity/images/" . $this->avatarSizes["square"]["default"];
+        } else {
             // Get avatar size.
             $avatar = (isset($this->avatarSizes[$size])) ? $this->avatarSizes[$size]["image"] : null;
 

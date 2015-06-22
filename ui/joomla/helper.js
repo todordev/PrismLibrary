@@ -2,7 +2,7 @@ var PrismUIHelper = {
 		
 	displayMessageSuccess: function(title, text) {
 		
-	    jQuery.pnotify({
+	    new PNotify({
 	        title: title,
 	        text: text,
 	        icon: "icon-ok",
@@ -10,8 +10,8 @@ var PrismUIHelper = {
         });
 	},
 	displayMessageFailure: function(title, text) {
-		
-		jQuery.pnotify({
+
+        new PNotify({
 	        title: title,
 	        text: text,
 	        icon: 'icon-warning-sign',
@@ -19,8 +19,8 @@ var PrismUIHelper = {
         });
 	},
 	displayMessageInfo: function(title, text) {
-		
-		jQuery.pnotify({
+
+        new PNotify({
 	        title: title,
 	        text: text,
 	        icon: 'icon-info',

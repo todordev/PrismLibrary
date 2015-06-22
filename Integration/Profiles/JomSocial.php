@@ -110,7 +110,9 @@ class JomSocial implements ProfilesInterface
     {
         $link = "";
 
-        if (isset($this->profiles[$userId])) {
+        if (!isset($this->profiles[$userId])) {
+            $link = \JUri::root() . "components/com_community/assets/default_thumb.jpg";
+        } else {
             // Get avatar size.
             $avatar = (isset($this->avatarSizes[$size])) ? $this->avatarSizes[$size] : null;
 
@@ -121,7 +123,6 @@ class JomSocial implements ProfilesInterface
             } else {
                 $link = \JUri::root() . $this->profiles[$userId]->$avatar;
             }
-
         }
 
         return $link;

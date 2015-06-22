@@ -10,7 +10,7 @@
 defined('JPATH_PLATFORM') or die;
 
 if (!defined("PRISM_PATH_LIBRARY")) {
-    define("PRISM_PATH_LIBRARY", JPATH_LIBRARIES . "/prism");
+    define("PRISM_PATH_LIBRARY", JPATH_LIBRARIES . "/Prism");
 }
 
 jimport("joomla.filesystem.file");

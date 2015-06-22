@@ -114,7 +114,9 @@ class EasySocial implements ProfilesInterface
     public function getAvatar($userId, $size = "small", $returnDefault = true)
     {
         $link = "";
-        if (isset($this->profiles[$userId])) {
+        if (!isset($this->profiles[$userId])) {
+            $link = \JUri::root() . "media/com_easysocial/defaults/avatars/user/".$this->avatarSizes["small"].".png";
+        } else {
             $avatar = (!isset($this->avatarSizes[$size])) ? $this->avatarSizes["small"] : $this->avatarSizes[$size];
 
             if (!empty($this->profiles[$userId]->$avatar)) {

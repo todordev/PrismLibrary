@@ -115,8 +115,9 @@ class EasyProfile implements ProfilesInterface
     public function getAvatar($userId, $size = "small", $returnDefault = true)
     {
         $link = "";
-        if (isset($this->profiles[$userId])) {
-
+        if (!isset($this->profiles[$userId])) {
+            $link = \JUri::root() . "components/com_jsn/assets/img/default.jpg";
+        } else {
             $avatar = (!isset($this->avatarSizes[$size])) ? null : $this->avatarSizes[$size];
 
             if (!empty($this->profiles[$userId]->avatar)) {
@@ -134,7 +135,6 @@ class EasyProfile implements ProfilesInterface
                     $link = \JUri::root() . "components/com_jsn/assets/img/default.jpg";
                 }
             }
-
         }
 
         return $link;
