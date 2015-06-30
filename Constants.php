@@ -36,6 +36,9 @@ class Constants
     const VERIFIED     = 1;
     const NOT_VERIFIED = 0;
 
+    const FOLLOWED     = 1;
+    const UNFOLLOWED   = 0;
+
     // Mail modes - html and plain text.
     const MAIL_MODE_HTML  = true;
     const MAIL_MODE_PLAIN = false;

@@ -259,17 +259,17 @@ abstract class PrismUI
     }
 
     /**
-     * Include Bootstrap 3 Typeahead library.
+     * Include Bootstrap 2 Typeahead library.
      *
      * <code>
      * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
      *
-     * JHtml::_('prism.ui.bootstrapTypeahead');
+     * JHtml::_('prism.ui.bootstrapTypeahead2');
      * </code>
      *
-     * @link https://github.com/twitter/typeahead.js Documentation of Bootstrap 3 Typeahead
+     * @link http://plugins.upbootstrap.com/bootstrap-ajax-typeahead/#docs Documentation of Bootstrap 2 Typeahead
      */
-    public static function bootstrapTypeahead()
+    public static function bootstrapTypeahead2()
     {
         // Only load once
         if (!empty(self::$loaded[__METHOD__])) {
@@ -277,8 +277,32 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/typeahead/css/typeahead.css');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/typeahead/js/typeahead.bundle.min.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap2/bootstrap-typeahead.min.js');
+
+        self::$loaded[__METHOD__] = true;
+    }
+
+    /**
+     * Include Bootstrap 3 Typeahead library.
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('prism.ui.bootstrapTypeahead3');
+     * </code>
+     *
+     * @link https://github.com/twitter/typeahead.js Documentation of Bootstrap 3 Typeahead
+     */
+    public static function bootstrapTypeahead3()
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/bootstrap3/typeahead/css/typeahead.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/typeahead/js/typeahead.bundle.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
