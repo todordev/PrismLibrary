@@ -34,8 +34,8 @@ class EasyProfile implements ProfilesInterface
     protected $avatarSizes = array(
         "icon"   => "mini_",
         "small"  => "mini_",
-        "medium" => "",
-        "large"  => "",
+        "medium" => "_",
+        "large"  => "_",
     );
 
     /**
