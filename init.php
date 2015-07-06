@@ -67,4 +67,4 @@ JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
 
 // Load library language.
 $lang = JFactory::getLanguage();
-$lang->load('lib_itprism', PRISM_PATH_LIBRARY);
+$lang->load('lib_prism', PRISM_PATH_LIBRARY);
