@@ -72,7 +72,7 @@ abstract class PrismUI
         $document = JFactory::getDocument();
 
         $document->addStylesheet(JUri::root() . 'libraries/Prism/ui/bootstrap2/editable/css/bootstrap-editable.css');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap2/editable/js/bootstrap-editable.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap2/editable/js/bootstrap-editable.min.js');
 
         self::$loaded[__METHOD__] = true;
 
@@ -264,12 +264,12 @@ abstract class PrismUI
      * <code>
      * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
      *
-     * JHtml::_('prism.ui.bootstrapTypeahead2');
+     * JHtml::_('prism.ui.bootstrap2Typeahead');
      * </code>
      *
      * @link http://plugins.upbootstrap.com/bootstrap-ajax-typeahead/#docs Documentation of Bootstrap 2 Typeahead
      */
-    public static function bootstrapTypeahead2()
+    public static function bootstrap2Typeahead()
     {
         // Only load once
         if (!empty(self::$loaded[__METHOD__])) {
@@ -288,12 +288,12 @@ abstract class PrismUI
      * <code>
      * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
      *
-     * JHtml::_('prism.ui.bootstrapTypeahead3');
+     * JHtml::_('prism.ui.bootstrap3Typeahead');
      * </code>
      *
      * @link https://github.com/twitter/typeahead.js Documentation of Bootstrap 3 Typeahead
      */
-    public static function bootstrapTypeahead3()
+    public static function bootstrap3Typeahead()
     {
         // Only load once
         if (!empty(self::$loaded[__METHOD__])) {
