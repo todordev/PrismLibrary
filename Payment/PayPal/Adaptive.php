@@ -15,8 +15,6 @@ use Joomla\Registry\Registry;
 // no direct access
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Prism\\Payment\\PayPal\\Adaptive\\Response", JPATH_LIBRARIES . '/prism/payment/paypal/adaptive/response.php');
-
 jimport("joomla.http.http");
 jimport("joomla.http.transport.curl");
 

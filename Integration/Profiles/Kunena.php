@@ -11,8 +11,6 @@ namespace Prism\Integration\Profiles;
 
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Prism\\Integration\\Profiles\\ProfilesInterface", JPATH_LIBRARIES . '/prism/integration/profiles/profilesinterface.php');
-
 /**
  * This class provides functionality used for integrating
  * extensions with the profile of Kunena.

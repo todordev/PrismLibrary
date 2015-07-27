@@ -11,7 +11,7 @@
 (function ($) {
     "use strict";
 
-    $.fn.fileinputLocales.pl = {
+    $.fn.fileinputLocales['pl'] = {
         fileSingle: 'plik',
         filePlural: 'pliki',
         browseLabel: 'Przeglądaj &hellip;',
@@ -36,6 +36,10 @@
         msgProgress: 'Wczytywanie pliku {index} z {files} - {name} - {percent}% zakończone.',
         msgSelected: '{n} {files} zaznaczonych',
         msgFoldersNotAllowed: 'Metodą przeciągnij i upuść, można przenosić tylko pliki. Pominięto {n} katalogów.',
+        msgImageWidthSmall: 'Szerokość pliku obrazu "{name}" musi być co najmniej {size} px.',
+        msgImageHeightSmall: 'Wysokość pliku obrazu "{name}" musi być co najmniej {size} px.',
+        msgImageWidthLarge: 'Szerokość pliku obrazu "{name}" nie może przekraczać {size} px.',
+        msgImageHeightLarge: 'Wysokość pliku obrazu "{name}" nie może przekraczać {size} px.',
         dropZoneTitle: 'Przeciągnij i upuść pliki tu &hellip;'
     };
 })(window.jQuery);

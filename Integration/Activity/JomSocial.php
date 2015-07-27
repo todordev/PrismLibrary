@@ -11,8 +11,6 @@ namespace Prism\Integration\Activity;
 
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Prism\\Integration\\Activity\\ActivityInterface", JPATH_LIBRARIES . '/prism/integration/activity/activityinterface.php');
-
 /**
  * This class provides functionality to
  * integrate extensions with the activities of JomSocial.

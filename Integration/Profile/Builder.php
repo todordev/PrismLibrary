@@ -76,7 +76,6 @@ class Builder
                 $params = \JComponentHelper::getParams("com_socialcommunity");
                 $path   = $params->get("images_directory", "/images/profiles");
 
-                \JLoader::register("Prism\\Integration\\Profile\\SocialCommunity", JPATH_LIBRARIES . '/prism/integration/profile/socialcommunity.php');
                 $profile = new SocialCommunity(\JFactory::getDbo());
                 $profile->load($userId);
                 $profile->setPath($path);
@@ -85,7 +84,6 @@ class Builder
 
             case "gravatar":
 
-                \JLoader::register("Prism\\Integration\\Profile\\Gravatar", JPATH_LIBRARIES . '/prism/integration/profile/gravatar.php');
                 $profile = new Gravatar(\JFactory::getDbo());
                 $profile->load($userId);
 
@@ -93,7 +91,6 @@ class Builder
 
             case "kunena":
 
-                \JLoader::register("Prism\\Integration\\Profile\\Kunena", JPATH_LIBRARIES . '/prism/integration/profile/kunena.php');
                 $profile = new Kunena(\JFactory::getDbo());
                 $profile->load($userId);
 
@@ -106,7 +103,6 @@ class Builder
                     \JLoader::register("CRoute", JPATH_SITE."/components/com_community/libraries/core.php");
                 }
 
-                \JLoader::register("Prism\\Integration\\Profile\\JomSocial", JPATH_LIBRARIES . '/prism/integration/profile/jomsocial.php');
                 $profile = new JomSocial(\JFactory::getDbo());
                 $profile->load($userId);
 
@@ -114,7 +110,6 @@ class Builder
 
             case "easysocial":
 
-                \JLoader::register("Prism\\Integration\\Profile\\EasySocial", JPATH_LIBRARIES . '/prism/integration/profile/easysocial.php');
                 $profile = new EasySocial(\JFactory::getDbo());
                 $profile->load($userId);
 
@@ -122,7 +117,6 @@ class Builder
 
             case "easyprofile":
 
-                \JLoader::register("Prism\\Integration\\Profile\\EasyProfile", JPATH_LIBRARIES . '/prism/integration/profile/easyprofile.php');
                 $profile = new EasyProfile(\JFactory::getDbo());
                 $profile->load($userId);
 

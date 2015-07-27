@@ -11,7 +11,7 @@
 (function ($) {
     "use strict";
 
-    $.fn.fileinputLocales.sk = {
+    $.fn.fileinputLocales['sk'] = {
         fileSingle: 'súbor',
         filePlural: 'súbory',
         browseLabel: 'Vybrať &hellip;',
@@ -36,6 +36,10 @@
         msgProgress: 'Nahrávanie súboru {index} z {files} - {name} - {percent}% dokončené.',
         msgSelected: '{n} {files} vybraté',
         msgFoldersNotAllowed: 'Tiahni a pusť iba súbory! Vynechané {n} pustené prečinok(y).',
+        msgImageWidthSmall: 'Šírka image súboru "{name}", musí byť minimálne {size} px.',
+        msgImageHeightSmall: 'Výška image súboru "{name}", musí byť minimálne {size} px.',
+        msgImageWidthLarge: 'Šírka image súboru "{name}" nemôže presiahnuť {size} px.',
+        msgImageHeightLarge: 'Výška súboru obrazu "{name}" nesmie presiahnuť {size} px.',
         dropZoneTitle: 'Tiahni a pusť súbory tu &hellip;'
     };
 })(window.jQuery);

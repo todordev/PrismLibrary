@@ -11,7 +11,7 @@
 (function ($) {
     "use strict";
 
-    $.fn.fileinputLocales.nl = {
+    $.fn.fileinputLocales['nl'] = {
         fileSingle: 'bestand',
         filePlural: 'bestanden',
         browseLabel: 'Zoek &hellip;',
@@ -36,6 +36,10 @@
         msgProgress: 'Bestanden laden {index} van de {files} - {name} - {percent}% compleet.',
         msgSelected: '{n} {files} geselecteerd',
         msgFoldersNotAllowed: 'Drag & drop bestanden alleen! overgeslagen {n} mappen(s).',
+        msgImageWidthSmall: 'Breedte van de image-bestand "{name}" moet minstens {size} px zijn.',
+        msgImageHeightSmall: 'Hoogte van de beeld bestand "{name}" moet minstens {size} px zijn.',
+        msgImageWidthLarge: 'Breedte van de image-bestand "{name}" kan niet hoger zijn dan {size} px.',
+        msgImageHeightLarge: 'Hoogte van het beeld bestand "{name}" kan niet hoger zijn dan {size} px.',
         dropZoneTitle: 'Drag & drop bestanden hier &hellip;'
     };
 })(window.jQuery);

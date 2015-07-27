@@ -13,8 +13,6 @@ use Prism\validator\Validator;
 
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Prism\\validator\\Validator", JPATH_LIBRARIES . "/prism/validator/validator.php");
-
 /**
  * This class provides functionality for validating an image size.
  *

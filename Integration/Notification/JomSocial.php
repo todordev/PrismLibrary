@@ -11,8 +11,6 @@ namespace Prism\Integration\Notification;
 
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Prism\\Integration\\Notification\\NotificationInterface", JPATH_LIBRARIES . '/prism/integration/notification/notificationinterface.php');
-
 /**
  * This class provides functionality to
  * integrate extensions with JomSocial notifications.

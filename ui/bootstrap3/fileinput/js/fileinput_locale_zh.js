@@ -12,7 +12,7 @@
 (function ($) {
     "use strict";
 
-    $.fn.fileinputLocales.zh = {
+    $.fn.fileinputLocales['zh'] = {
         fileSingle: '文件',
         filePlural: '多个文件',
         browseLabel: '选择 &hellip;',
@@ -37,6 +37,10 @@
         msgProgress: '加载第 {index} 文件 共 {files} - {name} - {percent}% 完成.',
         msgSelected: '{n} {files} 选中',
         msgFoldersNotAllowed: '只支持拖拽文件! 跳过 {n} 拖拽的文件夹.',
+        msgImageWidthSmall: '宽度的图像文件的"{name}"的必须是至少{size}像素.',
+        msgImageHeightSmall: '图像文件的"{name}"的高度必须至少为{size}像素.',
+        msgImageWidthLarge: '宽度的图像文件"{name}"不能超过{size}像素.',
+        msgImageHeightLarge: '图像文件"{name}"的高度不能超过{size}像素.',
         dropZoneTitle: '拖拽文件到这里 &hellip;',
         slugCallback: function(text) {
             return text ? text.split(/(\\|\/)/g).pop().replace(/[^\w\u4e00-\u9fa5\-.\\\/ ]+/g, '') : '';

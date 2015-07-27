@@ -14,8 +14,6 @@ use Joomla\Utilities\ArrayHelper;
 // no direct access
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Prism\\Transifex\\Response", JPATH_LIBRARIES . "/prism/transifex/response.php");
-
 /**
  * This class provides functionality for making requests to Transifex servers.
  *

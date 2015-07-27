@@ -15,8 +15,6 @@ use Joomla\Utilities\ArrayHelper;
 // no direct access
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Prism\\Payment\\AuthorizeNet\\Form", JPATH_LIBRARIES . "/prism/payment/authorizenet/form.php");
-
 /**
  * This class contains methods that is used for managing Direct Post Method.
  *

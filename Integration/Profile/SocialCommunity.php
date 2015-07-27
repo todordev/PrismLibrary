@@ -13,9 +13,7 @@ use Joomla\Registry\Registry;
 
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Prism\\Integration\\Profile\\ProfileInterface", JPATH_LIBRARIES . '/prism/integration/profile/profileinterface.php');
-
-jimport("socialcommunity.init");
+jimport("SocialCommunity.init");
 
 /**
  * This class provides functionality to

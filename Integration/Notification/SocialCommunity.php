@@ -9,12 +9,11 @@
 
 namespace Prism\Integration\Notification;
 
+use SocialCommunity\Notification;
+
 defined('JPATH_PLATFORM') or die;
 
-jimport("socialcommunity.init");
-
-\JLoader::register("Prism\\Integration\\Notification\\NotificationInterface", JPATH_LIBRARIES . '/prism/integration/notification/notificationinterface.php');
-\JLoader::register("SocialCommunity\\Notification", JPATH_LIBRARIES . '/socialcommunity/notification.php');
+jimport("SocialCommunity.init");
 
 /**
  * This class provides functionality to
@@ -100,7 +99,7 @@ class SocialCommunity implements NotificationInterface
             $this->content = $content;
         }
 
-        $notification = new \SocialCommunity\Notification(\JFactory::getDbo());
+        $notification = new Notification(\JFactory::getDbo());
 
         $notification->setContent($this->content);
         $notification->setUserId($this->user_id);

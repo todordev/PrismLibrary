@@ -14,9 +14,7 @@ use Joomla\Utilities\ArrayHelper;
 
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Prism\\Integration\\Profiles\\ProfilesInterface", JPATH_LIBRARIES . '/prism/integration/profiles/profilesinterface.php');
-
-jimport("socialcommunity.init");
+jimport("SocialCommunity.init");
 
 /**
  * This class provides functionality used for integrating

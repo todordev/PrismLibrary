@@ -76,7 +76,6 @@ class Builder
                 $params = \JComponentHelper::getParams("com_socialcommunity");
                 $path   = $params->get("images_directory", "/images/profiles");
 
-                \JLoader::register("Prism\\Integration\\Profiles\\SocialCommunity", JPATH_LIBRARIES . '/prism/integration/profiles/socialcommunity.php');
                 $profiles = new SocialCommunity(\JFactory::getDbo());
                 $profiles->load($usersIds);
                 $profiles->setPath($path);
@@ -85,7 +84,6 @@ class Builder
 
             case "gravatar":
 
-                \JLoader::register("Prism\\Integration\\Profiles\\Gravatar", JPATH_LIBRARIES . '/prism/integration/profiles/gravatar.php');
                 $profiles = new Gravatar(\JFactory::getDbo());
                 $profiles->load($usersIds);
 
@@ -93,7 +91,6 @@ class Builder
 
             case "kunena":
 
-                \JLoader::register("Prism\\Integration\\Profiles\\Kunena", JPATH_LIBRARIES . '/prism/integration/profiles/kunena.php');
                 $profiles = new Kunena(\JFactory::getDbo());
                 $profiles->load($usersIds);
 
@@ -106,7 +103,6 @@ class Builder
                     \JLoader::register("CRoute", JPATH_SITE."/components/com_community/libraries/core.php");
                 }
 
-                \JLoader::register("Prism\\Integration\\Profiles\\JomSocial", JPATH_LIBRARIES . '/prism/integration/profiles/jomsocial.php');
                 $profiles = new JomSocial(\JFactory::getDbo());
                 $profiles->load($usersIds);
 
@@ -114,7 +110,6 @@ class Builder
 
             case "easysocial":
 
-                \JLoader::register("Prism\\Integration\\Profiles\\EasySocial", JPATH_LIBRARIES . '/prism/integration/profiles/easysocial.php');
                 $profiles = new EasySocial(\JFactory::getDbo());
                 $profiles->load($usersIds);
 
@@ -122,7 +117,6 @@ class Builder
 
             case "easyprofile":
 
-                \JLoader::register("Prism\\Integration\\Profiles\\EasyProfile", JPATH_LIBRARIES . '/prism/integration/profiles/easyprofile.php');
                 $profiles = new EasyProfile(\JFactory::getDbo());
                 $profiles->load($usersIds);
 

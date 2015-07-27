@@ -13,8 +13,6 @@ use Prism\File\RemoverInterface;
 
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Prism\\File\\RemoverInterface", JPATH_LIBRARIES . "/prism/file/removerinterface.php");
-
 /**
  * This class provides functionality for removing file.
  *

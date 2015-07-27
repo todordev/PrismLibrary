@@ -32,13 +32,28 @@ abstract class Table implements TableInterface
      *
      * @param \JDatabaseDriver $db
      */
-    public function __construct(\JDatabaseDriver $db)
+    public function __construct(\JDatabaseDriver $db = null)
     {
         $this->db = $db;
     }
 
     abstract public function load($keys, $options = array());
     abstract public function store();
+
+    /**
+     * Set database object.
+     *
+     * <code>
+     * $notification   = new Gamification\Notification();
+     * $notification->setDb(\JFactory::getDbo());
+     * </code>
+     *
+     * @param \JDatabaseDriver $db
+     */
+    public function setDb(\JDatabaseDriver $db)
+    {
+        $this->db = $db;
+    }
 
     /**
      * Set notification data to object parameters.
@@ -135,5 +150,31 @@ abstract class Table implements TableInterface
         }
 
         return $vars;
+    }
+
+    /**
+     * Reset the properties of the object.
+     *
+     * <code>
+     * $notificationId = 1;
+     *
+     * $notification   = new Gamification\Notification(\JFactory::getDbo());
+     * $notification->load($notificationId);
+     *
+     * if (...) {
+     *    $notification->reset();
+     * }
+     * </code>
+     */
+    public function reset()
+    {
+        $parameters = get_object_vars($this);
+        foreach ($parameters as $key) {
+            if (is_string($key) and strcmp("db", $key) == 0) {
+                continue;
+            }
+
+            $this->$key = null;
+        }
     }
 }

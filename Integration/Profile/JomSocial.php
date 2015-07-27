@@ -11,7 +11,6 @@ namespace Prism\Integration\Profile;
 
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Prism\\Integration\\Profile\\ProfileInterface", JPATH_LIBRARIES . '/prism/integration/profile/profileinterface.php');
 \JLoader::register("CRoute", JPATH_ROOT . '/components/com_community/libraries/core.php');
 
 /**

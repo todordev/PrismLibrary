@@ -13,9 +13,6 @@ use Gamification\Notification;
 
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Prism\\Integration\\Notification\\NotificationInterface", JPATH_LIBRARIES . '/prism/integration/notification/notificationinterface.php');
-\JLoader::register("Gamification\\Notification", JPATH_LIBRARIES . '/gamification/notification.php');
-
 /**
  * This class provides functionality to
  * integrate extensions with the notifications of Gamification Platform.

@@ -12,7 +12,7 @@
 (function ($) {
     "use strict";
 
-    $.fn.fileinputLocales.sr = {
+    $.fn.fileinputLocales['sr'] = {
         fileSingle: 'datoteka',
         filePlural: 'datoteke',
         browseLabel: 'Izaberi &hellip;',
@@ -37,6 +37,10 @@
         msgProgress: 'Učitavanje datoteke {index} od {files} - {name} - {percent}% završeno.',
         msgSelected: '{n} {files} je označeno',
         msgFoldersNotAllowed: 'Moguće je prevlačiti samo datoteke! Preskočeno je {n} fascikla.',
+        msgImageWidthSmall: 'Ширина Имаге Филе "{name}" мора бити најмање {size} пк.',
+        msgImageHeightSmall: 'Висина Имаге Филе "{name}" мора бити најмање {size} пк.',
+        msgImageWidthLarge: 'Ширина Имаге Филе "{name}" не може бити већи од {size} пк.',
+        msgImageHeightLarge: 'Висина Имаге Филе "{name}" не може бити већи од {size} пк.',
         dropZoneTitle: 'Prevucite datoteke ovde &hellip;'
     };
 })(window.jQuery);

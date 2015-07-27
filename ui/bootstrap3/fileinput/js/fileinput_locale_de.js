@@ -9,7 +9,7 @@
 (function ($) {
     "use strict";
 
-    $.fn.fileinputLocales.de = {
+    $.fn.fileinputLocales['de'] = {
         fileSingle: 'Datei',
         filePlural: 'Dateien',
         browseLabel: 'Auswählen &hellip;',
@@ -34,6 +34,10 @@
         msgProgress: 'Datei {index} von {files} - {name} - zu {percent}% fertiggestellt.',
         msgSelected: '{n} {files} ausgewählt',
         msgFoldersNotAllowed: 'Drag & Drop funktioniert nur bei Dateien! {n} Ordner übersprungen.',
+        msgImageWidthSmall: 'Breite der Bilddatei "{name}" muss mindestens {size} px betragen.',
+        msgImageHeightSmall: 'Höhe der Bilddatei "{name}" muss mindestens {size} px betragen.',
+        msgImageWidthLarge: 'Breite der Bilddatei "{name}" nicht überschreiten {size} px.',
+        msgImageHeightLarge: 'Höhe der Bilddatei "{name}" nicht überschreiten {size} px.',
         dropZoneTitle: 'Dateien hierher ziehen &hellip;'
     };
 })(window.jQuery);

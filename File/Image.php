@@ -14,8 +14,6 @@ use Joomla\String\String;
 
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Prism\\File", JPATH_LIBRARIES . "/prism/file.php");
-
 /**
  * This class contains methods that are used for managing currency.
  *

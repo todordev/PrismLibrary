@@ -11,8 +11,6 @@ namespace Prism\Integration\Profile;
 
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Prism\\Integration\\Profile\\ProfileInterface", JPATH_LIBRARIES . '/prism/integration/profile/profileinterface.php');
-
 /**
  * This class provides functionality to
  * integrate extensions with the profile of Gravatar.

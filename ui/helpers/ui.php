@@ -131,15 +131,15 @@ abstract class PrismUI
     }
 
     /**
-     * Include Bootstrap File Upload Style library.
+     * Include File Input library based on Bootstrap 2.
      *
      * <code>
      * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
      *
-     * JHtml::_('prism.ui.bootstrapFileUploadStyle');
+     * JHtml::_('prism.ui.bootstrap2FileInput');
      * </code>
      */
-    public static function bootstrapFileUploadStyle()
+    public static function bootstrap2FileInput()
     {
         // Only load once
         if (!empty(self::$loaded[__METHOD__])) {
@@ -148,58 +148,8 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStylesheet(JUri::root() . 'libraries/Prism/ui/fileuploadstyle/css/bootstrap-fileuploadstyle.min.css');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/fileuploadstyle/js/bootstrap-fileuploadstyle.min.js');
-
-        self::$loaded[__METHOD__] = true;
-    }
-
-    /**
-     * Include Bootstrap File Style library (BS v2.3).
-     *
-     * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
-     *
-     * JHtml::_('prism.ui.bootstrap2FileStyle');
-     * </code>
-     *
-     * @link http://markusslima.github.io/bootstrap-filestyle/ Documentation of Bootstrap File Style
-     */
-    public static function bootstrap2FileStyle()
-    {
-        // Only load once
-        if (!empty(self::$loaded[__METHOD__])) {
-            return;
-        }
-
-        $document = JFactory::getDocument();
-
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap2/bootstrap-filestyle.min.js');
-
-        self::$loaded[__METHOD__] = true;
-    }
-
-    /**
-     * Include Bootstrap File Style library (BS v3).
-     *
-     * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
-     *
-     * JHtml::_('prism.ui.bootstrap3FileStyle');
-     * </code>
-     *
-     * @link http://markusslima.github.io/bootstrap-filestyle/ Documentation of Bootstrap File Style
-     */
-    public static function bootstrap3FileStyle()
-    {
-        // Only load once
-        if (!empty(self::$loaded[__METHOD__])) {
-            return;
-        }
-
-        $document = JFactory::getDocument();
-
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/bootstrap-filestyle.min.js');
+        $document->addStylesheet(JUri::root() . 'libraries/Prism/ui/bootstrap2/fileinput/css/bootstrap-fileinput.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap2/fileinput/js/bootstrap-fileinput.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -215,7 +165,7 @@ abstract class PrismUI
      *
      * @link https://github.com/kartik-v/bootstrap-fileinput Documentation of Bootstrap Fileinput
      */
-    public static function bootstrap3Fileinput()
+    public static function bootstrap3FileInput()
     {
         // Only load once
         if (!empty(self::$loaded[__METHOD__])) {
@@ -224,8 +174,8 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/fileinput/css/fileinput.min.css');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/fileinput/js/fileinput.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/css/fileinput.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/js/fileinput.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -241,7 +191,7 @@ abstract class PrismUI
      *
      * @link http://eonasdan.github.io/bootstrap-datetimepicker/ Documentation of Bootstrap Datepicker
      */
-    public static function bootstrapDatepicker()
+    public static function bootstrap3Datepicker()
     {
         // Only load once
         if (!empty(self::$loaded[__METHOD__])) {
@@ -504,7 +454,7 @@ abstract class PrismUI
         }
 
         // Load the calendar behavior
-        JHtml::_('prism.ui.bootstrapDatepicker');
+        JHtml::_('prism.ui.bootstrap3Datepicker');
         $languageTag = JFactory::getLanguage()->getTag();
         $locale = substr($languageTag, 0, 2);
 

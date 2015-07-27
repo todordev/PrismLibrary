@@ -68,17 +68,11 @@ class Builder
         switch ($type) {
 
             case "socialcommunity":
-
-                \JLoader::register("Prism\\Integration\\Notification\\SocialCommunity", JPATH_LIBRARIES."/prism/integration/notification/socialcommunity.php");
                 $notification = new SocialCommunity($userId);
-
                 break;
 
             case "gamification":
-
-                \JLoader::register("Prism\\Integration\\Notification\\Gamification", JPATH_LIBRARIES."/prism/integration/notification/gamification.php");
                 $notification = new Gamification($userId);
-
                 break;
 
             case "jomsocial":
@@ -88,18 +82,14 @@ class Builder
                     \JLoader::register("CRoute", JPATH_SITE."/components/com_community/libraries/core.php");
                 }
 
-                \JLoader::register("Prism\\Integration\\Notification\\JomSocial", JPATH_LIBRARIES."/prism/integration/notification/jomsocial.php");
                 $notification = new JomSocial($userId);
                 $notification->setDb(\JFactory::getDbo());
 
                 break;
 
             case "easysocial":
-
-                \JLoader::register("Prism\\Integration\\Notification\\EasySocial", JPATH_LIBRARIES."/prism/integration/notification/easysocial.php");
                 $notification = new EasySocial($userId);
                 $notification->setDb(\JFactory::getDbo());
-
                 break;
 
             default:

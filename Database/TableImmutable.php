@@ -32,7 +32,7 @@ abstract class TableImmutable implements TableInterface
      *
      * @param \JDatabaseDriver $db
      */
-    public function __construct(\JDatabaseDriver $db)
+    public function __construct(\JDatabaseDriver $db = null)
     {
         $this->db = $db;
     }

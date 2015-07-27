@@ -13,9 +13,6 @@ use Gamification\Activity;
 
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Prism\\Integration\\Activity\\ActivityInterface", JPATH_LIBRARIES . '/prism/integration/activity/activityinterface.php');
-\JLoader::register("Gamification\\Activity", JPATH_LIBRARIES . '/gamification/activity.php');
-
 /**
  * This class provides functionality to
  * integrate extensions with the activities of Gamification Platform.

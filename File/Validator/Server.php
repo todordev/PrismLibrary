@@ -13,8 +13,6 @@ use Prism\Validator\Validator;
 
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Prism\\Validator\\Validator", JPATH_LIBRARIES . "/prism/validator/validator.php");
-
 /**
  * This class provides functionality for validating a file,
  * using data from server result.

@@ -11,9 +11,9 @@
 (function ($) {
     "use strict";
 
-    $.fn.fileinputLocales.hu = {
+    $.fn.fileinputLocales['hu'] = {
         fileSingle: 'fájl',
-        filePlural: 'fájlok',
+        filePlural: 'fájl',
         browseLabel: 'Böngész &hellip;',
         removeLabel: 'Eltávolít',
         removeTitle: 'Kijelölt fájlok törlése',
@@ -36,6 +36,10 @@
         msgProgress: 'Feltöltés: {index} / {files} - {name} - {percent}% kész.',
         msgSelected: '{n} {files} kiválasztva.',
         msgFoldersNotAllowed: 'Csak fájlokat húzzon ide! Kihagyva {n} könyvtár.',
+        msgImageWidthSmall: 'Szélessége image file "{name}" legalább {size} px.',
+        msgImageHeightSmall: 'Magassága image file "{name}" legalább {size} px.',
+        msgImageWidthLarge: 'Szélessége image file "{name}" nem haladhatja meg a {size} px.',
+        msgImageHeightLarge: 'Magassága image file "{name}" nem haladhatja meg a {size} px.',
         dropZoneTitle: 'Fájlok húzása ide &hellip;'
     };
 })(window.jQuery);

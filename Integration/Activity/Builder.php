@@ -68,14 +68,10 @@ class Builder
         switch ($type) {
 
             case "socialcommunity":
-
-                \JLoader::register("Prism\\Integration\\Activity\\SocialCommunity", JPATH_LIBRARIES."/prism/integration/activity/socialcommunity.php");
                 $activity = new SocialCommunity($userId);
                 break;
 
             case "gamification":
-
-                \JLoader::register("Prism\\Integration\\Activity\\Gamification", JPATH_LIBRARIES."/prism/integration/activity/gamification.php");
                 $activity = new Gamification($userId);
                 break;
 
@@ -86,7 +82,6 @@ class Builder
                     \JLoader::register("CRoute", JPATH_SITE."/components/com_community/libraries/core.php");
                 }
 
-                \JLoader::register("Prism\\Integration\\Activity\\JomSocial", JPATH_LIBRARIES."/prism/integration/activity/jomsocial.php");
                 $activity = new JomSocial($userId);
                 $activity->setDb(\JFactory::getDbo());
 
@@ -97,7 +92,6 @@ class Builder
 
             case "easysocial":
 
-                \JLoader::register("Prism\\Integration\\Activity\\EasySocial", JPATH_LIBRARIES."/prism/integration/activity/easysocial.php");
                 $activity = new EasySocial($userId);
 
                 $contextId = ArrayHelper::getValue($this->config, "context_id");

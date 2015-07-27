@@ -11,7 +11,7 @@
 (function ($) {
     "use strict";
 
-    $.fn.fileinputLocales.cz = {
+    $.fn.fileinputLocales['cz'] = {
         fileSingle: 'soubor',
         filePlural: 'soubory',
         browseLabel: 'Vybrat &hellip;',
@@ -36,6 +36,10 @@
         msgProgress: 'Nahrávání souboru {index} z {files} - {name} - {percent}% dokončeno.',
         msgSelected: '{n} {files} vybrano',
         msgFoldersNotAllowed: 'Táhni a pusť pouze soubory! Vynechané {n} pustěné složk(y).',
+        msgImageWidthSmall: 'Šířka image soubor "{name}", musí být alespoň {size} px.',
+        msgImageHeightSmall: 'Výška image soubor "{name}", musí být alespoň {size} px.',
+        msgImageWidthLarge: 'Šířka obrazového souboru "{name}" nelze překročit {size} px.',
+        msgImageHeightLarge: 'Výška obrazového souboru "{name}" nelze překročit {size} px.',
         dropZoneTitle: 'Táhni a pusť soubory sem &hellip;'
     };
 })(window.jQuery);

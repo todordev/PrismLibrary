@@ -12,7 +12,7 @@
 (function ($) {
     "use strict";
 
-    $.fn.fileinputLocales.uk = {
+    $.fn.fileinputLocales['uk'] = {
         fileSingle: 'файл',
         filePlural: 'файли',
         browseLabel: 'Вибрати &hellip;',
@@ -22,7 +22,7 @@
         cancelTitle: 'Скасувати поточну загрузку',
         uploadLabel: 'Загрузити',
         uploadTitle: 'Загрузити вибрані файли',
-        msgSizeTooLarge: 'Файл "{name}" (<b>{size} KB</b>) перевищує максимальний розмыр <b>{maxSize} KB</b>',
+        msgSizeTooLarge: 'Файл "{name}" (<b>{size} KB</b>) перевищує максимальний розмір <b>{maxSize} KB</b>',
         msgFilesTooLess: 'Ви повинні вибрати як мінімум <b>{n}</b> {files} для загрузки',
         msgFilesTooMany: 'Кількість вибраних файлів <b>({n})</b> перевищує максимально допустиму кількість <b>{m}</b>',
         msgFileNotFound: 'Файл "{name}" не знайдено!',
@@ -37,6 +37,10 @@
         msgProgress: 'Загрузка файла {index} із {files} - {name} - {percent}% завершено.',
         msgSelected: '{n} {files} вибрано',
         msgFoldersNotAllowed: 'Дозволено перетягувати тільки файли! Пропущено {n} папок.',
-        dropZoneTitle: 'Перетяніть файли сюди &hellip;'
+        msgImageWidthSmall: 'Ширина зображення "{name}" повинна бути не менше {size} px.',
+        msgImageHeightSmall: 'Висота зображення "{name}" повинна бути не менше {size} px.',
+        msgImageWidthLarge: 'Ширина зображення "{name}" не може перевищувати {size} px.',
+        msgImageHeightLarge: 'Висота зображення "{name}" не може перевищувати {size} px.',
+        dropZoneTitle: 'Перетягніть файли сюди &hellip;'
     };
 })(window.jQuery);

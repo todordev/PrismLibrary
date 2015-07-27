@@ -13,7 +13,7 @@
 (function ($) {
     "use strict";
 
-    $.fn.fileinputLocales.it = {
+    $.fn.fileinputLocales['it'] = {
         fileSingle: 'file',
         filePlural: 'file',
         browseLabel: 'Sfoglia&hellip;',
@@ -38,6 +38,10 @@
         msgProgress: 'Caricamento file {index} di {files} - {name} - {percent}% completato.',
         msgSelected: '{n} {files} selezionati',
         msgFoldersNotAllowed: 'Trascina solo file! Ignorata/e {n} cartella/e.',
+        msgImageWidthSmall: 'Larghezza di file immagine "{name}" deve essere di almeno {size} px.',
+        msgImageHeightSmall: 'Altezza di file immagine "{name}" deve essere di almeno {size} px.',
+        msgImageWidthLarge: 'Larghezza di file immagine "{name}" non può superare {size} px.',
+        msgImageHeightLarge: 'Altezza di file immagine "{name}" non può superare {size} px.',
         dropZoneTitle: 'Trascina i file qui&hellip;'
     };
 })(window.jQuery);

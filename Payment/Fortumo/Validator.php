@@ -12,8 +12,6 @@ namespace Prism\Payment\Fortumo;
 // no direct access
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Prism\\Validator\\ValidatorInterface", JPATH_LIBRARIES . "/prism/validator/validatorinterface.php");
-
 /**
  * This class validates Fortumo response data.
  *

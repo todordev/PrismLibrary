@@ -13,8 +13,6 @@ use Prism\File\UploaderInterface;
 
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Prism\\File\\UploaderInterface", JPATH_LIBRARIES . "/prism/file/uploaderinterface.php");
-
 /**
  * This class provides functionality for uploading files and
  * validates the process.

@@ -11,7 +11,7 @@
 (function ($) {
     "use strict";
 
-    $.fn.fileinputLocales.th = {
+    $.fn.fileinputLocales['th'] = {
         fileSingle: 'ไฟล์',
         filePlural: 'ไฟล์',
         browseLabel: 'เลือกดู &hellip;',
@@ -36,6 +36,10 @@
         msgProgress: 'กำลังโหลดไฟล์ {index} จาก {files} - {name} - {percent}%',
         msgSelected: '{n} {files} ถูกเลือก',
         msgFoldersNotAllowed: 'Drag & drop เฉพาะไฟล์เท่านั้น! ข้าม dropped folder จำนวน {n}',
+        msgImageWidthSmall: 'ความกว้างของภาพไฟล์ "{name}" ต้องมีอย่างน้อย {size} px.',
+        msgImageHeightSmall: 'ความสูงของภาพไฟล์ "{name}" ต้องมีอย่างน้อย {size} px.',
+        msgImageWidthLarge: 'ความกว้างของภาพไฟล์ "{name}" ไม่เกิน {size} พิกเซล.',
+        msgImageHeightLarge: 'ความสูงของไฟล์ภาพ "{name}" ไม่เกิน {size} พิกเซล.',
         dropZoneTitle: 'Drag & drop ไฟล์ตรงนี้ &hellip;'
     };
 })(window.jQuery);

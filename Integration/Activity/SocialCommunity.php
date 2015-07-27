@@ -13,10 +13,7 @@ use SocialCommunity\Activity;
 
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Prism\\Integration\\Activity\\ActivityInterface", JPATH_LIBRARIES . '/prism/integration/activity/activityinterface.php');
-
-jimport("socialcommunity.init");
-jimport("socialcommunity.activity");
+jimport("SocialCommunity.init");
 
 /**
  * This class provides functionality to

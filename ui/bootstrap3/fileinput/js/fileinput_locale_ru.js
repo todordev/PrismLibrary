@@ -12,7 +12,7 @@
 (function ($) {
     "use strict";
 
-    $.fn.fileinputLocales.ru = {
+    $.fn.fileinputLocales['ru'] = {
         fileSingle: 'файл',
         filePlural: 'файлы',
         browseLabel: 'Выбрать &hellip;',
@@ -35,8 +35,12 @@
         msgValidationError: 'Ошибка при загрузке файла',
         msgLoading: 'Загрузка файла {index} из {files} &hellip;',
         msgProgress: 'Загрузка файла {index} из {files} - {name} - {percent}% завершено.',
-        msgSelected: '{n} {files} выбрано',
-        msgFoldersNotAllowed: 'Разрешено только перетаскивание файлов! Пропущено {n} папок.',
+        msgSelected: 'Выбрано файлов: {n}',
+        msgFoldersNotAllowed: 'Разрешено перетаскивание только файлов! Пропущено {n} папок.',
+        msgImageWidthSmall: 'Ширина изображения {name} должна быть не меньше {size} px.',
+        msgImageHeightSmall: 'Высота изображения {name} должна быть не меньше {size} px.',
+        msgImageWidthLarge: 'Ширина изображения "{name}" не может превышать {size} px.',
+        msgImageHeightLarge: 'Высота изображения "{name}" не может превышать {size} px.',
         dropZoneTitle: 'Перетащите файлы сюда &hellip;'
     };
 })(window.jQuery);
