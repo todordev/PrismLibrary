@@ -4,7 +4,7 @@
  * @subpackage   Constants
  * @author       Todor Iliev
  * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
- * @license      http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace Prism;
@@ -39,6 +39,9 @@ class Constants
     const FOLLOWED     = 1;
     const UNFOLLOWED   = 0;
 
+    const STATE_DEFAULT = 1;
+    const STATE_NOT_DEFAULT = 0;
+
     // Mail modes - html and plain text.
     const MAIL_MODE_HTML  = true;
     const MAIL_MODE_PLAIN = false;
@@ -59,4 +62,5 @@ class Constants
     // Return values
     const RETURN_DEFAULT = 1;
     const DO_NOT_RETURN_DEFAULT = 0;
+
 }

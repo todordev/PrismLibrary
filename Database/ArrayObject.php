@@ -36,7 +36,7 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
      *
      * @param \JDatabaseDriver $db
      */
-    public function __construct(\JDatabaseDriver $db)
+    public function __construct(\JDatabaseDriver $db = null)
     {
         $this->db   = $db;
     }
@@ -180,5 +180,23 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
     public function toArray()
     {
         return (array)$this->items;
+    }
+
+    /**
+     * Return the element keys.
+     *
+     * @param string $columnName
+     *
+     * @return array
+     */
+    public function getKeys($columnName = "id")
+    {
+        $keys = array();
+
+        foreach ($this->items as $item) {
+            $keys[] = isset($item[$columnName]) ? (int)$item[$columnName] : null;
+        }
+
+        return $keys;
     }
 }
