@@ -39,9 +39,6 @@ class Constants
     const FOLLOWED     = 1;
     const UNFOLLOWED   = 0;
 
-    const STATE_DEFAULT = 1;
-    const STATE_NOT_DEFAULT = 0;
-
     // Mail modes - html and plain text.
     const MAIL_MODE_HTML  = true;
     const MAIL_MODE_PLAIN = false;
@@ -63,4 +60,7 @@ class Constants
     const RETURN_DEFAULT = 1;
     const DO_NOT_RETURN_DEFAULT = 0;
 
+    // Return values
+    const STATE_DEFAULT = 1;
+    const STATE_NOT_DEFAULT = 0;
 }

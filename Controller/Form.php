@@ -176,7 +176,7 @@ class Form extends \JControllerForm
         if (!empty($forceDirection)) {
             return $forceDirection;
         }
-
+        var_dump($options);exit;
         $link = $this->defaultLink;
 
         $view   = ArrayHelper::getValue($options, "view");

@@ -18,7 +18,7 @@ defined('JPATH_PLATFORM') or die;
  * @package         Prism
  * @subpackage      Database\Tables
  */
-abstract class Table implements TableInterface
+abstract class TableObservable implements TableInterface, \JObservableInterface
 {
     /**
      * Database driver.
@@ -35,6 +35,11 @@ abstract class Table implements TableInterface
     protected $params = array();
 
     /**
+     * @var \JObserverUpdater
+     */
+    protected $observers;
+
+    /**
      * Initialize the object.
      *
      * @param \JDatabaseDriver $db
@@ -42,6 +47,11 @@ abstract class Table implements TableInterface
     public function __construct(\JDatabaseDriver $db = null)
     {
         $this->db = $db;
+
+        // Implement JObservableInterface:
+        // Create observer updater and attaches all observers interested by $this class:
+        $this->observers = new \JObserverUpdater($this);
+        \JObserverMapper::attachAllObservers($this);
     }
 
     abstract public function load($keys, $options = array());
@@ -229,5 +239,36 @@ abstract class Table implements TableInterface
         $this->params[$index] = $value;
 
         return $previous;
+    }
+
+    /**
+     * Implement JObservableInterface:
+     * Adds an observer to this instance.
+     * This method will be called from the constructor of classes implementing JObserverInterface
+     * which is instantiated by the constructor of $this with JObserverMapper::attachAllObservers($this)
+     *
+     * @param   \JObserverInterface|\JTableObserver  $observer  The observer object
+     *
+     * @return  void
+     *
+     * @since   3.1.2
+     */
+    public function attachObserver(\JObserverInterface $observer)
+    {
+        $this->observers->attachObserver($observer);
+    }
+
+    /**
+     * Gets the instance of the observer of class $observerClass
+     *
+     * @param   string  $observerClass  The observer class-name to return the object of
+     *
+     * @return  \JTableObserver|null
+     *
+     * @since   3.1.2
+     */
+    public function getObserverOfClass($observerClass)
+    {
+        return $this->observers->getObserverOfClass($observerClass);
     }
 }

@@ -36,4 +36,31 @@ class Simple extends \SimpleXMLElement
         $no   = $node->ownerDocument;
         $node->appendChild($no->createCDATASection($cdataText));
     }
+
+    /**
+     * Adds a child with $value inside CDATA.
+     *
+     * @param string $name
+     * @param mixed  $value
+     *
+     * <code>
+     * $sxml = new Prism\Xml\Simple();
+     *
+     * $sxml->addChildCData("body", "<strong>This text contains HTML code.</strong>");
+     * </code>
+     *
+     * @return Simple
+     */
+    public function addChildCData($name, $value = null)
+    {
+        $newChild = $this->addChild($name);
+
+        if ($newChild !== null) {
+            $node = dom_import_simplexml($newChild);
+            $no   = $node->ownerDocument;
+            $node->appendChild($no->createCDATASection($value));
+        }
+
+        return $newChild;
+    }
 }

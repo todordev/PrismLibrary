@@ -4,7 +4,7 @@
  * @subpackage      Database\Arrays
  * @author          Todor Iliev
  * @copyright       Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
- * @license         http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace Prism\Database;
@@ -173,7 +173,14 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
     }
 
     /**
-     * Return items as array.
+     * Return the items as array.
+     *
+     * <code>
+     * $groups = new Gamification\Group\Groups(JFactory::getDbo());
+     * $groups->load();
+     *
+     * $items = $groups->toArray();
+     * </code>
      *
      * @return array
      */
@@ -183,7 +190,14 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
     }
 
     /**
-     * Return the element keys.
+     * Return the keys of the elements.
+     *
+     * <code>
+     * $groups = new Gamification\Group\Groups(JFactory::getDbo());
+     * $groups->load();
+     *
+     * $keys = $groups->getKeys("id");
+     * </code>
      *
      * @param string $columnName
      *
@@ -198,5 +212,31 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
         }
 
         return $keys;
+    }
+
+    /**
+     * Prepare an array as options that could be used in select form elements.
+     *
+     * <code>
+     * $groups = new Gamification\Group\Groups(JFactory::getDbo());
+     * $groups->load();
+     *
+     * $options = $groups->toOptions("id", "name");
+     * </code>
+     *
+     * @param string $key The name of the property used for value.
+     * @param string $text The name of the property used for text.
+     *
+     * @return array
+     */
+    public function toOptions($key = "id", $text = "title")
+    {
+        $options = array();
+
+        foreach ($this->items as $item) {
+            $options[] = array("value" => $item[$key], "text" => $item[$text]);
+        }
+
+        return $options;
     }
 }

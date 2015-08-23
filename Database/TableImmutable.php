@@ -4,7 +4,7 @@
  * @subpackage      Database\Arrays
  * @author          Todor Iliev
  * @copyright       Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
- * @license         http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace Prism\Database;
@@ -26,6 +26,13 @@ abstract class TableImmutable implements TableInterface
      * @var \JDatabaseDriver
      */
     protected $db;
+
+    /**
+     * Object parameters.
+     *
+     * @var array
+     */
+    protected $params = array();
 
     /**
      * Initialize the object.
@@ -139,5 +146,51 @@ abstract class TableImmutable implements TableInterface
         }
 
         return $vars;
+    }
+
+    /**
+     * Returns a parameter of the object or the default value if the parameter is not set.
+     *
+     * <code>
+     * $notification   = new Gamification\Notification(\JFactory::getDbo());
+     *
+     * $userId = $notification->getParam("user_id");
+     * </code>
+     *
+     * @param   string $index The name of the index.
+     * @param   mixed  $default  The default value.
+     *
+     * @return  mixed    The value of the property.
+     */
+    public function getParam($index, $default = null)
+    {
+        if (isset($this->params[$index])) {
+            return $this->params[$index];
+        }
+
+        return $default;
+    }
+
+    /**
+     * Modifies a parameter of the object, creating it if it does not already exist.
+     *
+     * <code>
+     * $notification   = new Gamification\Notification(\JFactory::getDbo());
+     *
+     * $notification->set("user_id", 1);
+     * $notification->set("note", "....");
+     * </code>
+     *
+     * @param   string $index    The name of the parameter.
+     * @param   mixed  $value    The value of the parameter to set.
+     *
+     * @return  mixed  Previous value of the parameter.
+     */
+    public function setParam($index, $value = null)
+    {
+        $previous             = isset($this->params[$index]) ? $this->params[$index] : null;
+        $this->params[$index] = $value;
+
+        return $previous;
     }
 }

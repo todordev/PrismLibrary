@@ -416,16 +416,16 @@ abstract class PrismUI
     /**
      * Displays a calendar control field based on Twitter Bootstrap 3
      *
-     * @param   string  $value    The date value
-     * @param   string  $name     The name of the text field
-     * @param   string  $id       The id of the text field
-     * @param   string  $format   The date format
-     * @param   mixed   $attributes  Additional HTML attributes
+     * @param   string $value      The date value
+     * @param   string $name       The name of the text field
+     * @param   string $id         The id of the text field
+     * @param   string $format     The date format
+     * @param   mixed  $attributes Additional HTML attributes
      *
      * @return  string  HTML markup for a calendar field
      *
      * @since   1.5
-     * @see http://eonasdan.github.io/bootstrap-datetimepicker/
+     * @see     http://eonasdan.github.io/bootstrap-datetimepicker/
      */
     public static function calendar($value, $name, $id, $format = 'Y-m-d', $attributes = null)
     {
@@ -446,8 +446,8 @@ abstract class PrismUI
         }
 
         // Format value when not nulldate ('0000-00-00 00:00:00'), otherwise blank it as it would result in 1970-01-01.
-        if ((int) $value && $value != JFactory::getDbo()->getNullDate()) {
-            $date = new DateTime($value, new DateTimeZone('UTC'));
+        if ((int)$value && $value != JFactory::getDbo()->getNullDate()) {
+            $date       = new DateTime($value, new DateTimeZone('UTC'));
             $inputvalue = $date->format($format);
         } else {
             $inputvalue = '';
@@ -456,7 +456,7 @@ abstract class PrismUI
         // Load the calendar behavior
         JHtml::_('prism.ui.bootstrap3Datepicker');
         $languageTag = JFactory::getLanguage()->getTag();
-        $locale = substr($languageTag, 0, 2);
+        $locale      = substr($languageTag, 0, 2);
 
         // Only display the triggers once for each control.
         if (!in_array($id, $done)) {
@@ -467,9 +467,9 @@ abstract class PrismUI
             $document
                 ->addScriptDeclaration(
                     'jQuery(document).ready(function($) {
-                        jQuery("#'.$id.'_datepicker").datetimepicker({
-                            format: "'.$calendarDateFormat.'",
-                            locale: "'.Joomla\String\String::strtolower($locale).'",
+                        jQuery("#' . $id . '_datepicker").datetimepicker({
+                            format: "' . $calendarDateFormat . '",
+                            locale: "' . Joomla\String\String::strtolower($locale) . '",
                             allowInputToggle: true
                         });
                     });'
@@ -479,14 +479,100 @@ abstract class PrismUI
         }
 
         // Hide button using inline styles for readonly/disabled fields
-        $btn_style	= ($readonly || $disabled) ? ' style="display:none;"' : '';
+        $btn_style = ($readonly || $disabled) ? ' style="display:none;"' : '';
 
-        return '<div class="input-group date" id="'.$id.'_datepicker">
-                    <input type="text" title="' . ($inputvalue ? JHtml::_("date", $value, null, null) : "").'"
+        return '<div class="input-group date" id="' . $id . '_datepicker">
+                    <input type="text" title="' . ($inputvalue ? JHtml::_("date", $value, null, null) : "") . '"
                     name="' . $name . '" id="' . $id . '" value="' . htmlspecialchars($inputvalue, ENT_COMPAT, 'UTF-8') . '" ' . $attributes . ' />
                     <span class="input-group-addon" id="' . $id . '_img">
                         <span class="glyphicon glyphicon-calendar" id="' . $id . '_icon"' . $btn_style . '></span>
                     </span>
                 </div>';
+    }
+
+    /**
+     * Creates a tab pane
+     *
+     * @param   string $selector The pane identifier.
+     * @param   array  $params   The parameters for the pane
+     *
+     * @return  string
+     *
+     * @since   3.1
+     */
+    public static function bootstrap3StartTabSet($selector = 'myTab', $params = array())
+    {
+        $sig = md5(serialize(array($selector, $params)));
+
+        if (!isset(static::$loaded[__METHOD__][$sig])) {
+            // Setup options object
+            $opt['active'] = (isset($params['active']) && ($params['active'])) ? (string)$params['active'] : '';
+
+            // Attach tabs to document
+            JFactory::getDocument()
+                ->addScriptDeclaration(JLayoutHelper::render('bootstrap3.starttabsetscript', array('selector' => $selector)), PRISM_PATH_LIBRARY."/ui/layouts");
+
+            // Set static array
+            static::$loaded[__METHOD__][$sig]                = true;
+            static::$loaded[__METHOD__][$selector]['active'] = $opt['active'];
+        }
+
+        $html = JLayoutHelper::render('bootstrap3.starttabset', array('selector' => $selector), PRISM_PATH_LIBRARY."/ui/layouts");
+
+        return $html;
+    }
+
+    /**
+     * Close the current tab pane
+     *
+     * @return  string  HTML to close the pane
+     *
+     * @since   3.1
+     */
+    public static function bootstrap3endTabSet()
+    {
+        return "</div>";
+    }
+
+    /**
+     * Begins the display of a new tab content panel.
+     *
+     * @param   string $selector Identifier of the panel.
+     * @param   string $id       The ID of the div element
+     * @param   string $title    The title text for the new UL tab
+     *
+     * @return  string  HTML to start a new panel
+     *
+     * @since   3.1
+     */
+    public static function bootstrap3addTab($selector, $id, $title)
+    {
+        static $tabScriptLayout = null;
+        static $tabLayout = null;
+
+        $tabScriptLayout = is_null($tabScriptLayout) ? new JLayoutFile('bootstrap3.addtabscript', PRISM_PATH_LIBRARY."/ui/layouts") : $tabScriptLayout;
+        $tabLayout       = is_null($tabLayout) ? new JLayoutFile('bootstrap3.addtab', PRISM_PATH_LIBRARY."/ui/layouts") : $tabLayout;
+
+        $active = (static::$loaded['PrismUI::bootstrap3StartTabSet'][$selector]['active'] == $id) ? ' active' : '';
+
+        // Inject tab into UL
+        JFactory::getDocument()
+            ->addScriptDeclaration($tabScriptLayout->render(array('selector' => $selector, 'id' => $id, 'active' => $active, 'title' => $title)));
+
+        $html = $tabLayout->render(array('id' => $id, 'active' => $active));
+
+        return $html;
+    }
+
+    /**
+     * Close the current tab content panel
+     *
+     * @return  string  HTML to close the pane
+     *
+     * @since   3.1
+     */
+    public static function bootstrap3endTab()
+    {
+        return "</div>";
     }
 }
