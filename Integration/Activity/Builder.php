@@ -64,15 +64,23 @@ class Builder
     {
         $type   = ArrayHelper::getValue($this->config, "social_platform");
         $userId = ArrayHelper::getValue($this->config, "user_id");
+        $url    = ArrayHelper::getValue($this->config, "url");
+        $image  = ArrayHelper::getValue($this->config, "image");
+        $title  = ArrayHelper::getValue($this->config, "title");
 
         switch ($type) {
 
             case "socialcommunity":
                 $activity = new SocialCommunity($userId);
+                $activity->setUrl($url);
+                $activity->setImage($image);
                 break;
 
             case "gamification":
                 $activity = new Gamification($userId);
+                $activity->setTitle($title);
+                $activity->setUrl($url);
+                $activity->setImage($image);
                 break;
 
             case "jomsocial":
@@ -93,9 +101,7 @@ class Builder
             case "easysocial":
 
                 $activity = new EasySocial($userId);
-
-                $contextId = ArrayHelper::getValue($this->config, "context_id");
-                $activity->setContextId($contextId);
+                $activity->setContextId($userId);
 
                 break;
 

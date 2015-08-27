@@ -64,15 +64,23 @@ class Builder
     {
         $type   = ArrayHelper::getValue($this->config, "social_platform");
         $userId = ArrayHelper::getValue($this->config, "user_id");
+        $url    = ArrayHelper::getValue($this->config, "url");
+        $image  = ArrayHelper::getValue($this->config, "image");
+        $title  = ArrayHelper::getValue($this->config, "title");
 
         switch ($type) {
 
             case "socialcommunity":
                 $notification = new SocialCommunity($userId);
+                $notification->setUrl($url);
+                $notification->setImage($image);
                 break;
 
             case "gamification":
                 $notification = new Gamification($userId);
+                $notification->setTitle($title);
+                $notification->setUrl($url);
+                $notification->setImage($image);
                 break;
 
             case "jomsocial":

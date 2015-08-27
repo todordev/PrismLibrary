@@ -173,14 +173,7 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
     }
 
     /**
-     * Return the items as array.
-     *
-     * <code>
-     * $groups = new Gamification\Group\Groups(JFactory::getDbo());
-     * $groups->load();
-     *
-     * $items = $groups->toArray();
-     * </code>
+     * Return items as array.
      *
      * @return array
      */
@@ -190,7 +183,7 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
     }
 
     /**
-     * Return the keys of the elements.
+     * Return the element keys.
      *
      * <code>
      * $groups = new Gamification\Group\Groups(JFactory::getDbo());
@@ -226,15 +219,20 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
      *
      * @param string $key The name of the property used for value.
      * @param string $text The name of the property used for text.
+     * @param string $suffix The name of the property that can be included to the text.
      *
      * @return array
      */
-    public function toOptions($key = "id", $text = "title")
+    public function toOptions($key = "id", $text = "title", $suffix = "")
     {
         $options = array();
 
         foreach ($this->items as $item) {
-            $options[] = array("value" => $item[$key], "text" => $item[$text]);
+            if (!$suffix) {
+                $options[] = array("value" => $item[$key], "text" => $item[$text]);
+            } else {
+                $options[] = array("value" => $item[$key], "text" => $item[$text] . " [".$item[$suffix]."]");
+            }
         }
 
         return $options;

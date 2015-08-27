@@ -9,7 +9,7 @@
 
 namespace Prism\Integration\Notification;
 
-use Gamification\Notification;
+use Gamification\Notification\Notification;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -23,6 +23,7 @@ defined('JPATH_PLATFORM') or die;
 class Gamification implements NotificationInterface
 {
     protected $id;
+    protected $title;
     protected $content;
     protected $image;
     protected $url;
@@ -96,8 +97,12 @@ class Gamification implements NotificationInterface
 
         $notification = new Notification(\JFactory::getDbo());
 
-        $notification->setNote($this->getContent());
+        $notification->setContent($this->getContent());
         $notification->setUserId($this->getUserId());
+
+        if (!empty($this->title)) {
+            $notification->setTitle($this->getTitle());
+        }
 
         if (!empty($this->image)) {
             $notification->setImage($this->getImage());
@@ -135,14 +140,29 @@ class Gamification implements NotificationInterface
     }
 
     /**
+     * Return the title of the object where the URL points.
+     *
+     * <code>
+     * $notification = new Prism\Integration\Notification\Gamification();
+     * $title = $notification->getTitle();
+     * </code>
+     *
+     * @return string $title
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
      * Return the content of the notification.
      *
      * <code>
      * $notification = new Prism\Integration\Notification\Gamification();
-     * $note = $notification->getNote();
+     * $content = $notification->getContent();
      * </code>
      *
-     * @return string $note
+     * @return string $content
      */
     public function getContent()
     {
@@ -242,6 +262,27 @@ class Gamification implements NotificationInterface
     {
         $this->id = $id;
         
+        return $this;
+    }
+
+    /**
+     * Set a title of the object where the URL points.
+     *
+     * <code>
+     * $title = "...";
+     *
+     * $notification = new Prism\Integration\Notification\Gamification();
+     * $notification->setTitle($title);
+     * </code>
+     *
+     * @param string $title
+     *
+     * @return self
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
         return $this;
     }
 

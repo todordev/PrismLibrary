@@ -9,7 +9,7 @@
 
 namespace Prism\Integration\Activity;
 
-use Gamification\Activity;
+use Gamification\Activity\Activity;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -23,6 +23,7 @@ defined('JPATH_PLATFORM') or die;
 class Gamification implements ActivityInterface
 {
     protected $id;
+    protected $title;
     protected $content;
     protected $image;
     protected $url;
@@ -90,8 +91,12 @@ class Gamification implements ActivityInterface
     {
         $activity = new Activity(\JFactory::getDbo());
 
-        $activity->setInfo($this->getContent());
+        $activity->setContent($this->getContent());
         $activity->setUserId($this->getUserId());
+
+        if (!empty($this->title)) {
+            $activity->setTitle($this->getTitle());
+        }
 
         if (!empty($this->image)) {
             $activity->setImage($this->getImage());
@@ -120,6 +125,21 @@ class Gamification implements ActivityInterface
     }
 
     /**
+     * Return the title of the activity.
+     *
+     * <code>
+     * $activity = new Prism\Integration\Activity\Gamification();
+     * $title = $activity->getTitle();
+     * </code>
+     *
+     * @return string $title
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
      * Return the content of the activity.
      *
      * <code>
@@ -127,7 +147,7 @@ class Gamification implements ActivityInterface
      * $content = $activity->getContent();
      * </code>
      *
-     * @return string $note
+     * @return string $content
      */
     public function getContent()
     {
@@ -226,6 +246,27 @@ class Gamification implements ActivityInterface
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Set the title of the activity.
+     *
+     * <code>
+     * $title = "...";
+     *
+     * $activity = new Prism\Integration\Activity\Gamification();
+     * $activity->setTitle($title);
+     * </code>
+     *
+     * @param string $title
+     *
+     * @return self
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
 
         return $this;
     }
