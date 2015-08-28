@@ -1,6 +1,9 @@
 Prism Library Release Notes
 ==========================
 
+###v1.3
+* Fixed integration classes.
+
 ###v1.2
 * Added Bootstrap 3 layouts to PrismUI.
 * Added methods getParam, setParam to Prism\Database\Table and Prism\Database\TableImmutable.

@@ -128,14 +128,14 @@ class SocialCommunity implements ProfilesInterface
     {
         $link = "";
         if (!isset($this->profiles[$userId])) {
-            $link   = \JUri::root() . "media/com_socialcommunity/images/" . $this->avatarSizes["square"]["default"];
+            $link   = \JUri::root() . "media/com_socialcommunity/images/" . $this->avatarSizes[$size]["default"];
         } else {
             // Get avatar size.
             $avatar = (isset($this->avatarSizes[$size])) ? $this->avatarSizes[$size]["image"] : null;
 
             if (!$avatar or empty($this->profiles[$userId]->$avatar)) {
                 if ($returnDefault) {
-                    $avatar = (isset($this->avatarSizes[$size])) ? $this->avatarSizes[$size]["default"] : $this->avatarSizes["square"]["default"];
+                    $avatar = (isset($this->avatarSizes[$size])) ? $this->avatarSizes[$size]["default"] : $this->avatarSizes[$size]["default"];
                     $link   = \JUri::root() . "media/com_socialcommunity/images/" . $avatar;
                 }
             } else {
