@@ -1,6 +1,9 @@
 Prism Library Release Notes
 ==========================
 
+###v1.4
+* Renamed the filename of default controller.
+
 ###v1.3
 * Fixed integration classes.
 

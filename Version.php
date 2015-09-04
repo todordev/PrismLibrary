@@ -38,7 +38,7 @@ class Version
      *
      * @var integer
      */
-    public $devLevel = '3';
+    public $devLevel = '4';
 
     /**
      * Release Type
@@ -59,14 +59,14 @@ class Version
      *
      * @var string
      */
-    public $releaseDate = '38 August, 2015';
+    public $releaseDate = '03 September, 2015';
 
     /**
      * License
      *
      * @var string
      */
-    public $license = '<a href="http://www.gnu.org/copyleft/gpl.html" target="_blank">GNU/GPL</a>';
+    public $license = '<a href="http://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank">GNU/GPL</a>';
 
     /**
      * Copyright Text

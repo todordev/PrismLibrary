@@ -44,6 +44,26 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
     abstract public function load($options = array());
 
     /**
+     * Set a database object.
+     *
+     * <code>
+     * $object    = new Prism\Database\ArrayObject;
+     *
+     * $object->setDb(\JFactory::getDbo());
+     * </code>
+     *
+     * @param \JDatabaseDriver $db
+     *
+     * @return self
+     */
+    public function setDb(\JDatabaseDriver $db)
+    {
+        $this->db = $db;
+
+        return $this;
+    }
+
+    /**
      * Rewind the Iterator to the first element.
      *
      * @see Iterator::rewind()
