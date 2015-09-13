@@ -7,10 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism;
+namespace Prism\String;
 
 use Joomla\Utilities\ArrayHelper;
-use Joomla\String\String as JString;
 
 // no direct access
 defined('JPATH_PLATFORM') or die;
@@ -20,36 +19,15 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package     Prism
  * @subpackage  Strings
- *
- * @deprecated 1.10  Use {@link \Prism\String\StringHelper} instead unless otherwise noted.
  */
-class String
+class StringHelper
 {
-    protected $content;
-
-    /**
-     * Initialize the object.
-     *
-     * <code>
-     * $content = "If you can dream it, you can do it."
-     *
-     * $string = new Prism\String($content);
-     * </code>
-     * 
-     * @param string $content
-     */
-    public function __construct($content = "")
-    {
-        $this->content = (string)$content;
-    }
-
     /**
      * The method generates random string.
      * You can set a prefix and specify the length of the string.
      *
      * <code>
-     * $hash = new Prism\String;
-     * $hash->generateRandomString(32, "GEN");
+     * $hash = Prism\String\StringHelper::generateRandomString(32, "GEN");
      *
      * echo $hash;
      * </code>
@@ -59,7 +37,7 @@ class String
      *
      * @return string
      */
-    public function generateRandomString($length = 10, $prefix = "")
+    public static function generateRandomString($length = 10, $prefix = "")
     {
         // Generate string
         $hash = md5(uniqid(time() + mt_rand(), true));
@@ -70,9 +48,7 @@ class String
             $hash = $prefix . $hash;
         }
 
-        $this->content = $hash;
-
-        return $this;
+        return $hash;
     }
 
     /**
@@ -88,18 +64,18 @@ class String
      *     "position" => 0 // 0 for symbol on the left side, 1 for symbole on the right side.
      * );
      *
-     * $amount = new Prism\String(100);
-     * $amount->getAmount(GBP, $options);
+     * $amount = Prism\String\StringHelper::getAmount(100, GBP, $options);
      *
      * echo $amount;
      * </code>
      *
+     * @param float $amount Amount value.
      * @param string $currency Currency Code ( GBP, USD, EUR,...)
      * @param array $options Options - "intl", "locale", "symbol",...
      *
      * @return string
      */
-    public function getAmount($currency, $options = array())
+    public static function getAmount($amount, $currency, $options = array())
     {
         $useIntl   = ArrayHelper::getValue($options, "intl", false, "bool");
         $locale    = ArrayHelper::getValue($options, "locale");
@@ -116,25 +92,24 @@ class String
             }
 
             $numberFormat = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
-            $amount       = $numberFormat->formatCurrency($this->content, $currency);
+            $result       = $numberFormat->formatCurrency($amount, $currency);
 
         } else { // Generate a custom currency string.
 
             if (!empty($symbol)) { // Symbol
 
                 if (0 == $position) { // Symbol at the beginning.
-                    $amount = $symbol . $this->content;
+                    $result = $symbol . $amount;
                 } else { // Symbol at end.
-                    $amount = $this->content . $symbol;
+                    $result = $amount . $symbol;
                 }
 
             } else { // Code
-                $amount = $this->content . $currency;
+                $result = $amount . $currency;
             }
-
         }
 
-        return $amount;
+        return $result;
     }
 
     /**
@@ -143,20 +118,18 @@ class String
      * <code>
      * $content = "If you can <strong>dream</strong> it, you can do it. "
      *
-     * $string = new Prism\String($content);
-     * $string->clean();
-     *
-     * echo $string;
+     * echo Prism\String\StringHelper:clean($content);
      * </code>
      *
-     * @return self
+     * @param string $content
+     * @return string
      */
-    public function clean()
+    public static function clean($content)
     {
-        $this->content = strip_tags($this->content);
-        $this->content = JString::trim(preg_replace('/\r|\n/', ' ', $this->content));
+        $content = strip_tags($content);
+        $content = \JString::trim(preg_replace('/\r|\n/', ' ', $content));
 
-        return $this;
+        return $content;
     }
 
     /**
@@ -167,23 +140,21 @@ class String
      * $length  = 25;
      * $content = "If you can dream it, you can do it."
      *
-     * $string = new Prism\String();
-     * $string->substr($offset, $length);
-     *
-     * echo $string;
+     * echo Prism\String\StringHelper::substr($content, $offset, $length);
      * </code>
      *
+     * @param string $content
      * @param integer $offset
      * @param integer $length
      *
-     * @return self
+     * @return string
      */
-    public function substr($offset, $length)
+    public static function substr($content, $offset, $length)
     {
-        $pos           = JString::strpos($this->content, ' ', $length);
-        $this->content = JString::substr($this->content, $offset, $pos);
+        $pos     = \JString::strpos($content, ' ', $length);
+        $content = \JString::substr($content, $offset, $pos);
 
-        return $this;
+        return $content;
     }
 
     /**
@@ -194,17 +165,18 @@ class String
      * // String like this "name1=value1&name2=value2&name3=value3".
      * $rawPost  = file_get_contents("php://input");
      *
-     * $string = new Prism\String($content);
-     * $post   = $string->parseNameValue();
+     * $post = Prism\String\StringHelper::parseNameValue($content);
      * </code>
+     *
+     * @param string $content
      *
      * @return array
      */
-    public function parseNameValue()
+    public static function parseNameValue($content)
     {
         $result = array();
 
-        $data = explode("&", $this->content);
+        $data = explode("&", $content);
         foreach ($data as $value) {
             $value = explode("=", $value);
 
@@ -223,15 +195,5 @@ class String
         }
 
         return $result;
-    }
-
-    /**
-     * Return object value as a string.
-     * 
-     * @return string
-     */
-    public function __toString()
-    {
-        return (string)$this->content;
     }
 }

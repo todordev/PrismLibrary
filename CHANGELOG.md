@@ -1,6 +1,9 @@
 Prism Library Release Notes
 ==========================
 
+###v1.5
+* Added class Prism\String\StringHelper that will replaces current class Prism\String.
+
 ###v1.4
 * Renamed the filename of default controller.
 
