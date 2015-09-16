@@ -132,11 +132,12 @@ class Gravatar implements ProfilesInterface
      * $link = $profiles->getLink($userId);
      * </code>
      *
-     * @param integer $userId
+     * @param int $userId
+     * @param bool $route Route or not the link.
      *
      * @return string
      */
-    public function getLink($userId)
+    public function getLink($userId, $route = true)
     {
         return "javascript:void(0)";
     }

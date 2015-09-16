@@ -1,6 +1,6 @@
 <?php
 /**
- * @package      Prism
+ * @package      ITPrism
  * @subpackage   Integrations\Profile
  * @author       Todor Iliev
  * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
@@ -9,25 +9,24 @@
 
 namespace Prism\Integration\Profile;
 
+use Prism\Integration\Helper;
+
 defined('JPATH_PLATFORM') or die;
 
 /**
  * This class provides functionality to
- * integrate extensions with the profile of Kunena.
+ * integrate extensions with the profile of Community Builder.
  *
- * @package      Prism
+ * @package      ITPrism
  * @subpackage   Integrations\Profile
  */
-class Kunena implements ProfileInterface
+class CommunityBuilder implements ProfileInterface
 {
     protected $user_id;
     protected $avatar;
-    protected $name;
-    protected $username;
-    protected $permalink;
-    protected $alias;
     protected $location;
     protected $country_code;
+    protected $slug;
 
     /**
      * Predefined image sizes.
@@ -35,15 +34,15 @@ class Kunena implements ProfileInterface
      * @var array
      */
     protected $avatarSizes = array(
-        "icon" => array("folder" => "size36", "noimage" => "s_nophoto.jpg"),
-        "small" => array("folder" => "size72", "noimage" => "s_nophoto.jpg"),
-        "medium" => array("folder" => "size72", "noimage" => "nophoto.jpg"),
-        "large" => array("folder" => "size200", "noimage" => "nophoto.jpg"),
+        "icon"   => "tn",
+        "small"  => "tn",
+        "medium" => "",
+        "large"  => "",
     );
 
     /**
      * Database driver.
-     * 
+     *
      * @var \JDatabaseDriver
      */
     protected $db;
@@ -51,15 +50,15 @@ class Kunena implements ProfileInterface
     protected static $instances = array();
 
     /**
-     * Initialize the object
+     * Initialize the object.
      *
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\Kunena(\JFactory::getDbo());
+     * $profile = new Prism\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
      * </code>
      * 
-     * @param \JDatabaseDriver $db
+     * @param  \JDatabaseDriver $db
      */
     public function __construct(\JDatabaseDriver $db)
     {
@@ -67,25 +66,25 @@ class Kunena implements ProfileInterface
     }
 
     /**
-     * Create an object.
+     * Create an object
      *
      * <code>
      * $userId = 1;
      *
-     * $profile = Prism\Integration\Profile\Kunena::getInstance(\JFactory::getDbo(), $userId);
+     * $profile = Prism\Integration\Profile\CommunityBuilder::getInstance(\JFactory::getDbo(), $userId);
      * </code>
-     *
+     * 
      * @param  \JDatabaseDriver $db
      * @param  int $id
      *
-     * @return null|Kunena
+     * @return self|null
      */
     public static function getInstance(\JDatabaseDriver $db, $id)
     {
-        if (empty(self::$instances[$id])) {
-            $item                 = new Kunena($db);
+        if (!isset(self::$instances[$id])) {
+            $item   = new CommunityBuilder($db);
             $item->load($id);
-
+            
             self::$instances[$id] = $item;
         }
 
@@ -98,26 +97,29 @@ class Kunena implements ProfileInterface
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\Kunena(\JFactory::getDbo());
+     * $profile = new Prism\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
      * $profile->load($userId);
      * </code>
-     *
-     * @param int $id
+     * 
+     * @param int $id User ID.
      */
     public function load($id)
     {
         $query = $this->db->getQuery(true);
         $query
-            ->select("a.userid AS user_id, a.avatar, a.location")
-            ->from($this->db->quoteName("#__kunena_users", "a"))
-            ->where("a.userid = " . (int)$id);
+            ->select(
+                "a.id AS user_id, a.name, ".
+                "b.avatar, ".
+                $query->concatenate(array("a.id", "a.username"), ":") . " AS slug"
+            )
+            ->from($this->db->quoteName("#__users", "a"))
+            ->innerJoin($this->db->quoteName("#__comprofiler", "b") . " ON a.id = b.user_id")
+            ->where("a.id = " . (int)$id);
 
         $this->db->setQuery($query);
-        $result = $this->db->loadAssoc();
+        $result = (array)$this->db->loadAssoc();
 
-        if (!empty($result)) { // Set values to variables
-            $this->bind($result);
-        }
+        $this->bind($result);
     }
 
     /**
@@ -125,12 +127,12 @@ class Kunena implements ProfileInterface
      *
      * <code>
      * $data = array(
-     *     "name" => "...",
-     *     "country" => "...",
+     *     "location" => "...",
+     *     "country_code" => "...",
      * ...
      * );
      *
-     * $profile = new Prism\Integration\Profile\Kunena(\JFactory::getDbo());
+     * $profile = new Prism\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
      * $profile->bind($data);
      * </code>
      *
@@ -152,7 +154,7 @@ class Kunena implements ProfileInterface
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\Kunena(\JFactory::getDbo());
+     * $profile = new Prism\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $link = $profile->getLink();
@@ -160,16 +162,25 @@ class Kunena implements ProfileInterface
      *
      * @param bool $route Route or not the link.
      *
-     * @return string Return a link to the profile.
+     * @return string
      */
     public function getLink($route = true)
     {
         $link = "";
         if (!empty($this->user_id)) {
-            $link = 'index.php?option=com_kunena&view=profile&userid=' . $this->user_id;
 
-            if ($route) {
-                $link = \KunenaRoute::_($link, false);
+            $needles = array(
+                "userprofile" => array(0)
+            );
+
+            $menuItemId = Helper::getItemId("com_comprofiler", $needles);
+            $link = 'index.php?option=com_comprofiler&view=userprofile&user='.$this->user_id;
+            if (!empty($menuItemId)) {
+                $link .= "&Itemid=". (int)$menuItemId;
+            }
+
+            if (!$route) {
+                $link = \JRoute::_($link);
             }
         }
 
@@ -182,29 +193,29 @@ class Kunena implements ProfileInterface
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\Kunena(\JFactory::getDbo());
+     * $profile = new Prism\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $avatar = $profile->getAvatar();
      * </code>
      *
      * @param string $size One of the following sizes - icon, small, medium, large.
-     * @param bool   $returnDefault Return or not a link to default avatar.
-     * 
-     * @return string Return a link to the picture.
+     * @param bool $returnDefault Return or not a link to default avatar.
+     *
+     * @return string
      */
     public function getAvatar($size = "small", $returnDefault = true)
     {
         $link = "";
 
-        // Get avatar size.
         if (!empty($this->avatar)) {
-            $folder = (!array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes["small"]["folder"] : $this->avatarSizes[$size]["folder"];
-            $link = \JUri::root() . "media/kunena/avatars/resized/" . $folder . "/". $this->avatar;
+            $avatarSize = (!isset($this->avatarSizes[$size])) ? null : $this->avatarSizes[$size];
+
+            $file = \JString::trim($this->avatar);
+            $link = \JUri::root() . "images/comprofiler/"  . $avatarSize.$file;
         } else {
             if ($returnDefault) {
-                $noimage = (!array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes["small"]["noimage"] : $this->avatarSizes[$size]["noimage"];
-                $link    = \JUri::root() . "media/kunena/avatars/" . $noimage;
+                $link = \JUri::root() . "components/com_comprofiler/plugin/templates/default/images/avatar/nophoto_n.png";
             }
         }
 
@@ -217,7 +228,7 @@ class Kunena implements ProfileInterface
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\Kunena(\JFactory::getDbo());
+     * $profile = new Prism\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $location = $profile->getLocation();
@@ -227,7 +238,7 @@ class Kunena implements ProfileInterface
      */
     public function getLocation()
     {
-        return $this->location;
+        return "";
     }
 
     /**
@@ -236,7 +247,7 @@ class Kunena implements ProfileInterface
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\Kunena(\JFactory::getDbo());
+     * $profile = new Prism\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $countryCode = $profile->getCountryCode();

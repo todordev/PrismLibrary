@@ -122,6 +122,11 @@ class Builder
 
                 break;
 
+            case "communitybuilder":
+                $profiles = new CommunityBuilder(\JFactory::getDbo());
+                $profiles->load($usersIds);
+                break;
+
             default:
                 $profiles = null;
                 break;
@@ -145,7 +150,7 @@ class Builder
      * $profiles = $profilesBuilder->getProfiles();
      * </code>
      *
-     * @return null|object
+     * @return null|ProfilesInterface
      */
     public function getProfiles()
     {

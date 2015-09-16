@@ -1,6 +1,10 @@
 Prism Library Release Notes
 ==========================
 
+###v1.6
+* Added classes for integration with Community Builder.
+* Added option to route or not the links to community extensions.
+
 ###v1.5
 * Added class Prism\String\StringHelper that will replaces current class Prism\String.
 

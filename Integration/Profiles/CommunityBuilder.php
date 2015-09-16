@@ -1,6 +1,6 @@
 <?php
 /**
- * @package      Prism
+ * @package      ITPrism
  * @subpackage   Integrations\Profiles
  * @author       Todor Iliev
  * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
@@ -9,16 +9,18 @@
 
 namespace Prism\Integration\Profiles;
 
+use Prism\Integration\Helper;
+
 defined('JPATH_PLATFORM') or die;
 
 /**
  * This class provides functionality used for integrating
- * extensions with the profile of Kunena.
+ * extensions with the profile of Community Builder.
  *
- * @package      Prism
+ * @package      ITPrism
  * @subpackage   Integrations\Profiles
  */
-class Kunena implements ProfilesInterface
+class CommunityBuilder implements ProfilesInterface
 {
     protected $profiles = array();
 
@@ -28,10 +30,10 @@ class Kunena implements ProfilesInterface
      * @var array
      */
     protected $avatarSizes = array(
-        "icon" => array("folder" => "size36", "noimage" => "s_nophoto.jpg"),
-        "small" => array("folder" => "size72", "noimage" => "s_nophoto.jpg"),
-        "medium" => array("folder" => "size72", "noimage" => "nophoto.jpg"),
-        "large" => array("folder" => "size200", "noimage" => "nophoto.jpg"),
+        "icon"   => "tn",
+        "small"  => "tn",
+        "medium" => "",
+        "large"  => "",
     );
 
     /**
@@ -47,7 +49,7 @@ class Kunena implements ProfilesInterface
      * <code>
      * $ids = array(1, 2, 3, 4);
      *
-     * $profiles = new Prism\Integration\Profiles\Kunena(\JFactory::getDbo());
+     * $profiles = new Prism\Integration\Profiles\CommunityBuilder(\JFactory::getDbo());
      * </code>
      *
      * @param  \JDatabaseDriver $db
@@ -63,7 +65,7 @@ class Kunena implements ProfilesInterface
      * <code>
      * $ids = array(1, 2, 3, 4);
      *
-     * $profiles = new Prism\Integration\Profiles\Kunena(\JFactory::getDbo());
+     * $profiles = new Prism\Integration\Profiles\CommunityBuilder(\JFactory::getDbo());
      * $profiles->load($ids);
      * </code>
      *
@@ -76,9 +78,14 @@ class Kunena implements ProfilesInterface
             // Create a new query object.
             $query = $this->db->getQuery(true);
             $query
-                ->select("a.userid AS user_id, a.avatar")
-                ->from($this->db->quoteName("#__kunena_users", "a"))
-                ->where("a.userid IN ( " . implode(",", $ids) . ")");
+                ->select(
+                    "a.id AS user_id, a.name, ".
+                    "b.avatar, ".
+                    $query->concatenate(array("a.id", "a.username"), ":") . " AS slug"
+                )
+                ->from($this->db->quoteName("#__users", "a"))
+                ->innerJoin($this->db->quoteName("#__comprofiler", "b") . " ON a.id = b.user_id")
+                ->where("a.id IN ( " . implode(",", $ids) . ")");
 
             $this->db->setQuery($query);
             $this->profiles = (array)$this->db->loadObjectList("user_id");
@@ -92,34 +99,34 @@ class Kunena implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Integration\Profiles\Kunena(\JFactory::getDbo());
+     * $profiles = new Prism\Integration\Profiles\CommunityBuilder(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $avatar = $profiles->getAvatar($userId);
      * </code>
      * 
      * @param integer $userId
-     * @param string   $size One of the following sizes - icon, small, medium, large.
-     * @param bool   $returnDefault Return or not a link to default avatar.
+     * @param string  $size One of the following sizes - icon, small, medium, large.
+     * @param bool    $returnDefault Return or not a link to default avatar.
      *
      * @return string
      */
     public function getAvatar($userId, $size = "small", $returnDefault = true)
     {
         $link = "";
-
         if (!isset($this->profiles[$userId])) {
-            $link = \JUri::root() . "media/kunena/avatars/" . $this->avatarSizes["small"]["noimage"];
+            $link = \JUri::root() . "components/com_comprofiler/plugin/templates/default/images/avatar/nophoto_n.png";
         } else {
-            // Get avatar size.
-            if (!empty($this->profiles[$userId]->avatar)) {
-                $folder = (!array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes["small"]["folder"] : $this->avatarSizes[$size]["folder"];
-                $link = \JUri::root() . "media/kunena/avatars/resized/" . $folder . "/". $this->profiles[$userId]->avatar;
-            } else {
 
+            if (!empty($this->profiles[$userId]->avatar)) {
+                $avatarSize = (!isset($this->avatarSizes[$size])) ? null : $this->avatarSizes[$size];
+
+                $file = \JString::trim($this->profiles[$userId]->avatar);
+                $link = \JUri::root() . "images/comprofiler/"  . $avatarSize.$file;
+
+            } else {
                 if ($returnDefault) {
-                    $noimage = (!array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes["small"]["noimage"] : $this->avatarSizes[$size]["noimage"];
-                    $link = \JUri::root() . "media/kunena/avatars/" . $noimage;
+                    $link = \JUri::root() . "components/com_comprofiler/plugin/templates/default/images/avatar/nophoto_n.png";
                 }
             }
         }
@@ -134,7 +141,7 @@ class Kunena implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Integration\Profiles\Kunena(\JFactory::getDbo());
+     * $profiles = new Prism\Integration\Profiles\CommunityBuilder(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $link = $profiles->getLink($userId);
@@ -148,11 +155,21 @@ class Kunena implements ProfilesInterface
     public function getLink($userId, $route = true)
     {
         $link = "";
-        if (isset($this->profiles[$userId]) and !empty($this->profiles[$userId]->user_id)) {
-            $link = "index.php?option=com_kunena&view=profile&userid=" . (int)$this->profiles[$userId]->user_id;
+        
+        if (isset($this->profiles[$userId])) {
+            $needles = array(
+                "userprofile" => array(0)
+            );
 
+            $menuItemId = Helper::getItemId("com_comprofiler", $needles);
+            $link = 'index.php?option=com_comprofiler&view=userprofile&user='.$userId;
+            if (!empty($menuItemId)) {
+                $link .= "&Itemid=". (int)$menuItemId;
+            }
+
+            // Route the link.
             if ($route) {
-                $link = \KunenaRoute::_($link, false);
+                $link = \JRoute::_($link);
             }
         }
 
@@ -166,7 +183,7 @@ class Kunena implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Integration\Profiles\Kunena(\JFactory::getDbo());
+     * $profiles = new Prism\Integration\Profiles\CommunityBuilder(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $location = $profiles->getLocation($userId);
@@ -188,7 +205,7 @@ class Kunena implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Integration\Profiles\Kunena(\JFactory::getDbo());
+     * $profiles = new Prism\Integration\Profiles\CommunityBuilder(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $countryCode = $profiles->getCountryCode($userId);

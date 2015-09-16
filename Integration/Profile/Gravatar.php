@@ -153,9 +153,11 @@ class Gravatar implements ProfileInterface
      * $link = $profile->getLink();
      * </code>
      *
+     * @param bool $route Route or not the link.
+     *
      * @return string Return a link to the profile.
      */
-    public function getLink()
+    public function getLink($route = true)
     {
         return "javascript:void(0)";
     }

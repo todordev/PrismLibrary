@@ -159,16 +159,20 @@ class SocialCommunity implements ProfilesInterface
      * $link = $profiles->getLink($userId);
      * </code>
      * 
-     * @param integer $userId
+     * @param int $userId
+     * @param bool $route Route or not the link.
      *
      * @return string
      */
-    public function getLink($userId)
+    public function getLink($userId, $route = true)
     {
-        if (!isset($this->profiles[$userId])) {
-            $link = "";
-        } else {
+        $link = "";
+        if (isset($this->profiles[$userId]) and !empty($this->profiles[$userId]->slug)) {
             $link = \SocialCommunityHelperRoute::getProfileRoute($this->profiles[$userId]->slug);
+
+            if ($route) {
+                $link = \JRoute::_($link);
+            }
         }
 
         return $link;

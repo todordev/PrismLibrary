@@ -22,7 +22,7 @@ interface ProfileInterface
 {
     public function bind($data);
     public function load($id);
-    public function getLink();
+    public function getLink($route = true);
     public function getAvatar();
     public function getLocation();
     public function getCountryCode();

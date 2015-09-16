@@ -9,7 +9,6 @@
 
 namespace Prism\Controller;
 
-use Joomla\String\String;
 use Joomla\Utilities\ArrayHelper;
 
 defined('JPATH_PLATFORM') or die;
@@ -42,10 +41,10 @@ class DefaultController extends \JControllerLegacy
 
         // Guess the option as com_NameOfController
         if (empty($this->option)) {
-            $this->option = 'com_' . String::strtolower($this->getName());
+            $this->option = 'com_' . \JString::strtolower($this->getName());
         }
 
-        $this->defaultLink = 'index.php?option=' . String::strtolower($this->option);
+        $this->defaultLink = 'index.php?option=' . \JString::strtolower($this->option);
     }
 
     /**

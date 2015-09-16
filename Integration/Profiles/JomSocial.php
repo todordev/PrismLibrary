@@ -140,16 +140,20 @@ class JomSocial implements ProfilesInterface
      * $link = $profiles->getLink($userId);
      * </code>
      * 
-     * @param integer $userId
+     * @param int $userId
+     * @param bool $route Route or not the link.
      *
      * @return string
      */
-    public function getLink($userId)
+    public function getLink($userId, $route = true)
     {
-        if (!isset($this->profiles[$userId])) {
-            $link = "";
-        } else {
-            $link = \CRoute::_('index.php?option=com_community&view=profile&userid=' . $this->profiles[$userId]->user_id);
+        $link = "";
+        if (isset($this->profiles[$userId]) and !empty($this->profiles[$userId]->user_id)) {
+            $link = 'index.php?option=com_community&view=profile&userid=' . $this->profiles[$userId]->user_id;
+
+            if ($route) {
+                $link = \CRoute::_($link);
+            }
         }
 
         return $link;

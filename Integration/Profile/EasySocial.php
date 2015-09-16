@@ -15,7 +15,7 @@ defined('JPATH_PLATFORM') or die;
 
 /**
  * This class provides functionality to
- * integrate extensions with the profile of JomSocial.
+ * integrate extensions with the profile of Easy Social.
  *
  * @package      Prism
  * @subpackage   Integrations\Profile
@@ -166,13 +166,20 @@ class EasySocial implements ProfileInterface
      * $link = $profile->getLink();
      * </code>
      *
+     * @param bool $route Route or not the link.
+     *
      * @return string Return a link to the profile.
      */
-    public function getLink()
+    public function getLink($route = true)
     {
-        $options = array('id' => $this->getAlias());
+        $link = "";
 
-        return \FRoute::profile($options);
+        if ($route) {
+            $options = array('id' => $this->getAlias());
+            $link = \FRoute::profile($options);
+        }
+
+        return $link;
     }
 
     /**

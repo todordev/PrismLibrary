@@ -9,7 +9,6 @@
 
 namespace Prism\Controller;
 
-use Joomla\String\String;
 use Joomla\Utilities\ArrayHelper;
 
 defined('JPATH_PLATFORM') or die;
@@ -32,7 +31,7 @@ class Admin extends \JControllerAdmin
     public function __construct($config)
     {
         parent::__construct($config);
-        $this->defaultLink = 'index.php?option=' . String::strtolower($this->option);
+        $this->defaultLink = 'index.php?option=' . \JString::strtolower($this->option);
     }
 
     /**

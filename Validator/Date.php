@@ -8,8 +8,6 @@
 
 namespace Prism\Validator;
 
-use Joomla\String\String;
-
 // no direct access
 defined('JPATH_PLATFORM') or die;
 
@@ -62,7 +60,7 @@ class Date implements ValidatorInterface
      */
     public function isValid()
     {
-        $string = String::trim($this->date);
+        $string = \JString::trim($this->date);
         if (is_numeric($string)) {
             $string = "@".$string;
         }

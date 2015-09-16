@@ -10,7 +10,6 @@
 namespace Prism\File\Validator;
 
 use Prism\Validator\Validator;
-use Joomla\String\String;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -147,7 +146,7 @@ class Image extends Validator
         }
 
         // Check file extension
-        $ext = String::strtolower(\JFile::getExt($this->fileName));
+        $ext = \JString::strtolower(\JFile::getExt($this->fileName));
 
         if (false === array_search($ext, $this->imageExtensions)) {
             $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_EXTENSIONS', $ext);

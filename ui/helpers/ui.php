@@ -469,7 +469,7 @@ abstract class PrismUI
                     'jQuery(document).ready(function($) {
                         jQuery("#' . $id . '_datepicker").datetimepicker({
                             format: "' . $calendarDateFormat . '",
-                            locale: "' . Joomla\String\String::strtolower($locale) . '",
+                            locale: "' . \JString::strtolower($locale) . '",
                             allowInputToggle: true
                         });
                     });'

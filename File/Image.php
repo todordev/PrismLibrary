@@ -10,7 +10,6 @@
 namespace Prism\File;
 
 use Joomla\Utilities\ArrayHelper;
-use Joomla\String\String;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -69,7 +68,7 @@ class Image extends File
         $thumb = $image->resize($width, $height, true, $scale);
 
         $fileName = basename($this->file);
-        $ext      = String::strtolower(\JFile::getExt(\JFile::makeSafe($fileName)));
+        $ext      = \JString::strtolower(\JFile::getExt(\JFile::makeSafe($fileName)));
 
         switch ($ext) {
             case "gif":

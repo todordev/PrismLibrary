@@ -183,6 +183,10 @@ class SocialCommunity implements ProfileInterface
         $link = "";
         if (!empty($this->slug)) {
             $link = \SocialCommunityHelperRoute::getProfileRoute($this->slug);
+
+            if ($route) {
+                $link = \JRoute::_($link);
+            }
         }
 
         return $link;

@@ -116,10 +116,13 @@ class Builder
                 break;
 
             case "easyprofile":
-
                 $profile = new EasyProfile(\JFactory::getDbo());
                 $profile->load($userId);
+                break;
 
+            case "communitybuilder":
+                $profile = new CommunityBuilder(\JFactory::getDbo());
+                $profile->load($userId);
                 break;
 
             default:
@@ -145,7 +148,7 @@ class Builder
      * $profile = $profileBuilder->getProfile();
      * </code>
      *
-     * @return null|object
+     * @return null|ProfileInterface
      */
     public function getProfile()
     {

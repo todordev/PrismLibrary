@@ -9,8 +9,6 @@
 
 namespace Prism\Integration\Profiles;
 
-use Joomla\String\String;
-
 defined('JPATH_PLATFORM') or die;
 
 /**
@@ -121,11 +119,11 @@ class EasyProfile implements ProfilesInterface
             if (!empty($this->profiles[$userId]->avatar)) {
 
                 if (!empty($avatar)) {
-                    $file = String::trim($this->profiles[$userId]->avatar);
+                    $file = \JString::trim($this->profiles[$userId]->avatar);
                     $fileSplit = explode("_", $file);
                     $link = \JUri::root() . $fileSplit[0]  . $avatar . $fileSplit[1];
                 } else {
-                    $link = \JUri::root() . String::trim($this->profiles[$userId]->avatar);
+                    $link = \JUri::root() . \JString::trim($this->profiles[$userId]->avatar);
                 }
 
             } else {
