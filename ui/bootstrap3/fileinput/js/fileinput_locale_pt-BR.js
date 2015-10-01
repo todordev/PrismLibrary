@@ -21,9 +21,11 @@
         cancelTitle: 'Interromper envio em andamento',
         uploadLabel: 'Enviar',
         uploadTitle: 'Enviar arquivos selecionados',
-        msgSizeTooLarge: 'O arquivo "{name}" (<b>{size} KB</b>) excede o tamanho máximo permitido de <b>{maxSize} KB</b>. Por favor, tente enviar novamente!',
-        msgFilesTooLess: 'Você deve selecionar pelo menos <b>{n}</b> {files} para enviar. Por favor, tente enviar novamente!',
-        msgFilesTooMany: 'O número de arquivos selecionados para o envio <b>({n})</b> excede o limite máximo permitido de <b>{m}</b>. Por favor, tente enviar novamente!',
+        msgZoomTitle: 'Ver detalhes',
+        msgZoomModalHeading: 'Pré-visualização detalhada',
+        msgSizeTooLarge: 'O arquivo "{name}" (<b>{size} KB</b>) excede o tamanho máximo permitido de <b>{maxSize} KB</b>.',
+        msgFilesTooLess: 'Você deve selecionar pelo menos <b>{n}</b> {files} para enviar.',
+        msgFilesTooMany: 'O número de arquivos selecionados para o envio <b>({n})</b> excede o limite máximo permitido de <b>{m}</b>.',
         msgFileNotFound: 'O arquivo "{name}" não foi encontrado!',
         msgFileSecured: 'Restrições de segurança impedem a leitura do arquivo "{name}".',
         msgFileNotReadable: 'O arquivo "{name}" não pode ser lido.',
@@ -31,6 +33,7 @@
         msgFilePreviewError: 'Ocorreu um erro ao ler o arquivo "{name}".',
         msgInvalidFileType: 'Tipo inválido para o arquivo "{name}". Apenas arquivos "{types}" são permitidos.',
         msgInvalidFileExtension: 'Extensão inválida para o arquivo "{name}". Apenas arquivos "{extensions}" são permitidos.',
+        msgUploadAborted: 'O upload do arquivo foi abortada',
         msgValidationError: 'Erro de envio de arquivo',
         msgLoading: 'Enviando arquivo {index} de {files}&hellip;',
         msgProgress: 'Enviando arquivo {index} de {files} - {name} - {percent}% completo.',
@@ -40,6 +43,16 @@
         msgImageHeightSmall: 'Altura do arquivo de imagem "{name}" deve ser pelo menos {size} px.',
         msgImageWidthLarge: 'Largura do arquivo de imagem "{name}" não pode exceder {size} px.',
         msgImageHeightLarge: 'Altura do arquivo de imagem "{name}" não pode exceder {size} px.',
-        dropZoneTitle: 'Arraste e solte os arquivos aqui&hellip;'
+        msgImageResizeError: 'Could not get the image dimensions to resize.',
+        msgImageResizeException: 'Erro ao redimensionar a imagem.<pre>{errors}</pre>',
+        dropZoneTitle: 'Arraste e solte os arquivos aqui&hellip;',
+        fileActionSettings: {
+            removeTitle: 'Remover arquivo',
+            uploadTitle: 'Carregar arquivo',
+            indicatorNewTitle: 'Ainda não carregou',
+            indicatorSuccessTitle: 'Carregado',
+            indicatorErrorTitle: 'Carregar Erro',
+            indicatorLoadingTitle: 'A carregar ...'
+        }
     };
 })(window.jQuery);

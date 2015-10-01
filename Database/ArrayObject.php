@@ -257,4 +257,33 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
 
         return $options;
     }
+
+    /**
+     * Search in the results of arrays.
+     *
+     * <code>
+     * $groups = new Gamification\Group\Groups(JFactory::getDbo());
+     * $groups->load();
+     *
+     * $options = $groups->find(1, "id");
+     * </code>
+     *
+     * @param mixed $value The value that we will search.
+     * @param string $column The column where we will search.
+     *
+     * @return array
+     */
+    public function find($value, $column)
+    {
+        $result = array();
+
+        foreach ($this->items as $item) {
+            if (isset($item[$column]) and ($value == $item[$column])) {
+                $result = $item;
+                break;
+            }
+        }
+
+        return $result;
+    }
 }

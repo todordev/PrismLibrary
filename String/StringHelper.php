@@ -19,6 +19,8 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package     Prism
  * @subpackage  Strings
+ *
+ * @deprecated since v1.10
  */
 class StringHelper
 {
@@ -36,6 +38,8 @@ class StringHelper
      * @param string  $prefix A prefix, which will be added at the beginning of the string.
      *
      * @return string
+     *
+     * @deprecated since v1.10
      */
     public static function generateRandomString($length = 10, $prefix = "")
     {
@@ -74,6 +78,8 @@ class StringHelper
      * @param array $options Options - "intl", "locale", "symbol",...
      *
      * @return string
+     *
+     * @deprecated since v1.10
      */
     public static function getAmount($amount, $currency, $options = array())
     {
@@ -123,6 +129,8 @@ class StringHelper
      *
      * @param string $content
      * @return string
+     *
+     * @deprecated since v1.10
      */
     public static function clean($content)
     {
@@ -148,6 +156,8 @@ class StringHelper
      * @param integer $length
      *
      * @return string
+     *
+     * @deprecated since v1.10
      */
     public static function substr($content, $offset, $length)
     {
@@ -171,6 +181,8 @@ class StringHelper
      * @param string $content
      *
      * @return array
+     *
+     * @deprecated since v1.10
      */
     public static function parseNameValue($content)
     {

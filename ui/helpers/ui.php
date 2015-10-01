@@ -45,7 +45,7 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStylesheet(JUri::root() . 'libraries/Prism/ui/pnotify/css/jquery.pnotify.css');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/pnotify/css/jquery.pnotify.css');
         $document->addScript(JUri::root() . 'libraries/Prism/ui/pnotify/js/jquery.pnotify.min.js');
 
         self::$loaded[__METHOD__] = true;
@@ -71,7 +71,7 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStylesheet(JUri::root() . 'libraries/Prism/ui/bootstrap2/editable/css/bootstrap-editable.css');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/bootstrap2/editable/css/bootstrap-editable.css');
         $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap2/editable/js/bootstrap-editable.min.js');
 
         self::$loaded[__METHOD__] = true;
@@ -98,7 +98,7 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStylesheet(JUri::root() . 'libraries/Prism/ui/bootstrap3/editable/css/bootstrap-editable.css');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/bootstrap3/editable/css/bootstrap-editable.css');
         $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/editable/js/bootstrap-editable.js');
 
         self::$loaded[__METHOD__] = true;
@@ -148,7 +148,7 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStylesheet(JUri::root() . 'libraries/Prism/ui/bootstrap2/fileinput/css/bootstrap-fileinput.min.css');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/bootstrap2/fileinput/css/bootstrap-fileinput.min.css');
         $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap2/fileinput/js/bootstrap-fileinput.min.js');
 
         self::$loaded[__METHOD__] = true;
@@ -160,7 +160,7 @@ abstract class PrismUI
      * <code>
      * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
      *
-     * JHtml::_('prism.ui.bootstrap3Fileinput');
+     * JHtml::_('prism.ui.bootstrap3FileInput');
      * </code>
      *
      * @link https://github.com/kartik-v/bootstrap-fileinput Documentation of Bootstrap Fileinput
@@ -176,6 +176,7 @@ abstract class PrismUI
 
         $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/css/fileinput.min.css');
         $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/js/fileinput.min.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/js/plugins/canvas-to-blob.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -324,8 +325,8 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addStylesheet(JUri::root() . 'libraries/Prism/ui/fileupload/css/jquery.fileupload.css');
-//        $document->addStylesheet(JUri::root() . 'libraries/Prism/ui/fileupload/css/jquery.fileupload-ui.css');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/fileupload/css/jquery.fileupload.css');
+//        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/fileupload/css/jquery.fileupload-ui.css');
 
         $document->addScript(JUri::root() . 'libraries/Prism/ui/fileupload/js/jquery.ui.widget.js');
         $document->addScript(JUri::root() . 'libraries/Prism/ui/fileupload/js/jquery.iframe-transport.js');
@@ -359,7 +360,7 @@ abstract class PrismUI
         if (!$cdn) {
             $document->addScript(JUri::root() . 'libraries/Prism/ui/d3/js/d3.min.js');
         } else {
-            $document->addScript("//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js");
+            $document->addScript('//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js');
         }
 
         self::$loaded[__METHOD__] = true;
@@ -435,18 +436,18 @@ abstract class PrismUI
             $done = array();
         }
 
-        $readonly = isset($attributes['readonly']) && $attributes['readonly'] == 'readonly';
-        $disabled = isset($attributes['disabled']) && $attributes['disabled'] == 'disabled';
+        $readonly = (!empty($attributes['readonly']) and $attributes['readonly'] === 'readonly');
+        $disabled = (!empty($attributes['disabled']) and $attributes['disabled'] === 'disabled');
 
         if (is_array($attributes)) {
-            $attributes['class'] = isset($attributes['class']) ? $attributes['class'] : 'form-control';
+            $attributes['class'] = !empty($attributes['class']) ? $attributes['class'] : 'form-control';
             $attributes['class'] = trim($attributes['class'] . ' hasTooltip');
 
-            $attributes = JArrayHelper::toString($attributes);
+            $attributes = Joomla\Utilities\ArrayHelper::toString($attributes);
         }
 
         // Format value when not nulldate ('0000-00-00 00:00:00'), otherwise blank it as it would result in 1970-01-01.
-        if ((int)$value && $value != JFactory::getDbo()->getNullDate()) {
+        if ((int)$value && ($value !== JFactory::getDbo()->getNullDate())) {
             $date       = new DateTime($value, new DateTimeZone('UTC'));
             $inputvalue = $date->format($format);
         } else {
@@ -459,7 +460,7 @@ abstract class PrismUI
         $locale      = substr($languageTag, 0, 2);
 
         // Only display the triggers once for each control.
-        if (!in_array($id, $done)) {
+        if (!in_array($id, $done, true)) {
 
             $calendarDateFormat = CrowdfundingHelper::getDateFormat(true);
 
@@ -482,10 +483,10 @@ abstract class PrismUI
         $btn_style = ($readonly || $disabled) ? ' style="display:none;"' : '';
 
         return '<div class="input-group date" id="' . $id . '_datepicker">
-                    <input type="text" title="' . ($inputvalue ? JHtml::_("date", $value, null, null) : "") . '"
+                    <input type="text" title="' . ($inputvalue ? JHtml::_('date', $value, null, null) : '') . '"
                     name="' . $name . '" id="' . $id . '" value="' . htmlspecialchars($inputvalue, ENT_COMPAT, 'UTF-8') . '" ' . $attributes . ' />
                     <span class="input-group-addon" id="' . $id . '_img">
-                        <span class="glyphicon glyphicon-calendar" id="' . $id . '_icon"' . $btn_style . '></span>
+                        <span class="fa fa-calendar" id="' . $id . '_icon"' . $btn_style . '></span>
                     </span>
                 </div>';
     }
@@ -504,20 +505,23 @@ abstract class PrismUI
     {
         $sig = md5(serialize(array($selector, $params)));
 
-        if (!isset(static::$loaded[__METHOD__][$sig])) {
+        $layoutData = new stdClass();
+        $layoutData->selector = $selector;
+
+        if (array_key_exists($sig, static::$loaded[__METHOD__])) {
             // Setup options object
-            $opt['active'] = (isset($params['active']) && ($params['active'])) ? (string)$params['active'] : '';
+            $opt['active'] = (!empty($params['active'])) ? (string)$params['active'] : '';
 
             // Attach tabs to document
             JFactory::getDocument()
-                ->addScriptDeclaration(JLayoutHelper::render('bootstrap3.starttabsetscript', array('selector' => $selector)), PRISM_PATH_LIBRARY."/ui/layouts");
+                ->addScriptDeclaration(JLayoutHelper::render('bootstrap3.starttabsetscript', $layoutData), PRISM_PATH_LIBRARY.'/ui/layouts');
 
             // Set static array
             static::$loaded[__METHOD__][$sig]                = true;
             static::$loaded[__METHOD__][$selector]['active'] = $opt['active'];
         }
 
-        $html = JLayoutHelper::render('bootstrap3.starttabset', array('selector' => $selector), PRISM_PATH_LIBRARY."/ui/layouts");
+        $html = JLayoutHelper::render('bootstrap3.starttabset', $layoutData, PRISM_PATH_LIBRARY.'/ui/layouts');
 
         return $html;
     }
@@ -531,7 +535,7 @@ abstract class PrismUI
      */
     public static function bootstrap3endTabSet()
     {
-        return "</div>";
+        return '</div>';
     }
 
     /**
@@ -550,16 +554,21 @@ abstract class PrismUI
         static $tabScriptLayout = null;
         static $tabLayout = null;
 
-        $tabScriptLayout = is_null($tabScriptLayout) ? new JLayoutFile('bootstrap3.addtabscript', PRISM_PATH_LIBRARY."/ui/layouts") : $tabScriptLayout;
-        $tabLayout       = is_null($tabLayout) ? new JLayoutFile('bootstrap3.addtab', PRISM_PATH_LIBRARY."/ui/layouts") : $tabLayout;
+        $tabScriptLayout = ($tabScriptLayout === null) ? new JLayoutFile('bootstrap3.addtabscript', PRISM_PATH_LIBRARY.'/ui/layouts') : $tabScriptLayout;
+        $tabLayout       = ($tabLayout === null) ? new JLayoutFile('bootstrap3.addtab', PRISM_PATH_LIBRARY.'/ui/layouts') : $tabLayout;
 
-        $active = (static::$loaded['PrismUI::bootstrap3StartTabSet'][$selector]['active'] == $id) ? ' active' : '';
+        $active = (static::$loaded['PrismUI::bootstrap3StartTabSet'][$selector]['active'] === $id) ? ' active' : '';
 
-        // Inject tab into UL
-        JFactory::getDocument()
-            ->addScriptDeclaration($tabScriptLayout->render(array('selector' => $selector, 'id' => $id, 'active' => $active, 'title' => $title)));
+        // Inject tab into UL.
+        $dataLayout = new stdClass();
+        $dataLayout->selector = $selector;
+        $dataLayout->id = $id;
+        $dataLayout->active = $active;
+        $dataLayout->title = $title;
 
-        $html = $tabLayout->render(array('id' => $id, 'active' => $active));
+        JFactory::getDocument()->addScriptDeclaration($tabScriptLayout->render($dataLayout));
+
+        $html = $tabLayout->render($dataLayout);
 
         return $html;
     }
@@ -573,6 +582,6 @@ abstract class PrismUI
      */
     public static function bootstrap3endTab()
     {
-        return "</div>";
+        return '</div>';
     }
 }

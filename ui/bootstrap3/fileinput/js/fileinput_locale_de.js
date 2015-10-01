@@ -19,8 +19,10 @@
         cancelTitle: 'Hochladen abbrechen',
         uploadLabel: 'Hochladen',
         uploadTitle: 'Hochladen der ausgewählten Dateien',
+        msgZoomTitle: 'Details anzeigen',
+        msgZoomModalHeading: 'ausführliche Vorschau',
         msgSizeTooLarge: 'Datei "{name}" (<b>{size} KB</b>) überschreitet maximal zulässige Upload-Größe von <b>{maxSize} KB</b>.',
-        msgFilesTooLess: 'Sie müssen mindestens <b>{n}</b> {files} zum Hochladen auswählen. Bitte versuchen es erneut!',
+        msgFilesTooLess: 'Sie müssen mindestens <b>{n}</b> {files} zum Hochladen auswählen.',
         msgFilesTooMany: 'Anzahl der Dateien für den Upload ausgewählt <b>({n})</b> überschreitet maximal zulässige Grenze von <b>{m}</b> Stück.',
         msgFileNotFound: 'Datei "{name}" wurde nicht gefunden!',
         msgFileSecured: 'Sicherheitseinstellungen verhindern das Lesen der Datei "{name}".',
@@ -29,6 +31,7 @@
         msgFilePreviewError: 'Beim Lesen der Datei "{name}" ein Fehler aufgetreten.',
         msgInvalidFileType: 'Ungültiger Typ für Datei "{name}". Nur Dateien der Typen "{types}" werden unterstützt.',
         msgInvalidFileExtension: 'Ungültige Erweiterung für Datei "{name}". Nur Dateien mit der Endung "{extensions}" werden unterstützt.',
+        msgUploadAborted: 'Der Datei-Upload wurde abgebrochen',
         msgValidationError: 'Fehler beim Hochladen',
         msgLoading: 'Lade Datei {index} von {files} hoch&hellip;',
         msgProgress: 'Datei {index} von {files} - {name} - zu {percent}% fertiggestellt.',
@@ -38,6 +41,16 @@
         msgImageHeightSmall: 'Höhe der Bilddatei "{name}" muss mindestens {size} px betragen.',
         msgImageWidthLarge: 'Breite der Bilddatei "{name}" nicht überschreiten {size} px.',
         msgImageHeightLarge: 'Höhe der Bilddatei "{name}" nicht überschreiten {size} px.',
-        dropZoneTitle: 'Dateien hierher ziehen &hellip;'
+        msgImageResizeError: 'Konnte nicht die Bildabmessungen zu ändern.',
+        msgImageResizeException: 'Fehler beim Ändern der Größe des Bildes.<pre>{errors}</pre>',
+        dropZoneTitle: 'Dateien hierher ziehen &hellip;',
+        fileActionSettings: {
+            removeTitle: 'Datei entfernen',
+            uploadTitle: 'Datei hochladen',
+            indicatorNewTitle: 'Noch nicht hochgeladen',
+            indicatorSuccessTitle: 'Hochgeladen',
+            indicatorErrorTitle: 'Upload Fehler',
+            indicatorLoadingTitle: 'Hochladen ...'
+        }
     };
 })(window.jQuery);

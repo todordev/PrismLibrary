@@ -21,9 +21,11 @@
         cancelTitle: 'Abortar la subida en curso',
         uploadLabel: 'Subir archivo',
         uploadTitle: 'Subir archivos seleccionados',
-        msgSizeTooLarge: 'Archivo "{name}" (<b>{size} KB</b>) excede el tamaño máximo permitido de <b>{maxSize} KB</b>. Por favor, inténtelo de nuevo con archivos mas pequeños.',
-        msgFilesTooLess: 'Debe seleccionar al menos <b>{n}</b> {files} a cargar. Por favor, inténtelo de nuevo.',
-        msgFilesTooMany: 'El número de archivos seleccionados a cargar <b>({n})</b> excede el límite máximo permitido de <b>{m}</b>. Por favor, inténtelo de nuevo.',
+        msgZoomTitle: 'Ver detalles',
+        msgZoomModalHeading: 'Vista previa detallada',
+        msgSizeTooLarge: 'Archivo "{name}" (<b>{size} KB</b>) excede el tamaño máximo permitido de <b>{maxSize} KB</b>.',
+        msgFilesTooLess: 'Debe seleccionar al menos <b>{n}</b> {files} a cargar.',
+        msgFilesTooMany: 'El número de archivos seleccionados a cargar <b>({n})</b> excede el límite máximo permitido de <b>{m}</b>.',
         msgFileNotFound: 'Archivo "{name}" no encontrado.',
         msgFileSecured: 'No es posible acceder al archivo "{name}" porque estará siendo usado por otra aplicación o no tengamos permisos de lectura.',
         msgFileNotReadable: 'No es posible acceder al archivo "{name}".',
@@ -31,6 +33,7 @@
         msgFilePreviewError: 'Ocurrió un error mientras se leía el archivo "{name}".',
         msgInvalidFileType: 'Tipo de archivo no válido para "{name}". Sólo archivos "{types}" son permitidos.',
         msgInvalidFileExtension: 'Extensión de archivo no válido para "{name}". Sólo archivos "{extensions}" son permitidos.',
+        msgUploadAborted: 'La carga de archivos se ha cancelado',
         msgValidationError: 'Error al subir archivo',
         msgLoading: 'Subiendo archivo {index} de {files} &hellip;',
         msgProgress: 'Subiendo archivo {index} de {files} - {name} - {percent}% completado.',
@@ -40,6 +43,16 @@
         msgImageHeightSmall: 'La altura de la imagen "{name}" debe ser al menos {size} px.',
         msgImageWidthLarge: 'El ancho de la imagen "{name}" no puede exceder de {size} px.',
         msgImageHeightLarge: 'La altura de la imagen "{name}" no puede exceder de {size} px.',
-        dropZoneTitle: 'Arrastre y suelte aquí los archivos &hellip;'
+        msgImageResizeError: 'No se pudo obtener las dimensiones de imagen para cambiar el tamaño.',
+        msgImageResizeException: 'Error al cambiar el tamaño de la imagen.<pre>{errors}</pre>',
+        dropZoneTitle: 'Arrastre y suelte aquí los archivos &hellip;',
+        fileActionSettings: {
+            removeTitle: 'Eliminar archivo',
+            uploadTitle: 'Subir archivo',
+            indicatorNewTitle: 'No subido todavía',
+            indicatorSuccessTitle: 'Subido',
+            indicatorErrorTitle: 'Subir Error',
+            indicatorLoadingTitle: 'Subiendo ...'
+        }
     };
 })(window.jQuery);

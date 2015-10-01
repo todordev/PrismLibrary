@@ -8,10 +8,7 @@
  */
 
 defined('_JEXEC') or die;
-
-$selector = empty($displayData['selector']) ? '' : $displayData['selector'];
-
 ?>
 
-<ul class="nav nav-tabs" id="<?php echo $selector; ?>Tabs" role="tablist"></ul>
-<div class="tab-content" id="<?php echo $selector; ?>Content">
+<ul class="nav nav-tabs" id="<?php echo $displayData->selector; ?>Tabs" role="tablist"></ul>
+<div class="tab-content" id="<?php echo $displayData->selector; ?>Content">

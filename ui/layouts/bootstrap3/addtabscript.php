@@ -9,16 +9,10 @@
 
 defined('_JEXEC') or die;
 
-$selector = empty($displayData['selector']) ? '' : $displayData['selector'];
-$id = empty($displayData['id']) ? '' : $displayData['id'];
-$active = empty($displayData['active']) ? '' : $displayData['active'];
-$title = empty($displayData['title']) ? '' : $displayData['title'];
-
-
 echo "(function($){
     $(document).ready(function() {
         // Handler for .ready() called.
-        var tab = $('<li role=\"presentation\" class=\"" . $active . "\"><a href=\"#" . $id . "\" data-toggle=\"tab\" aria-controls=\"".$title."\" role=\"tab\">" . $title . "</a></li>');
-        $('#" . $selector . "Tabs').append(tab);
+        var tab = $('<li role=\"presentation\" class=\"" . $displayData->active . "\"><a href=\"#" . $displayData->id . "\" data-toggle=\"tab\" aria-controls=\"".$displayData->title."\" role=\"tab\">" . $displayData->title . "</a></li>');
+        $('#" . $displayData->selector . "Tabs').append(tab);
     });
 })(jQuery);";

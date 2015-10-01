@@ -22,9 +22,11 @@
         cancelTitle: 'لغو بارگزاری جاری',
         uploadLabel: 'بارگذاری',
         uploadTitle: 'بارگذاری فایل‌های انتخاب شده',
-        msgSizeTooLarge: 'فایل "{name}" (<b>{size} کیلوبایت</b>) از حداکثر مجاز <b>{maxSize} کیلوبایت</b> عبور کرده است. لطفا مجددا برای بارگذاری سعی کنید!',
-        msgFilesTooLess: 'شما باید حداقل <b>{n}</b> {files} فایل برای بارگذاری انتخاب کنید. لطفا مجددا برای بارگذاری سعی کنید!',
-        msgFilesTooMany: 'تعداد فایل‌های انتخاب شده برای بارگذاری <b>({n})</b> از حداکثر مجاز عبور کرده است <b>{m}</b>. لطفا مجددا برای بارگذاری سعی کنید!',
+        msgZoomTitle: 'دیدن جزئیات',
+        msgZoomModalHeading: 'پیشنمایش مفصل',
+        msgSizeTooLarge: 'فایل "{name}" (<b>{size} کیلوبایت</b>) از حداکثر مجاز <b>{maxSize} کیلوبایت</b>.',
+        msgFilesTooLess: 'شما باید حداقل <b>{n}</b> {files} فایل برای بارگذاری انتخاب کنید.',
+        msgFilesTooMany: 'تعداد فایل‌های انتخاب شده برای بارگذاری <b>({n})</b> از حداکثر مجاز عبور کرده است <b>{m}</b>.',
         msgFileNotFound: 'فایل "{name}" یافت نشد!',
         msgFileSecured: 'محدودیت های امنیتی مانع خواندن فایل "{name}" است.',
         msgFileNotReadable: 'فایل "{name}" قابل نوشتن نیست.',
@@ -32,6 +34,7 @@
         msgFilePreviewError: 'در هنگام خواندن فایل "{name}" خطایی رخ داد.',
         msgInvalidFileType: 'نوع فایل "{name}" معتبر نیست. فقط "{types}" پشیبانی می‌شود.',
         msgInvalidFileExtension: 'پسوند فایل "{name}" معتبر نیست. فقط "{extensions}" پشتیبانی می‌شود.',
+        msgUploadAborted: 'The file upload was aborted',
         msgValidationError: 'خطا در بارگزاری فایل',
         msgLoading: 'بارگیری فایل {index} از {files} &hellip;',
         msgProgress: 'بارگیری فایل {index} از {files} - {name} - {percent}% تمام شد.',
@@ -41,6 +44,16 @@
         msgImageHeightSmall: 'ارتفاع فایل تصویر "{name}" باید حداقل {size} پیکسل باشد.',
         msgImageWidthLarge: 'عرض فایل تصویر "{name}" نمیتواند از {size} پیکسل بیشتر باشد.',
         msgImageHeightLarge: 'ارتفاع فایل تصویر "{name}" نمی‌تواند از {size} پیکسل بیشتر باشد.',
-        dropZoneTitle: 'فایل‌ها را بکشید و در اینجا رها کنید &hellip;'
+        msgImageResizeError: 'یافت نشد ابعاد تصویر را برای تغییر اندازه.',
+        msgImageResizeException: 'خطا در هنگام تغییر اندازه تصویر.<pre>{errors}</pre>',
+        dropZoneTitle: 'فایل‌ها را بکشید و در اینجا رها کنید &hellip;',
+        fileActionSettings: {
+            removeTitle: 'حذف فایل',
+            uploadTitle: 'آپلود فایل',
+            indicatorNewTitle: 'آپلود نشده است',
+            indicatorSuccessTitle: 'آپلود شده',
+            indicatorErrorTitle: 'بارگذاری خطا',
+            indicatorLoadingTitle: 'آپلود ...'
+        }
     };
 })(window.jQuery);

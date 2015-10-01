@@ -8,10 +8,5 @@
  */
 
 defined('_JEXEC') or die;
-
-$id = empty($displayData['id']) ? '' : $displayData['id'];
-$active = empty($displayData['active']) ? '' : $displayData['active'];
-
 ?>
-
-<div role="tabpanel" id="<?php echo $id; ?>" class="tab-pane<?php echo $active; ?>">
+<div role="tabpanel" id="<?php echo $displayData->id; ?>" class="tab-pane<?php echo $displayData->active; ?>">

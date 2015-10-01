@@ -1,12 +1,16 @@
 Prism Library Release Notes
 ==========================
 
+###v1.7
+* Upgraded jQuery File Upload Plugin.
+* Upgraded File Input for Bootstrap 3.0.
+
 ###v1.6
 * Added classes for integration with Community Builder.
 * Added option to route or not the links to community extensions.
 
 ###v1.5
-* Added class Prism\String\StringHelper that will replaces current class Prism\String.
+* Added class Prism\Utilities\StringHelper that will replaces current class Prism\String.
 
 ###v1.4
 * Renamed the filename of default controller.
