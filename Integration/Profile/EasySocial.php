@@ -11,7 +11,7 @@ namespace Prism\Integration\Profile;
 
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Foundry", JPATH_ROOT . '/administrator/components/com_easysocial/includes/foundry.php');
+\JLoader::register('Foundry', JPATH_ROOT . '/administrator/components/com_easysocial/includes/foundry.php');
 
 /**
  * This class provides functionality to
@@ -37,10 +37,10 @@ class EasySocial implements ProfileInterface
      * @var array
      */
     protected $avatarSizes = array(
-        "icon" => "small",
-        "small" => "medium",
-        "medium" => "square",
-        "large" => "large",
+        'icon' => 'small',
+        'small' => 'medium',
+        'medium' => 'square',
+        'large' => 'large',
     );
 
     /**
@@ -111,21 +111,19 @@ class EasySocial implements ProfileInterface
         $query = $this->db->getQuery(true);
         $query
             ->select(
-                "a.id AS user_id, a.name, a.username, ".
-                "b.alias, b.permalink, " .
-                "c.small, c.medium, c.square, c.large"
+                'a.id AS user_id, a.name, a.username, '.
+                'b.alias, b.permalink, ' .
+                'c.small, c.medium, c.square, c.large'
             )
-            ->from($this->db->quoteName("#__users", "a"))
-            ->leftJoin($this->db->quoteName("#__social_users", "b") . " ON a.id = b.user_id")
-            ->leftJoin($this->db->quoteName("#__social_avatars", "c") . " ON a.id = c.uid")
-            ->where("a.id =" . (int)$id);
+            ->from($this->db->quoteName('#__users', 'a'))
+            ->leftJoin($this->db->quoteName('#__social_users', 'b') . ' ON a.id = b.user_id')
+            ->leftJoin($this->db->quoteName('#__social_avatars', 'c') . ' ON a.id = c.uid')
+            ->where('a.id =' . (int)$id);
 
         $this->db->setQuery($query);
-        $result = $this->db->loadAssoc();
+        $result = (array)$this->db->loadAssoc();
 
-        if (!empty($result)) { // Set values to variables
-            $this->bind($result);
-        }
+        $this->bind($result);
     }
 
     /**
@@ -145,10 +143,10 @@ class EasySocial implements ProfileInterface
      * @param array $data
      * @param array $ignored
      */
-    public function bind($data, $ignored = array())
+    public function bind($data, array $ignored = array())
     {
         foreach ($data as $key => $value) {
-            if (!in_array($key, $ignored)) {
+            if (!in_array($key, $ignored, true)) {
                 $this->$key = $value;
             }
         }
@@ -172,7 +170,7 @@ class EasySocial implements ProfileInterface
      */
     public function getLink($route = true)
     {
-        $link = "";
+        $link = '';
 
         if ($route) {
             $options = array('id' => $this->getAlias());
@@ -199,17 +197,17 @@ class EasySocial implements ProfileInterface
      *
      * @return string Return a link to the picture.
      */
-    public function getAvatar($size = "small", $returnDefault = true)
+    public function getAvatar($size = 'small', $returnDefault = true)
     {
-        $avatar = (!isset($this->avatarSizes[$size])) ? $this->avatarSizes["small"] : $this->avatarSizes[$size];
+        $avatar = (!array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes['small'] : $this->avatarSizes[$size];
 
-        $link = "";
+        $link = '';
 
-        if (!empty($this->$avatar)) {
-            $link = \JUri::root() . "media/com_easysocial/avatars/users/" . (int)$this->user_id . "/" . $this->$avatar;
+        if ($this->$avatar !== null) {
+            $link = \JUri::root() . 'media/com_easysocial/avatars/users/' . (int)$this->user_id . '/' . $this->$avatar;
         } else {
             if ($returnDefault) {
-                $link = \JUri::root() . "media/com_easysocial/defaults/avatars/users/" . $avatar . ".png";
+                $link = \JUri::root() . 'media/com_easysocial/defaults/avatars/users/' . $avatar . '.png';
             }
         }
 
@@ -221,16 +219,16 @@ class EasySocial implements ProfileInterface
         $config = \Foundry::config();
 
         // Default permalink to use.
-        $name = $config->get('users.aliasName') == 'realname' ? $this->name : $this->username;
+        $name = $config->get('users.aliasName') === 'realname' ? $this->name : $this->username;
         $name = $this->user_id . ':' . $name;
 
         // Check if the permalink is set
-        if ($this->permalink && !empty($this->permalink)) {
+        if (\JString::strlen($this->permalink) > 0) {
             $name = $this->permalink;
         }
 
         // If alias exists and permalink doesn't we use the alias
-        if ($this->alias && !empty($this->alias) && !$this->permalink) {
+        if (\JString::strlen($this->alias) > 0 and !$this->permalink) {
             $name = $this->alias;
         }
 
@@ -256,7 +254,7 @@ class EasySocial implements ProfileInterface
      */
     public function getLocation()
     {
-        if (is_null($this->location)) {
+        if ($this->location !== null) {
             $this->prepareLocation();
         }
 
@@ -279,7 +277,7 @@ class EasySocial implements ProfileInterface
      */
     public function getCountryCode()
     {
-        if (is_null($this->country_code)) {
+        if ($this->country_code !== null) {
             $this->prepareLocation();
         }
 
@@ -293,34 +291,34 @@ class EasySocial implements ProfileInterface
         $query = $this->db->getQuery(true);
 
         $query
-            ->select("a.id")
-            ->from($this->db->quoteName("#__social_fields", "a"))
-            ->where("a.unique_key =  " . $this->db->quote("ADDRESS"));
+            ->select('a.id')
+            ->from($this->db->quoteName('#__social_fields', 'a'))
+            ->where('a.unique_key =  ' . $this->db->quote('ADDRESS'));
 
         $this->db->setQuery($query);
-        $typeId = $this->db->loadResult();
+        $typeId = (int)$this->db->loadResult();
 
-        if (!empty($typeId)) {
+        if ($typeId > 0) {
 
             $query = $this->db->getQuery(true);
 
             $query
-                ->select("a.data")
-                ->from($this->db->quoteName("#__social_fields_data", "a"))
-                ->where("a.uid =  " . (int)$this->user_id)
-                ->where("a.field_id =  " . (int)$typeId);
+                ->select('a.data')
+                ->from($this->db->quoteName('#__social_fields_data', 'a'))
+                ->where('a.uid =  ' . (int)$this->user_id)
+                ->where('a.field_id =  ' . (int)$typeId);
 
             $this->db->setQuery($query);
-            $result = $this->db->loadResult();
+            $result = (string)$this->db->loadResult();
 
-            if (!empty($result)) { // Set values to variables
+            if (\JString::strlen($result) > 0) { // Set values to variables
                 $result = json_decode($result, true);
             } else {
                 $result = array();
             }
         }
 
-        $this->location = (isset($result["city"])) ? $result["city"] : "";
-        $this->country_code = (isset($result["country"])) ? $result["country"] : "";
+        $this->location = (array_key_exists('city', $result)) ? $result['city'] : '';
+        $this->country_code = (array_key_exists('country', $result)) ? $result['country'] : '';
     }
 }

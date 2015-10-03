@@ -40,7 +40,7 @@ class Builder
      * @param  array  $config Options used in the process of building profile object.
      *
      */
-    public function __construct($config = array())
+    public function __construct(array $config = array())
     {
         $this->config = $config;
     }
@@ -62,32 +62,32 @@ class Builder
      */
     public function build()
     {
-        $type   = ArrayHelper::getValue($this->config, "social_platform");
-        $userId = ArrayHelper::getValue($this->config, "user_id");
-        $url    = ArrayHelper::getValue($this->config, "url");
-        $image  = ArrayHelper::getValue($this->config, "image");
-        $title  = ArrayHelper::getValue($this->config, "title");
+        $type   = ArrayHelper::getValue($this->config, 'social_platform');
+        $userId = ArrayHelper::getValue($this->config, 'user_id');
+        $url    = ArrayHelper::getValue($this->config, 'url');
+        $image  = ArrayHelper::getValue($this->config, 'image');
+        $title  = ArrayHelper::getValue($this->config, 'title');
 
         switch ($type) {
 
-            case "socialcommunity":
+            case 'socialcommunity':
                 $notification = new SocialCommunity($userId);
                 $notification->setUrl($url);
                 $notification->setImage($image);
                 break;
 
-            case "gamification":
+            case 'gamification':
                 $notification = new Gamification($userId);
                 $notification->setTitle($title);
                 $notification->setUrl($url);
                 $notification->setImage($image);
                 break;
 
-            case "jomsocial":
+            case 'jomsocial':
 
                 // Register JomSocial Router
-                if (!class_exists("CRoute")) {
-                    \JLoader::register("CRoute", JPATH_SITE."/components/com_community/libraries/core.php");
+                if (!class_exists('CRoute')) {
+                    \JLoader::register('CRoute', JPATH_SITE.'/components/com_community/libraries/core.php');
                 }
 
                 $notification = new JomSocial($userId);
@@ -95,7 +95,7 @@ class Builder
 
                 break;
 
-            case "easysocial":
+            case 'easysocial':
                 $notification = new EasySocial($userId);
                 $notification->setDb(\JFactory::getDbo());
                 break;
@@ -123,7 +123,7 @@ class Builder
      * $notification = $notificationBuilder->getNotification();
      * </code>
      *
-     * @return null|object
+     * @return null|NotificationInterface
      */
     public function getNotification()
     {

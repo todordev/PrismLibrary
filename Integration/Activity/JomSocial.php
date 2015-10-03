@@ -76,7 +76,7 @@ class JomSocial implements ActivityInterface
      * @param  integer $userId User ID
      * @param  string  $content Information about the activity.
      */
-    public function __construct($userId = 0, $content = "")
+    public function __construct($userId = 0, $content = '')
     {
         $this->actorId = $userId;
         $this->content = $content;
@@ -121,7 +121,7 @@ class JomSocial implements ActivityInterface
     public function store()
     {
         if (!$this->app) {
-            throw new \RuntimeException(\JText::_("LIB_PRISM_ERROR_INVALID_JOMSOCIAL_APP"));
+            throw new \RuntimeException(\JText::_('LIB_PRISM_ERROR_INVALID_JOMSOCIAL_APP'));
         }
 
         $query = $this->db->getQuery(true);
@@ -129,12 +129,12 @@ class JomSocial implements ActivityInterface
         $date = new \JDate();
 
         $query
-            ->insert($this->db->quoteName("#__community_activities"))
-            ->set($this->db->quoteName("actor") . "=" . (int)$this->actorId)
-            ->set($this->db->quoteName("content") . "=" . $this->db->quote($this->content))
-            ->set($this->db->quoteName("archived") . "=" . $this->db->quote($this->archived))
-            ->set($this->db->quoteName("app") . "=" . $this->db->quote($this->app))
-            ->set($this->db->quoteName("created") . "=" . $this->db->quote($date->toSql()));
+            ->insert($this->db->quoteName('#__community_activities'))
+            ->set($this->db->quoteName('actor') . '=' . (int)$this->actorId)
+            ->set($this->db->quoteName('content') . '=' . $this->db->quote($this->content))
+            ->set($this->db->quoteName('archived') . '=' . $this->db->quote($this->archived))
+            ->set($this->db->quoteName('app') . '=' . $this->db->quote($this->app))
+            ->set($this->db->quoteName('created') . '=' . $this->db->quote($date->toSql()));
 
         $this->db->setQuery($query);
         $this->db->execute();

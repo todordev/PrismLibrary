@@ -45,7 +45,7 @@ class Gamification implements NotificationInterface
      * @param  integer $userId User ID
      * @param  string  $content   Notification massage to user.
      */
-    public function __construct($userId = 0, $content = "")
+    public function __construct($userId = 0, $content = '')
     {
         $this->user_id = $userId;
         $this->content = $content;
@@ -69,7 +69,7 @@ class Gamification implements NotificationInterface
      */
     public function bind(array $data)
     {
-        if (!empty($data)) {
+        if (count($data) > 0) {
             foreach ($data as $key => $value) {
                 $this->$key = $value;
             }
@@ -89,9 +89,9 @@ class Gamification implements NotificationInterface
      *
      * @param string $content
      */
-    public function send($content = "")
+    public function send($content = '')
     {
-        if (!empty($note)) {
+        if (\JString::strlen($content) > 0) {
             $this->content = $content;
         }
 
@@ -100,20 +100,19 @@ class Gamification implements NotificationInterface
         $notification->setContent($this->getContent());
         $notification->setUserId($this->getUserId());
 
-        if (!empty($this->title)) {
+        if ($this->title !== null) {
             $notification->setTitle($this->getTitle());
         }
 
-        if (!empty($this->image)) {
+        if ($this->image !== null) {
             $notification->setImage($this->getImage());
         }
 
-        if (!empty($this->url)) {
+        if ($this->url !== null) {
             $notification->setUrl($this->getUrl());
         }
 
         $notification->store();
-
     }
 
     /**

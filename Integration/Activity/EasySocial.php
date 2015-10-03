@@ -51,7 +51,7 @@ class EasySocial implements ActivityInterface
      *
      * @var string
      */
-    protected $verb = "create";
+    protected $verb = 'create';
 
     /**
      * This is the object that has done the activity.
@@ -63,15 +63,15 @@ class EasySocial implements ActivityInterface
      * This is the type of actor.
      * @var integer
      */
-    protected $actorType = "user";
+    protected $actorType = 'user';
 
     /**
      * This is the target item. This is usually needed if you are targeting an object.
      * Example targets: Adam posted an update on Jennifer's profile. The $targetId would be Jennifer's id.
      *
-     * @var integer
+     * @var int
      */
-    protected $targetId;
+    protected $targetId = 0;
 
     /**
      * The type of the stream, whether it should be rendered in full mode or mini mode.
@@ -80,7 +80,7 @@ class EasySocial implements ActivityInterface
      *
      * @var string
      */
-    protected $type = "full";
+    protected $type = 'full';
 
     /**
      * Initialize the object, setting a user id
@@ -88,7 +88,7 @@ class EasySocial implements ActivityInterface
      *
      * <code>
      * $userId = 1;
-     * $content = "...";
+     * $content = '...';
      *
      * $activity = new Prism\Integration\Activity\EasySocial($userId, $content);
      * </code>
@@ -96,7 +96,7 @@ class EasySocial implements ActivityInterface
      * @param  integer $userId Target ID
      * @param  string  $content Information about the activity.
      */
-    public function __construct($userId = 0, $content = "")
+    public function __construct($userId = 0, $content = '')
     {
         $this->actorId = $userId;
         $this->content = $content;
@@ -147,7 +147,7 @@ class EasySocial implements ActivityInterface
         $template->setSiteWide($this->siteWide);
 
         // Set target ID.
-        if (!empty($this->targetId)) {
+        if ($this->targetId > 0) {
             $template->setTarget($this->targetId);
         }
 

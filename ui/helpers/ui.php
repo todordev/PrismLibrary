@@ -428,7 +428,7 @@ abstract class PrismUI
      * @since   1.5
      * @see     http://eonasdan.github.io/bootstrap-datetimepicker/
      */
-    public static function calendar($value, $name, $id, $format = 'Y-m-d', $attributes = null)
+    public static function calendar($value, $name, $id, $format = 'Y-m-d', array $attributes = array())
     {
         static $done;
 
@@ -501,7 +501,7 @@ abstract class PrismUI
      *
      * @since   3.1
      */
-    public static function bootstrap3StartTabSet($selector = 'myTab', $params = array())
+    public static function bootstrap3StartTabSet($selector = 'myTab', array $params = array())
     {
         $sig = md5(serialize(array($selector, $params)));
 

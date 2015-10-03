@@ -43,28 +43,25 @@ class Frontend extends Form
     protected function prepareRedirectLink($options = array())
     {
         // Return predefined link
-        $forceDirection = ArrayHelper::getValue($options, "force_direction");
-        if (!empty($forceDirection)) {
+        $forceDirection = ArrayHelper::getValue($options, 'force_direction');
+        if (null !== $forceDirection) {
             return $forceDirection;
         }
 
         // Generate a return link
-        $view   = ArrayHelper::getValue($options, "view");
-        $layout = ArrayHelper::getValue($options, "layout");
-        $itemId = ArrayHelper::getValue($options, "id", 0, "uint");
-        $urlVar = ArrayHelper::getValue($options, "url_var", "id");
+        $view   = ArrayHelper::getValue($options, 'view');
+        $layout = ArrayHelper::getValue($options, 'layout');
+        $itemId = ArrayHelper::getValue($options, 'id', 0, 'uint');
+        $urlVar = ArrayHelper::getValue($options, 'url_var', 'id');
 
         // Remove standard parameters
-        unset($options["view"]);
-        unset($options["layout"]);
-        unset($options["id"]);
-        unset($options["url_var"]);
+        unset($options['view'], $options['task'], $options['id'], $options['url_var']);
 
         // Prepare additional parameters
         $extraParams = $this->prepareExtraParameters($options);
 
         // Generate return link
-        $link = $this->defaultLink . "&view=" . $view . $this->getRedirectToViewAppend($layout, $itemId, $urlVar) . $extraParams;
+        $link = $this->defaultLink . '&view=' . $view . $this->getRedirectToViewAppend($layout, $itemId, $urlVar) . $extraParams;
 
         return $link;
     }

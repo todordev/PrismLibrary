@@ -1,6 +1,10 @@
 Prism Library Release Notes
 ==========================
 
+###v1.8
+* Improved code quality.
+* Replaced Prism\Math with Prism\Utilities\MathHelper.
+
 ###v1.7
 * Upgraded jQuery File Upload Plugin.
 * Upgraded File Input for Bootstrap 3.0.

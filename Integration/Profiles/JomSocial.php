@@ -11,7 +11,7 @@ namespace Prism\Integration\Profiles;
 
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("CRoute", JPATH_ROOT . '/components/com_community/libraries/core.php');
+\JLoader::register('CRoute', JPATH_ROOT . '/components/com_community/libraries/core.php');
 
 /**
  * This class provides functionality used for integrating
@@ -30,10 +30,10 @@ class JomSocial implements ProfilesInterface
      * @var array
      */
     protected $avatarSizes = array(
-        "icon" => "thumb",
-        "small" => "thumb",
-        "medium" => "avatar",
-        "large" => "avatar",
+        'icon' => 'thumb',
+        'small' => 'thumb',
+        'medium' => 'avatar',
+        'large' => 'avatar',
     );
 
     /**
@@ -73,16 +73,15 @@ class JomSocial implements ProfilesInterface
      */
     public function load(array $ids)
     {
-        if (!empty($ids)) {
-
+        if (count($ids) > 0) {
             $query = $this->db->getQuery(true);
             $query
-                ->select("a.userid AS user_id, a.avatar, a.thumb")
-                ->from($this->db->quoteName("#__community_users", "a"))
-                ->where("a.userid IN ( " . implode(",", $ids) . ")");
+                ->select('a.userid AS user_id, a.avatar, a.thumb')
+                ->from($this->db->quoteName('#__community_users', 'a'))
+                ->where('a.userid IN ( ' . implode(',', $ids) . ')');
 
             $this->db->setQuery($query);
-            $this->profiles = (array)$this->db->loadObjectList("user_id");
+            $this->profiles = (array)$this->db->loadObjectList('user_id');
         }
     }
 
@@ -105,19 +104,19 @@ class JomSocial implements ProfilesInterface
      *
      * @return string
      */
-    public function getAvatar($userId, $size = "small", $returnDefault = true)
+    public function getAvatar($userId, $size = 'small', $returnDefault = true)
     {
-        $link = "";
+        $link = '';
 
-        if (!isset($this->profiles[$userId])) {
-            $link = \JUri::root() . "components/com_community/assets/default_thumb.jpg";
+        if (!array_key_exists($userId, $this->profiles)) {
+            $link = \JUri::root() . 'components/com_community/assets/default_thumb.jpg';
         } else {
             // Get avatar size.
-            $avatar = (isset($this->avatarSizes[$size])) ? $this->avatarSizes[$size] : null;
+            $avatar = (array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes[$size] : null;
 
             if (!$avatar or empty($this->profiles[$userId]->$avatar)) {
                 if ($returnDefault) {
-                    $link = \JUri::root() . "components/com_community/assets/default_thumb.jpg";
+                    $link = \JUri::root() . 'components/com_community/assets/default_thumb.jpg';
                 }
             } else {
                 $link = \JUri::root() . $this->profiles[$userId]->$avatar;
@@ -147,8 +146,8 @@ class JomSocial implements ProfilesInterface
      */
     public function getLink($userId, $route = true)
     {
-        $link = "";
-        if (isset($this->profiles[$userId]) and !empty($this->profiles[$userId]->user_id)) {
+        $link = '';
+        if (array_key_exists($userId, $this->profiles) and !empty($this->profiles[$userId]->user_id)) {
             $link = 'index.php?option=com_community&view=profile&userid=' . $this->profiles[$userId]->user_id;
 
             if ($route) {
@@ -178,7 +177,7 @@ class JomSocial implements ProfilesInterface
      */
     public function getLocation($userId)
     {
-        return "";
+        return '';
     }
 
     /**
@@ -199,6 +198,6 @@ class JomSocial implements ProfilesInterface
      */
     public function getCountryCode($userId)
     {
-        return "";
+        return '';
     }
 }

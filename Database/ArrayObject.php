@@ -82,7 +82,7 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
      */
     public function current()
     {
-        return (!isset($this->items[$this->position])) ? null : $this->items[$this->position];
+        return (!array_key_exists($this->position, $this->items)) ? null : $this->items[$this->position];
     }
 
     /**
@@ -116,7 +116,7 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
      */
     public function valid()
     {
-        return isset($this->items[$this->position]);
+        return array_key_exists($this->position, $this->items);
     }
 
     /**
@@ -143,7 +143,7 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
      */
     public function offsetSet($offset, $value)
     {
-        if (is_null($offset)) {
+        if (null === $offset) {
             $this->items[] = $value;
         } else {
             $this->items[$offset] = $value;
@@ -161,7 +161,7 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
      */
     public function offsetExists($offset)
     {
-        return isset($this->items[$offset]);
+        return array_key_exists($offset, $this->items);
     }
 
     /**
@@ -189,7 +189,7 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
      */
     public function offsetGet($offset)
     {
-        return isset($this->items[$offset]) ? $this->items[$offset] : null;
+        return (!array_key_exists($offset, $this->items)) ? null : $this->items[$offset];
     }
 
     /**
@@ -216,12 +216,12 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
      *
      * @return array
      */
-    public function getKeys($columnName = "id")
+    public function getKeys($columnName = 'id')
     {
         $keys = array();
 
         foreach ($this->items as $item) {
-            $keys[] = isset($item[$columnName]) ? (int)$item[$columnName] : null;
+            $keys[] = array_key_exists($columnName, $item) ? (int)$item[$columnName] : null;
         }
 
         return $keys;
@@ -243,15 +243,15 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
      *
      * @return array
      */
-    public function toOptions($key = "id", $text = "title", $suffix = "")
+    public function toOptions($key = 'id', $text = 'title', $suffix = '')
     {
         $options = array();
 
         foreach ($this->items as $item) {
             if (!$suffix) {
-                $options[] = array("value" => $item[$key], "text" => $item[$text]);
+                $options[] = array('value' => $item[$key], 'text' => $item[$text]);
             } else {
-                $options[] = array("value" => $item[$key], "text" => $item[$text] . " [".$item[$suffix]."]");
+                $options[] = array('value' => $item[$key], 'text' => $item[$text] . ' ['.$item[$suffix].']');
             }
         }
 
@@ -278,7 +278,7 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
         $result = array();
 
         foreach ($this->items as $item) {
-            if (isset($item[$column]) and ($value == $item[$column])) {
+            if (array_key_exists($column, $item) and ($value == $item[$column])) {
                 $result = $item;
                 break;
             }

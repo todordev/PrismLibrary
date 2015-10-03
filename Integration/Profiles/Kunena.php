@@ -28,10 +28,10 @@ class Kunena implements ProfilesInterface
      * @var array
      */
     protected $avatarSizes = array(
-        "icon" => array("folder" => "size36", "noimage" => "s_nophoto.jpg"),
-        "small" => array("folder" => "size72", "noimage" => "s_nophoto.jpg"),
-        "medium" => array("folder" => "size72", "noimage" => "nophoto.jpg"),
-        "large" => array("folder" => "size200", "noimage" => "nophoto.jpg"),
+        'icon' => array('folder' => 'size36', 'noimage' => 's_nophoto.jpg'),
+        'small' => array('folder' => 'size72', 'noimage' => 's_nophoto.jpg'),
+        'medium' => array('folder' => 'size72', 'noimage' => 'nophoto.jpg'),
+        'large' => array('folder' => 'size200', 'noimage' => 'nophoto.jpg'),
     );
 
     /**
@@ -71,17 +71,17 @@ class Kunena implements ProfilesInterface
      */
     public function load(array $ids)
     {
-        if (!empty($ids)) {
+        if (count($ids) > 0) {
 
             // Create a new query object.
             $query = $this->db->getQuery(true);
             $query
-                ->select("a.userid AS user_id, a.avatar")
-                ->from($this->db->quoteName("#__kunena_users", "a"))
-                ->where("a.userid IN ( " . implode(",", $ids) . ")");
+                ->select('a.userid AS user_id, a.avatar')
+                ->from($this->db->quoteName('#__kunena_users', 'a'))
+                ->where('a.userid IN ( ' . implode(',', $ids) . ')');
 
             $this->db->setQuery($query);
-            $this->profiles = (array)$this->db->loadObjectList("user_id");
+            $this->profiles = (array)$this->db->loadObjectList('user_id');
         }
     }
 
@@ -104,22 +104,22 @@ class Kunena implements ProfilesInterface
      *
      * @return string
      */
-    public function getAvatar($userId, $size = "small", $returnDefault = true)
+    public function getAvatar($userId, $size = 'small', $returnDefault = true)
     {
-        $link = "";
+        $link = '';
 
-        if (!isset($this->profiles[$userId])) {
-            $link = \JUri::root() . "media/kunena/avatars/" . $this->avatarSizes["small"]["noimage"];
+        if (!array_key_exists($userId, $this->profiles)) {
+            $link = \JUri::root() . 'media/kunena/avatars/' . $this->avatarSizes['small']['noimage'];
         } else {
             // Get avatar size.
             if (!empty($this->profiles[$userId]->avatar)) {
-                $folder = (!array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes["small"]["folder"] : $this->avatarSizes[$size]["folder"];
-                $link = \JUri::root() . "media/kunena/avatars/resized/" . $folder . "/". $this->profiles[$userId]->avatar;
+                $folder = (!array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes['small']['folder'] : $this->avatarSizes[$size]['folder'];
+                $link = \JUri::root() . 'media/kunena/avatars/resized/' . $folder . '/'. $this->profiles[$userId]->avatar;
             } else {
 
                 if ($returnDefault) {
-                    $noimage = (!array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes["small"]["noimage"] : $this->avatarSizes[$size]["noimage"];
-                    $link = \JUri::root() . "media/kunena/avatars/" . $noimage;
+                    $noImage = (!array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes['small']['noimage'] : $this->avatarSizes[$size]['noimage'];
+                    $link = \JUri::root() . 'media/kunena/avatars/' . $noImage;
                 }
             }
         }
@@ -147,9 +147,9 @@ class Kunena implements ProfilesInterface
      */
     public function getLink($userId, $route = true)
     {
-        $link = "";
-        if (isset($this->profiles[$userId]) and !empty($this->profiles[$userId]->user_id)) {
-            $link = "index.php?option=com_kunena&view=profile&userid=" . (int)$this->profiles[$userId]->user_id;
+        $link = '';
+        if (array_key_exists($userId, $this->profiles) and !empty($this->profiles[$userId]->user_id)) {
+            $link = 'index.php?option=com_kunena&view=profile&userid=' . (int)$this->profiles[$userId]->user_id;
 
             if ($route) {
                 $link = \KunenaRoute::_($link, false);
@@ -178,7 +178,7 @@ class Kunena implements ProfilesInterface
      */
     public function getLocation($userId)
     {
-        return "";
+        return '';
     }
 
     /**
@@ -199,6 +199,6 @@ class Kunena implements ProfilesInterface
      */
     public function getCountryCode($userId)
     {
-        return "";
+        return '';
     }
 }

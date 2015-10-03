@@ -35,10 +35,10 @@ class Kunena implements ProfileInterface
      * @var array
      */
     protected $avatarSizes = array(
-        "icon" => array("folder" => "size36", "noimage" => "s_nophoto.jpg"),
-        "small" => array("folder" => "size72", "noimage" => "s_nophoto.jpg"),
-        "medium" => array("folder" => "size72", "noimage" => "nophoto.jpg"),
-        "large" => array("folder" => "size200", "noimage" => "nophoto.jpg"),
+        'icon' => array('folder' => 'size36', 'noimage' => 's_nophoto.jpg'),
+        'small' => array('folder' => 'size72', 'noimage' => 's_nophoto.jpg'),
+        'medium' => array('folder' => 'size72', 'noimage' => 'nophoto.jpg'),
+        'large' => array('folder' => 'size200', 'noimage' => 'nophoto.jpg'),
     );
 
     /**
@@ -82,7 +82,7 @@ class Kunena implements ProfileInterface
      */
     public static function getInstance(\JDatabaseDriver $db, $id)
     {
-        if (empty(self::$instances[$id])) {
+        if (!array_key_exists($id, self::$instances)) {
             $item                 = new Kunena($db);
             $item->load($id);
 
@@ -108,16 +108,14 @@ class Kunena implements ProfileInterface
     {
         $query = $this->db->getQuery(true);
         $query
-            ->select("a.userid AS user_id, a.avatar, a.location")
-            ->from($this->db->quoteName("#__kunena_users", "a"))
-            ->where("a.userid = " . (int)$id);
+            ->select('a.userid AS user_id, a.avatar, a.location')
+            ->from($this->db->quoteName('#__kunena_users', 'a'))
+            ->where('a.userid = ' . (int)$id);
 
         $this->db->setQuery($query);
-        $result = $this->db->loadAssoc();
+        $result = (array)$this->db->loadAssoc();
 
-        if (!empty($result)) { // Set values to variables
-            $this->bind($result);
-        }
+        $this->bind($result);
     }
 
     /**
@@ -137,10 +135,10 @@ class Kunena implements ProfileInterface
      * @param array $data
      * @param array $ignored
      */
-    public function bind($data, $ignored = array())
+    public function bind($data, array $ignored = array())
     {
         foreach ($data as $key => $value) {
-            if (!in_array($key, $ignored)) {
+            if (!in_array($key, $ignored, true)) {
                 $this->$key = $value;
             }
         }
@@ -164,9 +162,9 @@ class Kunena implements ProfileInterface
      */
     public function getLink($route = true)
     {
-        $link = "";
-        if (!empty($this->user_id)) {
-            $link = 'index.php?option=com_kunena&view=profile&userid=' . $this->user_id;
+        $link = '';
+        if ($this->user_id !== null) {
+            $link = 'index.php?option=com_kunena&view=profile&userid=' . (int)$this->user_id;
 
             if ($route) {
                 $link = \KunenaRoute::_($link, false);
@@ -193,18 +191,18 @@ class Kunena implements ProfileInterface
      * 
      * @return string Return a link to the picture.
      */
-    public function getAvatar($size = "small", $returnDefault = true)
+    public function getAvatar($size = 'small', $returnDefault = true)
     {
-        $link = "";
+        $link = '';
 
         // Get avatar size.
-        if (!empty($this->avatar)) {
-            $folder = (!array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes["small"]["folder"] : $this->avatarSizes[$size]["folder"];
-            $link = \JUri::root() . "media/kunena/avatars/resized/" . $folder . "/". $this->avatar;
+        if (\JString::strlen($this->avatar) > 0) {
+            $folder = (!array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes['small']['folder'] : $this->avatarSizes[$size]['folder'];
+            $link = \JUri::root() . 'media/kunena/avatars/resized/' . $folder . '/'. $this->avatar;
         } else {
             if ($returnDefault) {
-                $noimage = (!array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes["small"]["noimage"] : $this->avatarSizes[$size]["noimage"];
-                $link    = \JUri::root() . "media/kunena/avatars/" . $noimage;
+                $noImage = (!array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes['small']['noimage'] : $this->avatarSizes[$size]['noimage'];
+                $link    = \JUri::root() . 'media/kunena/avatars/' . $noImage;
             }
         }
 
@@ -246,6 +244,6 @@ class Kunena implements ProfileInterface
      */
     public function getCountryCode()
     {
-        return "";
+        return '';
     }
 }

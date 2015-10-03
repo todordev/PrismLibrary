@@ -42,23 +42,21 @@ class Backend extends Form
      */
     protected function prepareRedirectLink($options)
     {
-        $view           = ArrayHelper::getValue($options, "view");
-        $task           = ArrayHelper::getValue($options, "task");
-        $itemId         = ArrayHelper::getValue($options, "id", 0, "uint");
-        $urlVar         = ArrayHelper::getValue($options, "url_var", "id");
+        $view           = ArrayHelper::getValue($options, 'view');
+        $task           = ArrayHelper::getValue($options, 'task');
+        $itemId         = ArrayHelper::getValue($options, 'id', 0, 'uint');
+        $urlVar         = ArrayHelper::getValue($options, 'url_var', 'id');
 
         // Remove standard parameters
-        unset($options["view"]);
-        unset($options["task"]);
-        unset($options["id"]);
-        unset($options["url_var"]);
+        unset($options['view'], $options['task'], $options['id'], $options['url_var']);
 
         $link = $this->defaultLink;
 
         // Redirect to different of common views
-        if (!empty($view)) {
-            $link .= "&view=" . $view;
-            if (!empty($itemId)) {
+        if (null !== $view) {
+            $link .= '&view=' . $view;
+
+            if ($itemId > 0) {
                 $link .= $this->getRedirectToItemAppend($itemId, $urlVar);
             } else {
                 $link .= $this->getRedirectToListAppend();
@@ -69,16 +67,16 @@ class Backend extends Form
 
         // Prepare redirection
         switch ($task) {
-            case "apply":
-                $link .= "&view=" . $this->view_item . $this->getRedirectToItemAppend($itemId, $urlVar);
+            case 'apply':
+                $link .= '&view=' . $this->view_item . $this->getRedirectToItemAppend($itemId, $urlVar);
                 break;
 
-            case "save2new":
-                $link .= "&view=" . $this->view_item . $this->getRedirectToItemAppend();
+            case 'save2new':
+                $link .= '&view=' . $this->view_item . $this->getRedirectToItemAppend();
                 break;
 
             default:
-                $link .= "&view=" . $this->view_list . $this->getRedirectToListAppend();
+                $link .= '&view=' . $this->view_list . $this->getRedirectToListAppend();
                 break;
         }
 

@@ -50,7 +50,7 @@ class Admin extends \JControllerAdmin
     protected function displayNotice($messages, $options)
     {
         $message = $this->prepareMessage($messages);
-        $this->setMessage($message, "notice");
+        $this->setMessage($message, 'notice');
 
         $link = $this->prepareRedirectLink($options);
         $this->setRedirect(\JRoute::_($link, false));
@@ -72,7 +72,7 @@ class Admin extends \JControllerAdmin
     protected function displayWarning($messages, $options)
     {
         $message = $this->prepareMessage($messages);
-        $this->setMessage($message, "warning");
+        $this->setMessage($message, 'warning');
 
         $link = $this->prepareRedirectLink($options);
         $this->setRedirect(\JRoute::_($link, false));
@@ -94,7 +94,7 @@ class Admin extends \JControllerAdmin
     protected function displayError($messages, $options)
     {
         $message = $this->prepareMessage($messages);
-        $this->setMessage($message, "error");
+        $this->setMessage($message, 'error');
 
         $link = $this->prepareRedirectLink($options);
         $this->setRedirect(\JRoute::_($link, false));
@@ -115,7 +115,7 @@ class Admin extends \JControllerAdmin
     protected function displayMessage($messages, $options)
     {
         $message = $this->prepareMessage($messages);
-        $this->setMessage($message, "message");
+        $this->setMessage($message, 'message');
 
         $link = $this->prepareRedirectLink($options);
         $this->setRedirect(\JRoute::_($link, false));
@@ -131,7 +131,7 @@ class Admin extends \JControllerAdmin
      */
     protected function prepareMessage($message)
     {
-        $result = "";
+        $result = '';
 
         if (is_array($message)) {
 
@@ -173,26 +173,25 @@ class Admin extends \JControllerAdmin
     protected function prepareRedirectLink($options)
     {
         // Return predefined link
-        $forceDirection = ArrayHelper::getValue($options, "force_direction");
-        if (!empty($forceDirection)) {
+        $forceDirection = ArrayHelper::getValue($options, 'force_direction');
+        if (null !== $forceDirection) {
             return $forceDirection;
         }
 
         $link = $this->defaultLink;
 
-        $view   = ArrayHelper::getValue($options, "view");
-        $layout = ArrayHelper::getValue($options, "layout");
+        $view   = ArrayHelper::getValue($options, 'view');
+        $layout = ArrayHelper::getValue($options, 'layout');
 
         // Remove standard parameters
-        unset($options["view"]);
-        unset($options["layout"]);
+        unset($options['view'], $options['layout']);
 
         // Set the view value
-        if (!empty($view)) {
-            $link .= "&view=" . $view;
+        if (\JString::strlen($view) > 0) {
+            $link .= '&view=' . $view;
         }
-        if (!empty($layout)) {
-            $link .= "&layout=" . $layout;
+        if (\JString::strlen($layout) > 0) {
+            $link .= '&layout=' . $layout;
         }
 
         // Generate additional parameters
@@ -208,16 +207,12 @@ class Admin extends \JControllerAdmin
      *
      * @return string
      */
-    protected function prepareExtraParameters($options)
+    protected function prepareExtraParameters(array $options)
     {
-        $uriString = "";
+        $uriString = '';
 
-        if (!empty($options)) {
-
-            foreach ($options as $key => $value) {
-                $uriString .= "&" . $key . "=" . $value;
-            }
-
+        foreach ($options as $key => $value) {
+            $uriString .= '&' . $key . '=' . $value;
         }
 
         return $uriString;

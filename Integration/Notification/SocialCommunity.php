@@ -13,7 +13,7 @@ use SocialCommunity\Notification;
 
 defined('JPATH_PLATFORM') or die;
 
-jimport("SocialCommunity.init");
+jimport('SocialCommunity.init');
 
 /**
  * This class provides functionality to
@@ -46,7 +46,7 @@ class SocialCommunity implements NotificationInterface
      * @param  integer $userId User ID
      * @param  string  $content Notice to user.
      */
-    public function __construct($userId = 0, $content = "")
+    public function __construct($userId = 0, $content = '')
     {
         $this->user_id = $userId;
         $this->content = $content;
@@ -67,12 +67,12 @@ class SocialCommunity implements NotificationInterface
      * </code>
      *
      * @param array $data
-     * @param array $excluded
+     * @param array $ignored
      */
-    public function bind($data, $excluded = array())
+    public function bind($data, array $ignored = array())
     {
         foreach ($data as $key => $value) {
-            if (in_array($key, $excluded)) {
+            if (in_array($key, $ignored, true)) {
                 continue;
             }
 
@@ -93,9 +93,9 @@ class SocialCommunity implements NotificationInterface
      *
      * @param string $content
      */
-    public function send($content = "")
+    public function send($content = '')
     {
-        if (!empty($content)) {
+        if (\JString::strlen($content) > 0) {
             $this->content = $content;
         }
 
@@ -104,11 +104,11 @@ class SocialCommunity implements NotificationInterface
         $notification->setContent($this->content);
         $notification->setUserId($this->user_id);
 
-        if (!empty($this->image)) {
+        if ($this->image !== null) {
             $notification->setImage($this->image);
         }
 
-        if (!empty($this->url)) {
+        if ($this->url !== null) {
             $notification->setUrl($this->url);
         }
 

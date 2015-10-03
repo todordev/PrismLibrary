@@ -48,19 +48,19 @@ abstract class Helper
         $app = \JFactory::getApplication();
         /** @var $app \JApplicationSite */
 
-        $option = $app->input->get("option");
+        $option = $app->input->get('option');
         
         switch ($option) {
 
-            case "com_jsn":
-            case "com_easysocial":
-            case "com_socialcommunity":
-                $userId = $app->input->getInt("id");
+            case 'com_jsn':
+            case 'com_easysocial':
+            case 'com_socialcommunity':
+                $userId = $app->input->getInt('id');
                 break;
 
-            case "com_kunena":
-            case "com_community":
-                $userId = $app->input->getInt("userid");
+            case 'com_kunena':
+            case 'com_community':
+                $userId = $app->input->getInt('userid');
                 break;
 
             default:
@@ -69,7 +69,7 @@ abstract class Helper
         }
 
         if (!$userId) {
-            $userId = \JFactory::getUser()->get("id");
+            $userId = \JFactory::getUser()->get('id');
         }
 
         return (int)$userId;
@@ -90,7 +90,7 @@ abstract class Helper
     public static function getItemId($componentName, $needles)
     {
         // Prepare cache hash.
-        $hashString = "";
+        $hashString = '';
         foreach ($needles as $view => $ids) {
             // Break the loop and exit from the method,
             // if it is not array with IDs.
@@ -99,12 +99,12 @@ abstract class Helper
             }
 
             $ids = ArrayHelper::toInteger($ids);
-            $hashString .= $view . implode(",", $ids);
+            $hashString .= $view . implode(',', $ids);
         }
         $hash = md5($hashString);
 
         // Check the cache.
-        if (isset(self::$menuItemIds[$hash])) {
+        if (array_key_exists($hash, self::$menuItemIds)) {
             return self::$menuItemIds[$hash];
         }
 
@@ -128,14 +128,14 @@ abstract class Helper
 
             if ($items) {
                 foreach ($items as $item) {
-                    if (isset($item->query) && isset($item->query['view'])) {
+                    if (isset($item->query) and array_key_exists('view', $item->query)) {
                         $view = $item->query['view'];
 
-                        if (!isset(self::$lookup[$view])) {
+                        if (!array_key_exists($view, self::$lookup)) {
                             self::$lookup[$view] = array();
                         }
 
-                        if (isset($item->query['id'])) {
+                        if (array_key_exists('id', $item->query)) {
                             self::$lookup[$view][$item->query['id']] = $item->id;
                         } else { // If it is a root element that have no a request parameter ID ( categories, authors ), we set 0 for an key
                             self::$lookup[$view][0] = $item->id;
@@ -149,10 +149,10 @@ abstract class Helper
         if ($needles) {
 
             foreach ($needles as $view => $ids) {
-                if (isset(self::$lookup[$view])) {
+                if (array_key_exists($view, self::$lookup)) {
 
                     foreach ($ids as $id) {
-                        if (isset(self::$lookup[$view][(int)$id])) {
+                        if (array_key_exists((int)$id, self::$lookup[$view])) {
                             $result = self::$lookup[$view][(int)$id];
                             break;
                         }

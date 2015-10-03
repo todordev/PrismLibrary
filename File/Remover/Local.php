@@ -21,22 +21,22 @@ defined('JPATH_PLATFORM') or die;
  */
 class Local implements RemoverInterface
 {
-    protected $file = "";
+    protected $file = '';
 
     /**
      * Initialize the object.
      *
      * <code>
-     * $myFile   = "/tmp/myfile.jpg";
+     * $myFile   = '/tmp/myfile.jpg';
      *
      * $file = new Prism\File\Remover\Local($myFile);
      * </code>
      *
      * @param  string $file A file location and name.
      */
-    public function __construct($file = "")
+    public function __construct($file = '')
     {
-        if (!empty($file)) {
+        if ($file !== '') {
             $this->file = \JPath::clean($file);
         }
     }
@@ -45,7 +45,7 @@ class Local implements RemoverInterface
      * Set file location.
      *
      * <code>
-     * $myFile   = "/tmp/myfile.jpg";
+     * $myFile   = '/tmp/myfile.jpg';
      *
      * $file = new Prism\File\Remover\Local();
      * $file->setFile($myFile);
@@ -66,7 +66,7 @@ class Local implements RemoverInterface
      * Get file location.
      *
      * <code>
-     * $myFile   = "/tmp/myfile.jpg";
+     * $myFile   = '/tmp/myfile.jpg';
      *
      * $file = new Prism\File\Remover\Local();
      * $file->setFile($myFile);
@@ -83,11 +83,13 @@ class Local implements RemoverInterface
      * Remove a file from the file system.
      *
      * <code>
-     * $myFile   = "/tmp/myfile.jpg";
+     * $myFile   = '/tmp/myfile.jpg';
      *
      * $file = new Prism\File\Remover\Local($myFile);
      * $file->remove();
      * </code>
+     * 
+     * @throws \RuntimeException
      */
     public function remove()
     {
@@ -99,6 +101,6 @@ class Local implements RemoverInterface
             throw new \RuntimeException(\JText::_('LIB_PRISM_ERROR_FILE_CANT_BE_REMOVED'));
         }
 
-        $this->file = "";
+        $this->file = '';
     }
 }

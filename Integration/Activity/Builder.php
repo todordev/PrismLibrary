@@ -62,43 +62,43 @@ class Builder
      */
     public function build()
     {
-        $type   = ArrayHelper::getValue($this->config, "social_platform");
-        $userId = ArrayHelper::getValue($this->config, "user_id");
-        $url    = ArrayHelper::getValue($this->config, "url");
-        $image  = ArrayHelper::getValue($this->config, "image");
-        $title  = ArrayHelper::getValue($this->config, "title");
+        $type   = ArrayHelper::getValue($this->config, 'social_platform');
+        $userId = ArrayHelper::getValue($this->config, 'user_id');
+        $url    = ArrayHelper::getValue($this->config, 'url');
+        $image  = ArrayHelper::getValue($this->config, 'image');
+        $title  = ArrayHelper::getValue($this->config, 'title');
 
         switch ($type) {
 
-            case "socialcommunity":
+            case 'socialcommunity':
                 $activity = new SocialCommunity($userId);
                 $activity->setUrl($url);
                 $activity->setImage($image);
                 break;
 
-            case "gamification":
+            case 'gamification':
                 $activity = new Gamification($userId);
                 $activity->setTitle($title);
                 $activity->setUrl($url);
                 $activity->setImage($image);
                 break;
 
-            case "jomsocial":
+            case 'jomsocial':
 
                 // Register JomSocial Router
-                if (!class_exists("CRoute")) {
-                    \JLoader::register("CRoute", JPATH_SITE."/components/com_community/libraries/core.php");
+                if (!class_exists('CRoute')) {
+                    \JLoader::register('CRoute', JPATH_SITE.'/components/com_community/libraries/core.php');
                 }
 
                 $activity = new JomSocial($userId);
                 $activity->setDb(\JFactory::getDbo());
 
-                $app = ArrayHelper::getValue($this->config, "app");
+                $app = ArrayHelper::getValue($this->config, 'app');
                 $activity->setApp($app);
 
                 break;
 
-            case "easysocial":
+            case 'easysocial':
 
                 $activity = new EasySocial($userId);
                 $activity->setContextId($userId);
@@ -128,7 +128,7 @@ class Builder
      * $activity = $activityBuilder->getActivity();
      * </code>
      *
-     * @return null|object
+     * @return null|ActivityInterface
      */
     public function getActivity()
     {

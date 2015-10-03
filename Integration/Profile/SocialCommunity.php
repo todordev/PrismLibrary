@@ -13,7 +13,7 @@ use Joomla\Registry\Registry;
 
 defined('JPATH_PLATFORM') or die;
 
-jimport("SocialCommunity.init");
+jimport('SocialCommunity.init');
 
 /**
  * This class provides functionality to
@@ -40,10 +40,10 @@ class SocialCommunity implements ProfileInterface
      * @var array
      */
     protected $avatarSizes = array(
-        "icon" => "image_icon",
-        "small" => "image_square",
-        "medium" => "image_small",
-        "large" => "image",
+        'icon' => 'image_icon',
+        'small' => 'image_square',
+        'medium' => 'image_small',
+        'large' => 'image',
     );
 
     /**
@@ -71,10 +71,10 @@ class SocialCommunity implements ProfileInterface
         $this->db = $db;
 
         // Set path to pictures
-        $params = \JComponentHelper::getParams("com_socialcommunity");
+        $params = \JComponentHelper::getParams('com_socialcommunity');
         /** @var  $params Registry */
 
-        $path   = $params->get("images_directory", "/images/profiles");
+        $path   = $params->get('images_directory', '/images/profiles');
 
         $this->setPath($path);
     }
@@ -95,7 +95,7 @@ class SocialCommunity implements ProfileInterface
      */
     public static function getInstance(\JDatabaseDriver $db, $id)
     {
-        if (!isset(self::$instances[$id])) {
+        if (!array_key_exists($id, self::$instances)) {
             $item   = new SocialCommunity($db);
             $item->load($id);
 
@@ -122,13 +122,13 @@ class SocialCommunity implements ProfileInterface
         $query = $this->db->getQuery(true);
         $query
             ->select(
-                "a.id AS user_id, a.image_icon, a.image_small, a.image_square, a.image, " .
-                $query->concatenate(array("a.id", "a.alias"), ":") . " AS slug, " .
-                "b.name as location, b.country_code"
+                'a.id AS user_id, a.image_icon, a.image_small, a.image_square, a.image, ' .
+                $query->concatenate(array('a.id', 'a.alias'), ':') . ' AS slug, ' .
+                'b.name as location, b.country_code'
             )
-            ->from($this->db->quoteName("#__itpsc_profiles", "a"))
-            ->leftJoin($this->db->quoteName("#__itpsc_locations", "b") . " ON a.location_id = b.id")
-            ->where("a.id = " . (int)$id);
+            ->from($this->db->quoteName('#__itpsc_profiles', 'a'))
+            ->leftJoin($this->db->quoteName('#__itpsc_locations', 'b') . ' ON a.location_id = b.id')
+            ->where('a.id = ' . (int)$id);
 
         $this->db->setQuery($query);
         $result = (array)$this->db->loadAssoc();
@@ -153,10 +153,10 @@ class SocialCommunity implements ProfileInterface
      * @param array $data
      * @param array $ignored
      */
-    public function bind($data, $ignored = array())
+    public function bind($data, array $ignored = array())
     {
         foreach ($data as $key => $value) {
-            if (!in_array($key, $ignored)) {
+            if (!in_array($key, $ignored, true)) {
                 $this->$key = $value;
             }
         }
@@ -180,8 +180,8 @@ class SocialCommunity implements ProfileInterface
      */
     public function getLink($route = true)
     {
-        $link = "";
-        if (!empty($this->slug)) {
+        $link = '';
+        if (\JString::strlen($this->slug) > 0) {
             $link = \SocialCommunityHelperRoute::getProfileRoute($this->slug);
 
             if ($route) {
@@ -209,19 +209,19 @@ class SocialCommunity implements ProfileInterface
      * 
      * @return string
      */
-    public function getAvatar($size = "small", $returnDefault = true)
+    public function getAvatar($size = 'small', $returnDefault = true)
     {
         // Get avatar size.
-        $avatar = (isset($this->avatarSizes[$size])) ? $this->avatarSizes[$size] : null;
+        $avatar = (array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes[$size] : null;
 
-        $link = "";
+        $link = '';
 
-        if (!$avatar or empty($this->$avatar)) {
+        if ($avatar === null or \JString::strlen($this->$avatar) === 0) {
             if ($returnDefault) {
-                $link = \JUri::root() . "media/com_socialcommunity/images/no_profile_200x200.png";
+                $link = \JUri::root() . 'media/com_socialcommunity/images/no_profile_200x200.png';
             }
         } else {
-            $link = \JUri::root() . ltrim($this->path . "/" . $this->$avatar, "/");
+            $link = \JUri::root() . ltrim($this->path . '/' . $this->$avatar, '/');
         }
 
         return $link;

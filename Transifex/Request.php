@@ -58,15 +58,15 @@ class Request
      *
      * @return null|Response
      */
-    protected function request($path, $options = array())
+    protected function request($path, array $options = array())
     {
         if (!function_exists('curl_version')) {
-            throw new \RuntimeException("The cURL library is not loaded.");
+            throw new \RuntimeException('The cURL library is not loaded.');
         }
 
-        $headers  = ArrayHelper::getValue($options, "headers", array(), "array");
-        $method   = ArrayHelper::getValue($options, "method", "get");
-        $postData = ArrayHelper::getValue($options, "data", array(), "array");
+        $headers  = ArrayHelper::getValue($options, 'headers', array(), 'array');
+        $method   = ArrayHelper::getValue($options, 'method', 'get');
+        $postData = ArrayHelper::getValue($options, 'data', array(), 'array');
 
         $url = $this->url . $path;
 
@@ -80,26 +80,26 @@ class Request
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
         // Prepare headers
-        if (!empty($headers)) {
+        if (count($headers) > 0) {
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
             curl_setopt($ch, CURLOPT_HEADER, 0);
         }
 
-        if (strcmp($method, "post") == 0) {
+        if (strcmp($method, 'post') === 0) {
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
         }
 
         if ($this->auth) {
-            curl_setopt($ch, CURLOPT_USERPWD, $this->username . ":" . $this->password);
+            curl_setopt($ch, CURLOPT_USERPWD, $this->username . ':' . $this->password);
         }
 
         // Get the data
         $response = curl_exec($ch);
-        if (!empty($response)) {
+        if (false !== $response) {
             $this->data = json_decode($response, true);
             if (!is_array($this->data)) {
-                $message = (string)$response . " (" . $url . ")";
+                $message = (string)$response . ' (' . $url . ')';
                 throw new \RuntimeException($message);
             }
         }
@@ -109,8 +109,8 @@ class Request
 
         // Check for error
         $errorNumber = curl_errno($ch);
-        if (!empty($errorNumber)) {
-            $message = curl_error($ch) . "(" . (int)$errorNumber . ")";
+        if ($errorNumber > 0) {
+            $message = curl_error($ch) . '(' . (int)$errorNumber . ')';
             throw new \RuntimeException($message);
         }
 
@@ -149,7 +149,7 @@ class Request
      *
      * @return null|Response
      */
-    public function get($path, $options = array())
+    public function get($path, array $options = array())
     {
         return $this->request($path, $options);
     }

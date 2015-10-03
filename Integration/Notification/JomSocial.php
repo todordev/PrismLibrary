@@ -27,7 +27,7 @@ class JomSocial implements NotificationInterface
     protected $content;
 
     protected $type = 0;
-    protected $cmdType = "notif_system_messaging";
+    protected $cmdType = 'notif_system_messaging';
     protected $status = 0;
     protected $created;
 
@@ -55,7 +55,7 @@ class JomSocial implements NotificationInterface
      * @param  integer $userId A user ID of the target.
      * @param  string  $content Content of the notice to user.
      */
-    public function __construct($userId = 0, $content = "")
+    public function __construct($userId = 0, $content = '')
     {
         $this->targetId = $userId;
         $this->content  = $content;
@@ -69,7 +69,7 @@ class JomSocial implements NotificationInterface
      * $content = "....";
      *
      * $notification = new Prism\Integration\Notification\JomSocial($userId, $content);
-     * $notification->setDb(JFactory::getDbo());
+     * $notification->setDb(\JFactory::getDbo());
      * </code>
      *
      * @param \JDatabaseDriver $db
@@ -91,44 +91,45 @@ class JomSocial implements NotificationInterface
      * $content = "....";
      *
      * $notification = new Prism\Integration\Notification\JomSocial($userId, $content);
-     * $notification->setDb(JFactory::getDbo());
+     * $notification->setDb(\JFactory::getDbo());
      *
      * $notification->send();
      * </code>
      *
      * @param string $content
      */
-    public function send($content = "")
+    public function send($content = '')
     {
-        if (!empty($content)) {
+        if (\JString::strlen($content) > 0) {
             $this->content = $content;
         }
 
         $query = $this->db->getQuery(true);
 
-        if (!empty($this->image)) {
-            $params["image"] = $this->image;
+        $params = array();
+        if ($this->image !== null) {
+            $params['image'] = $this->image;
         }
 
-        if (!empty($this->url)) {
-            $params["url"] = $this->url;
+        if ($this->url !== null) {
+            $params['url'] = $this->url;
         }
 
         $date = new \JDate();
 
         $query
-            ->insert($this->db->quoteName("#__community_notifications"))
-            ->set($this->db->quoteName("actor") . "=" . (int)$this->actorId)
-            ->set($this->db->quoteName("target") . "=" . (int)$this->targetId)
-            ->set($this->db->quoteName("content") . "=" . $this->db->quote($this->content))
-            ->set($this->db->quoteName("cmd_type") . "=" . $this->db->quote($this->cmdType))
-            ->set($this->db->quoteName("type") . "=" . $this->db->quote($this->type))
-            ->set($this->db->quoteName("status") . "=" . (int)$this->status)
-            ->set($this->db->quoteName("created") . "=" . $this->db->quote($date->toSql()));
+            ->insert($this->db->quoteName('#__community_notifications'))
+            ->set($this->db->quoteName('actor') . '=' . (int)$this->actorId)
+            ->set($this->db->quoteName('target') . '=' . (int)$this->targetId)
+            ->set($this->db->quoteName('content') . '=' . $this->db->quote($this->content))
+            ->set($this->db->quoteName('cmd_type') . '=' . $this->db->quote($this->cmdType))
+            ->set($this->db->quoteName('type') . '=' . $this->db->quote($this->type))
+            ->set($this->db->quoteName('status') . '=' . (int)$this->status)
+            ->set($this->db->quoteName('created') . '=' . $this->db->quote($date->toSql()));
 
-        if (!empty($params)) {
+        if (count($params) > 0) {
             $params = json_encode($params);
-            $query->set($this->db->quoteName("params") . "=" . $this->db->quote($params));
+            $query->set($this->db->quoteName('params') . '=' . $this->db->quote($params));
         }
 
         $this->db->setQuery($query);

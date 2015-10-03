@@ -41,7 +41,7 @@ class Builder
      * @param  array  $config Options used in the process of building profile object.
      *
      */
-    public function __construct($config = array())
+    public function __construct(array $config = array())
     {
         $this->config = $config;
     }
@@ -63,18 +63,18 @@ class Builder
      */
     public function build()
     {
-        $type       = ArrayHelper::getValue($this->config, "social_platform");
-        $usersIds   = ArrayHelper::getValue($this->config, "users_ids");
+        $type       = ArrayHelper::getValue($this->config, 'social_platform');
+        $usersIds   = ArrayHelper::getValue($this->config, 'users_ids');
 
         switch ($type) {
 
-            case "socialcommunity":
+            case 'socialcommunity':
 
-                jimport("socialcommunity.init");
+                jimport('SocialCommunity.init');
 
                 /** @var  $params Registry */
-                $params = \JComponentHelper::getParams("com_socialcommunity");
-                $path   = $params->get("images_directory", "/images/profiles");
+                $params = \JComponentHelper::getParams('com_socialcommunity');
+                $path   = $params->get('images_directory', '/images/profiles');
 
                 $profiles = new SocialCommunity(\JFactory::getDbo());
                 $profiles->load($usersIds);
@@ -82,25 +82,25 @@ class Builder
 
                 break;
 
-            case "gravatar":
+            case 'gravatar':
 
                 $profiles = new Gravatar(\JFactory::getDbo());
                 $profiles->load($usersIds);
 
                 break;
 
-            case "kunena":
+            case 'kunena':
 
                 $profiles = new Kunena(\JFactory::getDbo());
                 $profiles->load($usersIds);
 
                 break;
 
-            case "jomsocial":
+            case 'jomsocial':
 
                 // Register JomSocial Router
-                if (!class_exists("CRoute")) {
-                    \JLoader::register("CRoute", JPATH_SITE."/components/com_community/libraries/core.php");
+                if (!class_exists('CRoute')) {
+                    \JLoader::register('CRoute', JPATH_SITE.'/components/com_community/libraries/core.php');
                 }
 
                 $profiles = new JomSocial(\JFactory::getDbo());
@@ -108,21 +108,21 @@ class Builder
 
                 break;
 
-            case "easysocial":
+            case 'easysocial':
 
                 $profiles = new EasySocial(\JFactory::getDbo());
                 $profiles->load($usersIds);
 
                 break;
 
-            case "easyprofile":
+            case 'easyprofile':
 
                 $profiles = new EasyProfile(\JFactory::getDbo());
                 $profiles->load($usersIds);
 
                 break;
 
-            case "communitybuilder":
+            case 'communitybuilder':
                 $profiles = new CommunityBuilder(\JFactory::getDbo());
                 $profiles->load($usersIds);
                 break;

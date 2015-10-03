@@ -60,23 +60,17 @@ class Embed
         $host = $uri->getHost();
 
         // Youtube
-        if (false !== strpos($host, "youtu")) {
-            if (preg_match($this->patternYouTube, $this->url, $matches)) {
-                $this->code    = $matches[0];
-                $this->service = "youtube";
-
-                return;
-            }
+        if ((false !== strpos($host, 'youtu')) and (preg_match($this->patternYouTube, $this->url, $matches))) {
+            $this->code    = $matches[0];
+            $this->service = 'youtube';
+            return;
         }
 
         // Vimeo
-        if (false !== strpos($host, "vimeo")) {
-            if (preg_match($this->patternVimeo, $this->url, $matches)) {
-                $this->code    = $matches[5];
-                $this->service = "vimeo";
-
-                return;
-            }
+        if ((false !== strpos($host, 'vimeo')) and (preg_match($this->patternVimeo, $this->url, $matches))) {
+            $this->code    = $matches[5];
+            $this->service = 'vimeo';
+            return;
         }
     }
 
@@ -117,16 +111,16 @@ class Embed
     {
         switch ($this->service) {
 
-            case "youtube":
+            case 'youtube':
                 $html = '<iframe width="560" height="315" src="//www.youtube.com/embed/' . $this->code . '" frameborder="0" allowfullscreen></iframe>';
                 break;
 
-            case "vimeo":
+            case 'vimeo':
                 $html = '<iframe src="//player.vimeo.com/video/' . $this->code . '" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
                 break;
 
             default:
-                $html = "Invalid video service.";
+                $html = \JText::_('LIB_PRISM_ERROR_INVALID_VIDEO_SERVICE');
                 break;
         }
 

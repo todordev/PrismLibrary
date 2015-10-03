@@ -28,10 +28,10 @@ class EasyProfile implements ProfilesInterface
      * @var array
      */
     protected $avatarSizes = array(
-        "icon"   => "mini_",
-        "small"  => "mini_",
-        "medium" => "_",
-        "large"  => "_",
+        'icon'   => 'mini_',
+        'small'  => 'mini_',
+        'medium' => '_',
+        'large'  => '_',
     );
 
     /**
@@ -71,21 +71,21 @@ class EasyProfile implements ProfilesInterface
      */
     public function load(array $ids)
     {
-        if (!empty($ids)) {
+        if (count($ids) > 0) {
 
             // Create a new query object.
             $query = $this->db->getQuery(true);
             $query
                 ->select(
-                    "a.id AS user_id, a.avatar, ".
-                    $query->concatenate(array("b.id", "b.username"), ":") . " AS slug"
+                    'a.id AS user_id, a.avatar, '.
+                    $query->concatenate(array('b.id', 'b.username'), ':') . ' AS slug'
                 )
-                ->from($this->db->quoteName("#__jsn_users", "a"))
-                ->innerJoin($this->db->quoteName("#__users", "b") . " ON a.id = b.id")
-                ->where("a.id IN ( " . implode(",", $ids) . ")");
+                ->from($this->db->quoteName('#__jsn_users', 'a'))
+                ->innerJoin($this->db->quoteName('#__users', 'b') . ' ON a.id = b.id')
+                ->where('a.id IN ( ' . implode(',', $ids) . ')');
 
             $this->db->setQuery($query);
-            $this->profiles = (array)$this->db->loadObjectList("user_id");
+            $this->profiles = (array)$this->db->loadObjectList('user_id');
         }
     }
 
@@ -108,19 +108,19 @@ class EasyProfile implements ProfilesInterface
      *
      * @return string
      */
-    public function getAvatar($userId, $size = "small", $returnDefault = true)
+    public function getAvatar($userId, $size = 'small', $returnDefault = true)
     {
-        $link = "";
-        if (!isset($this->profiles[$userId])) {
-            $link = \JUri::root() . "components/com_jsn/assets/img/default.jpg";
+        $link = '';
+        if (!array_key_exists($userId, $this->profiles)) {
+            $link = \JUri::root() . 'components/com_jsn/assets/img/default.jpg';
         } else {
-            $avatar = (!isset($this->avatarSizes[$size])) ? null : $this->avatarSizes[$size];
+            $avatar = (!array_key_exists($size, $this->avatarSizes)) ? null : $this->avatarSizes[$size];
 
             if (!empty($this->profiles[$userId]->avatar)) {
 
-                if (!empty($avatar)) {
+                if (\JString::strlen($avatar) > 0) {
                     $file = \JString::trim($this->profiles[$userId]->avatar);
-                    $fileSplit = explode("_", $file);
+                    $fileSplit = explode('_', $file);
                     $link = \JUri::root() . $fileSplit[0]  . $avatar . $fileSplit[1];
                 } else {
                     $link = \JUri::root() . \JString::trim($this->profiles[$userId]->avatar);
@@ -128,7 +128,7 @@ class EasyProfile implements ProfilesInterface
 
             } else {
                 if ($returnDefault) {
-                    $link = \JUri::root() . "components/com_jsn/assets/img/default.jpg";
+                    $link = \JUri::root() . 'components/com_jsn/assets/img/default.jpg';
                 }
             }
         }
@@ -149,15 +149,16 @@ class EasyProfile implements ProfilesInterface
      * $link = $profiles->getLink($userId);
      * </code>
      * 
-     * @param integer $userId
+     * @param int $userId
+     * @param bool $route
      *
      * @return string
      */
-    public function getLink($userId)
+    public function getLink($userId, $route = true)
     {
-        $link = "";
+        $link = '';
         
-        if (isset($this->profiles[$userId])) {
+        if (array_key_exists($userId, $this->profiles)) {
             $link = \JRoute::_('index.php?option=com_jsn&view=profile&id='.$this->profiles[$userId]->slug);
         }
 
@@ -183,7 +184,7 @@ class EasyProfile implements ProfilesInterface
      */
     public function getLocation($userId)
     {
-        return "";
+        return '';
     }
 
     /**
@@ -204,6 +205,6 @@ class EasyProfile implements ProfilesInterface
      */
     public function getCountryCode($userId)
     {
-        return "";
+        return '';
     }
 }

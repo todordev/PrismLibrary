@@ -11,7 +11,7 @@ namespace Prism\Integration\Profiles;
 
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Foundry", JPATH_ROOT . '/administrator/components/com_easysocial/includes/foundry.php');
+\JLoader::register('Foundry', JPATH_ROOT . '/administrator/components/com_easysocial/includes/foundry.php');
 
 /**
  * This class provides functionality used for integrating
@@ -30,10 +30,10 @@ class EasySocial implements ProfilesInterface
      * @var array
      */
     protected $avatarSizes = array(
-        "icon" => "small",
-        "small" => "medium",
-        "medium" => "square",
-        "large" => "large",
+        'icon' => 'small',
+        'small' => 'medium',
+        'medium' => 'square',
+        'large' => 'large',
     );
 
     /**
@@ -73,21 +73,21 @@ class EasySocial implements ProfilesInterface
      */
     public function load(array $ids)
     {
-        if (!empty($ids)) {
+        if (count($ids) > 0) {
             $query = $this->db->getQuery(true);
             $query
                 ->select(
-                    "a.id AS user_id, a.name, a.username, " .
-                    "b.alias, b.permalink, " .
-                    "c.small, c.medium, c.square, c.large"
+                    'a.id AS user_id, a.name, a.username, ' .
+                    'b.alias, b.permalink, ' .
+                    'c.small, c.medium, c.square, c.large'
                 )
-                ->from($this->db->quoteName("#__users", "a"))
-                ->leftJoin($this->db->quoteName("#__social_users", "b") . " ON a.id = b.user_id")
-                ->leftJoin($this->db->quoteName("#__social_avatars", "c") . " ON a.id = c.uid")
-                ->where("a.id IN ( " . implode(",", $ids) . ")");
+                ->from($this->db->quoteName('#__users', 'a'))
+                ->leftJoin($this->db->quoteName('#__social_users', 'b') . ' ON a.id = b.user_id')
+                ->leftJoin($this->db->quoteName('#__social_avatars', 'c') . ' ON a.id = c.uid')
+                ->where('a.id IN ( ' . implode(',', $ids) . ')');
 
             $this->db->setQuery($query);
-            $this->profiles = (array)$this->db->loadObjectList("user_id");
+            $this->profiles = (array)$this->db->loadObjectList('user_id');
         }
     }
 
@@ -110,19 +110,19 @@ class EasySocial implements ProfilesInterface
      *
      * @return string
      */
-    public function getAvatar($userId, $size = "small", $returnDefault = true)
+    public function getAvatar($userId, $size = 'small', $returnDefault = true)
     {
-        $link = "";
-        if (!isset($this->profiles[$userId])) {
-            $link = \JUri::root() . "media/com_easysocial/defaults/avatars/user/".$this->avatarSizes["small"].".png";
+        $link = '';
+        if (!array_key_exists($userId, $this->profiles)) {
+            $link = \JUri::root() . 'media/com_easysocial/defaults/avatars/user/'.$this->avatarSizes['small'].'.png';
         } else {
-            $avatar = (!isset($this->avatarSizes[$size])) ? $this->avatarSizes["small"] : $this->avatarSizes[$size];
+            $avatar = (!array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes['small'] : $this->avatarSizes[$size];
 
             if (!empty($this->profiles[$userId]->$avatar)) {
-                $link = \JUri::root() . "media/com_easysocial/avatars/users/" . (int)$this->profiles[$userId]->user_id . "/" . $this->profiles[$userId]->$avatar;
+                $link = \JUri::root() . 'media/com_easysocial/avatars/users/' . (int)$this->profiles[$userId]->user_id . '/' . $this->profiles[$userId]->$avatar;
             } else {
                 if ($returnDefault) {
-                    $link = \JUri::root() . "media/com_easysocial/defaults/avatars/user/" . $avatar . ".png";
+                    $link = \JUri::root() . 'media/com_easysocial/defaults/avatars/user/' . $avatar . '.png';
                 }
             }
         }
@@ -150,8 +150,8 @@ class EasySocial implements ProfilesInterface
      */
     public function getLink($userId, $route = true)
     {
-        $link = "";
-        if (isset($this->profiles[$userId]) and $route) {
+        $link = '';
+        if (array_key_exists($userId, $this->profiles) and $route) {
             $options = array('id' => $this->getAlias($this->profiles[$userId]));
             $link = \FRoute::profile($options);
         }
@@ -164,16 +164,16 @@ class EasySocial implements ProfilesInterface
         $config = \Foundry::config();
 
         // Default permalink to use.
-        $name = $config->get('users.aliasName') == 'realname' ? $user->name : $user->username;
+        $name = $config->get('users.aliasName') === 'realname' ? $user->name : $user->username;
         $name = $user->user_id . ':' . $name;
 
         // Check if the permalink is set
-        if ($user->permalink && !empty($user->permalink)) {
+        if (\JString::strlen($user->permalink) > 0) {
             $name = $user->permalink;
         }
 
         // If alias exists and permalink doesn't we use the alias
-        if ($user->alias && !empty($user->alias) && !$user->permalink) {
+        if (\JString::strlen($user->alias) > 0 and !$user->permalink) {
             $name = $user->alias;
         }
 
@@ -202,7 +202,7 @@ class EasySocial implements ProfilesInterface
      */
     public function getLocation($userId)
     {
-        return "";
+        return '';
     }
 
     /**
@@ -223,6 +223,6 @@ class EasySocial implements ProfilesInterface
      */
     public function getCountryCode($userId)
     {
-        return "";
+        return '';
     }
 }

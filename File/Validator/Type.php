@@ -41,7 +41,7 @@ class Type extends Validator
      * @param string $file A path to the file.
      * @param string $fileName File name
      */
-    public function __construct($file = "", $fileName = "")
+    public function __construct($file = '', $fileName = '')
     {
         $this->file     = \JPath::clean($file);
         $this->fileName = \JFile::makeSafe(basename($fileName));
@@ -144,7 +144,7 @@ class Type extends Validator
         finfo_close($fileInfo);
 
         // Check mime type of the file
-        if (false === array_search($mimeType, $this->mimeTypes)) {
+        if (!in_array($mimeType, $this->mimeTypes, true)) {
             $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_TYPE', $this->fileName, $mimeType);
             return false;
         }
@@ -152,7 +152,7 @@ class Type extends Validator
         // Check file extension
         $ext = \JString::strtolower(\JFile::getExt($this->fileName));
 
-        if (false === array_search($ext, $this->legalExtensions)) {
+        if (!in_array($ext, $this->legalExtensions, true)) {
             $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_EXTENSIONS', $ext);
             return false;
         }

@@ -20,10 +20,10 @@ defined('JPATH_PLATFORM') or die;
 class Json
 {
     protected $success = true;
-    protected $title = "";
-    protected $text = "";
-    protected $data = null;
-    protected $redirectUrl = null;
+    protected $title = '';
+    protected $text = '';
+    protected $data;
+    protected $redirectUrl;
 
     /**
      * Initialize the object.
@@ -38,7 +38,7 @@ class Json
      * @param string $title
      * @param string $text
      */
-    public function __construct($title = "", $text = "")
+    public function __construct($title = '', $text = '')
     {
         $this->title = $title;
         $this->text  = $text;
@@ -243,19 +243,19 @@ class Json
     public function __toString()
     {
         $response = array(
-            "success" => $this->success,
-            "title"   => $this->title,
-            "text"    => $this->text
+            'success' => $this->success,
+            'title'   => $this->title,
+            'text'    => $this->text
         );
 
-        if (!empty($this->data)) {
-            $response["data"] = $this->data;
+        if (null !== $this->data) {
+            $response['data'] = $this->data;
         }
 
-        if (!empty($this->redirectUrl)) {
-            $response["redirect_url"] = $this->redirectUrl;
+        if (null !== $this->redirectUrl) {
+            $response['redirect_url'] = $this->redirectUrl;
         }
 
-        return json_encode($response);
+        return (string)json_encode($response);
     }
 }

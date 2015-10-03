@@ -11,7 +11,7 @@ namespace Prism\Integration\Profile;
 
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("CRoute", JPATH_ROOT . '/components/com_community/libraries/core.php');
+\JLoader::register('CRoute', JPATH_ROOT . '/components/com_community/libraries/core.php');
 
 /**
  * This class provides functionality to
@@ -34,10 +34,10 @@ class JomSocial implements ProfileInterface
      * @var array
      */
     protected $avatarSizes = array(
-        "icon" => "thumb",
-        "small" => "thumb",
-        "medium" => "avatar",
-        "large" => "avatar",
+        'icon' => 'thumb',
+        'small' => 'thumb',
+        'medium' => 'avatar',
+        'large' => 'avatar',
     );
 
     /**
@@ -107,9 +107,9 @@ class JomSocial implements ProfileInterface
     {
         $query = $this->db->getQuery(true);
         $query
-            ->select("a.userid AS user_id, a.avatar, a.thumb")
-            ->from($this->db->quoteName("#__community_users", "a"))
-            ->where("a.userid = " . (int)$id);
+            ->select('a.userid AS user_id, a.avatar, a.thumb')
+            ->from($this->db->quoteName('#__community_users', 'a'))
+            ->where('a.userid = ' . (int)$id);
 
         $this->db->setQuery($query);
         $result = $this->db->loadAssoc();
@@ -136,10 +136,10 @@ class JomSocial implements ProfileInterface
      * @param array $data
      * @param array $ignored
      */
-    public function bind($data, $ignored = array())
+    public function bind($data, array $ignored = array())
     {
         foreach ($data as $key => $value) {
-            if (!in_array($key, $ignored)) {
+            if (!in_array($key, $ignored, true)) {
                 $this->$key = $value;
             }
         }
@@ -163,9 +163,9 @@ class JomSocial implements ProfileInterface
      */
     public function getLink($route = true)
     {
-        $link = "";
-        if (!empty($this->user_id)) {
-            $link = 'index.php?option=com_community&view=profile&userid=' . $this->user_id;
+        $link = '';
+        if ($this->user_id !== null) {
+            $link = 'index.php?option=com_community&view=profile&userid=' . (int)$this->user_id;
 
             if ($route) {
                 $link = \CRoute::_($link);
@@ -192,16 +192,16 @@ class JomSocial implements ProfileInterface
      *
      * @return string Return a link to the picture.
      */
-    public function getAvatar($size = "small", $returnDefault = true)
+    public function getAvatar($size = 'small', $returnDefault = true)
     {
         // Get avatar size.
-        $avatar = (isset($this->avatarSizes[$size])) ? $this->avatarSizes[$size] : null;
+        $avatar = (array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes[$size] : null;
 
-        $link = "";
+        $link = '';
 
-        if (!$avatar or empty($this->$avatar)) {
+        if ($avatar === null or \JString::strlen($this->$avatar) === 0) {
             if ($returnDefault) {
-                $link = \JUri::root() . "components/com_community/assets/default_thumb.jpg";
+                $link = \JUri::root() . 'components/com_community/assets/default_thumb.jpg';
             }
         } else {
             $link = \JUri::root() . $this->$avatar;
@@ -226,35 +226,35 @@ class JomSocial implements ProfileInterface
      */
     public function getLocation()
     {
-        if (is_null($this->location)) {
+        if ($this->location === null) {
 
-            $result = "";
+            $result = '';
 
             $query = $this->db->getQuery(true);
 
             $query
-                ->select("a.id")
-                ->from($this->db->quoteName("#__community_fields", "a"))
-                ->where("a.type =  " . $this->db->quote("country"));
+                ->select('a.id')
+                ->from($this->db->quoteName('#__community_fields', 'a'))
+                ->where('a.type =  ' . $this->db->quote('country'));
 
             $this->db->setQuery($query);
-            $typeId = $this->db->loadResult();
+            $typeId = (int)$this->db->loadResult();
 
-            if (!empty($typeId)) {
+            if ($typeId > 0) {
 
                 $query = $this->db->getQuery(true);
 
                 $query
-                    ->select("a.value")
-                    ->from($this->db->quoteName("#__community_fields_values", "a"))
-                    ->where("a.user_id =  " . (int)$this->user_id)
-                    ->where("a.field_id =  " . (int)$typeId);
+                    ->select('a.value')
+                    ->from($this->db->quoteName('#__community_fields_values', 'a'))
+                    ->where('a.user_id =  ' . (int)$this->user_id)
+                    ->where('a.field_id =  ' . (int)$typeId);
 
                 $this->db->setQuery($query);
                 $result = $this->db->loadResult();
 
                 if (!$result) { // Set values to variables
-                    $result = "";
+                    $result = '';
                 }
             }
 
@@ -280,6 +280,6 @@ class JomSocial implements ProfileInterface
      */
     public function getCountryCode()
     {
-        return "";
+        return '';
     }
 }

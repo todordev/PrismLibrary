@@ -17,6 +17,8 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package     Prism
  * @subpackage  Math
+ *
+ * @deprecated 1.10  Use {@link \Prism\Utilities\MathHelper} instead unless otherwise noted.
  */
 class Math
 {
@@ -34,14 +36,19 @@ class Math
      *
      * </code>
      *
-     * @param int|float $value1
-     * @param int|float  $value2
+     * @param float $value1
+     * @param float $value2
      * @param int  $decimalPoint
+     *
+     * @deprecated 1.10  Use {@link \Prism\Utilities\MathHelper} instead unless otherwise noted.
      */
     public function calculatePercentage($value1, $value2, $decimalPoint = 2)
     {
-        if (($value1 == 0) or ($value2 == 0)) {
-            $this->result = 0;
+        $value1 = (float)$value1;
+        $value2 = (float)$value2;
+        
+        if (($value1 === 0.0) or ($value2 === 0.0)) {
+            $this->result = 0.0;
         } else {
             $value = ($value1 / $value2) * 100;
             $this->result = round($value, $decimalPoint);
@@ -65,11 +72,16 @@ class Math
      * @param float $percent
      * @param float $value
      * @param int  $decimalPoint
+     *
+     * @deprecated 1.10  Use {@link \Prism\Utilities\MathHelper} instead unless otherwise noted.
      */
     public function calculateValueFromPercent($percent, $value, $decimalPoint = 2)
     {
-        if (($percent == 0) or ($value == 0)) {
-            $this->result = 0;
+        $percent = (float)$percent;
+        $value   = (float)$value;
+        
+        if (($percent === 0.0) or ($value === 0.0)) {
+            $this->result = 0.0;
         } else {
             $value = ($percent / 100) * $value;
             $this->result = round($value, $decimalPoint);
@@ -90,20 +102,22 @@ class Math
      * @param array $values
      * @param string  $action ( M = multiplication, S = calculate sum )
      * @param int  $decimalPoint
+     *
+     * @deprecated 1.10  Use {@link \Prism\Utilities\MathHelper} instead unless otherwise noted.
      */
-    public function calculateTotal($values, $action = "M", $decimalPoint = 2)
+    public function calculateTotal($values, $action = 'M', $decimalPoint = 2)
     {
         $result = array_shift($values);
 
         switch ($action) {
 
-            case "M":
+            case 'M':
                 foreach ($values as $value) {
                     $result *=  $value;
                 }
                 break;
 
-            case "S":
+            case 'S':
                 foreach ($values as $value) {
                     $result +=  $value;
                 }
@@ -117,6 +131,8 @@ class Math
      * Return object value as a string.
      *
      * @return string
+     *
+     * @deprecated 1.10  Use {@link \Prism\Utilities\MathHelper} instead unless otherwise noted.
      */
     public function __toString()
     {

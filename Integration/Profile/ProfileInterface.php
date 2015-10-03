@@ -20,7 +20,7 @@ defined('JPATH_PLATFORM') or die;
  */
 interface ProfileInterface
 {
-    public function bind($data);
+    public function bind($data, array $ignored = array());
     public function load($id);
     public function getLink($route = true);
     public function getAvatar();

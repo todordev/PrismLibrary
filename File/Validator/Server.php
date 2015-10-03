@@ -49,7 +49,7 @@ class Server extends Validator
      * @param int $errorCode Error code that comes from server.
      * @param array $ignored Ignored server errors.
      */
-    public function __construct($errorCode = 0, $ignored = array())
+    public function __construct($errorCode = 0, array $ignored = array())
     {
         $this->errorCode    = $errorCode;
         $this->ignored      = $ignored;
@@ -92,14 +92,14 @@ class Server extends Validator
      */
     public function isValid($ignored = array())
     {
-        if (is_array($ignored) and !empty($ignored)) {
+        if (is_array($ignored) and count($ignored) > 0) {
             $this->ignored = array_merge($this->ignored, $ignored);
         }
 
         $result = true;
 
         // If the error code have to be ignored, this should be treat as not error.
-        if (!$this->errorCode or in_array($this->errorCode, $this->ignored)) {
+        if (!$this->errorCode or in_array($this->errorCode, $this->ignored, true)) {
             return $result;
         }
 

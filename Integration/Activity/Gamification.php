@@ -46,7 +46,7 @@ class Gamification implements ActivityInterface
      * @param  integer $userId User ID
      * @param  string  $content   Information about the activity.
      */
-    public function __construct($userId = 0, $content = "")
+    public function __construct($userId = 0, $content = '')
     {
         $this->user_id = $userId;
         $this->content = $content;
@@ -67,12 +67,10 @@ class Gamification implements ActivityInterface
      *
      * @param array $data
      */
-    public function bind($data)
+    public function bind(array $data)
     {
-        if (!empty($data)) {
-            foreach ($data as $key => $value) {
-                $this->$key = $value;
-            }
+        foreach ($data as $key => $value) {
+            $this->$key = $value;
         }
     }
 
@@ -94,15 +92,15 @@ class Gamification implements ActivityInterface
         $activity->setContent($this->getContent());
         $activity->setUserId($this->getUserId());
 
-        if (!empty($this->title)) {
+        if ($this->title !== null) {
             $activity->setTitle($this->getTitle());
         }
 
-        if (!empty($this->image)) {
+        if ($this->image !== null) {
             $activity->setImage($this->getImage());
         }
 
-        if (!empty($this->url)) {
+        if ($this->url !== null) {
             $activity->setUrl($this->getUrl());
         }
 

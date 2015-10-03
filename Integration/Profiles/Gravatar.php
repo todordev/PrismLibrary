@@ -28,10 +28,10 @@ class Gravatar implements ProfilesInterface
      * @var array
      */
     protected $avatarSizes = array(
-        "icon" => "40",
-        "small" => "80",
-        "medium" => "160",
-        "large" => "200",
+        'icon' => '40',
+        'small' => '80',
+        'medium' => '160',
+        'large' => '200',
     );
 
     /**
@@ -71,15 +71,15 @@ class Gravatar implements ProfilesInterface
      */
     public function load(array $ids)
     {
-        if (!empty($ids)) {
+        if (count($ids) > 0) {
             $query = $this->db->getQuery(true);
             $query
-                ->select("a.id AS user_id, a.email, MD5(a.email) as hash")
-                ->from($this->db->quoteName("#__users", "a"))
-                ->where("a.id IN ( " . implode(",", $ids) . ")");
+                ->select('a.id AS user_id, a.email, MD5(a.email) as hash')
+                ->from($this->db->quoteName('#__users', 'a'))
+                ->where('a.id IN ( ' . implode(',', $ids) . ')');
 
             $this->db->setQuery($query);
-            $this->profiles = (array)$this->db->loadObjectList("user_id");
+            $this->profiles = (array)$this->db->loadObjectList('user_id');
         }
     }
 
@@ -101,19 +101,16 @@ class Gravatar implements ProfilesInterface
      *
      * @return string
      */
-    public function getAvatar($userId, $size = "small")
+    public function getAvatar($userId, $size = 'small')
     {
-        if (!isset($this->profiles[$userId])) {
-            $link = "";
+        if (!array_key_exists($userId, $this->profiles)) {
+            $link = '';
         } else {
-            $link = "http://www.gravatar.com/avatar/" . $this->profiles[$userId]->hash;
-
-            $avatarSize = (!isset($this->avatarSizes[$size])) ? null : (int)$this->avatarSizes[$size];
-
-            if (!empty($avatarSize)) {
-                $link .= "?s=" . $avatarSize;
+            $link = 'http://www.gravatar.com/avatar/' . $this->profiles[$userId]->hash;
+            $avatarSize = (!array_key_exists($size, $this->avatarSizes)) ? null : (int)$this->avatarSizes[$size];
+            if ($avatarSize !== null) {
+                $link .= '?s=' . $avatarSize;
             }
-
         }
 
         return $link;
@@ -139,7 +136,7 @@ class Gravatar implements ProfilesInterface
      */
     public function getLink($userId, $route = true)
     {
-        return "javascript:void(0)";
+        return 'javascript:void(0)';
     }
 
     /**
@@ -161,7 +158,7 @@ class Gravatar implements ProfilesInterface
      */
     public function getLocation($userId)
     {
-        return "";
+        return '';
     }
 
     /**
@@ -182,6 +179,6 @@ class Gravatar implements ProfilesInterface
      */
     public function getCountryCode($userId)
     {
-        return "";
+        return '';
     }
 }

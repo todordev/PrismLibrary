@@ -33,7 +33,7 @@ class Date extends \JDate
     public function getLastDay()
     {
         $day = clone $this;
-        $day->modify("yesterday");
+        $day->modify('yesterday');
 
         return $day;
     }
@@ -96,7 +96,7 @@ class Date extends \JDate
     public function getLastWeek()
     {
         $day = clone $this;
-        $day->modify("7 days ago");
+        $day->modify('7 days ago');
 
         return $day;
     }
@@ -115,7 +115,7 @@ class Date extends \JDate
     public function getBeginOfWeek()
     {
         $monday = clone $this;
-        $monday->modify(('Sunday' == $monday->format('l')) ? 'Monday last week' : 'Monday this week');
+        $monday->modify(('Sunday' === $monday->format('l')) ? 'Monday last week' : 'Monday this week');
 
         return $monday;
     }
@@ -192,7 +192,7 @@ class Date extends \JDate
     {
         // Get the current year.
         $year     = clone $this;
-        $thisYear = $year->format("Y");
+        $thisYear = $year->format('Y');
 
         $firstDay = clone $this;
         $firstDay->modify('first day of January '.$thisYear);
@@ -215,7 +215,7 @@ class Date extends \JDate
     {
         // Get the current year.
         $year     = clone $this;
-        $thisYear = $year->format("Y");
+        $thisYear = $year->format('Y');
 
         $lastDay = clone $this;
         $lastDay->modify('last day of December '. $thisYear);
@@ -269,7 +269,7 @@ class Date extends \JDate
     public function calculateEndDate($days)
     {
         $endDate = clone $this;
-        $endDate->modify("+" . (int)$days . " days");
+        $endDate->modify('+' . (int)$days . ' days');
 
         return $endDate;
     }

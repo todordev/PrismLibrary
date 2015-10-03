@@ -34,10 +34,10 @@ class CommunityBuilder implements ProfileInterface
      * @var array
      */
     protected $avatarSizes = array(
-        "icon"   => "tn",
-        "small"  => "tn",
-        "medium" => "",
-        "large"  => "",
+        'icon'   => 'tn',
+        'small'  => 'tn',
+        'medium' => '',
+        'large'  => '',
     );
 
     /**
@@ -81,7 +81,7 @@ class CommunityBuilder implements ProfileInterface
      */
     public static function getInstance(\JDatabaseDriver $db, $id)
     {
-        if (!isset(self::$instances[$id])) {
+        if (!array_key_exists($id, self::$instances)) {
             $item   = new CommunityBuilder($db);
             $item->load($id);
             
@@ -108,13 +108,13 @@ class CommunityBuilder implements ProfileInterface
         $query = $this->db->getQuery(true);
         $query
             ->select(
-                "a.id AS user_id, a.name, ".
-                "b.avatar, ".
-                $query->concatenate(array("a.id", "a.username"), ":") . " AS slug"
+                'a.id AS user_id, a.name, '.
+                'b.avatar, '.
+                $query->concatenate(array('a.id', 'a.username'), ':') . ' AS slug'
             )
-            ->from($this->db->quoteName("#__users", "a"))
-            ->innerJoin($this->db->quoteName("#__comprofiler", "b") . " ON a.id = b.user_id")
-            ->where("a.id = " . (int)$id);
+            ->from($this->db->quoteName('#__users', 'a'))
+            ->innerJoin($this->db->quoteName('#__comprofiler', 'b') . ' ON a.id = b.user_id')
+            ->where('a.id = ' . (int)$id);
 
         $this->db->setQuery($query);
         $result = (array)$this->db->loadAssoc();
@@ -139,10 +139,10 @@ class CommunityBuilder implements ProfileInterface
      * @param array $data
      * @param array $ignored
      */
-    public function bind($data, $ignored = array())
+    public function bind($data, array $ignored = array())
     {
         foreach ($data as $key => $value) {
-            if (!in_array($key, $ignored)) {
+            if (!in_array($key, $ignored, true)) {
                 $this->$key = $value;
             }
         }
@@ -166,17 +166,17 @@ class CommunityBuilder implements ProfileInterface
      */
     public function getLink($route = true)
     {
-        $link = "";
-        if (!empty($this->user_id)) {
+        $link = '';
+        if (($this->user_id !== null) and ($this->user_id > 0)) {
 
             $needles = array(
-                "userprofile" => array(0)
+                'userprofile' => array(0)
             );
 
-            $menuItemId = Helper::getItemId("com_comprofiler", $needles);
-            $link = 'index.php?option=com_comprofiler&view=userprofile&user='.$this->user_id;
-            if (!empty($menuItemId)) {
-                $link .= "&Itemid=". (int)$menuItemId;
+            $menuItemId = Helper::getItemId('com_comprofiler', $needles);
+            $link = 'index.php?option=com_comprofiler&view=userprofile&user='.(int)$this->user_id;
+            if ($menuItemId > 0) {
+                $link .= '&Itemid='. (int)$menuItemId;
             }
 
             if (!$route) {
@@ -204,18 +204,18 @@ class CommunityBuilder implements ProfileInterface
      *
      * @return string
      */
-    public function getAvatar($size = "small", $returnDefault = true)
+    public function getAvatar($size = 'small', $returnDefault = true)
     {
-        $link = "";
+        $link = '';
 
-        if (!empty($this->avatar)) {
-            $avatarSize = (!isset($this->avatarSizes[$size])) ? null : $this->avatarSizes[$size];
+        if ($this->avatar !== null) {
+            $avatarSize = (!array_key_exists($size, $this->avatarSizes)) ? null : $this->avatarSizes[$size];
 
             $file = \JString::trim($this->avatar);
-            $link = \JUri::root() . "images/comprofiler/"  . $avatarSize.$file;
+            $link = \JUri::root() . 'images/comprofiler/'  . $avatarSize.$file;
         } else {
             if ($returnDefault) {
-                $link = \JUri::root() . "components/com_comprofiler/plugin/templates/default/images/avatar/nophoto_n.png";
+                $link = \JUri::root() . 'components/com_comprofiler/plugin/templates/default/images/avatar/nophoto_n.png';
             }
         }
 
@@ -238,7 +238,7 @@ class CommunityBuilder implements ProfileInterface
      */
     public function getLocation()
     {
-        return "";
+        return '';
     }
 
     /**
@@ -257,6 +257,6 @@ class CommunityBuilder implements ProfileInterface
      */
     public function getCountryCode()
     {
-        return "";
+        return '';
     }
 }

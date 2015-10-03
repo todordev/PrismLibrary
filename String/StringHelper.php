@@ -29,7 +29,7 @@ class StringHelper
      * You can set a prefix and specify the length of the string.
      *
      * <code>
-     * $hash = Prism\String\StringHelper::generateRandomString(32, "GEN");
+     * $hash = Prism\String\StringHelper::generateRandomString(32, 'GEN');
      *
      * echo $hash;
      * </code>
@@ -41,14 +41,14 @@ class StringHelper
      *
      * @deprecated since v1.10
      */
-    public static function generateRandomString($length = 10, $prefix = "")
+    public static function generateRandomString($length = 10, $prefix = '')
     {
         // Generate string
         $hash = md5(uniqid(time() + mt_rand(), true));
         $hash = substr($hash, 0, $length);
 
         // Add prefix
-        if (!empty($prefix)) {
+        if ($prefix !== '') {
             $hash = $prefix . $hash;
         }
 
@@ -62,10 +62,10 @@ class StringHelper
      *
      * <code>
      * $options = array(
-     *     "intl" => true",
-     *     "locale" => "en_GB",
-     *     "symbol" => "£",
-     *     "position" => 0 // 0 for symbol on the left side, 1 for symbole on the right side.
+     *     'intl' => true',
+     *     'locale' => 'en_GB',
+     *     'symbol' => '£',
+     *     'position' => 0 // 0 for symbol on the left side, 1 for symbole on the right side.
      * );
      *
      * $amount = Prism\String\StringHelper::getAmount(100, GBP, $options);
@@ -75,18 +75,18 @@ class StringHelper
      *
      * @param float $amount Amount value.
      * @param string $currency Currency Code ( GBP, USD, EUR,...)
-     * @param array $options Options - "intl", "locale", "symbol",...
+     * @param array $options Options - 'intl', 'locale', 'symbol',...
      *
      * @return string
      *
      * @deprecated since v1.10
      */
-    public static function getAmount($amount, $currency, $options = array())
+    public static function getAmount($amount, $currency, array $options = array())
     {
-        $useIntl   = ArrayHelper::getValue($options, "intl", false, "bool");
-        $locale    = ArrayHelper::getValue($options, "locale");
-        $symbol    = ArrayHelper::getValue($options, "symbol");
-        $position  = ArrayHelper::getValue($options, "position");
+        $useIntl   = ArrayHelper::getValue($options, 'intl', false, 'bool');
+        $locale    = ArrayHelper::getValue($options, 'locale');
+        $symbol    = ArrayHelper::getValue($options, 'symbol');
+        $position  = ArrayHelper::getValue($options, 'position');
 
         // Use PHP Intl library.
         if ($useIntl and extension_loaded('intl')) { // Generate currency string using PHP NumberFormatter ( Internationalization Functions )
@@ -102,9 +102,9 @@ class StringHelper
 
         } else { // Generate a custom currency string.
 
-            if (!empty($symbol)) { // Symbol
+            if (\JString::strlen($symbol) > 0) { // Symbol
 
-                if (0 == $position) { // Symbol at the beginning.
+                if (0 === (int)$position) { // Symbol at the beginning.
                     $result = $symbol . $amount;
                 } else { // Symbol at end.
                     $result = $amount . $symbol;
@@ -122,7 +122,7 @@ class StringHelper
      * Clean tags, spaces and newlines.
      *
      * <code>
-     * $content = "If you can <strong>dream</strong> it, you can do it. "
+     * $content = 'If you can <strong>dream</strong> it, you can do it. '
      *
      * echo Prism\String\StringHelper:clean($content);
      * </code>
@@ -146,7 +146,7 @@ class StringHelper
      * <code>
      * $offset  = 0;
      * $length  = 25;
-     * $content = "If you can dream it, you can do it."
+     * $content = 'If you can dream it, you can do it.'
      *
      * echo Prism\String\StringHelper::substr($content, $offset, $length);
      * </code>
@@ -172,8 +172,8 @@ class StringHelper
      *
      * <code>
      *
-     * // String like this "name1=value1&name2=value2&name3=value3".
-     * $rawPost  = file_get_contents("php://input");
+     * // String like this 'name1=value1&name2=value2&name3=value3'.
+     * $rawPost  = file_get_contents('php://input');
      *
      * $post = Prism\String\StringHelper::parseNameValue($content);
      * </code>
@@ -188,11 +188,11 @@ class StringHelper
     {
         $result = array();
 
-        $data = explode("&", $content);
+        $data = explode('&', $content);
         foreach ($data as $value) {
-            $value = explode("=", $value);
+            $value = explode('=', $value);
 
-            if (count($value) == 2) {
+            if (count($value) === 2) {
 
                 $value[0] = urldecode($value[0]);
                 $value[1] = urldecode($value[1]);

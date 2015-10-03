@@ -44,13 +44,11 @@ class ShortUrl
      * @param string $url
      * @param array $options
      */
-    public function __construct($url, $options = array())
+    public function __construct($url, array $options = array())
     {
         $this->url = $url;
 
-        if (!empty($options)) {
-            $this->bind($options);
-        }
+        $this->bind($options);
     }
 
     /**
@@ -73,15 +71,15 @@ class ShortUrl
      */
     public function bind($options)
     {
-        if (isset($options['api_key'])) {
+        if (array_key_exists('api_key', $options)) {
             $this->apiKey = $options['api_key'];
         }
 
-        if (isset($options['service'])) {
+        if (array_key_exists('service', $options)) {
             $this->service = $options['service'];
         }
 
-        if (isset($options['login'])) {
+        if (array_key_exists('login', $options)) {
             $this->login = $options['login'];
         }
     }
@@ -109,30 +107,30 @@ class ShortUrl
     {
         // Check for installed CURL library
         $installedLibraries = get_loaded_extensions();
-        if (!in_array('curl', $installedLibraries)) {
-            throw new \Exception("LIB_PRISM_ERROR_SHORT_URL_SERVICE_REQUEST");
+        if (!in_array('curl', $installedLibraries, true)) {
+            throw new \Exception('LIB_PRISM_ERROR_SHORT_URL_SERVICE_REQUEST');
         }
 
         switch ($this->service) {
 
-            case "jmp":
-                $this->getBitlyURL("j.mp");
+            case 'jmp':
+                $this->getBitlyURL('j.mp');
                 break;
 
-            case "bitlycom":
-                $this->getBitlyURL("bitly.com");
+            case 'bitlycom':
+                $this->getBitlyURL('bitly.com');
                 break;
 
-            case "tinycc":
+            case 'tinycc':
                 $this->getTinyURL();
                 break;
 
-            case "google":
+            case 'google':
                 $this->getGoogleURL();
                 break;
 
             default: // bit.ly
-                $this->getBitlyURL("bit.ly");
+                $this->getBitlyURL('bit.ly');
                 break;
 
         }
@@ -147,9 +145,9 @@ class ShortUrl
      *
      * @throws \Exception
      */
-    protected function getBitlyURL($domain = "bit.ly")
+    protected function getBitlyURL($domain = 'bit.ly')
     {
-        $url = "http://api.bitly.com/v3/shorten?login=" . $this->login . "&apiKey=" . $this->apiKey . "&longUrl=" . $this->url . "&format=json&domain=" . $domain;
+        $url = 'http://api.bitly.com/v3/shorten?login=' . $this->login . '&apiKey=' . $this->apiKey . '&longUrl=' . $this->url . '&format=json&domain=' . $domain;
 
         $curlObj = curl_init();
         curl_setopt($curlObj, CURLOPT_URL, $url);
@@ -162,17 +160,17 @@ class ShortUrl
 
         curl_close($curlObj);
 
-        if (!empty($response)) {
+        if (false !== $response) {
             $json = json_decode($response);
 
-            if ($json->status_code != 200) {
-                $errorMessage = "[Bitly service] Message: " . $json->status_txt;
+            if ((int)$json->status_code !== 200) {
+                $errorMessage = '[Bitly service] Message: ' . $json->status_txt;
                 throw new \Exception($errorMessage);
             } else {
                 $this->shortUrl = $json->data->url;
             }
         } else {
-            throw new \Exception(\JText::_("LIB_PRISM_ERROR_SHORT_URL_SERVICE_REQUEST"));
+            throw new \Exception(\JText::_('LIB_PRISM_ERROR_SHORT_URL_SERVICE_REQUEST'));
         }
     }
 
@@ -183,7 +181,7 @@ class ShortUrl
      */
     protected function getTinyURL()
     {
-        $url = "http://tiny.cc/?c=rest_api&m=shorten&version=2.0.3&format=json&shortUrl=&longUrl=" . $this->url . "&login=" . $this->login . "&apiKey=" . $this->apiKey;
+        $url = 'http://tiny.cc/?c=rest_api&m=shorten&version=2.0.3&format=json&shortUrl=&longUrl=' . $this->url . '&login=' . $this->login . '&apiKey=' . $this->apiKey;
 
         $curlObj = curl_init();
         curl_setopt($curlObj, CURLOPT_URL, $url);
@@ -196,17 +194,17 @@ class ShortUrl
 
         curl_close($curlObj);
 
-        if (!empty($response)) {
+        if (false !== $response) {
             $json = json_decode($response);
 
-            if (!empty($json->errorCode)) {
-                $errorMessage = "[TinyCC service] Message: " . $json->errorMessage;
+            if (isset($json->errorCode) and ($json->errorCode > 0)) {
+                $errorMessage = '[TinyCC service] Message: ' . $json->errorMessage;
                 throw new \Exception($errorMessage);
             } else {
                 $this->shortUrl = $json->results->short_url;
             }
         } else {
-            throw new \Exception(\JText::_("LIB_PRISM_ERROR_SHORT_URL_SERVICE_REQUEST"));
+            throw new \Exception(\JText::_('LIB_PRISM_ERROR_SHORT_URL_SERVICE_REQUEST'));
         }
     }
 
@@ -238,17 +236,17 @@ class ShortUrl
 
         curl_close($curlObj);
 
-        if (!empty($response)) {
+        if (false !== $response) {
             $json = json_decode($response);
 
-            if (!empty($json->error)) {
-                $errorMessage = "[Goo.gl service] Message: " . $json->error->message . "; Location: " . $json->error->errors[0]->location;
+            if (isset($json->error) and count($json->error) > 0) {
+                $errorMessage = '[Goo.gl service] Message: ' . $json->error->message . '; Location: ' . $json->error->errors[0]->location;
                 throw new \Exception($errorMessage);
             } else {
                 $this->shortUrl = $json->id;
             }
         } else {
-            throw new \Exception(\JText::_("LIB_PRISM_ERROR_REDUCE_URL"));
+            throw new \Exception(\JText::_('LIB_PRISM_ERROR_REDUCE_URL'));
         }
     }
 }

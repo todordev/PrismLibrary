@@ -13,7 +13,7 @@ use SocialCommunity\Activity;
 
 defined('JPATH_PLATFORM') or die;
 
-jimport("SocialCommunity.init");
+jimport('SocialCommunity.init');
 
 /**
  * This class provides functionality to
@@ -46,7 +46,7 @@ class SocialCommunity implements ActivityInterface
      * @param  integer $userId User ID
      * @param  string  $content Information about the activity.
      */
-    public function __construct($userId = 0, $content = "")
+    public function __construct($userId = 0, $content = '')
     {
         $this->user_id = $userId;
         $this->content = $content;
@@ -68,10 +68,10 @@ class SocialCommunity implements ActivityInterface
      * @param array $data
      * @param array $excluded
      */
-    public function bind($data, $excluded = array())
+    public function bind($data, array $excluded = array())
     {
         foreach ($data as $key => $value) {
-            if (in_array($key, $excluded)) {
+            if (in_array($key, $excluded, true)) {
                 continue;
             }
 
@@ -95,15 +95,15 @@ class SocialCommunity implements ActivityInterface
     {
         $activity = new Activity(\JFactory::getDbo());
 
-        $activity->set("content", $this->content);
-        $activity->set("user_id", $this->user_id);
+        $activity->set('content', $this->content);
+        $activity->set('user_id', $this->user_id);
 
-        if (!empty($this->image)) {
-            $activity->set("image", $this->image);
+        if ($this->image !== null) {
+            $activity->set('image', $this->image);
         }
 
-        if (!empty($this->url)) {
-            $activity->set("url", $this->url);
+        if ($this->url !== null) {
+            $activity->set('url', $this->url);
         }
 
         $activity->store();

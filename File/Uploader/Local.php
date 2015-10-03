@@ -22,8 +22,8 @@ defined('JPATH_PLATFORM') or die;
  */
 class Local implements UploaderInterface
 {
-    protected $file = "";
-    protected $destination = "";
+    protected $file = '';
+    protected $destination = '';
 
     /**
      * Initialize the object.
@@ -36,7 +36,7 @@ class Local implements UploaderInterface
      *
      * @param  string $file A path to the file.
      */
-    public function __construct($file = "")
+    public function __construct($file = '')
     {
         $this->file = $file;
     }
@@ -84,12 +84,12 @@ class Local implements UploaderInterface
     {
         $destination = \JPath::clean($destination);
         if (!$destination) {
-            throw new \InvalidArgumentException(\JText::_("LIB_PRISM_ERROR_INVALID_DESTINATION"));
+            throw new \InvalidArgumentException(\JText::_('LIB_PRISM_ERROR_INVALID_DESTINATION'));
         }
 
         $folder = dirname($destination);
         if (!\JFolder::exists($folder)) {
-            throw new \RuntimeException(\JText::sprintf("LIB_PRISM_ERROR_FOLDER_DOES_NOT_EXIST", $folder));
+            throw new \RuntimeException(\JText::sprintf('LIB_PRISM_ERROR_FOLDER_DOES_NOT_EXIST', $folder));
         }
 
         $this->destination = $destination;

@@ -25,13 +25,13 @@ class Image extends File
      * Create a thumbnail from an image file.
      *
      * <code>
-     * $myFile   = "/tmp/myfile.jpg";
+     * $myFile   = '/tmp/myfile.jpg';
      *
      * $options = array(
-     *     "destination" => "image/mypic.jpg",
-     *     "width" => 200,
-     *     "height" => 200,
-     *     "scale" => JImage::SCALE_INSIDE
+     *     'destination' => 'image/mypic.jpg',
+     *     'width' => 200,
+     *     'height' => 200,
+     *     'scale' => JImage::SCALE_INSIDE
      * );
      *
      * $file = new PrismFileImage($myFile);
@@ -48,13 +48,13 @@ class Image extends File
      */
     public function createThumbnail($options)
     {
-        $width       = ArrayHelper::getValue($options, "width", 100);
-        $height      = ArrayHelper::getValue($options, "height", 100);
-        $scale       = ArrayHelper::getValue($options, "scale", \JImage::SCALE_INSIDE);
-        $destination = ArrayHelper::getValue($options, "destination");
+        $width       = ArrayHelper::getValue($options, 'width', 100);
+        $height      = ArrayHelper::getValue($options, 'height', 100);
+        $scale       = ArrayHelper::getValue($options, 'scale', \JImage::SCALE_INSIDE);
+        $destination = ArrayHelper::getValue($options, 'destination');
 
         if (!$destination) {
-            throw new \InvalidArgumentException(\JText::_("LIB_PRISM_ERROR_INVALID_FILE_DESTINATION"));
+            throw new \InvalidArgumentException(\JText::_('LIB_PRISM_ERROR_INVALID_FILE_DESTINATION'));
         }
 
         // Generate thumbnail.
@@ -71,11 +71,11 @@ class Image extends File
         $ext      = \JString::strtolower(\JFile::getExt(\JFile::makeSafe($fileName)));
 
         switch ($ext) {
-            case "gif":
+            case 'gif':
                 $type = IMAGETYPE_GIF;
                 break;
 
-            case "png":
+            case 'png':
                 $type = IMAGETYPE_PNG;
                 break;
 

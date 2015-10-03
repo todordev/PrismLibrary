@@ -37,10 +37,10 @@ class Response
      * @param array $data
      * @param array $excluded
      */
-    public function bind(array $data, $excluded = array())
+    public function bind(array $data, array $excluded = array())
     {
         foreach ($data as $key => $value) {
-            if (!in_array($key, $excluded)) {
+            if (!in_array($key, $excluded, true)) {
                 $this->$key = $value;
             }
         }

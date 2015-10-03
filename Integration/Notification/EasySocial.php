@@ -36,10 +36,10 @@ class EasySocial implements NotificationInterface
     protected $url;
 
     protected $actorId;
-    protected $actorType = "user";
+    protected $actorType = 'user';
 
     protected $targetId;
-    protected $targetType = "user";
+    protected $targetType = 'user';
 
     protected $contextId;
     protected $contextType;
@@ -64,7 +64,7 @@ class EasySocial implements NotificationInterface
      * @param  integer $userId User ID
      * @param  string  $content Notice to user.
      */
-    public function __construct($userId = 0, $content = "")
+    public function __construct($userId = 0, $content = '')
     {
         $this->targetId = $userId;
         $this->content  = $content;
@@ -107,9 +107,9 @@ class EasySocial implements NotificationInterface
      *
      * @param string $content
      */
-    public function send($content = "")
+    public function send($content = '')
     {
-        if (!empty($content)) {
+        if (\JString::strlen($content) > 0) {
             $this->content = $content;
         }
 
@@ -118,32 +118,31 @@ class EasySocial implements NotificationInterface
         $date = new \JDate();
 
         $query
-            ->insert($this->db->quoteName("#__social_notifications"))
-            ->set($this->db->quoteName("uid") . "=" . (int)$this->uid)
-            ->set($this->db->quoteName("actor_id") . "=" . (int)$this->actorId)
-            ->set($this->db->quoteName("actor_type") . "=" . $this->db->quote($this->actorType))
-            ->set($this->db->quoteName("target_id") . "=" . (int)$this->targetId)
-            ->set($this->db->quoteName("target_type") . "=" . $this->db->quote($this->targetType))
-            ->set($this->db->quoteName("content") . "=" . $this->db->quote($this->content))
-            ->set($this->db->quoteName("cmd") . "=" . $this->db->quote($this->cmd))
-            ->set($this->db->quoteName("type") . "=" . $this->db->quote($this->type))
-            ->set($this->db->quoteName("url") . "=" . $this->db->quote($this->url))
-            ->set($this->db->quoteName("state") . "=" . (int)$this->state)
-            ->set($this->db->quoteName("created") . "=" . $this->db->quote($date->toSql()));
+            ->insert($this->db->quoteName('#__social_notifications'))
+            ->set($this->db->quoteName('uid') . '=' . (int)$this->uid)
+            ->set($this->db->quoteName('actor_id') . '=' . (int)$this->actorId)
+            ->set($this->db->quoteName('actor_type') . '=' . $this->db->quote($this->actorType))
+            ->set($this->db->quoteName('target_id') . '=' . (int)$this->targetId)
+            ->set($this->db->quoteName('target_type') . '=' . $this->db->quote($this->targetType))
+            ->set($this->db->quoteName('content') . '=' . $this->db->quote($this->content))
+            ->set($this->db->quoteName('cmd') . '=' . $this->db->quote($this->cmd))
+            ->set($this->db->quoteName('type') . '=' . $this->db->quote($this->type))
+            ->set($this->db->quoteName('url') . '=' . $this->db->quote($this->url))
+            ->set($this->db->quoteName('state') . '=' . (int)$this->state)
+            ->set($this->db->quoteName('created') . '=' . $this->db->quote($date->toSql()));
 
-        if (!empty($this->image)) {
-            $query->set($this->db->quoteName("image") . "=" . $this->db->quote($this->image));
+        if ($this->image !== null) {
+            $query->set($this->db->quoteName('image') . '=' . $this->db->quote($this->image));
         }
 
-        if (!empty($this->title)) {
-            $query->set($this->db->quoteName("title") . "=" . $this->db->quote($this->title));
+        if ($this->title !== null) {
+            $query->set($this->db->quoteName('title') . '=' . $this->db->quote($this->title));
         }
 
         $this->db->setQuery($query);
         $this->db->execute();
 
         $this->id = $this->db->insertid();
-
     }
 
     /**

@@ -13,9 +13,9 @@ use Prism\Log\WriterInterface;
 
 defined('JPATH_PLATFORM') or die;
 
-jimport("joomla.filesystem.path");
-jimport("joomla.filesystem.folder");
-jimport("joomla.filesystem.file");
+jimport('joomla.filesystem.path');
+jimport('joomla.filesystem.folder');
+jimport('joomla.filesystem.file');
 
 /**
  * This is a class that provides functionality for storing log data in a file.
@@ -51,7 +51,7 @@ class File implements WriterInterface
         $this->file = $this->validate($file);
 
         if (!$this->file) {
-            throw new \UnexpectedValueException(\JText::_("LIB_PRISM_ERROR_INVALID_FILE"));
+            throw new \UnexpectedValueException(\JText::_('LIB_PRISM_ERROR_INVALID_FILE'));
         }
     }
 
@@ -62,7 +62,7 @@ class File implements WriterInterface
         $folder = dirname($file);
 
         if (!\JFolder::exists($folder)) {
-            throw new \RuntimeException(\JText::sprintf("LIB_PRISM_ERROR_FOLDER_DOES_NOT_EXIST", $folder));
+            throw new \RuntimeException(\JText::sprintf('LIB_PRISM_ERROR_FOLDER_DOES_NOT_EXIST', $folder));
         }
 
         // Create file
@@ -132,7 +132,7 @@ class File implements WriterInterface
      * $writer->setData($data);
      * </code>
      *
-     * @param array $data
+     * @param mixed $data
      *
      * @return self
      */
@@ -177,11 +177,11 @@ class File implements WriterInterface
      */
     public function store()
     {
-        $logData = "=========================================\n";
-        $logData .= "Date Time: " . $this->recordDate . "\n";
-        $logData .= $this->title . " (" . $this->type . ") \n";
-        if (!empty($this->data)) {
-            $logData .= var_export($this->data, true) . "\n";
+        $logData = '=========================================\n';
+        $logData .= 'Date Time: ' . $this->recordDate . '\n';
+        $logData .= $this->title . ' (' . $this->type . ') \n';
+        if (null !== $this->data) {
+            $logData .= var_export($this->data, true) . '\n';
         }
 
         file_put_contents($this->file, stripslashes($logData), FILE_APPEND);

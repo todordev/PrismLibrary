@@ -32,10 +32,10 @@ class EasyProfile implements ProfileInterface
      * @var array
      */
     protected $avatarSizes = array(
-        "icon"   => "mini_",
-        "small"  => "mini_",
-        "medium" => "_",
-        "large"  => "_",
+        'icon'   => 'mini_',
+        'small'  => 'mini_',
+        'medium' => '_',
+        'large'  => '_',
     );
 
     /**
@@ -79,7 +79,7 @@ class EasyProfile implements ProfileInterface
      */
     public static function getInstance(\JDatabaseDriver $db, $id)
     {
-        if (!isset(self::$instances[$id])) {
+        if (!array_key_exists($id, self::$instances)) {
             $item   = new EasyProfile($db);
             $item->load($id);
             
@@ -106,12 +106,12 @@ class EasyProfile implements ProfileInterface
         $query = $this->db->getQuery(true);
         $query
             ->select(
-                "a.id AS user_id, a.avatar, ".
-                $query->concatenate(array("b.id", "b.username"), ":") . " AS slug"
+                'a.id AS user_id, a.avatar, '.
+                $query->concatenate(array('b.id', 'b.username'), ':') . ' AS slug'
             )
-            ->from($this->db->quoteName("#__jsn_users", "a"))
-            ->innerJoin($this->db->quoteName("#__users", "b") . " ON a.id = b.id")
-            ->where("a.id = " . (int)$id);
+            ->from($this->db->quoteName('#__jsn_users', 'a'))
+            ->innerJoin($this->db->quoteName('#__users', 'b') . ' ON a.id = b.id')
+            ->where('a.id = ' . (int)$id);
 
         $this->db->setQuery($query);
         $result = (array)$this->db->loadAssoc();
@@ -136,10 +136,10 @@ class EasyProfile implements ProfileInterface
      * @param array $data
      * @param array $ignored
      */
-    public function bind($data, $ignored = array())
+    public function bind($data, array $ignored = array())
     {
         foreach ($data as $key => $value) {
-            if (!in_array($key, $ignored)) {
+            if (!in_array($key, $ignored, true)) {
                 $this->$key = $value;
             }
         }
@@ -163,8 +163,8 @@ class EasyProfile implements ProfileInterface
      */
     public function getLink($route = true)
     {
-        $link = "";
-        if (!empty($this->slug)) {
+        $link = '';
+        if ($this->slug !== null) {
             $link = \JRoute::_('index.php?option=com_jsn&view=profile&id='.$this->slug);
         }
 
@@ -188,19 +188,19 @@ class EasyProfile implements ProfileInterface
      *
      * @return string
      */
-    public function getAvatar($size = "small", $returnDefault = true)
+    public function getAvatar($size = 'small', $returnDefault = true)
     {
-        $avatar = (!isset($this->avatarSizes[$size])) ? null : $this->avatarSizes[$size];
+        $avatar = (!array_key_exists($size, $this->avatarSizes)) ? null : $this->avatarSizes[$size];
 
-        $link = "";
+        $link = '';
 
-        if (!empty($this->avatar)) {
+        if ($this->avatar !== null) {
             $file = \JString::trim($this->avatar);
-            $fileSplit = explode("_", $file);
+            $fileSplit = explode('_', $file);
             $link = \JUri::root() . $fileSplit[0]  . $avatar . $fileSplit[1];
         } else {
             if ($returnDefault) {
-                $link = \JUri::root() . "components/com_jsn/assets/img/default.jpg";
+                $link = \JUri::root() . 'components/com_jsn/assets/img/default.jpg';
             }
         }
 
@@ -223,7 +223,7 @@ class EasyProfile implements ProfileInterface
      */
     public function getLocation()
     {
-        return "";
+        return '';
     }
 
     /**
@@ -242,6 +242,6 @@ class EasyProfile implements ProfileInterface
      */
     public function getCountryCode()
     {
-        return "";
+        return '';
     }
 }

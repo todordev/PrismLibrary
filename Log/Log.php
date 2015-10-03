@@ -49,7 +49,7 @@ class Log
      * @param string $type
      * @param mixed  $data
      */
-    public function __construct($title = "", $type = "", $data = null)
+    public function __construct($title = '', $type = '', $data = null)
     {
         $this->setTitle($title);
         $this->setType($type);
@@ -256,7 +256,7 @@ class Log
         $this->setData($data);
 
         $date = new \JDate();
-        $this->setRecordDate($date->__toString());
+        $this->setRecordDate((string)$date);
 
         $this->store();
     }

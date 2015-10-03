@@ -83,7 +83,7 @@ abstract class Table implements TableInterface
     public function bind($data, $ignored = array())
     {
         foreach ($data as $key => $value) {
-            if (!in_array($key, $ignored)) {
+            if (!in_array($key, $ignored, true)) {
                 $this->$key = $value;
             }
         }
@@ -151,7 +151,7 @@ abstract class Table implements TableInterface
         $vars = get_object_vars($this);
 
         foreach ($vars as $key => $value) {
-            if (strcmp('db', $key) == 0) {
+            if (strcmp('db', $key) === 0) {
                 unset($vars[$key]);
             }
         }
@@ -177,7 +177,7 @@ abstract class Table implements TableInterface
     {
         $parameters = get_object_vars($this);
         foreach ($parameters as $key) {
-            if (is_string($key) and strcmp("db", $key) == 0) {
+            if (is_string($key) and strcmp('db', $key) === 0) {
                 continue;
             }
 
@@ -201,7 +201,7 @@ abstract class Table implements TableInterface
      */
     public function getParam($index, $default = null)
     {
-        if (isset($this->params[$index])) {
+        if (array_key_exists($index, $this->params)) {
             return $this->params[$index];
         }
 
@@ -225,7 +225,7 @@ abstract class Table implements TableInterface
      */
     public function setParam($index, $value = null)
     {
-        $previous             = isset($this->params[$index]) ? $this->params[$index] : null;
+        $previous             = (!array_key_exists($index, $this->params)) ? null : $this->params[$index];
         $this->params[$index] = $value;
 
         return $previous;

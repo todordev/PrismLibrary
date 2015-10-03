@@ -38,7 +38,7 @@ class Size extends Validator
      *
      * @param string $file A path to the file.
      */
-    public function __construct($file = "")
+    public function __construct($file = '')
     {
         $this->file     = \JPath::clean($file);
     }
@@ -152,35 +152,27 @@ class Size extends Validator
         $imageProperties = \JImage::getImageFileProperties($this->file);
 
         // Check the minimum width of the image.
-        if (!empty($this->minWidth)) {
-            if ($imageProperties->width < $this->minWidth) {
-                $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_IMAGE_MIN_WIDTH', $this->minWidth);
-                return false;
-            }
+        if (($this->minWidth > 0) and ($imageProperties->width < $this->minWidth)) {
+            $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_IMAGE_MIN_WIDTH', $this->minWidth);
+            return false;
         }
 
         // Check the minimum height of the image.
-        if (!empty($this->minHeight)) {
-            if ($imageProperties->height < $this->minHeight) {
-                $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_IMAGE_MIN_HEIGHT', $this->minHeight);
-                return false;
-            }
+        if (($this->minHeight > 0) and ($imageProperties->height < $this->minHeight)) {
+            $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_IMAGE_MIN_HEIGHT', $this->minHeight);
+            return false;
         }
 
         // Check the maximum width of the image.
-        if (!empty($this->maxWidth)) {
-            if ($imageProperties->width > $this->maxWidth) {
-                $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_IMAGE_MAX_WIDTH', $this->maxWidth);
-                return false;
-            }
+        if (($this->maxWidth > 0) and ($imageProperties->width > $this->maxWidth)) {
+            $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_IMAGE_MAX_WIDTH', $this->maxWidth);
+            return false;
         }
 
         // Check the maximum height of the image.
-        if (!empty($this->maxHeight)) {
-            if ($imageProperties->height > $this->maxHeight) {
-                $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_IMAGE_MAX_HEIGHT', $this->maxHeight);
-                return false;
-            }
+        if (($this->maxHeight > 0) and ($imageProperties->height > $this->maxHeight)) {
+            $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_IMAGE_MAX_HEIGHT', $this->maxHeight);
+            return false;
         }
 
         return true;

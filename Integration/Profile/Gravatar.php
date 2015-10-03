@@ -30,10 +30,10 @@ class Gravatar implements ProfileInterface
      * @var array
      */
     protected $avatarSizes = array(
-        "icon" => "40",
-        "small" => "80",
-        "medium" => "160",
-        "large" => "200",
+        'icon' => '40',
+        'small' => '80',
+        'medium' => '160',
+        'large' => '200',
     );
 
     /**
@@ -103,9 +103,9 @@ class Gravatar implements ProfileInterface
     {
         $query = $this->db->getQuery(true);
         $query
-            ->select("a.id AS user_id, a.email, MD5(a.email) as hash")
-            ->from($this->db->quoteName("#__users", "a"))
-            ->where("a.id = " . (int)$id);
+            ->select('a.id AS user_id, a.email, MD5(a.email) as hash')
+            ->from($this->db->quoteName('#__users', 'a'))
+            ->where('a.id = ' . (int)$id);
 
         $this->db->setQuery($query);
         $result = (array)$this->db->loadAssoc();
@@ -130,10 +130,10 @@ class Gravatar implements ProfileInterface
      * @param array $data
      * @param array $ignored
      */
-    public function bind($data, $ignored = array())
+    public function bind($data, array $ignored = array())
     {
         foreach ($data as $key => $value) {
-            if (!in_array($key, $ignored)) {
+            if (!in_array($key, $ignored, true)) {
                 $this->$key = $value;
             }
         }
@@ -159,7 +159,7 @@ class Gravatar implements ProfileInterface
      */
     public function getLink($route = true)
     {
-        return "javascript:void(0)";
+        return 'javascript:void(0)';
     }
 
     /**
@@ -178,14 +178,14 @@ class Gravatar implements ProfileInterface
      *
      * @return string Return a link to the picture.
      */
-    public function getAvatar($size = "small")
+    public function getAvatar($size = 'small')
     {
-        $avatarSize = (!isset($this->avatarSizes[$size])) ? null : (int)$this->avatarSizes[$size];
+        $avatarSize = (!array_key_exists($size, $this->avatarSizes)) ? null : (int)$this->avatarSizes[$size];
 
-        $link = "http://www.gravatar.com/avatar/" . $this->hash;
+        $link = 'http://www.gravatar.com/avatar/' . $this->hash;
 
-        if (!empty($avatarSize)) {
-            $link .= "?s=" . $avatarSize;
+        if ($avatarSize !== null) {
+            $link .= '?s=' . $avatarSize;
         }
 
         return $link;
@@ -207,7 +207,7 @@ class Gravatar implements ProfileInterface
      */
     public function getLocation()
     {
-        return "";
+        return '';
     }
 
     /**
@@ -226,6 +226,6 @@ class Gravatar implements ProfileInterface
      */
     public function getCountryCode()
     {
-        return "";
+        return '';
     }
 }

@@ -50,7 +50,7 @@ class Form extends \JControllerForm
     protected function displayNotice($messages, $options)
     {
         $message = $this->prepareMessage($messages);
-        $this->setMessage($message, "notice");
+        $this->setMessage($message, 'notice');
 
         $link = $this->prepareRedirectLink($options);
         $this->setRedirect(\JRoute::_($link, false));
@@ -72,7 +72,7 @@ class Form extends \JControllerForm
     protected function displayWarning($messages, $options)
     {
         $message = $this->prepareMessage($messages);
-        $this->setMessage($message, "warning");
+        $this->setMessage($message, 'warning');
 
         $link = $this->prepareRedirectLink($options);
         $this->setRedirect(\JRoute::_($link, false));
@@ -94,7 +94,7 @@ class Form extends \JControllerForm
     protected function displayError($messages, $options)
     {
         $message = $this->prepareMessage($messages);
-        $this->setMessage($message, "error");
+        $this->setMessage($message, 'error');
 
         $link = $this->prepareRedirectLink($options);
         $this->setRedirect(\JRoute::_($link, false));
@@ -116,7 +116,7 @@ class Form extends \JControllerForm
     protected function displayMessage($messages, $options)
     {
         $message = $this->prepareMessage($messages);
-        $this->setMessage($message, "message");
+        $this->setMessage($message, 'message');
 
         $link = $this->prepareRedirectLink($options);
         $this->setRedirect(\JRoute::_($link, false));
@@ -134,7 +134,7 @@ class Form extends \JControllerForm
     {
         if (is_array($message)) {
 
-            $result = "";
+            $result = '';
 
             foreach ($message as $value) {
                 if (is_object($value)) {
@@ -171,32 +171,29 @@ class Form extends \JControllerForm
     protected function prepareRedirectLink($options)
     {
         // Return predefined link
-        $forceDirection = ArrayHelper::getValue($options, "force_direction");
-        if (!empty($forceDirection)) {
+        $forceDirection = ArrayHelper::getValue($options, 'force_direction');
+        if (null !== $forceDirection) {
             return $forceDirection;
         }
         $link = $this->defaultLink;
 
-        $view   = ArrayHelper::getValue($options, "view");
-        $layout = ArrayHelper::getValue($options, "layout");
-        $itemId = ArrayHelper::getValue($options, "id", 0, "uint");
-        $urlVar = ArrayHelper::getValue($options, "url_var", "id");
+        $view   = ArrayHelper::getValue($options, 'view');
+        $layout = ArrayHelper::getValue($options, 'layout');
+        $itemId = ArrayHelper::getValue($options, 'id', 0, 'uint');
+        $urlVar = ArrayHelper::getValue($options, 'url_var', 'id');
 
         // Remove standard parameters
-        unset($options["view"]);
-        unset($options["layout"]);
-        unset($options["url_var"]);
-        unset($options["id"]);
+        unset($options['view'], $options['layout'], $options['url_var'], $options['id']);
 
         // Redirect to different of common views
-        if (!empty($view)) {
-            $link .= "&view=" . $view;
+        if (null !== $view) {
+            $link .= '&view=' . $view;
         }
-        if (!empty($layout)) {
-            $link .= "&layout=" . $layout;
+        if (null !== $layout) {
+            $link .= '&layout=' . $layout;
         }
 
-        if (!empty($itemId)) {
+        if ($itemId > 0) {
             $link .= $this->getRedirectToItemAppend($itemId, $urlVar);
         } else {
             $link .= $this->getRedirectToListAppend();
@@ -215,16 +212,12 @@ class Form extends \JControllerForm
      *
      * @return string
      */
-    protected function prepareExtraParameters($options)
+    protected function prepareExtraParameters(array $options)
     {
-        $uriString = "";
+        $uriString = '';
 
-        if (is_array($options) and !empty($options)) {
-
-            foreach ($options as $key => $value) {
-                $uriString .= "&" . $key . "=" . $value;
-            }
-
+        foreach ($options as $key => $value) {
+            $uriString .= '&' . $key . '=' . $value;
         }
 
         return $uriString;
@@ -239,6 +232,6 @@ class Form extends \JControllerForm
      */
     public function cancel($key = null)
     {
-        $this->setRedirect(\JRoute::_($this->defaultLink . "&view=" . $this->view_list . $this->getRedirectToListAppend(), false));
+        $this->setRedirect(\JRoute::_($this->defaultLink . '&view=' . $this->view_list . $this->getRedirectToListAppend(), false));
     }
 }

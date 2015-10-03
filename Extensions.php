@@ -38,7 +38,7 @@ class Extensions
      *     "com_gamification"
      * );
      *
-     * $extensions = new PrismExtensions(JFactory::getDbo(), $extensionsNames);
+     * $extensions = new Prism\Extensions(\JFactory::getDbo(), $extensionsNames);
      * </code>
      *
      * @param \JDatabaseDriver $db         Database driver.
@@ -59,7 +59,7 @@ class Extensions
      *     "com_gamification"
      * );
      *
-     * $extensions = new PrismExtensions(JFactory::getDbo(), $extensionsNames);
+     * $extensions = new Prism\Extensions(\JFactory::getDbo(), $extensionsNames);
      *
      * $enabled = $extensions->getEnabled();
      * </code>
@@ -80,17 +80,13 @@ class Extensions
 
         $query = $this->db->getQuery(true);
         $query
-            ->select("a.element")
-            ->from($this->db->quoteName("#__extensions", "a"))
-            ->where("a.element IN (" . implode(",", $extensions) . ")")
-            ->where("a.enabled = 1");
+            ->select('a.element')
+            ->from($this->db->quoteName('#__extensions', 'a'))
+            ->where('a.element IN (' . implode(',', $extensions) . ')')
+            ->where('a.enabled = 1');
 
         $this->db->setQuery($query);
-        $extensions = $this->db->loadColumn();
-
-        if (!$extensions) {
-            $extensions = array();
-        }
+        $extensions = (array)$this->db->loadColumn();
 
         return $extensions;
     }

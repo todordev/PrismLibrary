@@ -9,13 +9,13 @@
 
 defined('JPATH_PLATFORM') or die;
 
-if (!defined("PRISM_PATH_LIBRARY")) {
-    define("PRISM_PATH_LIBRARY", JPATH_LIBRARIES . "/Prism");
+if (!defined('PRISM_PATH_LIBRARY')) {
+    define('PRISM_PATH_LIBRARY', JPATH_LIBRARIES . '/Prism');
 }
 
-jimport("joomla.filesystem.file");
-jimport("joomla.filesystem.folder");
-jimport("joomla.filesystem.path");
+jimport('joomla.filesystem.file');
+jimport('joomla.filesystem.folder');
+jimport('joomla.filesystem.path');
 
 JLoader::registerNamespace('Prism', JPATH_LIBRARIES);
 

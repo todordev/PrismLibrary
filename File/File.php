@@ -45,9 +45,9 @@ class File
      *
      * @param  mixed $file
      */
-    public function __construct($file = "")
+    public function __construct($file = '')
     {
-        if (!empty($file)) {
+        if ($file !== '') {
             $this->file = \JPath::clean($file);
         }
 
@@ -108,13 +108,13 @@ class File
      * @param  array $file An array that comes from JInput.
      * @param  string $destination Destination where the file is going to be saved.
      */
-    public function upload(array $file = array(), $destination = "")
+    public function upload(array $file = array(), $destination = '')
     {
-        if (!empty($file)) {
+        if (count($file) > 0) {
             $this->uploader->setFile($file);
         }
 
-        if (!empty($destination)) {
+        if (\JString::strlen($destination) > 0) {
             $this->uploader->setDestination($destination);
         }
 
@@ -140,7 +140,7 @@ class File
      */
     public function addValidator(Validator $validator, $reset = false)
     {
-        if (!empty($reset)) {
+        if ($reset !== false) {
             $this->validators = array();
         }
 
@@ -229,7 +229,7 @@ class File
             $remover->remove();
         }
 
-        $this->file = "";
+        $this->file = '';
     }
 
     /**

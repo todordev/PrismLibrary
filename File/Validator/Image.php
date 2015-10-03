@@ -32,8 +32,8 @@ class Image extends Validator
      * Initialize the object.
      *
      * <code>
-     * $myFile     = "/tmp/myfile.jpg";
-     * $fileName   = "myfile.jpg";
+     * $myFile     = '/tmp/myfile.jpg';
+     * $fileName   = 'myfile.jpg';
      *
      * $validator = new Prism\File\Validator\Image($myFile, $fileName);
      * </code>
@@ -41,7 +41,7 @@ class Image extends Validator
      * @param string $file A path to the file.
      * @param string $fileName File name
      */
-    public function __construct($file = "", $fileName = "")
+    public function __construct($file = '', $fileName = '')
     {
         $this->file     = \JPath::clean($file);
         $this->fileName = \JFile::makeSafe(basename($fileName));
@@ -51,7 +51,7 @@ class Image extends Validator
      * Set a location of a file.
      *
      * <code>
-     * $myFile     = "/tmp/myfile.jpg";
+     * $myFile     = '/tmp/myfile.jpg';
      *
      * $validator = new Prism\File\Validator\Image();
      * $validator->setFile($myFile);
@@ -68,7 +68,7 @@ class Image extends Validator
      * Set a file name.
      *
      * <code>
-     * $fileName  = "myfile.jpg";
+     * $fileName  = 'myfile.jpg';
      *
      * $validator = new Prism\File\Validator\Image();
      * $validator->setFileName($fileName);
@@ -85,7 +85,7 @@ class Image extends Validator
      * Set a mime types that are allowed.
      *
      * <code>
-     * $mimeTypes  = array("image/jpeg", "image/gif");
+     * $mimeTypes  = array('image/jpeg', 'image/gif');
      *
      * $validator = new Prism\File\Validator\Image();
      * $validator->setMimeTypes($mimeTypes);
@@ -102,7 +102,7 @@ class Image extends Validator
      * Set a file extensions that are allowed.
      *
      * <code>
-     * $imageExtensions  = array("jpg", "png");
+     * $imageExtensions  = array('jpg', 'png');
      *
      * $validator = new Prism\File\Validator\Image();
      * $validator->setImageExtensions($imageExtensions);
@@ -119,8 +119,8 @@ class Image extends Validator
      * Validate image type and extension.
      *
      * <code>
-     * $myFile     = "/tmp/myfile.jpg";
-     * $fileName   = "myfile.jpg";
+     * $myFile     = '/tmp/myfile.jpg';
+     * $fileName   = 'myfile.jpg';
      *
      * $validator = new Prism\File\Validator\Image($myFile, $fileName);
      *
@@ -140,7 +140,7 @@ class Image extends Validator
         $imageProperties = \JImage::getImageFileProperties($this->file);
 
         // Check mime type of the file
-        if (false === array_search($imageProperties->mime, $this->mimeTypes)) {
+        if (!in_array($imageProperties->mime, $this->mimeTypes, true)) {
             $this->message = \JText::_('LIB_PRISM_ERROR_FILE_TYPE');
             return false;
         }
@@ -148,7 +148,7 @@ class Image extends Validator
         // Check file extension
         $ext = \JString::strtolower(\JFile::getExt($this->fileName));
 
-        if (false === array_search($ext, $this->imageExtensions)) {
+        if (!in_array($ext, $this->imageExtensions, true)) {
             $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_EXTENSIONS', $ext);
             return false;
         }

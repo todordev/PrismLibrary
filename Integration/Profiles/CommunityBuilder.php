@@ -30,10 +30,10 @@ class CommunityBuilder implements ProfilesInterface
      * @var array
      */
     protected $avatarSizes = array(
-        "icon"   => "tn",
-        "small"  => "tn",
-        "medium" => "",
-        "large"  => "",
+        'icon'   => 'tn',
+        'small'  => 'tn',
+        'medium' => '',
+        'large'  => '',
     );
 
     /**
@@ -73,22 +73,22 @@ class CommunityBuilder implements ProfilesInterface
      */
     public function load(array $ids)
     {
-        if (!empty($ids)) {
+        if (count($ids) > 0) {
 
             // Create a new query object.
             $query = $this->db->getQuery(true);
             $query
                 ->select(
-                    "a.id AS user_id, a.name, ".
-                    "b.avatar, ".
-                    $query->concatenate(array("a.id", "a.username"), ":") . " AS slug"
+                    'a.id AS user_id, a.name, '.
+                    'b.avatar, '.
+                    $query->concatenate(array('a.id', 'a.username'), ':') . ' AS slug'
                 )
-                ->from($this->db->quoteName("#__users", "a"))
-                ->innerJoin($this->db->quoteName("#__comprofiler", "b") . " ON a.id = b.user_id")
-                ->where("a.id IN ( " . implode(",", $ids) . ")");
+                ->from($this->db->quoteName('#__users', 'a'))
+                ->innerJoin($this->db->quoteName('#__comprofiler', 'b') . ' ON a.id = b.user_id')
+                ->where('a.id IN ( ' . implode(',', $ids) . ')');
 
             $this->db->setQuery($query);
-            $this->profiles = (array)$this->db->loadObjectList("user_id");
+            $this->profiles = (array)$this->db->loadObjectList('user_id');
         }
     }
 
@@ -111,22 +111,22 @@ class CommunityBuilder implements ProfilesInterface
      *
      * @return string
      */
-    public function getAvatar($userId, $size = "small", $returnDefault = true)
+    public function getAvatar($userId, $size = 'small', $returnDefault = true)
     {
-        $link = "";
-        if (!isset($this->profiles[$userId])) {
-            $link = \JUri::root() . "components/com_comprofiler/plugin/templates/default/images/avatar/nophoto_n.png";
+        $link = '';
+        if (!array_key_exists($userId, $this->profiles)) {
+            $link = \JUri::root() . 'components/com_comprofiler/plugin/templates/default/images/avatar/nophoto_n.png';
         } else {
 
             if (!empty($this->profiles[$userId]->avatar)) {
-                $avatarSize = (!isset($this->avatarSizes[$size])) ? null : $this->avatarSizes[$size];
+                $avatarSize = (!array_key_exists($size, $this->avatarSizes)) ? null : $this->avatarSizes[$size];
 
                 $file = \JString::trim($this->profiles[$userId]->avatar);
-                $link = \JUri::root() . "images/comprofiler/"  . $avatarSize.$file;
+                $link = \JUri::root() . 'images/comprofiler/'  . $avatarSize.$file;
 
             } else {
                 if ($returnDefault) {
-                    $link = \JUri::root() . "components/com_comprofiler/plugin/templates/default/images/avatar/nophoto_n.png";
+                    $link = \JUri::root() . 'components/com_comprofiler/plugin/templates/default/images/avatar/nophoto_n.png';
                 }
             }
         }
@@ -154,17 +154,17 @@ class CommunityBuilder implements ProfilesInterface
      */
     public function getLink($userId, $route = true)
     {
-        $link = "";
+        $link = '';
         
-        if (isset($this->profiles[$userId])) {
+        if (array_key_exists($userId, $this->profiles)) {
             $needles = array(
-                "userprofile" => array(0)
+                'userprofile' => array(0)
             );
 
-            $menuItemId = Helper::getItemId("com_comprofiler", $needles);
-            $link = 'index.php?option=com_comprofiler&view=userprofile&user='.$userId;
-            if (!empty($menuItemId)) {
-                $link .= "&Itemid=". (int)$menuItemId;
+            $menuItemId = Helper::getItemId('com_comprofiler', $needles);
+            $link = 'index.php?option=com_comprofiler&view=userprofile&user='.(int)$userId;
+            if ($menuItemId > 0) {
+                $link .= '&Itemid='. (int)$menuItemId;
             }
 
             // Route the link.
@@ -195,7 +195,7 @@ class CommunityBuilder implements ProfilesInterface
      */
     public function getLocation($userId)
     {
-        return "";
+        return '';
     }
 
     /**
@@ -216,6 +216,6 @@ class CommunityBuilder implements ProfilesInterface
      */
     public function getCountryCode($userId)
     {
-        return "";
+        return '';
     }
 }

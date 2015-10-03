@@ -33,7 +33,7 @@ class Database implements WriterInterface
      * Initialize the object.
      *
      * <code>
-     * $tableName = "#__crowdf_logs";
+     * $tableName = '#__crowdf_logs';
      *
      * $writer = new Prism\Log\Writer\Database(JFactory::getDbo(), $tableName);
      * </code>
@@ -49,7 +49,7 @@ class Database implements WriterInterface
         $this->tableName = $tableName;
 
         if (!$this->tableName) {
-            throw new \UnexpectedValueException(\JText::_("LIB_PRISM_ERROR_INVALID_LOG_DATABASE_TABLE_NAME"));
+            throw new \UnexpectedValueException(\JText::_('LIB_PRISM_ERROR_INVALID_LOG_DATABASE_TABLE_NAME'));
         }
     }
 
@@ -57,8 +57,8 @@ class Database implements WriterInterface
      * Set a title of logged information.
      *
      * <code>
-     * $tableName = "#__crowdf_logs";
-     * $title = "Logged title...";
+     * $tableName = '#__crowdf_logs';
+     * $title = 'Logged title...';
      *
      * $writer = new Prism\Log\Writer\Database(JFactory::getDbo(), $tableName);
      * $writer->setTitle($title);
@@ -79,8 +79,8 @@ class Database implements WriterInterface
      * Set a type of logged information.
      *
      * <code>
-     * $tableName = "#__crowdf_logs";
-     * $type = "PAYMENT_PROCESS";
+     * $tableName = '#__crowdf_logs';
+     * $type = 'PAYMENT_PROCESS';
      *
      * $writer = new Prism\Log\Writer\Database(JFactory::getDbo(), $tableName);
      * $writer->setType($type);
@@ -101,17 +101,17 @@ class Database implements WriterInterface
      * Set an additional information about logged information.
      *
      * <code>
-     * $tableName = "#__crowdf_logs";
+     * $tableName = '#__crowdf_logs';
      * $data = array(
-     *    "amount" => 100,
-     *    "currency" => "USD"
+     *    'amount' => 100,
+     *    'currency' => 'USD'
      * );
      *
      * $writer = new Prism\Log\Writer\Database(JFactory::getDbo(), $tableName);
      * $writer->setData($data);
      * </code>
      *
-     * @param array $data
+     * @param mixed $data
      *
      * @return self
      */
@@ -126,8 +126,8 @@ class Database implements WriterInterface
      * Set date of logged information.
      *
      * <code>
-     * $tableName = "#__crowdf_logs";
-     * $date = "01-01-2014";
+     * $tableName = '#__crowdf_logs';
+     * $date = '01-01-2014';
      *
      * $writer = new Prism\Log\Writer\Database(JFactory::getDbo(), $tableName);
      * $writer->setDate($date);
@@ -150,7 +150,7 @@ class Database implements WriterInterface
      * Save the information in a database.
      *
      * <code>
-     * $tableName = "#__crowdf_logs";
+     * $tableName = '#__crowdf_logs';
      *
      * $writer = new Prism\Log\Writer\Database(JFactory::getDbo(), $tableName);
      * $writer->store();
@@ -160,15 +160,15 @@ class Database implements WriterInterface
     {
         $query = $this->db->getQuery(true);
 
-        $data = (!empty($this->data)) ? $this->data : "NULL";
+        $data = (null !== $this->data) ? $this->data : 'NULL';
 
         $query
             ->insert($this->db->quoteName($this->tableName))
-            ->set($this->db->quoteName("id") . "=" . $this->db->quote("NULL"))
-            ->set($this->db->quoteName("title") . "=" . $this->db->quote($this->title))
-            ->set($this->db->quoteName("type") . "=" . $this->db->quote($this->type))
-            ->set($this->db->quoteName("data") . "=" . $this->db->quote($data))
-            ->set($this->db->quoteName("record_date") . "=" . $this->db->quote($this->recordDate));
+            ->set($this->db->quoteName('id') . '=' . $this->db->quote('NULL'))
+            ->set($this->db->quoteName('title') . '=' . $this->db->quote($this->title))
+            ->set($this->db->quoteName('type') . '=' . $this->db->quote($this->type))
+            ->set($this->db->quoteName('data') . '=' . $this->db->quote($data))
+            ->set($this->db->quoteName('record_date') . '=' . $this->db->quote($this->recordDate));
 
         $this->db->setQuery($query);
         $this->db->execute();

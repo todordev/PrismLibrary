@@ -40,7 +40,7 @@ class DefaultController extends \JControllerLegacy
         parent::__construct($config);
 
         // Guess the option as com_NameOfController
-        if (empty($this->option)) {
+        if (null === $this->option) {
             $this->option = 'com_' . \JString::strtolower($this->getName());
         }
 
@@ -64,7 +64,7 @@ class DefaultController extends \JControllerLegacy
     protected function displayNotice($messages, $options)
     {
         $message = $this->prepareMessage($messages);
-        $this->setMessage($message, "notice");
+        $this->setMessage($message, 'notice');
 
         $link = $this->prepareRedirectLink($options);
         $this->setRedirect(\JRoute::_($link, false));
@@ -87,7 +87,7 @@ class DefaultController extends \JControllerLegacy
     protected function displayWarning($messages, $options)
     {
         $message = $this->prepareMessage($messages);
-        $this->setMessage($message, "warning");
+        $this->setMessage($message, 'warning');
 
         $link = $this->prepareRedirectLink($options);
         $this->setRedirect(\JRoute::_($link, false));
@@ -110,7 +110,7 @@ class DefaultController extends \JControllerLegacy
     protected function displayError($messages, $options)
     {
         $message = $this->prepareMessage($messages);
-        $this->setMessage($message, "error");
+        $this->setMessage($message, 'error');
 
         $link = $this->prepareRedirectLink($options);
         $this->setRedirect(\JRoute::_($link, false));
@@ -133,7 +133,7 @@ class DefaultController extends \JControllerLegacy
     protected function displayMessage($messages, $options)
     {
         $message = $this->prepareMessage($messages);
-        $this->setMessage($message, "message");
+        $this->setMessage($message, 'message');
 
         $link = $this->prepareRedirectLink($options);
         $this->setRedirect(\JRoute::_($link, false));
@@ -151,7 +151,7 @@ class DefaultController extends \JControllerLegacy
     {
         if (is_array($message)) {
 
-            $result = "";
+            $result = '';
 
             foreach ($message as $value) {
 
@@ -192,19 +192,18 @@ class DefaultController extends \JControllerLegacy
     {
         $link = $this->defaultLink;
 
-        $view   = ArrayHelper::getValue($options, "view");
-        $layout = ArrayHelper::getValue($options, "layout");
+        $view   = ArrayHelper::getValue($options, 'view');
+        $layout = ArrayHelper::getValue($options, 'layout');
 
         // Remove standard parameters
-        unset($options["view"]);
-        unset($options["layout"]);
+        unset($options['view'], $options['layout']);
 
         // Set the view value
-        if (!empty($view)) {
-            $link .= "&view=" . $view;
+        if (null !== $view) {
+            $link .= '&view=' . $view;
         }
-        if (!empty($layout)) {
-            $link .= "&layout=" . $layout;
+        if (null !== $layout) {
+            $link .= '&layout=' . $layout;
         }
 
         // Generate additional parameters
@@ -220,14 +219,12 @@ class DefaultController extends \JControllerLegacy
      *
      * @return string
      */
-    protected function prepareExtraParameters($options)
+    protected function prepareExtraParameters(array $options)
     {
-        $uriString = "";
+        $uriString = '';
 
-        if (is_array($options) and !empty($options)) {
-            foreach ($options as $key => $value) {
-                $uriString .= "&" . $key . "=" . $value;
-            }
+        foreach ($options as $key => $value) {
+            $uriString .= '&' . $key . '=' . $value;
         }
 
         return $uriString;

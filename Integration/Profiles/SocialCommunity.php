@@ -14,7 +14,7 @@ use Joomla\Utilities\ArrayHelper;
 
 defined('JPATH_PLATFORM') or die;
 
-jimport("SocialCommunity.init");
+jimport('SocialCommunity.init');
 
 /**
  * This class provides functionality used for integrating
@@ -33,10 +33,10 @@ class SocialCommunity implements ProfilesInterface
      * @var array
      */
     protected $avatarSizes = array(
-        "icon" => array("default" => "no_profile_24x24.png", "image" => "image_icon"),
-        "small" => array("default" => "no_profile_50x50.png", "image" => "image_square"),
-        "medium" => array("default" => "no_profile_100x100.png", "image" => "image_small"),
-        "large" => array("default" => "no_profile_200x200.png", "image" => "image")
+        'icon' => array('default' => 'no_profile_24x24.png', 'image' => 'image_icon'),
+        'small' => array('default' => 'no_profile_50x50.png', 'image' => 'image_square'),
+        'medium' => array('default' => 'no_profile_100x100.png', 'image' => 'image_small'),
+        'large' => array('default' => 'no_profile_200x200.png', 'image' => 'image')
     );
 
     protected $path;
@@ -64,10 +64,10 @@ class SocialCommunity implements ProfilesInterface
         $this->db = $db;
 
         // Set path to pictures
-        $params = \JComponentHelper::getParams("com_socialcommunity");
+        $params = \JComponentHelper::getParams('com_socialcommunity');
         /** @var  $params Registry */
 
-        $path   = $params->get("images_directory", "/images/profiles");
+        $path   = $params->get('images_directory', '/images/profiles');
 
         $this->setPath($path);
     }
@@ -86,22 +86,22 @@ class SocialCommunity implements ProfilesInterface
      */
     public function load(array $ids)
     {
-        if (!empty($ids)) {
+        if (count($ids) > 0) {
 
             // Create a new query object.
             $query = $this->db->getQuery(true);
             $query
                 ->select(
-                    "a.id AS user_id, a.image_icon, a.image_small, a.image_square, a.image, " .
-                    $query->concatenate(array("a.id", "a.alias"), ":") . " AS slug, " .
-                    "b.name as location, b.country_code"
+                    'a.id AS user_id, a.image_icon, a.image_small, a.image_square, a.image, ' .
+                    $query->concatenate(array('a.id', 'a.alias'), ':') . ' AS slug, ' .
+                    'b.name as location, b.country_code'
                 )
-                ->from($this->db->quoteName("#__itpsc_profiles", "a"))
-                ->leftJoin($this->db->quoteName("#__itpsc_locations", "b") . " ON a.location_id = b.id")
-                ->where("a.id IN ( " . implode(",", $ids) . ")");
+                ->from($this->db->quoteName('#__itpsc_profiles', 'a'))
+                ->leftJoin($this->db->quoteName('#__itpsc_locations', 'b') . ' ON a.location_id = b.id')
+                ->where('a.id IN ( ' . implode(',', $ids) . ')');
 
             $this->db->setQuery($query);
-            $this->profiles = (array)$this->db->loadObjectList("user_id");
+            $this->profiles = (array)$this->db->loadObjectList('user_id');
         }
     }
 
@@ -124,22 +124,22 @@ class SocialCommunity implements ProfilesInterface
      *
      * @return string
      */
-    public function getAvatar($userId, $size = "small", $returnDefault = true)
+    public function getAvatar($userId, $size = 'small', $returnDefault = true)
     {
-        $link = "";
-        if (!isset($this->profiles[$userId])) {
-            $link   = \JUri::root() . "media/com_socialcommunity/images/" . $this->avatarSizes[$size]["default"];
+        $link = '';
+        if (!array_key_exists($userId, $this->profiles)) {
+            $link   = \JUri::root() . 'media/com_socialcommunity/images/' . $this->avatarSizes[$size]['default'];
         } else {
             // Get avatar size.
-            $avatar = (isset($this->avatarSizes[$size])) ? $this->avatarSizes[$size]["image"] : null;
+            $avatar = (array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes[$size]['image'] : null;
 
             if (!$avatar or empty($this->profiles[$userId]->$avatar)) {
                 if ($returnDefault) {
-                    $avatar = (isset($this->avatarSizes[$size])) ? $this->avatarSizes[$size]["default"] : $this->avatarSizes[$size]["default"];
-                    $link   = \JUri::root() . "media/com_socialcommunity/images/" . $avatar;
+                    $avatar = (!array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes['small']['default'] : $this->avatarSizes[$size]['default'];
+                    $link   = \JUri::root() . 'media/com_socialcommunity/images/' . $avatar;
                 }
             } else {
-                $link = \JUri::root() . ltrim($this->path . "/" . $this->profiles[$userId]->$avatar, "/");
+                $link = \JUri::root() . ltrim($this->path . '/' . $this->profiles[$userId]->$avatar, '/');
             }
         }
 
@@ -166,8 +166,8 @@ class SocialCommunity implements ProfilesInterface
      */
     public function getLink($userId, $route = true)
     {
-        $link = "";
-        if (isset($this->profiles[$userId]) and !empty($this->profiles[$userId]->slug)) {
+        $link = '';
+        if (array_key_exists($userId, $this->profiles) and !empty($this->profiles[$userId]->slug)) {
             $link = \SocialCommunityHelperRoute::getProfileRoute($this->profiles[$userId]->slug);
 
             if ($route) {
@@ -197,7 +197,7 @@ class SocialCommunity implements ProfilesInterface
      */
     public function getLocation($userId)
     {
-        if (!isset($this->profiles[$userId])) {
+        if (!array_key_exists($userId, $this->profiles)) {
             return null;
         } else {
             return $this->profiles[$userId]->location;
@@ -222,7 +222,7 @@ class SocialCommunity implements ProfilesInterface
      */
     public function getCountryCode($userId)
     {
-        if (!isset($this->profiles[$userId])) {
+        if (!array_key_exists($userId, $this->profiles)) {
             return null;
         } else {
             return $this->profiles[$userId]->country_code;
