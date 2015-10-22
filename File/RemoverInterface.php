@@ -16,6 +16,8 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package         Prism
  * @subpackage      Files\Interfaces
+ *
+ * @deprecated since v1.10
  */
 interface RemoverInterface
 {

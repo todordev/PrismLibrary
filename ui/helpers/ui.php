@@ -415,6 +415,28 @@ abstract class PrismUI
     }
 
     /**
+     * This method loads serializeJSON.
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('prism.ui.serializeJson');
+     * </code>
+     */
+    public static function serializeJson()
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/jquery.serializejson.min.js');
+
+        self::$loaded[__METHOD__] = true;
+    }
+
+    /**
      * Displays a calendar control field based on Twitter Bootstrap 3
      *
      * @param   string $value      The date value

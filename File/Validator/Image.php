@@ -32,7 +32,7 @@ class Image extends Validator
      * Initialize the object.
      *
      * <code>
-     * $myFile     = '/tmp/myfile.jpg';
+     * $myFile     = '/tmp/myfile.tmp';
      * $fileName   = 'myfile.jpg';
      *
      * $validator = new Prism\File\Validator\Image($myFile, $fileName);
@@ -141,7 +141,7 @@ class Image extends Validator
 
         // Check mime type of the file
         if (!in_array($imageProperties->mime, $this->mimeTypes, true)) {
-            $this->message = \JText::_('LIB_PRISM_ERROR_FILE_TYPE');
+            $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_TYPE', $this->file, $imageProperties->mime);
             return false;
         }
 
@@ -149,7 +149,7 @@ class Image extends Validator
         $ext = \JString::strtolower(\JFile::getExt($this->fileName));
 
         if (!in_array($ext, $this->imageExtensions, true)) {
-            $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_EXTENSIONS', $ext);
+            $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_EXTENSIONS_S', $this->file);
             return false;
         }
 

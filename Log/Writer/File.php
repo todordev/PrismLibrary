@@ -177,11 +177,11 @@ class File implements WriterInterface
      */
     public function store()
     {
-        $logData = '=========================================\n';
-        $logData .= 'Date Time: ' . $this->recordDate . '\n';
-        $logData .= $this->title . ' (' . $this->type . ') \n';
+        $logData = "=========================================\n";
+        $logData .= 'Date Time: ' . $this->recordDate . "\n";
+        $logData .= $this->title . ' (' . $this->type . ") \n";
         if (null !== $this->data) {
-            $logData .= var_export($this->data, true) . '\n';
+            $logData .= var_export($this->data, true) . "\n";
         }
 
         file_put_contents($this->file, stripslashes($logData), FILE_APPEND);

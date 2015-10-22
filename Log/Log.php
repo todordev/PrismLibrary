@@ -285,13 +285,11 @@ class Log
     {
         /** @var $writer WriterInterface */
         foreach ($this->writers as $writer) {
-
             $writer->setTitle($this->getTitle());
             $writer->setType($this->getType());
             $writer->setData($this->getData());
             $writer->setDate($this->getRecordDate());
             $writer ->store();
-
         }
     }
 }

@@ -19,6 +19,8 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package      Prism
  * @subpackage   Files\Uploaders
+ *
+ * @deprecated since v1.10
  */
 class Local implements UploaderInterface
 {

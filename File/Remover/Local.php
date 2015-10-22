@@ -18,6 +18,8 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package      Prism
  * @subpackage   Files\Removers
+ *
+ * @deprecated since v1.10
  */
 class Local implements RemoverInterface
 {

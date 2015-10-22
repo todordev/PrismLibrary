@@ -9,6 +9,8 @@
 
 namespace Prism\Database;
 
+use Joomla\Registry\Registry;
+
 defined('JPATH_PLATFORM') or die;
 
 /**
@@ -30,9 +32,9 @@ abstract class Table implements TableInterface
     /**
      * Object parameters.
      *
-     * @var array
+     * @var Registry
      */
-    protected $params = array();
+    protected $params;
 
     /**
      * Initialize the object.
@@ -42,6 +44,7 @@ abstract class Table implements TableInterface
     public function __construct(\JDatabaseDriver $db = null)
     {
         $this->db = $db;
+        $this->params = new Registry;
     }
 
     abstract public function load($keys, $options = array());
@@ -82,6 +85,12 @@ abstract class Table implements TableInterface
      */
     public function bind($data, $ignored = array())
     {
+        // Parse parameters of the object if they exists.
+        if (array_key_exists('params', $data) and !in_array('params', $ignored, true)) {
+            $this->params = new Registry($data['params']);
+            unset($data['params']);
+        }
+
         foreach ($data as $key => $value) {
             if (!in_array($key, $ignored, true)) {
                 $this->$key = $value;
@@ -150,10 +159,12 @@ abstract class Table implements TableInterface
     {
         $vars = get_object_vars($this);
 
-        foreach ($vars as $key => $value) {
-            if (strcmp('db', $key) === 0) {
-                unset($vars[$key]);
-            }
+        if (array_key_exists('db', $vars)) {
+            unset($vars['db']);
+        }
+
+        if (array_key_exists('params', $vars)) {
+            $vars['params'] = $this->getParams();
         }
 
         return $vars;
@@ -176,11 +187,17 @@ abstract class Table implements TableInterface
     public function reset()
     {
         $parameters = get_object_vars($this);
-        foreach ($parameters as $key) {
-            if (is_string($key) and strcmp('db', $key) === 0) {
-                continue;
-            }
 
+        if (array_key_exists('db', $parameters)) {
+            unset($parameters['db']);
+        }
+
+        if (array_key_exists('params', $parameters)) {
+            unset($parameters['params']);
+            $this->params = new Registry;
+        }
+
+        foreach ($parameters as $key) {
             $this->$key = null;
         }
     }
@@ -201,11 +218,7 @@ abstract class Table implements TableInterface
      */
     public function getParam($index, $default = null)
     {
-        if (array_key_exists($index, $this->params)) {
-            return $this->params[$index];
-        }
-
-        return $default;
+        return $this->params->get($index, $default);
     }
 
     /**
@@ -225,9 +238,25 @@ abstract class Table implements TableInterface
      */
     public function setParam($index, $value = null)
     {
-        $previous             = (!array_key_exists($index, $this->params)) ? null : $this->params[$index];
-        $this->params[$index] = $value;
+        $previous             = $this->params->get($index);
+        $this->params->set($index, $value);
 
         return $previous;
+    }
+
+    /**
+     * Return the parameters of the object.
+     *
+     * <code>
+     * $notification   = new Gamification\Notification(\JFactory::getDbo());
+     *
+     * $params = $notification->getParams();
+     * </code>
+     *
+     * @return  array
+     */
+    public function getParams()
+    {
+        return $this->params->toArray();
     }
 }

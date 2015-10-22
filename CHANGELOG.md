@@ -1,6 +1,9 @@
 Prism Library Release Notes
 ==========================
 
+###v1.9
+* Added [Filesystem] (http://flysystem.thephpleague.com/adapter/phpcr/) library to the package.
+
 ###v1.8
 * Improved code quality.
 * Replaced Prism\Math with Prism\Utilities\MathHelper.
