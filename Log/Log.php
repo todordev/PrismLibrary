@@ -9,6 +9,8 @@
 
 namespace Prism\Log;
 
+use Prism\Log\Adapter\AdapterInterface;
+
 defined('JPATH_PLATFORM') or die;
 
 /**
@@ -24,7 +26,14 @@ class Log
     protected $data;
     protected $recordDate;
 
+    /**
+     * @var array
+     *
+     * @deprecated since v1.10
+     */
     protected $writers = array();
+
+    protected $adapters = array();
 
     /**
      * Initialize the object.
@@ -38,9 +47,9 @@ class Log
      * );
      *
      * $file   = "/logs/com_crowdfunding.log";
-     * $writer = new PrismLogWriterFile($file);
+     * $writer = new Prism\Log\Adapter\File($file);
      *
-     * $log = new PrismLog($title, $type, $data);
+     * $log = new Prism\Log($title, $type, $data);
      * $log->addWriter($writer);
      * $log->store();
      * </code>
@@ -61,13 +70,15 @@ class Log
      *
      * <code>
      * $file   = "/logs/com_crowdfunding.log";
-     * $writer = new PrismLogWriterFile($file);
+     * $writer = new Prism\Log\Adapter\File($file);
      *
-     * $log = new PrismLog();
+     * $log = new Prism\Log();
      * $log->addWriter($writer);
      * </code>
      *
      * @param WriterInterface $writer
+     *
+     * @deprecated since v1.10
      */
     public function addWriter(WriterInterface $writer)
     {
@@ -75,10 +86,28 @@ class Log
     }
 
     /**
+     * Initialize the object.
+     *
+     * <code>
+     * $file   = "/logs/com_crowdfunding.log";
+     * $writer = new Prism\Log\Adapter\File($file);
+     *
+     * $log = new Prism\Log();
+     * $log->addWriter($writer);
+     * </code>
+     *
+     * @param AdapterInterface $adapter
+     */
+    public function addAdapter(AdapterInterface $adapter)
+    {
+        $this->adapters[] = $adapter;
+    }
+
+    /**
      * Get a title that is going to be stored.
      *
      * <code>
-     * $log   = new PrismLog();
+     * $log   = new Prism\Log();
      * $title = $log->getTitle();
      * </code>
      *
@@ -93,7 +122,7 @@ class Log
      * Get a type of the logged information.
      *
      * <code>
-     * $log   = new PrismLog();
+     * $log   = new Prism\Log();
      * $type  = $log->getType();
      * </code>
      *
@@ -108,7 +137,7 @@ class Log
      * Get the data that is going to be logged.
      *
      * <code>
-     * $log   = new PrismLog();
+     * $log   = new Prism\Log();
      * $data  = $log->getData();
      * </code>
      *
@@ -123,7 +152,7 @@ class Log
      * Get the date of the log record.
      *
      * <code>
-     * $log   = new PrismLog();
+     * $log   = new Prism\Log();
      * $date  = $log->getRecordDate();
      * </code>
      *
@@ -140,7 +169,7 @@ class Log
      * <code>
      * $title = "My title...";
      *
-     * $log   = new PrismLog();
+     * $log   = new Prism\Log();
      * $log->setTitle($title);
      * </code>
      *
@@ -161,7 +190,7 @@ class Log
      * <code>
      * $type = "MY_TYPE";
      *
-     * $log   = new PrismLog();
+     * $log   = new Prism\Log();
      * $log->setType($type);
      * </code>
      *
@@ -185,7 +214,7 @@ class Log
      *     "currency" => "USD"
      * );
      *
-     * $log   = new PrismLog();
+     * $log   = new Prism\Log();
      * $log->setData($data);
      * </code>
      *
@@ -210,7 +239,7 @@ class Log
      * <code>
      * $date  = "30-01-2014";
      *
-     * $log   = new PrismLog();
+     * $log   = new Prism\Log();
      * $log->setRecordDate($date);
      * </code>
      *
@@ -237,9 +266,9 @@ class Log
      * );
      *
      * $file   = "/logs/com_crowdfunding.log";
-     * $writer = new PrismLogWriterFile($file);
+     * $writer = new Prism\Log\Adapter\File($file);
      *
-     * $log   = new PrismLog();
+     * $log   = new Prism\Log();
      * $log->addWriter($writer);
      *
      * $log->add($title, $type, $data);
@@ -273,9 +302,9 @@ class Log
      * );
      *
      * $file   = "/logs/com_crowdfunding.log";
-     * $writer = new PrismLogWriterFile($file);
+     * $writer = new Prism\Log\Adapter\File($file);
      *
-     * $log = new PrismLog($title, $type, $data);
+     * $log = new Prism\Log($title, $type, $data);
      * $log->addWriter($writer);
      *
      * $log->store();
@@ -283,13 +312,13 @@ class Log
      */
     public function store()
     {
-        /** @var $writer WriterInterface */
-        foreach ($this->writers as $writer) {
-            $writer->setTitle($this->getTitle());
-            $writer->setType($this->getType());
-            $writer->setData($this->getData());
-            $writer->setDate($this->getRecordDate());
-            $writer ->store();
+        /** @var $adapter AdapterInterface */
+        foreach ($this->adapters as $adapter) {
+            $adapter->setTitle($this->getTitle());
+            $adapter->setType($this->getType());
+            $adapter->setData($this->getData());
+            $adapter->setDate($this->getRecordDate());
+            $adapter ->store();
         }
     }
 }

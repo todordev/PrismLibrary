@@ -18,6 +18,8 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package         Prism
  * @subpackage      Logs\Writers
+ *
+ * @deprecated since v1.10
  */
 class Database implements WriterInterface
 {

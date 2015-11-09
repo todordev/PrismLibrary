@@ -22,6 +22,8 @@ jimport('joomla.filesystem.file');
  *
  * @package         Prism
  * @subpackage      Logs\Writers
+ *
+ * @deprecated since v1.10
  */
 class File implements WriterInterface
 {

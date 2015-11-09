@@ -22,6 +22,7 @@
         <folder>File</folder>
         <folder>Integration</folder>
         <folder>language</folder>
+        <folder>libs</folder>
         <folder>Log</folder>
         <folder>Payment</folder>
         <folder>Response</folder>

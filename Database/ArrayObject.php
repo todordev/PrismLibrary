@@ -221,7 +221,11 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
         $keys = array();
 
         foreach ($this->items as $item) {
-            $keys[] = array_key_exists($columnName, $item) ? (int)$item[$columnName] : null;
+            if (is_array($item)) {
+                $keys[] = array_key_exists($columnName, $item) ? $item[$columnName] : null;
+            } elseif (is_object($item)) {
+                $keys[] = isset($item->$columnName) ? $item->$columnName : null;
+            }
         }
 
         return $keys;

@@ -484,7 +484,7 @@ abstract class PrismUI
         // Only display the triggers once for each control.
         if (!in_array($id, $done, true)) {
 
-            $calendarDateFormat = CrowdfundingHelper::getDateFormat(true);
+            $calendarDateFormat = Prism\Utilities\DateHelper::formatCalendarDate($format);
 
             $document = JFactory::getDocument();
             $document
@@ -530,7 +530,7 @@ abstract class PrismUI
         $layoutData = new stdClass();
         $layoutData->selector = $selector;
 
-        if (array_key_exists($sig, static::$loaded[__METHOD__])) {
+        if (!isset(static::$loaded[__METHOD__][$sig])) {
             // Setup options object
             $opt['active'] = (!empty($params['active'])) ? (string)$params['active'] : '';
 
@@ -555,7 +555,7 @@ abstract class PrismUI
      *
      * @since   3.1
      */
-    public static function bootstrap3endTabSet()
+    public static function bootstrap3EndTabSet()
     {
         return '</div>';
     }
@@ -571,7 +571,7 @@ abstract class PrismUI
      *
      * @since   3.1
      */
-    public static function bootstrap3addTab($selector, $id, $title)
+    public static function bootstrap3AddTab($selector, $id, $title)
     {
         static $tabScriptLayout = null;
         static $tabLayout = null;
@@ -602,7 +602,7 @@ abstract class PrismUI
      *
      * @since   3.1
      */
-    public static function bootstrap3endTab()
+    public static function bootstrap3EndTab()
     {
         return '</div>';
     }
