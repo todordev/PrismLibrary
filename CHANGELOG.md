@@ -3,6 +3,10 @@ Prism Library Release Notes
 
 ###v1.9
 * Added [Filesystem] (http://flysystem.thephpleague.com/adapter/phpcr/) library to the package.
+* Added [GuzzleHttp] (https://github.com/guzzle/guzzle) library.
+* Added [OAuth2 Client] (http://thephpleague.com/oauth2-client/) library.
+* Upgraded [WePay] (https://github.com/wepay/php-sdk) and [Stripe] (https://github.com/stripe/stripe-php) libraries.
+* Moved Mollie, Stripe, WePay, Coinbase and Blockchain folders from Payment to libs.
 
 ###v1.8
 * Improved code quality.
