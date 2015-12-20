@@ -20,7 +20,7 @@ defined('JPATH_PLATFORM') or die;
  * @package         Prism
  * @subpackage      Database\Tables
  */
-abstract class TableImmutable implements TableInterface
+abstract class TableImmutable
 {
     /**
      * Database driver.
@@ -37,6 +37,13 @@ abstract class TableImmutable implements TableInterface
     protected $params;
 
     /**
+     * Flag that show us if the current object has been initialized by the method bind().
+     *
+     * @var bool
+     */
+    protected $bound = false;
+
+    /**
      * Initialize the object.
      *
      * @param \JDatabaseDriver $db
@@ -47,27 +54,7 @@ abstract class TableImmutable implements TableInterface
         $this->params = new Registry;
     }
 
-    abstract public function load($keys, $options = array());
-    
-    final public function store()
-    {
-        throw new \Exception(\JText::sprintf('LIB_PRISM_ERROR_IMMUTABLE_OBJECT_STORE', get_class($this)));
-    }
-
-    /**
-     * Set database object.
-     *
-     * <code>
-     * $notification   = new Gamification\Notification();
-     * $notification->setDb(\JFactory::getDbo());
-     * </code>
-     *
-     * @param \JDatabaseDriver $db
-     */
-    public function setDb(\JDatabaseDriver $db)
-    {
-        $this->db = $db;
-    }
+    abstract public function load($keys, array $options = array());
 
     /**
      * Set notification data to object parameters.
@@ -86,19 +73,37 @@ abstract class TableImmutable implements TableInterface
      *
      * @param array $data
      * @param array $ignored
+     *
+     * @return self
      */
-    public function bind($data, $ignored = array())
+    public function bind($data, array $ignored = array())
     {
-        // Parse parameters of the object if they exists.
-        if (array_key_exists('params', $data) and !in_array('params', $ignored, true)) {
-            $this->params = new Registry($data['params']);
-            unset($data['params']);
-        }
+        if (!$this->bound) {
 
-        foreach ($data as $key => $value) {
-            if (!in_array($key, $ignored, true)) {
-                $this->$key = $value;
+            // Parse parameters of the object if they exists.
+            if (array_key_exists('params', $data) and !in_array('params', $ignored, true)) {
+                $this->params = new Registry($data['params']);
+                unset($data['params']);
             }
+
+            foreach ($data as $key => $value) {
+                if (!in_array($key, $ignored, true)) {
+                    $this->$key = $value;
+                }
+            }
+
+            $this->bound = true;
+
+            return $this;
+
+        } else { // Create new object if it is already bound.
+
+            $newObject = new $this($this->db);
+            /** @var $newObject ValueObject */
+
+            $newObject->bind($data, $ignored);
+
+            return $newObject;
         }
     }
 
@@ -123,29 +128,6 @@ abstract class TableImmutable implements TableInterface
         }
 
         return $default;
-    }
-
-    /**
-     * Modifies a property of the object, creating it if it does not already exist.
-     *
-     * <code>
-     * $notification   = new Gamification\Notification(\JFactory::getDbo());
-     *
-     * $notification->set("user_id", 1);
-     * $notification->set("note", "....");
-     * </code>
-     *
-     * @param   string $property The name of the property.
-     * @param   mixed  $value    The value of the property to set.
-     *
-     * @return  mixed  Previous value of the property.
-     */
-    public function set($property, $value = null)
-    {
-        $previous        = isset($this->$property) ? $this->$property : null;
-        $this->$property = $value;
-
-        return $previous;
     }
 
     /**
@@ -175,38 +157,6 @@ abstract class TableImmutable implements TableInterface
     }
 
     /**
-     * Reset the properties of the object.
-     *
-     * <code>
-     * $notificationId = 1;
-     *
-     * $notification   = new Gamification\Notification(\JFactory::getDbo());
-     * $notification->load($notificationId);
-     *
-     * if (...) {
-     *    $notification->reset();
-     * }
-     * </code>
-     */
-    public function reset()
-    {
-        $parameters = get_object_vars($this);
-
-        if (array_key_exists('db', $parameters)) {
-            unset($parameters['db']);
-        }
-
-        if (array_key_exists('params', $parameters)) {
-            unset($parameters['params']);
-            $this->params = new Registry;
-        }
-
-        foreach ($parameters as $key) {
-            $this->$key = null;
-        }
-    }
-
-    /**
      * Returns a parameter of the object or the default value if the parameter is not set.
      *
      * <code>
@@ -223,29 +173,6 @@ abstract class TableImmutable implements TableInterface
     public function getParam($index, $default = null)
     {
         return $this->params->get($index, $default);
-    }
-
-    /**
-     * Modifies a parameter of the object, creating it if it does not already exist.
-     *
-     * <code>
-     * $notification   = new Gamification\Notification(\JFactory::getDbo());
-     *
-     * $notification->set("user_id", 1);
-     * $notification->set("note", "....");
-     * </code>
-     *
-     * @param   string $index    The name of the parameter.
-     * @param   mixed  $value    The value of the parameter to set.
-     *
-     * @return  mixed  Previous value of the parameter.
-     */
-    public function setParam($index, $value = null)
-    {
-        $previous             = $this->params->get($index);
-        $this->params->set($index, $value);
-
-        return $previous;
     }
 
     /**

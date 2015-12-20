@@ -1,7 +1,7 @@
 <?php
 /**
  * @package         Prism
- * @subpackage      Database\Arrays
+ * @subpackage      Database\Objects
  * @author          Todor Iliev
  * @copyright       Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
@@ -16,7 +16,7 @@ defined('JPATH_PLATFORM') or die;
  * The data has to be loaded from database.
  *
  * @package         Prism
- * @subpackage      Database\Arrays
+ * @subpackage      Database\Objects
  */
 abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
 {
@@ -41,7 +41,7 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
         $this->db   = $db;
     }
 
-    abstract public function load($options = array());
+    abstract public function load(array $options = array());
 
     /**
      * Set a database object.

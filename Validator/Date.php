@@ -62,7 +62,12 @@ class Date implements ValidatorInterface
     {
         $string = \JString::trim($this->date);
         if (is_numeric($string)) {
-            $string = "@".$string;
+            $string = (int)$string;
+            if ($string === 0) {
+                return false;
+            }
+
+            $string = '@'.$string;
         }
 
         try {

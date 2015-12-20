@@ -20,9 +20,10 @@ defined('JPATH_PLATFORM') or die;
 class Constants
 {
     // States
-    const PUBLISHED   = 1;
-    const UNPUBLISHED = 0;
-    const TRASHED     = -2;
+    const PUBLISHED          = 1;
+    const UNPUBLISHED        = 0;
+    const TRASHED            = -2;
+    const AWAITING_APPROVAL  = -3;
 
     const APPROVED     = 1;
     const NOT_APPROVED = 0;

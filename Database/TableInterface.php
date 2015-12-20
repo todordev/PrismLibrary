@@ -17,6 +17,8 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package         Prism
  * @subpackage      Database\Interfaces
+ *
+ * @deprecated since v1.15
  */
 interface TableInterface
 {
