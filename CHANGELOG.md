@@ -7,7 +7,7 @@ Prism Library Release Notes
 * Added [OAuth2 Client] (http://thephpleague.com/oauth2-client/) library.
 * Upgraded [WePay] (https://github.com/wepay/php-sdk) and [Stripe] (https://github.com/stripe/stripe-php) libraries.
 * Moved Mollie, Stripe, WePay, Coinbase and Blockchain folders from Payment to libs.
-* Upgraded Cropper.
+* Added Collection class that will replace Prism\Database\ArrayObject.
 
 ###v1.8
 * Improved code quality.

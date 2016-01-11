@@ -38,7 +38,7 @@ class Version
      *
      * @var integer
      */
-    public $devLevel = '8';
+    public $devLevel = '9';
 
     /**
      * Release Type
@@ -59,7 +59,7 @@ class Version
      *
      * @var string
      */
-    public $releaseDate = '31 October, 2015';
+    public $releaseDate = '31 January, 2016';
 
     /**
      * License
@@ -73,7 +73,7 @@ class Version
      *
      * @var string
      */
-    public $copyright = '&copy; 2015 Prism. All rights reserved.';
+    public $copyright = '&copy; 2016 Prism. All rights reserved.';
 
     /**
      * URL

@@ -17,10 +17,8 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package         Prism
  * @subpackage      Database\Objects
- *
- * @deprecated v1.15
  */
-abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
+abstract class Collection implements \Iterator, \Countable, \ArrayAccess
 {
     protected $items = array();
 
@@ -49,7 +47,7 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
      * Set a database object.
      *
      * <code>
-     * $object    = new Prism\Database\ArrayObject;
+     * $object    = new Prism\Database\Collection;
      *
      * $object->setDb(\JFactory::getDbo());
      * </code>

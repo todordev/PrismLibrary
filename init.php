@@ -23,9 +23,9 @@ JLoader::registerNamespace('League', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('Psr', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('GuzzleHttp', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('JmesPath', PRISM_PATH_LIBRARY . '/libs');
-JLoader::registerNamespace('OAuth2', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('RandomLib', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('SecurityLib', PRISM_PATH_LIBRARY . '/libs');
+JLoader::registerNamespace('AdamPaterson', PRISM_PATH_LIBRARY . '/libs');
 
 // Register some helpers.
 JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
