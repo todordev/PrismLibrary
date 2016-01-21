@@ -43,6 +43,9 @@ class Constants
     const DISPLAY          = 1;
     const DO_NOT_DISPLAY   = 0;
 
+    const INACTIVE = 0;
+    const ACTIVE = 1;
+
     // Mail modes - html and plain text.
     const MAIL_MODE_HTML  = true;
     const MAIL_MODE_PLAIN = false;
@@ -71,4 +74,12 @@ class Constants
     // State replace
     const REPLACE = 1;
     const DO_NOT_REPLACE = 0;
+
+    // Access state
+    const ACCESS_PRIVATE = 0;
+    const ACCESS_PUBLIC = 1;
+    const ACCESS_FOLLOWERS = 2;
+    const ACCESS_FRIENDS = 3;
+    const ACCESS_FOLLOWERS_FRIENDS = 5;
+
 }

@@ -26,6 +26,29 @@ abstract class PrismUI
     protected static $loaded = array();
 
     /**
+     * Include jQuery plugin is-loading
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('Prism.ui.isLoading');
+     * </code>
+     */
+    public static function isLoading()
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/jquery.isloading.min.js');
+
+        self::$loaded[__METHOD__] = true;
+    }
+
+    /**
      * Include backend styles.
      *
      * <code>
