@@ -43,7 +43,8 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/jquery.isloading.min.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/isloading/jquery.isloading.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/isloading/isloading.css');
 
         self::$loaded[__METHOD__] = true;
     }
