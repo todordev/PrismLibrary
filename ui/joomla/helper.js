@@ -1,30 +1,75 @@
 var PrismUIHelper = {
 		
-	displayMessageSuccess: function(title, text) {
-		
+	displayMessageSuccess: function(title, text, styling, icon) {
+
+        if (!icon) {
+            icon = 'fa fa-check-circle'; // icon-ok, glyphicon glyphicon-ok-sign
+        }
+
+        if (!styling) {
+            styling = 'bootstrap3'; // brighttheme, jqueryui, fontawesome
+        }
+
 	    new PNotify({
 	        title: title,
 	        text: text,
-	        icon: "icon-ok",
-	        type: "success"
+	        icon: icon,
+	        type: "success",
+            styling: styling
         });
 	},
-	displayMessageFailure: function(title, text) {
+	displayMessageFailure: function(title, text, styling, icon) {
+
+        if (!icon) {
+            icon = 'fa fa-exclamation-circle'; // icon-warning-sign, glyphicon glyphicon-warning-sign
+        }
+
+        if (!styling) {
+            styling = 'bootstrap3'; // brighttheme, jqueryui, fontawesome
+        }
 
         new PNotify({
 	        title: title,
 	        text: text,
-	        icon: 'icon-warning-sign',
-	        type: "error"
+	        icon: icon,
+	        type: "error",
+            styling: styling
         });
 	},
-	displayMessageInfo: function(title, text) {
+	displayMessageWarning: function(title, text, styling, icon) {
+
+        if (!icon) {
+            icon = 'fa fa-exclamation-circle'; // icon-warning-sign, glyphicon glyphicon-warning-sign
+        }
+
+        if (!styling) {
+            styling = 'bootstrap3'; // brighttheme, jqueryui, fontawesome
+        }
+
+		new PNotify({
+			title: title,
+			text: text,
+			icon: icon,
+			type: "warning",
+            styling: styling
+		});
+	},
+	displayMessageInfo: function(title, text, styling, icon) {
+
+        if (!icon) {
+            icon = 'fa fa-info-circle'; // icon-info, glyphicon glyphicon-info-sign
+        }
+
+        if (!styling) {
+            styling = 'bootstrap3'; // brighttheme, jqueryui, fontawesome
+        }
 
         new PNotify({
 	        title: title,
 	        text: text,
-	        icon: 'icon-info',
-	        type: "info"
+	        icon: icon,
+	        type: "info",
+            styling: styling
         });
 		
 	},

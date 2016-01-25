@@ -12,6 +12,8 @@ Prism Library Release Notes
 * Upgraded [Bootstrap FileInput] (http://plugins.krajee.com/file-input) to v4.2.9.
 * Upgraded [Bootstrap MaxLength] (https://github.com/mimo84/bootstrap-maxlength) to v1.7.0.
 * Added the library [Defuse\Crypto\Crypto] (https://github.com/defuse/php-encryption).
+* Upgraded [pNotify] (https://sciactive.github.io/pnotify/) to v3.0.0.
+* Improved JavaScript PrismUIHelper. Added options for icon and styling to the methods that display pNotify messages.
 
 ###v1.8
 * Improved code quality.
