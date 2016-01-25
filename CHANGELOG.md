@@ -8,7 +8,10 @@ Prism Library Release Notes
 * Upgraded [WePay] (https://github.com/wepay/php-sdk) and [Stripe] (https://github.com/stripe/stripe-php) libraries.
 * Moved Mollie, Stripe, WePay, Coinbase and Blockchain folders from Payment to libs.
 * Added Collection class that will replace Prism\Database\ArrayObject.
-* Upgraded Cropper to v2.2.5.
+* Upgraded [Cropper] (http://fengyuanchen.github.io/cropper/) to v2.2.5.
+* Upgraded [Bootstrap FileInput] (http://plugins.krajee.com/file-input) to v4.2.9.
+* Upgraded [Bootstrap MaxLength] (https://github.com/mimo84/bootstrap-maxlength) to v1.7.0.
+* Added the library [Defuse\Crypto\Crypto] (https://github.com/defuse/php-encryption).
 
 ###v1.8
 * Improved code quality.

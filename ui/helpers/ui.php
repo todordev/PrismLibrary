@@ -195,7 +195,7 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap-maxlength.min.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap-maxlength.js');
 
         self::$loaded[__METHOD__] = true;
     }

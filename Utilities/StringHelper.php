@@ -194,4 +194,27 @@ class StringHelper
 
         return $result;
     }
+
+    /**
+     * Convert a string to new one that can be used in the URL.
+     *
+     * <code>
+     * $name = 'John Dow';
+     *
+     * // Converted to 'john-dow'.
+     * $alias = Prism\Utilities\StringHelper::stringUrlSafe($name);
+     * </code>
+     *
+     * @param string $string
+     *
+     * @return string
+     */
+    public static function stringUrlSafe($string)
+    {
+        if ((int)\JFactory::getConfig()->get('unicodeslugs') === 1) {
+            return \JFilterOutput::stringURLUnicodeSlug($string);
+        } else {
+            return \JFilterOutput::stringURLSafe($string);
+        }
+    }
 }

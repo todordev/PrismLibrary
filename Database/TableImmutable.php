@@ -99,7 +99,7 @@ abstract class TableImmutable
         } else { // Create new object if it is already bound.
 
             $newObject = new $this($this->db);
-            /** @var $newObject ValueObject */
+            /** @var $newObject TableImmutable */
 
             $newObject->bind($data, $ignored);
 

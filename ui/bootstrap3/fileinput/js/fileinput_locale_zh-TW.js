@@ -15,7 +15,7 @@
     $.fn.fileinputLocales['zh-TW'] = {
         fileSingle: '單一檔案',
         filePlural: '複選檔案',
-        browseLabel: '預覽 &hellip;',
+        browseLabel: '瀏覽 &hellip;',
         removeLabel: '移除',
         removeTitle: '清除選取檔案',
         cancelLabel: '取消',
@@ -47,9 +47,6 @@
         msgImageResizeError: '無法獲取的圖像尺寸調整。',
         msgImageResizeException: '錯誤而調整圖像大小。<pre>{errors}</pre>',
         dropZoneTitle: '拖曳檔案至此 &hellip;',
-        slugCallback: function(text) {
-            return text ? text.split(/(\\|\/)/g).pop().replace(/[^\w\u4e00-\u9fa5\-.\\\/ ]+/g, '') : '';
-        },
         fileActionSettings: {
             removeTitle: '刪除檔案',
             uploadTitle: '上傳檔案',

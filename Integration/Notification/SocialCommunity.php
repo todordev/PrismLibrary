@@ -9,7 +9,7 @@
 
 namespace Prism\Integration\Notification;
 
-use SocialCommunity\Notification;
+use SocialCommunity\Notification\Notification;
 
 defined('JPATH_PLATFORM') or die;
 

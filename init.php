@@ -17,8 +17,9 @@ jimport('joomla.filesystem.file');
 jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.path');
 
-JLoader::registerNamespace('Prism', JPATH_LIBRARIES);
 JLoader::registerNamespace('Aws', PRISM_PATH_LIBRARY . '/libs');
+JLoader::registerNamespace('Defuse', PRISM_PATH_LIBRARY . '/libs');
+JLoader::registerNamespace('Prism', JPATH_LIBRARIES);
 JLoader::registerNamespace('League', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('Psr', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('GuzzleHttp', PRISM_PATH_LIBRARY . '/libs');

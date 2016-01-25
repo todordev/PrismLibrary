@@ -9,7 +9,7 @@
 
 namespace Prism\Integration\Activity;
 
-use SocialCommunity\Activity;
+use SocialCommunity\Activity\Activity;
 
 defined('JPATH_PLATFORM') or die;
 

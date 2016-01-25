@@ -14,7 +14,7 @@ use Joomla\Utilities\ArrayHelper;
 
 defined('JPATH_PLATFORM') or die;
 
-jimport('SocialCommunity.init');
+jimport('Socialcommunity.init');
 
 /**
  * This class provides functionality used for integrating
