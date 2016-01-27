@@ -128,8 +128,7 @@ final class Helper
                 break;
 
             default:
-                $domain    = (\JFactory::getApplication()->isAdmin()) ? \JUri::root() : '';
-                $uriImages = $domain . $this->params->get('local_media_folder', 'images');
+                $uriImages = \JUri::root() . $this->params->get('local_media_folder', 'images');
                 break;
         }
 
