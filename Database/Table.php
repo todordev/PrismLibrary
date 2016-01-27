@@ -197,7 +197,7 @@ abstract class Table
             $this->params = new Registry;
         }
 
-        foreach ($parameters as $key) {
+        foreach ($parameters as $key => $value) {
             $this->$key = null;
         }
     }

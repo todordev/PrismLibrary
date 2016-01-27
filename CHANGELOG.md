@@ -14,6 +14,7 @@ Prism Library Release Notes
 * Added the library [Defuse\Crypto\Crypto] (https://github.com/defuse/php-encryption).
 * Upgraded [pNotify] (https://sciactive.github.io/pnotify/) to v3.0.0.
 * Improved JavaScript PrismUIHelper. Added options for icon and styling to the methods that display pNotify messages.
+* Added [Carbon] (http://carbon.nesbot.com/) library.
 
 ###v1.8
 * Improved code quality.

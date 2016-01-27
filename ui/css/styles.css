@@ -29,6 +29,24 @@
     background-color: #e6e6fa;
 }
 
+/* Text Color */
+
+.gray-light1 {
+	color: #e6e6e6;
+}
+
+.gray-light2 {
+	color: #dcdcdc;
+}
+
+.gray-light3 {
+	color: #d2d2d2;
+}
+
+.gray-light4 {
+	color: #c8c8c8;
+}
+
 /* Width */
 .width-600px{
 	width: 600px !important;
