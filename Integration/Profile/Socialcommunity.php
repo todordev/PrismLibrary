@@ -162,7 +162,7 @@ class Socialcommunity extends ProfileAbstract
                 $link = \JUri::root() . 'media/com_socialcommunity/images/no_profile_200x200.png';
             }
         } else {
-            $link = $this->mediaUrl . '/' . $this->$avatar;
+            $link = $this->mediaUrl . '/user' .$this->user_id. '/' . $this->$avatar;
         }
 
         return $link;

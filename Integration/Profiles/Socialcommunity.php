@@ -23,7 +23,7 @@ jimport('Socialcommunity.init');
  * @package      Prism
  * @subpackage   Integrations\Profiles
  */
-class Socialcommunity implements ProfilesInterface
+class Socialcommunity extends ProfilesAbstract
 {
     protected $profiles = array();
 
@@ -55,29 +55,32 @@ class Socialcommunity implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      *
      * $profiles = new Prism\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
-     * $profiles->load($ids);
+     * $profiles->load(array('ids' => $ids));
      * </code>
      *
-     * @param array $ids
+     * @param array $options
      */
-    public function load(array $ids)
+    public function load(array $options = array())
     {
-        if (count($ids) > 0) {
+        $userIds = (array_key_exists('user_ids', $options)) ? $options['user_ids'] : array();
+
+        if (count($userIds) > 0) {
 
             // Create a new query object.
             $query = $this->db->getQuery(true);
             $query
                 ->select(
-                    'a.id AS user_id, a.image_icon, a.image_small, a.image_square, a.image, ' .
+                    'a.id, a.user_id, a.image_icon, a.image_small, a.image_square, a.image, ' .
                     $query->concatenate(array('a.id', 'a.alias'), ':') . ' AS slug, ' .
                     'b.name as location, b.country_code'
                 )
                 ->from($this->db->quoteName('#__itpsc_profiles', 'a'))
                 ->leftJoin($this->db->quoteName('#__itpsc_locations', 'b') . ' ON a.location_id = b.id')
-                ->where('a.id IN ( ' . implode(',', $ids) . ')');
+                ->where('a.user_id IN ( ' . implode(',', $userIds) . ')');
 
             $this->db->setQuery($query);
             $this->profiles = (array)$this->db->loadObjectList('user_id');
+
         }
     }
 
@@ -115,7 +118,7 @@ class Socialcommunity implements ProfilesInterface
                     $link   = \JUri::root() . 'media/com_socialcommunity/images/' . $avatar;
                 }
             } else {
-                $link = $this->mediaUrl . '/' . $this->profiles[$userId]->$avatar;
+                $link = $this->mediaUrl . '/user'.$userId.'/' . $this->profiles[$userId]->$avatar;
             }
         }
 

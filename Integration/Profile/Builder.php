@@ -80,7 +80,7 @@ class Builder
                 $url   = $filesystemHelper->getMediaFolderUri();
 
                 $profile = new Socialcommunity(\JFactory::getDbo());
-                $profile->load($userId);
+                $profile->load(array('user_id' => $userId));
                 $profile->setMediaUrl($url);
 
                 break;
