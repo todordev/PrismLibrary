@@ -9,11 +9,11 @@
 
 namespace Prism\Integration\Notification;
 
-use SocialCommunity\Notification\Notification;
+use Socialcommunity\Notification\Notification;
 
 defined('JPATH_PLATFORM') or die;
 
-jimport('SocialCommunity.init');
+jimport('Socialcommunity.init');
 
 /**
  * This class provides functionality to
@@ -22,7 +22,7 @@ jimport('SocialCommunity.init');
  * @package      Prism
  * @subpackage   Integrations\Notifications
  */
-class SocialCommunity implements NotificationInterface
+class Socialcommunity implements NotificationInterface
 {
     protected $id;
     protected $content;
@@ -40,7 +40,7 @@ class SocialCommunity implements NotificationInterface
      * $userId = 1;
      * $content = "....";
      *
-     * $notification = new Prism\Integration\Notification\SocialCommunity($userId, $content);
+     * $notification = new Prism\Integration\Notification\Socialcommunity($userId, $content);
      * </code>
      *
      * @param  integer $userId User ID
@@ -62,7 +62,7 @@ class SocialCommunity implements NotificationInterface
      * ....
      * );
      *
-     * $notification = new Prism\Integration\Notification\SocialCommunity();
+     * $notification = new Prism\Integration\Notification\Socialcommunity();
      * $notification->bind($data);
      * </code>
      *
@@ -87,7 +87,7 @@ class SocialCommunity implements NotificationInterface
      * $userId = 1;
      * $content = "....";
      *
-     * $notification = new Prism\Integration\Notification\SocialCommunity($userId, $content);
+     * $notification = new Prism\Integration\Notification\Socialcommunity($userId, $content);
      * $notification->send();
      * </code>
      *
@@ -122,7 +122,7 @@ class SocialCommunity implements NotificationInterface
      * $userId = 1;
      * $content = "....";
      *
-     * $notification = new Prism\Integration\Notification\SocialCommunity($userId, $content);
+     * $notification = new Prism\Integration\Notification\Socialcommunity($userId, $content);
      * $notification->setDb(JFactory::getDbo());
      * $notification->send();
      *
@@ -142,7 +142,7 @@ class SocialCommunity implements NotificationInterface
      * Return the content of the notification.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\SocialCommunity();
+     * $notification = new Prism\Integration\Notification\Socialcommunity();
      * $content = $notification->getContent();
      * </code>
      *
@@ -157,7 +157,7 @@ class SocialCommunity implements NotificationInterface
      * Return an image that is part of the notification.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\SocialCommunity();
+     * $notification = new Prism\Integration\Notification\Socialcommunity();
      * $image        = $notification->getImage();
      * </code>
      *
@@ -172,7 +172,7 @@ class SocialCommunity implements NotificationInterface
      * Return an URL which is part of the notification.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\SocialCommunity();
+     * $notification = new Prism\Integration\Notification\Socialcommunity();
      * $url          = $notification->getUrl();
      * </code>
      *
@@ -187,7 +187,7 @@ class SocialCommunity implements NotificationInterface
      * Return a date where the notification has been created.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\SocialCommunity();
+     * $notification = new Prism\Integration\Notification\Socialcommunity();
      * $date = $notification->getCreated();
      * </code>
      *
@@ -202,7 +202,7 @@ class SocialCommunity implements NotificationInterface
      * Return the status of the notification.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\SocialCommunity();
+     * $notification = new Prism\Integration\Notification\Socialcommunity();
      * $status = $notification->getStatus();
      * </code>
      *
@@ -217,7 +217,7 @@ class SocialCommunity implements NotificationInterface
      * Return the ID of the user receiver.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\SocialCommunity();
+     * $notification = new Prism\Integration\Notification\Socialcommunity();
      * $userId       = $notification->getUserId();
      * </code>
      *
@@ -234,7 +234,7 @@ class SocialCommunity implements NotificationInterface
      * <code>
      * $id = 1;
      *
-     * $notification = new Prism\Integration\Notification\SocialCommunity();
+     * $notification = new Prism\Integration\Notification\Socialcommunity();
      * $notification->setId($id);
      * </code>
      *
@@ -255,7 +255,7 @@ class SocialCommunity implements NotificationInterface
      * <code>
      * $content = "...";
      *
-     * $notification = new Prism\Integration\Notification\SocialCommunity();
+     * $notification = new Prism\Integration\Notification\Socialcommunity();
      * $notification->setContent($content);
      * </code>
      *
@@ -276,7 +276,7 @@ class SocialCommunity implements NotificationInterface
      * <code>
      * $image = "...";
      *
-     * $notification = new Prism\Integration\Notification\SocialCommunity();
+     * $notification = new Prism\Integration\Notification\Socialcommunity();
      * $notification->setImage($image);
      * </code>
      *
@@ -297,7 +297,7 @@ class SocialCommunity implements NotificationInterface
      * <code>
      * $url = "...";
      *
-     * $notification = new Prism\Integration\Notification\SocialCommunity();
+     * $notification = new Prism\Integration\Notification\Socialcommunity();
      * $notification->setUrl($url);
      * </code>
      *
@@ -318,7 +318,7 @@ class SocialCommunity implements NotificationInterface
      * <code>
      * $created = "2014-01-01";
      *
-     * $notification = new Prism\Integration\Notification\SocialCommunity();
+     * $notification = new Prism\Integration\Notification\Socialcommunity();
      * $notification->setCreated($created);
      * </code>
      *
@@ -339,7 +339,7 @@ class SocialCommunity implements NotificationInterface
      * <code>
      * $status = 1;
      *
-     * $notification = new Prism\Integration\Notification\SocialCommunity();
+     * $notification = new Prism\Integration\Notification\Socialcommunity();
      * $notification->setStatus($status);
      * </code>
      *
@@ -360,7 +360,7 @@ class SocialCommunity implements NotificationInterface
      * <code>
      * $userId = 1;
      *
-     * $notification = new Prism\Integration\Notification\SocialCommunity();
+     * $notification = new Prism\Integration\Notification\Socialcommunity();
      * $notification->setUserId($userId);
      * </code>
      *

@@ -9,11 +9,11 @@
 
 namespace Prism\Integration\Activity;
 
-use SocialCommunity\Activity\Activity;
+use Socialcommunity\Activity\Activity;
 
 defined('JPATH_PLATFORM') or die;
 
-jimport('SocialCommunity.init');
+jimport('Socialcommunity.init');
 
 /**
  * This class provides functionality to
@@ -22,7 +22,7 @@ jimport('SocialCommunity.init');
  * @package      Prism
  * @subpackage   Integrations\Activities
  */
-class SocialCommunity implements ActivityInterface
+class Socialcommunity implements ActivityInterface
 {
     protected $id;
     protected $content;
@@ -40,7 +40,7 @@ class SocialCommunity implements ActivityInterface
      * $userId = 1;
      * $content = "...";
      *
-     * $activity = new Prism\Integration\Activity\SocialCommunity($userId, $content);
+     * $activity = new Prism\Integration\Activity\Socialcommunity($userId, $content);
      * </code>
      *
      * @param  integer $userId User ID
@@ -61,7 +61,7 @@ class SocialCommunity implements ActivityInterface
      *     "content" => "...",
      * );
      *
-     * $activity = new Prism\Integration\Activity\SocialCommunity();
+     * $activity = new Prism\Integration\Activity\Socialcommunity();
      * $activity->bind($data);
      * </code>
      *
@@ -86,7 +86,7 @@ class SocialCommunity implements ActivityInterface
      * $userId = 1;
      * $content = "...";
      *
-     * $activity = new Prism\Integration\Activity\SocialCommunity($userId, $content);
+     * $activity = new Prism\Integration\Activity\Socialcommunity($userId, $content);
      * $activity->setDb(JFactory::getDbo());
      * $activity->store();
      * </code>
@@ -113,7 +113,7 @@ class SocialCommunity implements ActivityInterface
      * Return an item ID.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\SocialCommunity();
+     * $activity = new Prism\Integration\Activity\Socialcommunity();
      * $id = $activity->getId();
      * </code>
      *
@@ -128,7 +128,7 @@ class SocialCommunity implements ActivityInterface
      * Return the content of the activity.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\SocialCommunity();
+     * $activity = new Prism\Integration\Activity\Socialcommunity();
      * $content = $activity->getContent();
      * </code>
      *
@@ -143,7 +143,7 @@ class SocialCommunity implements ActivityInterface
      * Return an image.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\SocialCommunity();
+     * $activity = new Prism\Integration\Activity\Socialcommunity();
      * $image = $activity->getImage();
      * </code>
      *
@@ -158,7 +158,7 @@ class SocialCommunity implements ActivityInterface
      * Return a URL that is part from activity.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\SocialCommunity();
+     * $activity = new Prism\Integration\Activity\Socialcommunity();
      * $url = $activity->getUrl();
      * </code>
      *
@@ -173,7 +173,7 @@ class SocialCommunity implements ActivityInterface
      * Return a date when the activity has been created.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\SocialCommunity();
+     * $activity = new Prism\Integration\Activity\Socialcommunity();
      * $created = $activity->getCreated();
      * </code>
      *
@@ -188,7 +188,7 @@ class SocialCommunity implements ActivityInterface
      * Return a user ID.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\SocialCommunity();
+     * $activity = new Prism\Integration\Activity\Socialcommunity();
      * $userId = $activity->getUserId();
      * </code>
      *
@@ -205,7 +205,7 @@ class SocialCommunity implements ActivityInterface
      * <code>
      * $id = 1;
      *
-     * $activity = new Prism\Integration\Activity\SocialCommunity();
+     * $activity = new Prism\Integration\Activity\Socialcommunity();
      * $activity->setId($id);
      * </code>
      *
@@ -226,7 +226,7 @@ class SocialCommunity implements ActivityInterface
      * <code>
      * $content = "...";
      *
-     * $activity = new Prism\Integration\Activity\SocialCommunity();
+     * $activity = new Prism\Integration\Activity\Socialcommunity();
      * $activity->setContent($id);
      * </code>
      *
@@ -247,7 +247,7 @@ class SocialCommunity implements ActivityInterface
      * <code>
      * $image = "...";
      *
-     * $activity = new Prism\Integration\Activity\SocialCommunity();
+     * $activity = new Prism\Integration\Activity\Socialcommunity();
      * $activity->setImage($image);
      * </code>
      *
@@ -268,7 +268,7 @@ class SocialCommunity implements ActivityInterface
      * <code>
      * $url = "...";
      *
-     * $activity = new Prism\Integration\Activity\SocialCommunity();
+     * $activity = new Prism\Integration\Activity\Socialcommunity();
      * $activity->setUrl($url);
      * </code>
      *
@@ -289,7 +289,7 @@ class SocialCommunity implements ActivityInterface
      * <code>
      * $created = "...";
      *
-     * $activity = new Prism\Integration\Activity\SocialCommunity();
+     * $activity = new Prism\Integration\Activity\Socialcommunity();
      * $activity->setCreated($created);
      * </code>
      *
@@ -310,7 +310,7 @@ class SocialCommunity implements ActivityInterface
      * <code>
      * $userId = 1;
      *
-     * $activity = new Prism\Integration\Activity\SocialCommunity();
+     * $activity = new Prism\Integration\Activity\Socialcommunity();
      * $activity->setUserId($userId);
      * </code>
      *

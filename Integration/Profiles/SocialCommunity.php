@@ -18,12 +18,12 @@ jimport('Socialcommunity.init');
 
 /**
  * This class provides functionality used for integrating
- * extensions with the profile of SocialCommunity.
+ * extensions with the profile of Social Community.
  *
  * @package      Prism
  * @subpackage   Integrations\Profiles
  */
-class SocialCommunity implements ProfilesInterface
+class Socialcommunity implements ProfilesInterface
 {
     protected $profiles = array();
 
@@ -39,7 +39,7 @@ class SocialCommunity implements ProfilesInterface
         'large' => array('default' => 'no_profile_200x200.png', 'image' => 'image')
     );
 
-    protected $path;
+    protected $mediaUrl;
 
     /**
      * Database driver
@@ -49,36 +49,12 @@ class SocialCommunity implements ProfilesInterface
     protected $db;
 
     /**
-     * Initialize the object
-     *
-     * <code>
-     * $ids = array(1, 2, 3, 4);
-     *
-     * $profiles = new Prism\Integration\Profiles\SocialCommunity(\JFactory::getDbo());
-     * </code>
-     *
-     * @param  \JDatabaseDriver $db
-     */
-    public function __construct(\JDatabaseDriver $db)
-    {
-        $this->db = $db;
-
-        // Set path to pictures
-        $params = \JComponentHelper::getParams('com_socialcommunity');
-        /** @var  $params Registry */
-
-        $path   = $params->get('images_directory', '/images/profiles');
-
-        $this->setPath($path);
-    }
-
-    /**
      * Load data about profiles from database.
      *
      * <code>
      * $ids = array(1, 2, 3, 4);
      *
-     * $profiles = new Prism\Integration\Profiles\SocialCommunity(\JFactory::getDbo());
+     * $profiles = new Prism\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
      * $profiles->load($ids);
      * </code>
      *
@@ -112,7 +88,7 @@ class SocialCommunity implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Integration\Profiles\SocialCommunity(\JFactory::getDbo());
+     * $profiles = new Prism\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $avatar = $profiles->getAvatar($userId);
@@ -133,13 +109,13 @@ class SocialCommunity implements ProfilesInterface
             // Get avatar size.
             $avatar = (array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes[$size]['image'] : null;
 
-            if (!$avatar or empty($this->profiles[$userId]->$avatar)) {
+            if (!$avatar or !array_key_exists($userId, $this->profiles) or !$this->profiles[$userId]->$avatar) {
                 if ($returnDefault) {
                     $avatar = (!array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes['small']['default'] : $this->avatarSizes[$size]['default'];
                     $link   = \JUri::root() . 'media/com_socialcommunity/images/' . $avatar;
                 }
             } else {
-                $link = \JUri::root() . ltrim($this->path . '/' . $this->profiles[$userId]->$avatar, '/');
+                $link = $this->mediaUrl . '/' . $this->profiles[$userId]->$avatar;
             }
         }
 
@@ -153,7 +129,7 @@ class SocialCommunity implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Integration\Profiles\SocialCommunity(\JFactory::getDbo());
+     * $profiles = new Prism\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $link = $profiles->getLink($userId);
@@ -167,8 +143,8 @@ class SocialCommunity implements ProfilesInterface
     public function getLink($userId, $route = true)
     {
         $link = '';
-        if (array_key_exists($userId, $this->profiles) and !empty($this->profiles[$userId]->slug)) {
-            $link = \SocialCommunityHelperRoute::getProfileRoute($this->profiles[$userId]->slug);
+        if (array_key_exists($userId, $this->profiles) and $this->profiles[$userId]->slug !== '') {
+            $link = \SocialcommunityHelperRoute::getProfileRoute($this->profiles[$userId]->slug);
 
             if ($route) {
                 $link = \JRoute::_($link);
@@ -185,7 +161,7 @@ class SocialCommunity implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Integration\Profiles\SocialCommunity(\JFactory::getDbo());
+     * $profiles = new Prism\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $location = $profiles->getLocation($userId);
@@ -211,7 +187,7 @@ class SocialCommunity implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Integration\Profiles\SocialCommunity(\JFactory::getDbo());
+     * $profiles = new Prism\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $countryCode = $profiles->getCountryCode($userId);
@@ -230,23 +206,61 @@ class SocialCommunity implements ProfilesInterface
     }
 
     /**
-     * Set the path to the images folder.
+     * Set the URL to the media folder.
      *
      * <code>
      * $ids = array(1, 2, 3, 4);
-     * $path = "/images/profiles;
+     * $url = "/images/profiles;
      *
-     * $profiles = new Prism\Integration\Profiles\SocialCommunity(\JFactory::getDbo());
-     * $profiles->setPath($path);
+     * $profiles = new Prism\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
+     * $profiles->setMediaUrl($url);
      * </code>
      * 
+     * @param string $url
+     * @return self
+     */
+    public function setMediaUrl($url)
+    {
+        $this->mediaUrl = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get the URL to media folder.
+     *
+     * <code>
+     * $ids = array(1, 2, 3, 4);
+     *
+     * $profiles = new Prism\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
+     * $url = $profiles->getMediaUrl();
+     * </code>
+     *
+     * @return string
+     */
+    public function getMediaUrl()
+    {
+        return $this->mediaUrl;
+    }
+
+    /**
+     * Set the path to the images folder.
+     *
+     * <code>
+     * $path = "/images/profiles;
+     *
+     * $profiles = new Prism\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
+     * $profiles->setPath($path);
+     * </code>
+     *
      * @param string $path
      * @return self
+     *
+     * @deprecated v1.15
      */
     public function setPath($path)
     {
-        $this->path = $path;
-
+        $this->mediaUrl = $path;
         return $this;
     }
 }

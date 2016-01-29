@@ -11,6 +11,7 @@ namespace Prism\Integration\Profile;
 
 use Joomla\Utilities\ArrayHelper;
 use Joomla\Registry\Registry;
+use Prism\Filesystem\Helper;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -70,15 +71,17 @@ class Builder
 
             case 'socialcommunity':
 
-                jimport('socialcommunity.init');
+                jimport('Socialcommunity.init');
 
                 /** @var  $params Registry */
                 $params = \JComponentHelper::getParams('com_socialcommunity');
-                $path   = $params->get('images_directory', '/images/profiles');
+                $filesystemHelper = new Helper($params);
 
-                $profile = new SocialCommunity(\JFactory::getDbo());
+                $url   = $filesystemHelper->getMediaFolderUri();
+
+                $profile = new Socialcommunity(\JFactory::getDbo());
                 $profile->load($userId);
-                $profile->setPath($path);
+                $profile->setMediaUrl($url);
 
                 break;
 

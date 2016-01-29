@@ -58,28 +58,6 @@ class Socialcommunity extends ProfileAbstract
     protected static $instances = array();
 
     /**
-     * Initialize the object.
-     *
-     * <code>
-     * $profile = new Prism\Integration\Profile\Socialcommunity(\JFactory::getDbo());
-     * </code>
-     * 
-     * @param \JDatabaseDriver $db
-     */
-    public function __construct(\JDatabaseDriver $db)
-    {
-        parent::__construct($db);
-
-        // Set path to pictures
-        $params = \JComponentHelper::getParams('com_socialcommunity');
-        /** @var  $params Registry */
-
-        $path   = $params->get('images_directory', '/images/profiles');
-
-        $this->mediaUrl($path);
-    }
-
-    /**
      * Load user data
      *
      * <code>
@@ -142,7 +120,7 @@ class Socialcommunity extends ProfileAbstract
     public function getLink($route = true)
     {
         $link = '';
-        if (\JString::strlen($this->slug) > 0) {
+        if ($this->slug !== '') {
             $link = \SocialcommunityHelperRoute::getProfileRoute($this->slug);
 
             if ($route) {
@@ -179,7 +157,7 @@ class Socialcommunity extends ProfileAbstract
 
         $link = '';
 
-        if ($avatar === null or \JString::strlen($this->$avatar) === 0) {
+        if ($avatar === null or !$this->$avatar) {
             if ($returnDefault) {
                 $link = \JUri::root() . 'media/com_socialcommunity/images/no_profile_200x200.png';
             }
@@ -233,7 +211,7 @@ class Socialcommunity extends ProfileAbstract
     }
 
     /**
-     * Set the path to the images folder.
+     * Set the URL to the media folder.
      *
      * <code>
      * $keys = array(
@@ -255,6 +233,47 @@ class Socialcommunity extends ProfileAbstract
     {
         $this->mediaUrl = $url;
 
+        return $this;
+    }
+
+    /**
+     * Get the URL to media folder.
+     *
+     * <code>
+     * $ids = array(1, 2, 3, 4);
+     *
+     * $profiles = new Prism\Integration\Profile\Socialcommunity(\JFactory::getDbo());
+     * $url = $profiles->getMediaUrl();
+     * </code>
+     *
+     * @return string
+     */
+    public function getMediaUrl()
+    {
+        return $this->mediaUrl;
+    }
+
+    /**
+     * Set the path to the images folder.
+     *
+     * <code>
+     * $userId = 1;
+     * $path   = "/images/profiles;
+     *
+     * $profile = new Prism\Integration\Profile\Socialcommunity(\JFactory::getDbo());
+     * $profile->load($userId);
+     *
+     * $profile->setPath($path);
+     * </code>
+     *
+     * @param string $path
+     * @return self
+     *
+     * @deprecated v1.15
+     */
+    public function setPath($path)
+    {
+        $this->mediaUrl = $path;
         return $this;
     }
 }
