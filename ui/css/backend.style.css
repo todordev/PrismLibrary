@@ -13,6 +13,11 @@
     padding: 5px 0 5px 20px;
 }
 
+.upgrade-info a {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 /* Panel */
 
 .panel {
