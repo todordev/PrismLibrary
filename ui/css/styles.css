@@ -29,6 +29,10 @@
     background-color: #e6e6fa;
 }
 
+.bgcolor-red {
+	background-color: red;
+}
+
 /* Text Color */
 
 .gray-light1 {

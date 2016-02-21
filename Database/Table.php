@@ -167,6 +167,12 @@ abstract class Table
             $vars['params'] = $this->getParams();
         }
 
+        foreach ($vars as $key => $v) {
+            if (is_object($v) and method_exists($v, 'getProperties')) {
+                $vars[$key] = $v->getProperties();
+            }
+        }
+
         return $vars;
     }
 
