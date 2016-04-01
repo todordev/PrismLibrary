@@ -99,3 +99,7 @@
     background-color: #d9edf7;
     border-color: #bce8f1;
 }
+
+.table tbody tr.warning2 > td {
+    background-color: #fcedce;
+}

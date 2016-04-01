@@ -61,6 +61,10 @@ class Date implements ValidatorInterface
     public function isValid()
     {
         $string = \JString::trim($this->date);
+        if ($string === '') {
+            return false;
+        }
+
         if (is_numeric($string)) {
             $string = (int)$string;
             if ($string === 0) {

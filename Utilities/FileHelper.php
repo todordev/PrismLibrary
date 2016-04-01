@@ -57,10 +57,11 @@ class FileHelper
      * </code>
      *
      * @param int $maxFileSizeByUser Maximum file size set by user.
+     * @param string $format Format that will be returned - MB or KB.
      *
      * @return int
      */
-    public static function getMaximumFileSize($maxFileSizeByUser = 0)
+    public static function getMaximumFileSize($maxFileSizeByUser = 0, $format = 'KB')
     {
         $values = array();
         $KB = 1024 * 1024;
@@ -76,7 +77,6 @@ class FileHelper
         }
 
         $postMaxSize  = (int)(ini_get('post_max_size'));
-
         if ($postMaxSize > 0) {
             $values[] = $postMaxSize * $KB;
         }
@@ -90,6 +90,8 @@ class FileHelper
             $values[] = $memoryLimit;
         }
 
-        return min($values);
+        $result = min($values);
+
+        return (($result > 0.0) and (strcmp($format, 'MB') === 0)) ? $result / $KB : $result;
     }
 }
