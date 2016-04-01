@@ -44,7 +44,7 @@ class ApiRequestor
      * @param array|null $params
      * @param array|null $headers
      *
-     * @return array An array whose first element is the response and second
+     * @return array An array whose first element is an API response and second
      *    element is the API key used to make the request.
      */
     public function request($method, $url, $params = null, $headers = null)
@@ -57,7 +57,8 @@ class ApiRequestor
         }
         list($rbody, $rcode, $rheaders, $myApiKey) =
         $this->_requestRaw($method, $url, $params, $headers);
-        $resp = $this->_interpretResponse($rbody, $rcode, $rheaders);
+        $json = $this->_interpretResponse($rbody, $rcode, $rheaders);
+        $resp = new ApiResponse($rbody, $rcode, $rheaders, $json);
         return array($resp, $myApiKey);
     }
 
@@ -91,7 +92,7 @@ class ApiRequestor
 
         switch ($rcode) {
             case 400:
-                // 'rate_limit' code is depreciated, but left here for backwards compatibility
+                // 'rate_limit' code is deprecated, but left here for backwards compatibility
                 // for API versions earlier than 2015-09-08
                 if ($code == 'rate_limit') {
                     throw new Error\RateLimit($msg, $param, $rcode, $rbody, $resp, $rheaders);
@@ -145,6 +146,11 @@ class ApiRequestor
         if (Stripe::$apiVersion) {
             $defaultHeaders['Stripe-Version'] = Stripe::$apiVersion;
         }
+
+        if (Stripe::$accountId) {
+            $defaultHeaders['Stripe-Account'] = Stripe::$accountId;
+        }
+
         $hasFile = false;
         $hasCurlFile = class_exists('\CURLFile', false);
         foreach ($params as $k => $v) {

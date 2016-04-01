@@ -29,11 +29,30 @@ class StripeObject implements ArrayAccess, JsonSerializable
         ));
     }
 
+    /**
+     * @return object The last response from the Stripe API
+     */
+    public function getLastResponse()
+    {
+        return $this->_lastResponse;
+    }
+
+    /**
+     * @param ApiResponse
+     *
+     * @return void Set the last response from the Stripe API
+     */
+    public function setLastResponse($resp)
+    {
+        $this->_lastResponse = $resp;
+    }
+
     protected $_opts;
     protected $_values;
     protected $_unsavedValues;
     protected $_transientValues;
     protected $_retrieveOptions;
+    protected $_lastResponse;
 
     public function __construct($id = null, $opts = null)
     {
@@ -69,7 +88,7 @@ class StripeObject implements ArrayAccess, JsonSerializable
         }
 
         if (self::$nestedUpdatableAttributes->includes($k)
-                && isset($this->$k) && is_array($v)) {
+                && isset($this->$k) && $this->$k instanceof AttachedObject && is_array($v)) {
             $this->$k->replaceWith($v);
         } else {
             // TODO: may want to clear from $_transientValues (Won't be user-visible).

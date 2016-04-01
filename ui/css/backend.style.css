@@ -13,6 +13,11 @@
     padding: 5px 0 5px 20px;
 }
 
+.upgrade-info a {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 /* Panel */
 
 .panel {
@@ -93,4 +98,8 @@
     color: #3a87ad;
     background-color: #d9edf7;
     border-color: #bce8f1;
+}
+
+.table tbody tr.warning2 > td {
+    background-color: #fcedce;
 }

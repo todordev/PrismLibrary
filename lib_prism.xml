@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<extension type="library" version="3.4" method="upgrade">
+<extension type="library" version="3.5" method="upgrade">
 	<name>Prism Library</name>
 	<libraryname>Prism</libraryname>
 	<author>Todor Iliev</author>
@@ -10,7 +10,7 @@
 	<packager>ITPrism</packager>
 	<packagerurl>http://itprism.com</packagerurl>
 	<version>1.9</version>
-	<creationDate>29 February, 2016</creationDate>
+	<creationDate>31 MArch, 2016</creationDate>
 	<description><![CDATA[
     <p><a href="http://itprism.com/free-joomla-extensions/others/software-development-kit" target="_blank">Prism Library</a> is a collection of PHP classes used in many ITPrism extensions.</p>
     <p><a href="http://itprism.com/" target="_blank">Subscribe for the newsletter</a> to receive information about updates and new ITPrism extensions.</p>

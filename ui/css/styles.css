@@ -25,8 +25,20 @@
     background-color: #ffe4c4;
 }
 
+.bgcolor-yellow-lighter {
+	background-color: #fffede;
+}
+
+.bgcolor-yellow-lighter2 {
+	background-color: #fcffe4;
+}
+
 .bgcolor-violet-light {
     background-color: #e6e6fa;
+}
+
+.bgcolor-red {
+	background-color: red;
 }
 
 /* Text Color */
@@ -48,12 +60,25 @@
 }
 
 /* Width */
-.width-600px{
-	width: 600px !important;
+
+.width-100px{
+	width: 100px !important;
+}
+
+.width-150px{
+	width: 150px !important;
+}
+
+.width-200px{
+	width: 200px !important;
 }
 
 .width-400px{
 	width: 400px !important;
+}
+
+.width-600px{
+	width: 600px !important;
 }
 
 .height-600px{
@@ -263,3 +288,13 @@
     color: #000;
 }
 
+.note-block {
+	background-color: #d9edf7;
+	border-color: #bce8f1;
+	color: #3a87ad;
+	padding: 5px 0 5px 10px;
+}
+
+.inline-element {
+	display: inline !important;
+}

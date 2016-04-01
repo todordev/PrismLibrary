@@ -20,7 +20,7 @@ defined('JPATH_PLATFORM') or die;
  */
 abstract class Collection implements \Iterator, \Countable, \ArrayAccess
 {
-    protected $items = array();
+    protected $items        = array();
 
     /**
      * Database driver.
@@ -38,7 +38,7 @@ abstract class Collection implements \Iterator, \Countable, \ArrayAccess
      */
     public function __construct(\JDatabaseDriver $db = null)
     {
-        $this->db   = $db;
+        $this->db = $db;
     }
 
     abstract public function load(array $options = array());
@@ -195,28 +195,47 @@ abstract class Collection implements \Iterator, \Countable, \ArrayAccess
     /**
      * Return items as array.
      *
+     * @param bool $resetKeys
+     *
      * @return array
      */
-    public function toArray()
+    public function toArray($resetKeys = false)
     {
-        return (array)$this->items;
+        return (array) (!$resetKeys) ? $this->items : array_values($this->items);
     }
 
     /**
-     * Return the element keys.
+     * Return the keys of the elements.
      *
      * <code>
      * $groups = new Gamification\Group\Groups(JFactory::getDbo());
      * $groups->load();
      *
-     * $keys = $groups->getKeys("id");
+     * $keys = $groups->getKeys();
+     * </code>
+     *
+     * @return array
+     */
+    public function getKeys()
+    {
+        return array_keys($this->items);
+    }
+
+    /**
+     * Return property values of the elements.
+     *
+     * <code>
+     * $groups = new Gamification\Group\Groups(JFactory::getDbo());
+     * $groups->load();
+     *
+     * $values = $groups->getValues("title");
      * </code>
      *
      * @param string $columnName
      *
      * @return array
      */
-    public function getKeys($columnName = 'id')
+    public function getValues($columnName = 'id')
     {
         $keys = array();
 
@@ -252,10 +271,22 @@ abstract class Collection implements \Iterator, \Countable, \ArrayAccess
         $options = array();
 
         foreach ($this->items as $item) {
-            if (!$suffix) {
-                $options[] = array('value' => $item[$key], 'text' => $item[$text]);
-            } else {
-                $options[] = array('value' => $item[$key], 'text' => $item[$text] . ' ['.$item[$suffix].']');
+
+            if (is_array($item)) {
+
+                if (!$suffix) {
+                    $options[] = array('value' => $item[$key], 'text' => $item[$text]);
+                } else {
+                    $options[] = array('value' => $item[$key], 'text' => $item[$text] . ' ['.$item[$suffix].']');
+                }
+
+            } elseif (is_object($item)) {
+
+                if (!$suffix) {
+                    $options[] = array('value' => $item->$key, 'text' => $item->$text);
+                } else {
+                    $options[] = array('value' => $item->$key, 'text' => $item->$text . ' ['.$item->$suffix.']');
+                }
             }
         }
 
