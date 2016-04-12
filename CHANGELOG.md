@@ -1,5 +1,11 @@
-Prism Library Release Notes
+Prism Library Changelog
 ==========================
+
+###v1.10
+* Added [Abraham\TwitterOAuth] library.
+* Added [Facebook] library.
+* Added [Google] library.
+* Added [Monolog] library.
 
 ###v1.9
 * Added [Filesystem] (http://flysystem.thephpleague.com/adapter/phpcr/) library to the package.

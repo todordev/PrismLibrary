@@ -38,7 +38,7 @@ class Version
      *
      * @var integer
      */
-    public $devLevel = '9';
+    public $devLevel = '10';
 
     /**
      * Release Type
@@ -59,7 +59,7 @@ class Version
      *
      * @var string
      */
-    public $releaseDate = '31 March, 2016';
+    public $releaseDate = '12 April, 2016';
 
     /**
      * License
@@ -83,18 +83,11 @@ class Version
     public $url = '<a href="http://itprism.com/free-joomla-extensions/others/software-development-kit" target="_blank">Prism Library</a>';
 
     /**
-     * Backlink
-     *
-     * @var string
-     */
-    public $backlink = '<div style="width:100%; text-align: left; font-size: xx-small; margin-top: 10px;"><a href="http://itprism.com/free-joomla-extensions/others/software-development-kit" target="_blank">Prism Library</a></div>';
-
-    /**
      * Developer
      *
      * @var string
      */
-    public $developer = '<a href="http://itprism.com" target="_blank">Prism</a>';
+    public $developer = '<a href="http://itprism.com" target="_blank">ITPrism</a>';
 
     /**
      *  Build long format of the version text.
