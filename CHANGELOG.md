@@ -2,10 +2,10 @@ Prism Library Changelog
 ==========================
 
 ###v1.10
-* Added [Abraham\TwitterOAuth] library.
-* Added [Facebook] library.
-* Added [Google] library.
-* Added [Monolog] library.
+* Added [Abraham\TwitterOAuth] (https://github.com/abraham/twitteroauth) library.
+* Added [Facebook] (https://github.com/facebook/facebook-php-sdk-v4) library.
+* Added [Google] (https://github.com/google/google-api-php-client) library.
+* Added [Monolog] (https://github.com/Seldaek/monolog) library.
 
 ###v1.9
 * Added [Filesystem] (http://flysystem.thephpleague.com/adapter/phpcr/) library to the package.
