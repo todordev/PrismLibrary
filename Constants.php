@@ -82,4 +82,14 @@ class Constants
     const ACCESS_FRIENDS = 3;
     const ACCESS_FOLLOWERS_FRIENDS = 5;
 
+    const ORDER_MOST_RECENT_FIRST = 'rdate';
+    const ORDER_OLDEST_FIRST = 'date';
+    const ORDER_TITLE_ALPHABETICAL = 'alpha';
+    const ORDER_TITLE_REVERSE_ALPHABETICAL = 'ralpha';
+    const ORDER_AUTHOR_ALPHABETICAL = 'author';
+    const ORDER_AUTHOR_REVERSE_ALPHABETICAL = 'rauthor';
+    const ORDER_MOST_HITS = 'hits';
+    const ORDER_LEAST_HITS = 'rhits';
+    const ORDER_RANDOM_ORDER = 'random';
+    const ORDER_ITEM_MANAGER_ORDER = 'order';
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * @package         Prism
- * @subpackage      Database\Arrays
+ * @subpackage      Database\Tables
  * @author          Todor Iliev
  * @copyright       Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license         GNU General Public License version 3 or later; see LICENSE.txt

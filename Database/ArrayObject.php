@@ -1,7 +1,7 @@
 <?php
 /**
  * @package         Prism
- * @subpackage      Database\Objects
+ * @subpackage      Database\Collections
  * @author          Todor Iliev
  * @copyright       Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
@@ -16,7 +16,7 @@ defined('JPATH_PLATFORM') or die;
  * The data will be loaded from database.
  *
  * @package         Prism
- * @subpackage      Database\Objects
+ * @subpackage      Database\Collections
  *
  * @deprecated v1.15
  */

@@ -1,6 +1,11 @@
 Prism Library Changelog
 ==========================
 
+###v1.11
+* Added command buses that can be used for helper and database collections.
+* Added Prism\Utilities\QueryHelper and Prism\Utilities\TagHelper.
+* Added order constants.
+
 ###v1.10
 * Added [Abraham\TwitterOAuth] (https://github.com/abraham/twitteroauth) library.
 * Added [Facebook] (https://github.com/facebook/facebook-php-sdk-v4) library.

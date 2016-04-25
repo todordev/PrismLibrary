@@ -20,7 +20,7 @@ defined('JPATH_PLATFORM') or die;
  * @package     Prism
  * @subpackage  Utilities
  */
-class StringHelper
+abstract class StringHelper
 {
     /**
      * The method generates random string.

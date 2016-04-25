@@ -18,7 +18,7 @@ defined('JPATH_PLATFORM') or die;
  * @package     Prism
  * @subpackage  Utilities
  */
-final class NetworkHelper
+abstract class NetworkHelper
 {
     /**
      * Retrieves the best guess of the client's actual IP address.
