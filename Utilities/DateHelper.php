@@ -35,7 +35,7 @@ abstract class DateHelper
     {
         $dateFormat = '';
 
-        switch($format) {
+        switch ($format) {
             case 'Y-m-d':
                 $dateFormat = 'YYYY-MM-DD';
                 break;

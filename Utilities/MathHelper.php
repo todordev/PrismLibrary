@@ -18,7 +18,7 @@ defined('JPATH_PLATFORM') or die;
  * @package     Prism
  * @subpackage  Utilities
  */
-class MathHelper
+abstract class MathHelper
 {
     /**
      * Calculate percentage from two values.

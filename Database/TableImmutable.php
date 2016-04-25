@@ -1,7 +1,7 @@
 <?php
 /**
  * @package         Prism
- * @subpackage      Database\Arrays
+ * @subpackage      Database\Tables
  * @author          Todor Iliev
  * @copyright       Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
@@ -79,7 +79,6 @@ abstract class TableImmutable
     public function bind($data, array $ignored = array())
     {
         if (!$this->bound) {
-
             // Parse parameters of the object if they exists.
             if (array_key_exists('params', $data) and !in_array('params', $ignored, true)) {
                 $this->params = new Registry($data['params']);
@@ -95,7 +94,6 @@ abstract class TableImmutable
             $this->bound = true;
 
             return $this;
-
         } else { // Create new object if it is already bound.
 
             $newObject = new $this($this->db);

@@ -18,7 +18,7 @@ defined('JPATH_PLATFORM') or die;
  * @package     Prism
  * @subpackage  Utilities
  */
-class FileHelper
+abstract class FileHelper
 {
     /**
      * Return line that reads from file.
