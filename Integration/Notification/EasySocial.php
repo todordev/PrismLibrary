@@ -9,6 +9,8 @@
 
 namespace Prism\Integration\Notification;
 
+use Prism\Database\TableTrait;
+
 defined('JPATH_PLATFORM') or die;
 
 /**
@@ -20,6 +22,8 @@ defined('JPATH_PLATFORM') or die;
  */
 class EasySocial implements NotificationInterface
 {
+    use TableTrait;
+
     protected $id;
 
     protected $uid;
@@ -45,13 +49,6 @@ class EasySocial implements NotificationInterface
     protected $contextType;
 
     /**
-     * Database driver.
-     *
-     * @var \JDatabaseDriver
-     */
-    protected $db;
-
-    /**
      * Initialize the object.
      *
      * <code>
@@ -71,28 +68,6 @@ class EasySocial implements NotificationInterface
     }
 
     /**
-     * Set database driver.
-     *
-     * <code>
-     * $userId = 1;
-     * $content = "....";
-     *
-     * $notification = new Prism\Integration\Notification\EasySocial($userId, $content);
-     * $notification->setDb(JFactory::getDbo());
-     * </code>
-     *
-     * @param \JDatabaseDriver $db
-     *
-     * @return self
-     */
-    public function setDb(\JDatabaseDriver $db)
-    {
-        $this->db = $db;
-
-        return $this;
-    }
-
-    /**
      * Store a notification to database.
      *
      * <code>
@@ -109,7 +84,7 @@ class EasySocial implements NotificationInterface
      */
     public function send($content = '')
     {
-        if (\JString::strlen($content) > 0) {
+        if ($content !== '') {
             $this->content = $content;
         }
 

@@ -21,6 +21,8 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package      Prism
  * @subpackage   Integrations\Profiles
+ *
+ * @deprecated v1.20
  */
 class Builder
 {
@@ -109,6 +111,9 @@ class Builder
                 $profile = new JomSocial(\JFactory::getDbo());
                 $profile->load($userId);
 
+                // Load language file.
+                $lang = \JFactory::getLanguage();
+                $lang->load('com_community.country', JPATH_BASE);
                 break;
 
             case 'easysocial':

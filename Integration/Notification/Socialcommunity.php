@@ -9,6 +9,7 @@
 
 namespace Prism\Integration\Notification;
 
+use Prism\Database\TableTrait;
 use Socialcommunity\Notification\Notification;
 
 defined('JPATH_PLATFORM') or die;
@@ -24,6 +25,8 @@ jimport('Socialcommunity.init');
  */
 class Socialcommunity implements NotificationInterface
 {
+    use TableTrait;
+
     protected $id;
     protected $content;
     protected $image;
@@ -35,7 +38,7 @@ class Socialcommunity implements NotificationInterface
 
     /**
      * Initialize the object.
-     * 
+     *
      * <code>
      * $userId = 1;
      * $content = "....";
@@ -53,34 +56,6 @@ class Socialcommunity implements NotificationInterface
     }
 
     /**
-     * Set values to object properties.
-     *
-     * <code>
-     * $data = array(
-     *     "property1" => "...",
-     *     "property2" => "...",
-     * ....
-     * );
-     *
-     * $notification = new Prism\Integration\Notification\Socialcommunity();
-     * $notification->bind($data);
-     * </code>
-     *
-     * @param array $data
-     * @param array $ignored
-     */
-    public function bind($data, array $ignored = array())
-    {
-        foreach ($data as $key => $value) {
-            if (in_array($key, $ignored, true)) {
-                continue;
-            }
-
-            $this->$key = $value;
-        }
-    }
-
-    /**
      * Store a notification to database.
      *
      * <code>
@@ -95,11 +70,11 @@ class Socialcommunity implements NotificationInterface
      */
     public function send($content = '')
     {
-        if (\JString::strlen($content) > 0) {
+        if ($content !== '') {
             $this->content = $content;
         }
 
-        $notification = new Notification(\JFactory::getDbo());
+        $notification = new Notification($this->db);
 
         $notification->setContent($this->content);
         $notification->setUserId($this->user_id);

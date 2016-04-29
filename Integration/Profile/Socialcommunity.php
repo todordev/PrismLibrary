@@ -9,7 +9,7 @@
 
 namespace Prism\Integration\Profile;
 
-use Joomla\Registry\Registry;
+use Prism\Database\TableImmutable;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -22,7 +22,7 @@ jimport('Socialcommunity.init');
  * @package      Prism
  * @subpackage   Integrations\Profile
  */
-class Socialcommunity extends ProfileAbstract
+class Socialcommunity extends TableImmutable implements ProfileInterface
 {
     protected $id;
     protected $user_id;
@@ -41,21 +41,30 @@ class Socialcommunity extends ProfileAbstract
      *
      * @var array
      */
-    protected $avatarSizes = array(
-        'icon' => 'image_icon',
-        'small' => 'image_square',
-        'medium' => 'image_small',
-        'large' => 'image',
-    );
+    protected $avatarSizes = array();
 
     /**
-     * Database driver.
+     * Initialize the object
      *
-     * @var \JDatabaseDriver
+     * <code>
+     * $userId = 1;
+     *
+     * $profile = new Prism\Integration\Profile\Kunena(\JFactory::getDbo());
+     * </code>
+     *
+     * @param \JDatabaseDriver $db
      */
-    protected $db;
+    public function __construct(\JDatabaseDriver $db)
+    {
+        parent::__construct($db);
 
-    protected static $instances = array();
+        $this->avatarSizes = array(
+            'icon' => 'image_icon',
+            'small' => 'image_square',
+            'medium' => 'image_small',
+            'large' => 'image',
+        );
+    }
 
     /**
      * Load user data
@@ -68,7 +77,7 @@ class Socialcommunity extends ProfileAbstract
      * $profile = new Prism\Integration\Profile\Socialcommunity(\JFactory::getDbo());
      * $profile->load($keys);
      * </code>
-     * 
+     *
      * @param array $keys
      * @param array $options
      */
@@ -147,7 +156,7 @@ class Socialcommunity extends ProfileAbstract
      *
      * @param string $size One of the following sizes - icon, small, medium, large.
      * @param bool   $returnDefault Return or not a link to default avatar.
-     * 
+     *
      * @return string
      */
     public function getAvatar($size = 'small', $returnDefault = true)
@@ -251,29 +260,5 @@ class Socialcommunity extends ProfileAbstract
     public function getMediaUrl()
     {
         return $this->mediaUrl;
-    }
-
-    /**
-     * Set the path to the images folder.
-     *
-     * <code>
-     * $userId = 1;
-     * $path   = "/images/profiles;
-     *
-     * $profile = new Prism\Integration\Profile\Socialcommunity(\JFactory::getDbo());
-     * $profile->load($userId);
-     *
-     * $profile->setPath($path);
-     * </code>
-     *
-     * @param string $path
-     * @return self
-     *
-     * @deprecated v1.15
-     */
-    public function setPath($path)
-    {
-        $this->mediaUrl = $path;
-        return $this;
     }
 }

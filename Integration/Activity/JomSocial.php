@@ -9,6 +9,8 @@
 
 namespace Prism\Integration\Activity;
 
+use Prism\Database\TableTrait;
+
 defined('JPATH_PLATFORM') or die;
 
 /**
@@ -20,6 +22,8 @@ defined('JPATH_PLATFORM') or die;
  */
 class JomSocial implements ActivityInterface
 {
+    use TableTrait;
+
     protected $id;
 
     /**
@@ -56,13 +60,6 @@ class JomSocial implements ActivityInterface
     protected $created;
 
     /**
-     * Database driver.
-     *
-     * @var \JDatabaseDriver
-     */
-    protected $db;
-
-    /**
      * Initialize the object, setting a user id
      * and information about the activity.
      *
@@ -72,7 +69,7 @@ class JomSocial implements ActivityInterface
      *
      * $activity = new Prism\Integration\Activity\JomSocial($userId, $content);
      * </code>
-     * 
+     *
      * @param  integer $userId User ID
      * @param  string  $content Information about the activity.
      */
@@ -80,28 +77,6 @@ class JomSocial implements ActivityInterface
     {
         $this->actorId = $userId;
         $this->content = $content;
-    }
-
-    /**
-     * Set a database driver.
-     * 
-     * <code>
-     * $userId = 1;
-     * $content = "...";
-     *
-     * $activity = new Prism\Integration\Activity\JomSocial($userId, $content);
-     * $activity->setDb(JFactory::getDbo());
-     * </code>
-     * 
-     * @param \JDatabaseDriver $db
-     *
-     * @return self
-     */
-    public function setDb(\JDatabaseDriver $db)
-    {
-        $this->db = $db;
-
-        return $this;
     }
 
     /**
@@ -229,7 +204,7 @@ class JomSocial implements ActivityInterface
      * </code>
      *
      * @param string $content
-     * 
+     *
      * @return self
      */
     public function setContent($content)
@@ -250,7 +225,7 @@ class JomSocial implements ActivityInterface
      * </code>
      *
      * @param string $created
-     * 
+     *
      * @return self
      */
     public function setCreated($created)

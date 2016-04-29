@@ -27,12 +27,7 @@ class EasyProfile implements ProfilesInterface
      *
      * @var array
      */
-    protected $avatarSizes = array(
-        'icon'   => 'mini_',
-        'small'  => 'mini_',
-        'medium' => '_',
-        'large'  => '_',
-    );
+    protected $avatarSizes = array();
 
     /**
      * Database driver
@@ -55,6 +50,13 @@ class EasyProfile implements ProfilesInterface
     public function __construct(\JDatabaseDriver $db)
     {
         $this->db = $db;
+
+        $this->avatarSizes = array(
+            'icon'   => 'mini_',
+            'small'  => 'mini_',
+            'medium' => '_',
+            'large'  => '_',
+        );
     }
 
     /**
@@ -67,12 +69,11 @@ class EasyProfile implements ProfilesInterface
      * $profiles->load($ids);
      * </code>
      *
-     * @param array $ids
+     * @param array $userIds
      */
-    public function load(array $ids)
+    public function load(array $userIds)
     {
-        if (count($ids) > 0) {
-
+        if (count($userIds) > 0) {
             // Create a new query object.
             $query = $this->db->getQuery(true);
             $query
@@ -82,7 +83,7 @@ class EasyProfile implements ProfilesInterface
                 )
                 ->from($this->db->quoteName('#__jsn_users', 'a'))
                 ->innerJoin($this->db->quoteName('#__users', 'b') . ' ON a.id = b.id')
-                ->where('a.id IN ( ' . implode(',', $ids) . ')');
+                ->where('a.id IN ( ' . implode(',', $userIds) . ')');
 
             $this->db->setQuery($query);
             $this->profiles = (array)$this->db->loadObjectList('user_id');
@@ -101,7 +102,7 @@ class EasyProfile implements ProfilesInterface
      *
      * $avatar = $profiles->getAvatar($userId);
      * </code>
-     * 
+     *
      * @param integer $userId
      * @param string   $size One of the following sizes - icon, small, medium, large.
      * @param bool   $returnDefault Return or not a link to default avatar.
@@ -117,7 +118,6 @@ class EasyProfile implements ProfilesInterface
             $avatar = (!array_key_exists($size, $this->avatarSizes)) ? null : $this->avatarSizes[$size];
 
             if (!empty($this->profiles[$userId]->avatar)) {
-
                 if (\JString::strlen($avatar) > 0) {
                     $file = \JString::trim($this->profiles[$userId]->avatar);
                     $fileSplit = explode('_', $file);
@@ -148,7 +148,7 @@ class EasyProfile implements ProfilesInterface
      *
      * $link = $profiles->getLink($userId);
      * </code>
-     * 
+     *
      * @param int $userId
      * @param bool $route
      *

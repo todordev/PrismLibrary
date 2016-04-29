@@ -19,6 +19,8 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package      Prism
  * @subpackage   Integrations\Activities
+ *
+ * @deprecated v1.20
  */
 class Builder
 {

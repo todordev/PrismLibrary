@@ -46,7 +46,6 @@ final class Helper
     public function getFilesystem()
     {
         switch($this->params->get('filesystem', 'local')) {
-
             case 'amazon_s3':
                 $client = new S3Client([
                     'credentials' => [
@@ -128,7 +127,6 @@ final class Helper
     public function getMediaFolderUri($userId = 0)
     {
         switch($this->params->get('filesystem', 'local')) {
-
             case 'amazon_s3':
                 $uriImages = $this->params->get('remote_domain') . $this->params->get('remote_media_folder', 'media');
                 break;

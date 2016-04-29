@@ -27,12 +27,7 @@ class Kunena implements ProfilesInterface
      *
      * @var array
      */
-    protected $avatarSizes = array(
-        'icon' => array('folder' => 'size36', 'noimage' => 's_nophoto.jpg'),
-        'small' => array('folder' => 'size72', 'noimage' => 's_nophoto.jpg'),
-        'medium' => array('folder' => 'size72', 'noimage' => 'nophoto.jpg'),
-        'large' => array('folder' => 'size200', 'noimage' => 'nophoto.jpg'),
-    );
+    protected $avatarSizes = array();
 
     /**
      * Database driver
@@ -55,6 +50,13 @@ class Kunena implements ProfilesInterface
     public function __construct(\JDatabaseDriver $db)
     {
         $this->db = $db;
+
+        $this->avatarSizes = array(
+            'icon' => array('folder' => 'size36', 'noimage' => 's_nophoto.jpg'),
+            'small' => array('folder' => 'size72', 'noimage' => 's_nophoto.jpg'),
+            'medium' => array('folder' => 'size72', 'noimage' => 'nophoto.jpg'),
+            'large' => array('folder' => 'size200', 'noimage' => 'nophoto.jpg'),
+        );
     }
 
     /**
@@ -67,18 +69,17 @@ class Kunena implements ProfilesInterface
      * $profiles->load($ids);
      * </code>
      *
-     * @param array $ids
+     * @param array $userIds
      */
-    public function load(array $ids)
+    public function load(array $userIds)
     {
-        if (count($ids) > 0) {
-
+        if (count($userIds) > 0) {
             // Create a new query object.
             $query = $this->db->getQuery(true);
             $query
                 ->select('a.userid AS user_id, a.avatar')
                 ->from($this->db->quoteName('#__kunena_users', 'a'))
-                ->where('a.userid IN ( ' . implode(',', $ids) . ')');
+                ->where('a.userid IN ( ' . implode(',', $userIds) . ')');
 
             $this->db->setQuery($query);
             $this->profiles = (array)$this->db->loadObjectList('user_id');
@@ -97,7 +98,7 @@ class Kunena implements ProfilesInterface
      *
      * $avatar = $profiles->getAvatar($userId);
      * </code>
-     * 
+     *
      * @param integer $userId
      * @param string   $size One of the following sizes - icon, small, medium, large.
      * @param bool   $returnDefault Return or not a link to default avatar.
@@ -116,7 +117,6 @@ class Kunena implements ProfilesInterface
                 $folder = (!array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes['small']['folder'] : $this->avatarSizes[$size]['folder'];
                 $link = \JUri::root() . 'media/kunena/avatars/resized/' . $folder . '/'. $this->profiles[$userId]->avatar;
             } else {
-
                 if ($returnDefault) {
                     $noImage = (!array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes['small']['noimage'] : $this->avatarSizes[$size]['noimage'];
                     $link = \JUri::root() . 'media/kunena/avatars/' . $noImage;
@@ -139,7 +139,7 @@ class Kunena implements ProfilesInterface
      *
      * $link = $profiles->getLink($userId);
      * </code>
-     * 
+     *
      * @param int $userId
      * @param bool $route Route or not the link.
      *

@@ -18,7 +18,7 @@ defined('JPATH_PLATFORM') or die;
  * @package         Prism
  * @subpackage      Helpers
  */
-abstract class HelperAbstract implements HelperInterface
+abstract class HelperAbstract
 {
     /**
      * Database driver.

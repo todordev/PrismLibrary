@@ -10,6 +10,7 @@
 namespace Prism\Integration\Activity;
 
 use Gamification\Activity\Activity;
+use Prism\Database\TableTrait;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -22,6 +23,8 @@ defined('JPATH_PLATFORM') or die;
  */
 class Gamification implements ActivityInterface
 {
+    use TableTrait;
+
     protected $id;
     protected $title;
     protected $content;
@@ -53,28 +56,6 @@ class Gamification implements ActivityInterface
     }
 
     /**
-     * Set values to object properties.
-     *
-     * <code>
-     * $data = array(
-     *     "user_id" => 1,
-     *     "content" => "...",
-     * );
-     *
-     * $activity = new Prism\Integration\Activity\Gamification();
-     * $activity->bind($data);
-     * </code>
-     *
-     * @param array $data
-     */
-    public function bind(array $data)
-    {
-        foreach ($data as $key => $value) {
-            $this->$key = $value;
-        }
-    }
-
-    /**
      * Store information about activity.
      *
      * <code>
@@ -87,7 +68,7 @@ class Gamification implements ActivityInterface
      */
     public function store()
     {
-        $activity = new Activity(\JFactory::getDbo());
+        $activity = new Activity($this->db);
 
         $activity->setContent($this->getContent());
         $activity->setUserId($this->getUserId());

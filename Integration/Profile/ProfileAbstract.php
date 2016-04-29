@@ -18,6 +18,8 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package      Prism
  * @subpackage   Integrations\Profiles
+ *
+ * @deprecated v1.20
  */
 abstract class ProfileAbstract extends TableImmutable
 {

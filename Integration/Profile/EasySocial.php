@@ -9,6 +9,8 @@
 
 namespace Prism\Integration\Profile;
 
+use Prism\Database\TableImmutable;
+
 defined('JPATH_PLATFORM') or die;
 
 \JLoader::register('Foundry', JPATH_ROOT . '/administrator/components/com_easysocial/includes/foundry.php');
@@ -20,7 +22,7 @@ defined('JPATH_PLATFORM') or die;
  * @package      Prism
  * @subpackage   Integrations\Profile
  */
-class EasySocial implements ProfileInterface
+class EasySocial extends TableImmutable implements ProfileInterface
 {
     protected $user_id;
     protected $avatar;
@@ -36,21 +38,7 @@ class EasySocial implements ProfileInterface
      *
      * @var array
      */
-    protected $avatarSizes = array(
-        'icon' => 'small',
-        'small' => 'medium',
-        'medium' => 'square',
-        'large' => 'large',
-    );
-
-    /**
-     * Database driver.
-     *
-     * @var \JDatabaseDriver
-     */
-    protected $db;
-
-    protected static $instances = array();
+    protected $avatarSizes = array();
 
     /**
      * Initialize the object
@@ -65,33 +53,14 @@ class EasySocial implements ProfileInterface
      */
     public function __construct(\JDatabaseDriver $db)
     {
-        $this->db = $db;
-    }
+        parent::__construct($db);
 
-    /**
-     * Create an object.
-     *
-     * <code>
-     * $userId = 1;
-     *
-     * $profile = Prism\Integration\Profile\EasySocial::getInstance(\JFactory::getDbo(), $userId);
-     * </code>
-     *
-     * @param  \JDatabaseDriver $db
-     * @param  int $id
-     *
-     * @return null|EasySocial
-     */
-    public static function getInstance(\JDatabaseDriver $db, $id)
-    {
-        if (empty(self::$instances[$id])) {
-            $item                 = new EasySocial($db);
-            $item->load($id);
-
-            self::$instances[$id] = $item;
-        }
-
-        return self::$instances[$id];
+        $this->avatarSizes = array(
+            'icon' => 'small',
+            'small' => 'medium',
+            'medium' => 'square',
+            'large' => 'large',
+        );
     }
 
     /**
@@ -104,9 +73,10 @@ class EasySocial implements ProfileInterface
      * $profile->load($userId);
      * </code>
      *
-     * @param int $id
+     * @param array $keys
+     * @param array $options
      */
-    public function load($id)
+    public function load($keys, array $options = array())
     {
         $query = $this->db->getQuery(true);
         $query
@@ -118,38 +88,12 @@ class EasySocial implements ProfileInterface
             ->from($this->db->quoteName('#__users', 'a'))
             ->leftJoin($this->db->quoteName('#__social_users', 'b') . ' ON a.id = b.user_id')
             ->leftJoin($this->db->quoteName('#__social_avatars', 'c') . ' ON a.id = c.uid')
-            ->where('a.id =' . (int)$id);
+            ->where('a.id =' . (int)$keys);
 
         $this->db->setQuery($query);
         $result = (array)$this->db->loadAssoc();
 
         $this->bind($result);
-    }
-
-    /**
-     * Set values to object properties.
-     *
-     * <code>
-     * $data = array(
-     *     "name" => "...",
-     *     "country" => "...",
-     * ...
-     * );
-     *
-     * $profile = new Prism\Integration\Profile\EasySocial(\JFactory::getDbo());
-     * $profile->bind($data);
-     * </code>
-     *
-     * @param array $data
-     * @param array $ignored
-     */
-    public function bind($data, array $ignored = array())
-    {
-        foreach ($data as $key => $value) {
-            if (!in_array($key, $ignored, true)) {
-                $this->$key = $value;
-            }
-        }
     }
 
     /**
@@ -223,12 +167,12 @@ class EasySocial implements ProfileInterface
         $name = $this->user_id . ':' . $name;
 
         // Check if the permalink is set
-        if (\JString::strlen($this->permalink) > 0) {
+        if ($this->permalink !== '') {
             $name = $this->permalink;
         }
 
         // If alias exists and permalink doesn't we use the alias
-        if (\JString::strlen($this->alias) > 0 and !$this->permalink) {
+        if ($this->alias !== '' and !$this->permalink) {
             $name = $this->alias;
         }
 
@@ -299,7 +243,6 @@ class EasySocial implements ProfileInterface
         $typeId = (int)$this->db->loadResult();
 
         if ($typeId > 0) {
-
             $query = $this->db->getQuery(true);
 
             $query
@@ -311,7 +254,7 @@ class EasySocial implements ProfileInterface
             $this->db->setQuery($query);
             $result = (string)$this->db->loadResult();
 
-            if (\JString::strlen($result) > 0) { // Set values to variables
+            if ($result !== '') {
                 $result = json_decode($result, true);
             } else {
                 $result = array();

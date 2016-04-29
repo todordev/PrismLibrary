@@ -1,6 +1,11 @@
 Prism Library Changelog
 ==========================
 
+###v1.12
+* Added new third-party libraries - React\Promise, GuzzleHttp\Stream.
+* Upgraded some third-party libraries - Coinbase and GuzzleHttp.
+* Improved integration, helper and database classes.
+
 ###v1.11
 * Added command buses that can be used for helper and database collections.
 * Added Prism\Utilities\QueryHelper and Prism\Utilities\TagHelper.

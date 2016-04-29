@@ -9,6 +9,8 @@
 
 namespace Prism\Integration\Profile;
 
+use Prism\Database\TableImmutable;
+
 defined('JPATH_PLATFORM') or die;
 
 \JLoader::register('CRoute', JPATH_ROOT . '/components/com_community/libraries/core.php');
@@ -20,7 +22,7 @@ defined('JPATH_PLATFORM') or die;
  * @package      Prism
  * @subpackage   Integrations\Profile
  */
-class JomSocial implements ProfileInterface
+class JomSocial extends TableImmutable implements ProfileInterface
 {
     protected $user_id;
     protected $avatar;
@@ -33,21 +35,7 @@ class JomSocial implements ProfileInterface
      *
      * @var array
      */
-    protected $avatarSizes = array(
-        'icon' => 'thumb',
-        'small' => 'thumb',
-        'medium' => 'avatar',
-        'large' => 'avatar',
-    );
-
-    /**
-     * Database driver.
-     * 
-     * @var \JDatabaseDriver
-     */
-    protected $db;
-
-    protected static $instances = array();
+    protected $avatarSizes = array();
 
     /**
      * Initialize the object
@@ -57,38 +45,19 @@ class JomSocial implements ProfileInterface
      *
      * $profile = new Prism\Integration\Profile\JomSocial(\JFactory::getDbo());
      * </code>
-     * 
+     *
      * @param  \JDatabaseDriver $db
      */
     public function __construct(\JDatabaseDriver $db)
     {
-        $this->db = $db;
-    }
+        parent::__construct($db);
 
-    /**
-     * Create an object.
-     *
-     * <code>
-     * $userId = 1;
-     *
-     * $profile = Prism\Integration\Profile\JomSocial::getInstance(\JFactory::getDbo(), $userId);
-     * </code>
-     *
-     * @param  \JDatabaseDriver $db
-     * @param  int $id
-     *
-     * @return null|JomSocial
-     */
-    public static function getInstance(\JDatabaseDriver $db, $id)
-    {
-        if (empty(self::$instances[$id])) {
-            $item                 = new JomSocial($db);
-            $item->load($id);
-
-            self::$instances[$id] = $item;
-        }
-
-        return self::$instances[$id];
+        $this->avatarSizes = array(
+            'icon' => 'thumb',
+            'small' => 'thumb',
+            'medium' => 'avatar',
+            'large' => 'avatar',
+        );
     }
 
     /**
@@ -101,48 +70,21 @@ class JomSocial implements ProfileInterface
      * $profile->load($userId);
      * </code>
      *
-     * @param int $id
+     * @param array $keys
+     * @param array $options
      */
-    public function load($id)
+    public function load($keys, array $options = array())
     {
         $query = $this->db->getQuery(true);
         $query
             ->select('a.userid AS user_id, a.avatar, a.thumb')
             ->from($this->db->quoteName('#__community_users', 'a'))
-            ->where('a.userid = ' . (int)$id);
+            ->where('a.userid = ' . (int)$keys);
 
         $this->db->setQuery($query);
-        $result = $this->db->loadAssoc();
+        $result = (array)$this->db->loadAssoc();
 
-        if (!empty($result)) { // Set values to variables
-            $this->bind($result);
-        }
-    }
-
-    /**
-     * Set values to object properties.
-     *
-     * <code>
-     * $data = array(
-     *     "name" => "...",
-     *     "country" => "...",
-     * ...
-     * );
-     *
-     * $profile = new Prism\Integration\Profile\JomSocial(\JFactory::getDbo());
-     * $profile->bind($data);
-     * </code>
-     *
-     * @param array $data
-     * @param array $ignored
-     */
-    public function bind($data, array $ignored = array())
-    {
-        foreach ($data as $key => $value) {
-            if (!in_array($key, $ignored, true)) {
-                $this->$key = $value;
-            }
-        }
+        $this->bind($result);
     }
 
     /**
@@ -227,7 +169,6 @@ class JomSocial implements ProfileInterface
     public function getLocation()
     {
         if ($this->location === null) {
-
             $result = '';
 
             $query = $this->db->getQuery(true);
@@ -241,7 +182,6 @@ class JomSocial implements ProfileInterface
             $typeId = (int)$this->db->loadResult();
 
             if ($typeId > 0) {
-
                 $query = $this->db->getQuery(true);
 
                 $query
@@ -261,7 +201,7 @@ class JomSocial implements ProfileInterface
             $this->location = $result;
         }
 
-        return $this->location;
+        return \JText::_($this->location);
     }
 
     /**

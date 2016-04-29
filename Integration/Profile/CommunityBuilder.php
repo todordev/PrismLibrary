@@ -1,6 +1,6 @@
 <?php
 /**
- * @package      ITPrism
+ * @package      Prism
  * @subpackage   Integrations\Profile
  * @author       Todor Iliev
  * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
@@ -9,6 +9,7 @@
 
 namespace Prism\Integration\Profile;
 
+use Prism\Database\TableImmutable;
 use Prism\Integration\Helper;
 
 defined('JPATH_PLATFORM') or die;
@@ -17,10 +18,10 @@ defined('JPATH_PLATFORM') or die;
  * This class provides functionality to
  * integrate extensions with the profile of Community Builder.
  *
- * @package      ITPrism
+ * @package      Prism
  * @subpackage   Integrations\Profile
  */
-class CommunityBuilder implements ProfileInterface
+class CommunityBuilder extends TableImmutable implements ProfileInterface
 {
     protected $user_id;
     protected $avatar;
@@ -33,21 +34,7 @@ class CommunityBuilder implements ProfileInterface
      *
      * @var array
      */
-    protected $avatarSizes = array(
-        'icon'   => 'tn',
-        'small'  => 'tn',
-        'medium' => '',
-        'large'  => '',
-    );
-
-    /**
-     * Database driver.
-     *
-     * @var \JDatabaseDriver
-     */
-    protected $db;
-
-    protected static $instances = array();
+    protected $avatarSizes = array();
 
     /**
      * Initialize the object.
@@ -57,38 +44,19 @@ class CommunityBuilder implements ProfileInterface
      *
      * $profile = new Prism\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
      * </code>
-     * 
+     *
      * @param  \JDatabaseDriver $db
      */
     public function __construct(\JDatabaseDriver $db)
     {
-        $this->db = $db;
-    }
+        parent::__construct($db);
 
-    /**
-     * Create an object
-     *
-     * <code>
-     * $userId = 1;
-     *
-     * $profile = Prism\Integration\Profile\CommunityBuilder::getInstance(\JFactory::getDbo(), $userId);
-     * </code>
-     * 
-     * @param  \JDatabaseDriver $db
-     * @param  int $id
-     *
-     * @return self|null
-     */
-    public static function getInstance(\JDatabaseDriver $db, $id)
-    {
-        if (!array_key_exists($id, self::$instances)) {
-            $item   = new CommunityBuilder($db);
-            $item->load($id);
-            
-            self::$instances[$id] = $item;
-        }
-
-        return self::$instances[$id];
+        $this->avatarSizes = array(
+            'icon'   => 'tn',
+            'small'  => 'tn',
+            'medium' => '',
+            'large'  => '',
+        );
     }
 
     /**
@@ -100,10 +68,11 @@ class CommunityBuilder implements ProfileInterface
      * $profile = new Prism\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
      * $profile->load($userId);
      * </code>
-     * 
-     * @param int $id User ID.
+     *
+     * @param int|array $keys
+     * @param array $options
      */
-    public function load($id)
+    public function load($keys, array $options = array())
     {
         $query = $this->db->getQuery(true);
         $query
@@ -114,38 +83,12 @@ class CommunityBuilder implements ProfileInterface
             )
             ->from($this->db->quoteName('#__users', 'a'))
             ->innerJoin($this->db->quoteName('#__comprofiler', 'b') . ' ON a.id = b.user_id')
-            ->where('a.id = ' . (int)$id);
+            ->where('a.id = ' . (int)$keys);
 
         $this->db->setQuery($query);
         $result = (array)$this->db->loadAssoc();
 
         $this->bind($result);
-    }
-
-    /**
-     * Set values to object properties.
-     *
-     * <code>
-     * $data = array(
-     *     "location" => "...",
-     *     "country_code" => "...",
-     * ...
-     * );
-     *
-     * $profile = new Prism\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
-     * $profile->bind($data);
-     * </code>
-     *
-     * @param array $data
-     * @param array $ignored
-     */
-    public function bind($data, array $ignored = array())
-    {
-        foreach ($data as $key => $value) {
-            if (!in_array($key, $ignored, true)) {
-                $this->$key = $value;
-            }
-        }
     }
 
     /**
@@ -168,7 +111,6 @@ class CommunityBuilder implements ProfileInterface
     {
         $link = '';
         if (($this->user_id !== null) and ($this->user_id > 0)) {
-
             $needles = array(
                 'userprofile' => array(0)
             );

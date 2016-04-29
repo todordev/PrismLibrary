@@ -9,8 +9,8 @@
 	<license>http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3</license>
 	<packager>ITPrism</packager>
 	<packagerurl>http://itprism.com</packagerurl>
-	<version>1.11</version>
-	<creationDate>25 April, 2016</creationDate>
+	<version>1.12</version>
+	<creationDate>29 April, 2016</creationDate>
 	<description><![CDATA[
     <p><a href="http://itprism.com/free-joomla-extensions/others/software-development-kit" target="_blank">Prism Library</a> is a collection of PHP classes used in many ITPrism extensions.</p>
     <p><a href="http://itprism.com/" target="_blank">Subscribe for the newsletter</a> to receive information about updates and new ITPrism extensions.</p>
@@ -28,7 +28,6 @@
         <folder>Log</folder>
         <folder>Payment</folder>
         <folder>Response</folder>
-        <folder>String</folder>
         <folder>Transifex</folder>
         <folder>ui</folder>
         <folder>Utilities</folder>

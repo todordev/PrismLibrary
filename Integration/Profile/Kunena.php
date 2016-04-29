@@ -9,6 +9,8 @@
 
 namespace Prism\Integration\Profile;
 
+use Prism\Database\TableImmutable;
+
 defined('JPATH_PLATFORM') or die;
 
 /**
@@ -18,7 +20,7 @@ defined('JPATH_PLATFORM') or die;
  * @package      Prism
  * @subpackage   Integrations\Profile
  */
-class Kunena implements ProfileInterface
+class Kunena extends TableImmutable implements ProfileInterface
 {
     protected $user_id;
     protected $avatar;
@@ -34,21 +36,7 @@ class Kunena implements ProfileInterface
      *
      * @var array
      */
-    protected $avatarSizes = array(
-        'icon' => array('folder' => 'size36', 'noimage' => 's_nophoto.jpg'),
-        'small' => array('folder' => 'size72', 'noimage' => 's_nophoto.jpg'),
-        'medium' => array('folder' => 'size72', 'noimage' => 'nophoto.jpg'),
-        'large' => array('folder' => 'size200', 'noimage' => 'nophoto.jpg'),
-    );
-
-    /**
-     * Database driver.
-     * 
-     * @var \JDatabaseDriver
-     */
-    protected $db;
-
-    protected static $instances = array();
+    protected $avatarSizes = array();
 
     /**
      * Initialize the object
@@ -58,38 +46,19 @@ class Kunena implements ProfileInterface
      *
      * $profile = new Prism\Integration\Profile\Kunena(\JFactory::getDbo());
      * </code>
-     * 
+     *
      * @param \JDatabaseDriver $db
      */
     public function __construct(\JDatabaseDriver $db)
     {
-        $this->db = $db;
-    }
+        parent::__construct($db);
 
-    /**
-     * Create an object.
-     *
-     * <code>
-     * $userId = 1;
-     *
-     * $profile = Prism\Integration\Profile\Kunena::getInstance(\JFactory::getDbo(), $userId);
-     * </code>
-     *
-     * @param  \JDatabaseDriver $db
-     * @param  int $id
-     *
-     * @return null|Kunena
-     */
-    public static function getInstance(\JDatabaseDriver $db, $id)
-    {
-        if (!array_key_exists($id, self::$instances)) {
-            $item                 = new Kunena($db);
-            $item->load($id);
-
-            self::$instances[$id] = $item;
-        }
-
-        return self::$instances[$id];
+        $this->avatarSizes = array(
+            'icon' => array('folder' => 'size36', 'noimage' => 's_nophoto.jpg'),
+            'small' => array('folder' => 'size72', 'noimage' => 's_nophoto.jpg'),
+            'medium' => array('folder' => 'size72', 'noimage' => 'nophoto.jpg'),
+            'large' => array('folder' => 'size200', 'noimage' => 'nophoto.jpg'),
+        );
     }
 
     /**
@@ -102,46 +71,21 @@ class Kunena implements ProfileInterface
      * $profile->load($userId);
      * </code>
      *
-     * @param int $id
+     * @param array $keys
+     * @param array $options
      */
-    public function load($id)
+    public function load($keys, array $options = array())
     {
         $query = $this->db->getQuery(true);
         $query
             ->select('a.userid AS user_id, a.avatar, a.location')
             ->from($this->db->quoteName('#__kunena_users', 'a'))
-            ->where('a.userid = ' . (int)$id);
+            ->where('a.userid = ' . (int)$keys);
 
         $this->db->setQuery($query);
         $result = (array)$this->db->loadAssoc();
 
         $this->bind($result);
-    }
-
-    /**
-     * Set values to object properties.
-     *
-     * <code>
-     * $data = array(
-     *     "name" => "...",
-     *     "country" => "...",
-     * ...
-     * );
-     *
-     * $profile = new Prism\Integration\Profile\Kunena(\JFactory::getDbo());
-     * $profile->bind($data);
-     * </code>
-     *
-     * @param array $data
-     * @param array $ignored
-     */
-    public function bind($data, array $ignored = array())
-    {
-        foreach ($data as $key => $value) {
-            if (!in_array($key, $ignored, true)) {
-                $this->$key = $value;
-            }
-        }
     }
 
     /**
@@ -188,7 +132,7 @@ class Kunena implements ProfileInterface
      *
      * @param string $size One of the following sizes - icon, small, medium, large.
      * @param bool   $returnDefault Return or not a link to default avatar.
-     * 
+     *
      * @return string Return a link to the picture.
      */
     public function getAvatar($size = 'small', $returnDefault = true)

@@ -10,6 +10,7 @@
 namespace Prism\Integration\Notification;
 
 use Gamification\Notification\Notification;
+use Prism\Database\TableTrait;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -22,6 +23,8 @@ defined('JPATH_PLATFORM') or die;
  */
 class Gamification implements NotificationInterface
 {
+    use TableTrait;
+
     protected $id;
     protected $title;
     protected $content;
@@ -41,39 +44,14 @@ class Gamification implements NotificationInterface
      *
      * $notification = new Prism\Integration\Notification\Gamification($userId, $message);
      * </code>
-     * 
-     * @param  integer $userId User ID
+     *
+     * @param  int $userId User ID
      * @param  string  $content   Notification massage to user.
      */
     public function __construct($userId = 0, $content = '')
     {
         $this->user_id = $userId;
         $this->content = $content;
-    }
-
-    /**
-     * Set values to object properties.
-     * 
-     * <code>
-     * $data = array(
-     *     "property1" => "...",
-     *     "property2" => "...",
-     * ....
-     * );
-     *
-     * $notification = new Prism\Integration\Notification\Gamification();
-     * $notification->bind($data);
-     * </code>
-     * 
-     * @param array $data
-     */
-    public function bind(array $data)
-    {
-        if (count($data) > 0) {
-            foreach ($data as $key => $value) {
-                $this->$key = $value;
-            }
-        }
     }
 
     /**
@@ -91,11 +69,11 @@ class Gamification implements NotificationInterface
      */
     public function send($content = '')
     {
-        if (\JString::strlen($content) > 0) {
+        if ($content !== '') {
             $this->content = $content;
         }
 
-        $notification = new Notification(\JFactory::getDbo());
+        $notification = new Notification($this->db);
 
         $notification->setContent($this->getContent());
         $notification->setUserId($this->getUserId());
@@ -287,16 +265,16 @@ class Gamification implements NotificationInterface
 
     /**
      * Set a content of the notification.
-     * 
+     *
      * <code>
      * $note = "...";
      *
      * $notification = new Prism\Integration\Notification\Gamification();
      * $notification->setContent($note);
      * </code>
-     * 
+     *
      * @param string $content
-     * 
+     *
      * @return self
      */
     public function setContent($content)
@@ -315,9 +293,9 @@ class Gamification implements NotificationInterface
      * $notification = new Prism\Integration\Notification\Gamification();
      * $notification->setImage($image);
      * </code>
-     * 
+     *
      * @param string $image
-     * 
+     *
      * @return self
      */
     public function setImage($image)
@@ -336,9 +314,9 @@ class Gamification implements NotificationInterface
      * $notification = new Prism\Integration\Notification\Gamification();
      * $notification->setUrl($url);
      * </code>
-     * 
+     *
      * @param string $url
-     * 
+     *
      * @return self
      */
     public function setUrl($url)
@@ -357,9 +335,9 @@ class Gamification implements NotificationInterface
      * $notification = new Prism\Integration\Notification\Gamification();
      * $notification->setCreated($created);
      * </code>
-     * 
+     *
      * @param string $created
-     * 
+     *
      * @return self
      */
     public function setCreated($created)
@@ -376,9 +354,9 @@ class Gamification implements NotificationInterface
      * $notification = new Prism\Integration\Notification\Gamification();
      * $notification->setStatus($status);
      * </code>
-     * 
-     * @param integer $status
-     * 
+     *
+     * @param int $status
+     *
      * @return self
      */
     public function setStatus($status)
@@ -397,9 +375,9 @@ class Gamification implements NotificationInterface
      * $notification = new Prism\Integration\Notification\Gamification();
      * $notification->setUserId($userId);
      * </code>
-     * 
-     * @param integer $userId
-     * 
+     *
+     * @param int $userId
+     *
      * @return self
      */
     public function setUserId($userId)

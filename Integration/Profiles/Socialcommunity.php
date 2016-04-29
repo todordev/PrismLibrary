@@ -9,9 +9,6 @@
 
 namespace Prism\Integration\Profiles;
 
-use Joomla\Registry\Registry;
-use Joomla\Utilities\ArrayHelper;
-
 defined('JPATH_PLATFORM') or die;
 
 jimport('Socialcommunity.init');
@@ -23,7 +20,7 @@ jimport('Socialcommunity.init');
  * @package      Prism
  * @subpackage   Integrations\Profiles
  */
-class Socialcommunity extends ProfilesAbstract
+class Socialcommunity implements ProfilesInterface
 {
     protected $profiles = array();
 
@@ -32,14 +29,7 @@ class Socialcommunity extends ProfilesAbstract
      *
      * @var array
      */
-    protected $avatarSizes = array(
-        'icon' => array('default' => 'no_profile_24x24.png', 'image' => 'image_icon'),
-        'small' => array('default' => 'no_profile_50x50.png', 'image' => 'image_square'),
-        'medium' => array('default' => 'no_profile_100x100.png', 'image' => 'image_small'),
-        'large' => array('default' => 'no_profile_200x200.png', 'image' => 'image')
-    );
-
-    protected $mediaUrl;
+    protected $avatarSizes = array();
 
     /**
      * Database driver
@@ -47,6 +37,25 @@ class Socialcommunity extends ProfilesAbstract
      * @var \JDatabaseDriver
      */
     protected $db;
+
+    protected $mediaUrl;
+
+    /**
+     * Initialize the object.
+     *
+     * @param \JDatabaseDriver $db
+     */
+    public function __construct(\JDatabaseDriver $db)
+    {
+        $this->db = $db;
+
+        $this->avatarSizes = array(
+            'icon' => array('default' => 'no_profile_24x24.png', 'image' => 'image_icon'),
+            'small' => array('default' => 'no_profile_50x50.png', 'image' => 'image_square'),
+            'medium' => array('default' => 'no_profile_100x100.png', 'image' => 'image_small'),
+            'large' => array('default' => 'no_profile_200x200.png', 'image' => 'image')
+        );
+    }
 
     /**
      * Load data about profiles from database.
@@ -58,14 +67,11 @@ class Socialcommunity extends ProfilesAbstract
      * $profiles->load(array('ids' => $ids));
      * </code>
      *
-     * @param array $options
+     * @param array $userIds
      */
-    public function load(array $options = array())
+    public function load(array $userIds)
     {
-        $userIds = (array_key_exists('user_ids', $options)) ? $options['user_ids'] : array();
-
         if (count($userIds) > 0) {
-
             // Create a new query object.
             $query = $this->db->getQuery(true);
             $query
@@ -80,7 +86,6 @@ class Socialcommunity extends ProfilesAbstract
 
             $this->db->setQuery($query);
             $this->profiles = (array)$this->db->loadObjectList('user_id');
-
         }
     }
 
@@ -96,7 +101,7 @@ class Socialcommunity extends ProfilesAbstract
      *
      * $avatar = $profiles->getAvatar($userId);
      * </code>
-     * 
+     *
      * @param integer $userId
      * @param string   $size One of the following sizes - icon, small, medium, large.
      * @param bool   $returnDefault Return or not a link to default avatar.
@@ -137,7 +142,7 @@ class Socialcommunity extends ProfilesAbstract
      *
      * $link = $profiles->getLink($userId);
      * </code>
-     * 
+     *
      * @param int $userId
      * @param bool $route Route or not the link.
      *
@@ -218,7 +223,7 @@ class Socialcommunity extends ProfilesAbstract
      * $profiles = new Prism\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
      * $profiles->setMediaUrl($url);
      * </code>
-     * 
+     *
      * @param string $url
      * @return self
      */
@@ -244,26 +249,5 @@ class Socialcommunity extends ProfilesAbstract
     public function getMediaUrl()
     {
         return $this->mediaUrl;
-    }
-
-    /**
-     * Set the path to the images folder.
-     *
-     * <code>
-     * $path = "/images/profiles;
-     *
-     * $profiles = new Prism\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
-     * $profiles->setPath($path);
-     * </code>
-     *
-     * @param string $path
-     * @return self
-     *
-     * @deprecated v1.15
-     */
-    public function setPath($path)
-    {
-        $this->mediaUrl = $path;
-        return $this;
     }
 }

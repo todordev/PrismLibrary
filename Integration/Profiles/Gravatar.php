@@ -27,12 +27,7 @@ class Gravatar implements ProfilesInterface
      *
      * @var array
      */
-    protected $avatarSizes = array(
-        'icon' => '40',
-        'small' => '80',
-        'medium' => '160',
-        'large' => '200',
-    );
+    protected $avatarSizes = array();
 
     /**
      * Database driver
@@ -55,6 +50,13 @@ class Gravatar implements ProfilesInterface
     public function __construct(\JDatabaseDriver $db)
     {
         $this->db = $db;
+
+        $this->avatarSizes = array(
+            'icon' => '40',
+            'small' => '80',
+            'medium' => '160',
+            'large' => '200',
+        );
     }
 
     /**
@@ -67,16 +69,16 @@ class Gravatar implements ProfilesInterface
      * $profiles->load($ids);
      * </code>
      *
-     * @param array $ids
+     * @param array $userIds
      */
-    public function load(array $ids)
+    public function load(array $userIds)
     {
-        if (count($ids) > 0) {
+        if (count($userIds) > 0) {
             $query = $this->db->getQuery(true);
             $query
                 ->select('a.id AS user_id, a.email, MD5(a.email) as hash')
                 ->from($this->db->quoteName('#__users', 'a'))
-                ->where('a.id IN ( ' . implode(',', $ids) . ')');
+                ->where('a.id IN ( ' . implode(',', $userIds) . ')');
 
             $this->db->setQuery($query);
             $this->profiles = (array)$this->db->loadObjectList('user_id');

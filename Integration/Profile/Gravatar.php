@@ -9,6 +9,8 @@
 
 namespace Prism\Integration\Profile;
 
+use Prism\Database\TableImmutable;
+
 defined('JPATH_PLATFORM') or die;
 
 /**
@@ -18,7 +20,7 @@ defined('JPATH_PLATFORM') or die;
  * @package      Prism
  * @subpackage   Integrations\Profile
  */
-class Gravatar implements ProfileInterface
+class Gravatar extends TableImmutable implements ProfileInterface
 {
     protected $user_id;
     protected $hash;
@@ -29,21 +31,7 @@ class Gravatar implements ProfileInterface
      *
      * @var array
      */
-    protected $avatarSizes = array(
-        'icon' => '40',
-        'small' => '80',
-        'medium' => '160',
-        'large' => '200',
-    );
-
-    /**
-     * Database driver.
-     * 
-     * @var \JDatabaseDriver
-     */
-    protected $db;
-
-    protected static $instances = array();
+    protected $avatarSizes = array();
 
     /**
      * Initialize the object
@@ -53,38 +41,19 @@ class Gravatar implements ProfileInterface
      *
      * $profile = new Prism\Integration\Profile\Gravatar(\JFactory::getDbo());
      * </code>
-     * 
+     *
      * @param  \JDatabaseDriver $db
      */
     public function __construct(\JDatabaseDriver $db)
     {
-        $this->db = $db;
-    }
+        parent::__construct($db);
 
-    /**
-     * Create an object.
-     *
-     * <code>
-     * $userId = 1;
-     *
-     * $profile = Prism\Integration\Profile\Gravatar::getInstance(\JFactory::getDbo(), $userId);
-     * </code>
-     *
-     * @param  \JDatabaseDriver $db
-     * @param  int $id
-     *
-     * @return null|Gravatar
-     */
-    public static function getInstance(\JDatabaseDriver $db, $id)
-    {
-        if (empty(self::$instances[$id])) {
-            $item   = new Gravatar($db);
-            $item->load($id);
-
-            self::$instances[$id] = $item;
-        }
-
-        return self::$instances[$id];
+        $this->avatarSizes = array(
+            'icon' => '40',
+            'small' => '80',
+            'medium' => '160',
+            'large' => '200',
+        );
     }
 
     /**
@@ -96,47 +65,22 @@ class Gravatar implements ProfileInterface
      * $profile = new Prism\Integration\Profile\Gravatar(\JFactory::getDbo());
      * $profile->load($userId);
      * </code>
-     * 
-     * @param int $id
+     *
+     * @param array $keys
+     * @param array $options
      */
-    public function load($id)
+    public function load($keys, array $options = array())
     {
         $query = $this->db->getQuery(true);
         $query
             ->select('a.id AS user_id, a.email, MD5(a.email) as hash')
             ->from($this->db->quoteName('#__users', 'a'))
-            ->where('a.id = ' . (int)$id);
+            ->where('a.id = ' . (int)$keys);
 
         $this->db->setQuery($query);
         $result = (array)$this->db->loadAssoc();
 
         $this->bind($result);
-    }
-
-    /**
-     * Set values to object properties.
-     *
-     * <code>
-     * $data = array(
-     *     "name" => "...",
-     *     "country" => "...",
-     * ...
-     * );
-     *
-     * $profile = new Prism\Integration\Profile\Gravatar(\JFactory::getDbo());
-     * $profile->bind($data);
-     * </code>
-     *
-     * @param array $data
-     * @param array $ignored
-     */
-    public function bind($data, array $ignored = array())
-    {
-        foreach ($data as $key => $value) {
-            if (!in_array($key, $ignored, true)) {
-                $this->$key = $value;
-            }
-        }
     }
 
     /**
@@ -149,7 +93,7 @@ class Gravatar implements ProfileInterface
      *
      * $profile = new Prism\Integration\Profile\Gravatar(\JFactory::getDbo());
      * $profile->load($userId);
-     * 
+     *
      * $link = $profile->getLink();
      * </code>
      *
@@ -170,10 +114,10 @@ class Gravatar implements ProfileInterface
      *
      * $profile = new Prism\Integration\Profile\Gravatar(\JFactory::getDbo());
      * $profile->load($userId);
-     * 
+     *
      * $avatar = $profile->getAvatar();
      * </code>
-     * 
+     *
      * @param string $size  One of the following sizes - icon, small, medium, large.
      *
      * @return string Return a link to the picture.
@@ -199,7 +143,7 @@ class Gravatar implements ProfileInterface
      *
      * $profile = new Prism\Integration\Profile\Gravatar(\JFactory::getDbo());
      * $profile->load($userId);
-     * 
+     *
      * $location = $profile->getLocation();
      * </code>
      *
@@ -218,7 +162,7 @@ class Gravatar implements ProfileInterface
      *
      * $profile = new Prism\Integration\Profile\Gravatar(\JFactory::getDbo());
      * $profile->load($userId);
-     * 
+     *
      * $countryCode = $profile->getCountryCode();
      * </code>
      *

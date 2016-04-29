@@ -19,7 +19,7 @@ defined('JPATH_PLATFORM') or die;
  */
 interface HelperHandlerInterface
 {
-    public function addCommand(HelperInterface $command, $index = '');
+    public function addCommand(HelperAbstract $command, $index = '');
     public function removeCommand($index);
     public function removeCommands();
     public function handle(array $options = array());

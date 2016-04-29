@@ -29,12 +29,7 @@ class CommunityBuilder implements ProfilesInterface
      *
      * @var array
      */
-    protected $avatarSizes = array(
-        'icon'   => 'tn',
-        'small'  => 'tn',
-        'medium' => '',
-        'large'  => '',
-    );
+    protected $avatarSizes = array();
 
     /**
      * Database driver
@@ -57,6 +52,13 @@ class CommunityBuilder implements ProfilesInterface
     public function __construct(\JDatabaseDriver $db)
     {
         $this->db = $db;
+
+        $this->avatarSizes = array(
+            'icon'   => 'tn',
+            'small'  => 'tn',
+            'medium' => '',
+            'large'  => '',
+        );
     }
 
     /**
@@ -69,11 +71,11 @@ class CommunityBuilder implements ProfilesInterface
      * $profiles->load($ids);
      * </code>
      *
-     * @param array $ids
+     * @param array $userIds
      */
-    public function load(array $ids)
+    public function load(array $userIds)
     {
-        if (count($ids) > 0) {
+        if (count($userIds) > 0) {
 
             // Create a new query object.
             $query = $this->db->getQuery(true);
@@ -85,7 +87,7 @@ class CommunityBuilder implements ProfilesInterface
                 )
                 ->from($this->db->quoteName('#__users', 'a'))
                 ->innerJoin($this->db->quoteName('#__comprofiler', 'b') . ' ON a.id = b.user_id')
-                ->where('a.id IN ( ' . implode(',', $ids) . ')');
+                ->where('a.id IN ( ' . implode(',', $userIds) . ')');
 
             $this->db->setQuery($query);
             $this->profiles = (array)$this->db->loadObjectList('user_id');
@@ -104,7 +106,7 @@ class CommunityBuilder implements ProfilesInterface
      *
      * $avatar = $profiles->getAvatar($userId);
      * </code>
-     * 
+     *
      * @param integer $userId
      * @param string  $size One of the following sizes - icon, small, medium, large.
      * @param bool    $returnDefault Return or not a link to default avatar.
@@ -117,7 +119,6 @@ class CommunityBuilder implements ProfilesInterface
         if (!array_key_exists($userId, $this->profiles)) {
             $link = \JUri::root() . 'components/com_comprofiler/plugin/templates/default/images/avatar/nophoto_n.png';
         } else {
-
             if (!empty($this->profiles[$userId]->avatar)) {
                 $avatarSize = (!array_key_exists($size, $this->avatarSizes)) ? null : $this->avatarSizes[$size];
 
@@ -146,7 +147,7 @@ class CommunityBuilder implements ProfilesInterface
      *
      * $link = $profiles->getLink($userId);
      * </code>
-     * 
+     *
      * @param int $userId
      * @param bool $route Route or not the link.
      *

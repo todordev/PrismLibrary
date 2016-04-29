@@ -9,6 +9,8 @@
 
 namespace Prism\Integration\Notification;
 
+use Prism\Database\TableTrait;
+
 defined('JPATH_PLATFORM') or die;
 
 /**
@@ -20,6 +22,8 @@ defined('JPATH_PLATFORM') or die;
  */
 class JomSocial implements NotificationInterface
 {
+    use TableTrait;
+
     protected $id;
 
     protected $actorId;
@@ -34,13 +38,6 @@ class JomSocial implements NotificationInterface
     protected $image;
     protected $url;
     protected $cmd_type;
-
-    /**
-     * Database driver.
-     *
-     * @var \JDatabaseDriver
-     */
-    protected $db;
 
     /**
      * Initialize the object.
@@ -62,28 +59,6 @@ class JomSocial implements NotificationInterface
     }
 
     /**
-     * Set database driver.
-     *
-     * <code>
-     * $userId = 1;
-     * $content = "....";
-     *
-     * $notification = new Prism\Integration\Notification\JomSocial($userId, $content);
-     * $notification->setDb(\JFactory::getDbo());
-     * </code>
-     *
-     * @param \JDatabaseDriver $db
-     *
-     * @return self
-     */
-    public function setDb(\JDatabaseDriver $db)
-    {
-        $this->db = $db;
-
-        return $this;
-    }
-
-    /**
      * Store a notification to database.
      *
      * <code>
@@ -100,7 +75,7 @@ class JomSocial implements NotificationInterface
      */
     public function send($content = '')
     {
-        if (\JString::strlen($content) > 0) {
+        if ($content !== '') {
             $this->content = $content;
         }
 
@@ -450,14 +425,14 @@ class JomSocial implements NotificationInterface
 
     /**
      * Return notification type.
-     * 
+     *
      * <code>
      * $type = "...";
-     * 
+     *
      * $notification = new Prism\Integration\Notification\JomSocial();
      * $notification->setType($type);
      * </code>
-     * 
+     *
      * @param string $type
      *
      * @return self

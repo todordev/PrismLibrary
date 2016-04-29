@@ -20,10 +20,10 @@ defined('JPATH_PLATFORM') or die;
  */
 class Ipn
 {
-    const VERIFIED = "VERIFIED";
-    const INVALID  = "INVALID";
+    const VERIFIED = 'VERIFIED';
+    const INVALID  = 'INVALID';
 
-    protected $url = "";
+    protected $url = '';
     protected $data = array();
     protected $status;
 
@@ -75,11 +75,7 @@ class Ipn
      */
     public function isVerified()
     {
-        if ($this->status == self::VERIFIED) {
-            return true;
-        }
-
-        return false;
+        return (bool)($this->status === self::VERIFIED);
     }
 
     /**
@@ -104,7 +100,7 @@ class Ipn
     public function verify($loadCertificate = false)
     {
         if (!function_exists('curl_version')) {
-            $this->error = \JText::sprintf("LIB_PRISM_ERROR_CURL_LIBRARY_NOT_LOADED");
+            $this->error = \JText::sprintf('LIB_PRISM_ERROR_CURL_LIBRARY_NOT_LOADED');
             return;
         }
 
@@ -114,25 +110,21 @@ class Ipn
         }
 
         // Strip slashes if magic quotes are enabled
-        if (function_exists('get_magic_quotes_gpc')) {
-
-            if (1 == get_magic_quotes_gpc()) {
-                foreach ($this->data as $key => $value) {
-                    $this->data[stripslashes($key)] = stripslashes($value);
-                }
+        if (function_exists('get_magic_quotes_gpc') and (1 === (int)get_magic_quotes_gpc())) {
+            foreach ($this->data as $key => $value) {
+                $this->data[stripslashes($key)] = stripslashes($value);
             }
-
         }
 
         // Prepare request data
         $request = 'cmd=_notify-validate';
         foreach ($this->data as $key => $value) {
-            $request .= "&" . rawurlencode($key) . "=" . rawurlencode($value);
+            $request .= '&' . rawurlencode($key) . '=' . rawurlencode($value);
         }
 
         $ch = curl_init($this->url);
         if (false === $ch) {
-            $this->error = \JText::sprintf("LIB_PRISM_ERROR_PAYPAL_CONNECTION", $this->url) . "\n";
+            $this->error = \JText::sprintf('LIB_PRISM_ERROR_PAYPAL_CONNECTION', $this->url) . "\n";
             return;
         }
 
@@ -146,20 +138,20 @@ class Ipn
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: Close'));
 
         if ($loadCertificate) {
-            curl_setopt($ch, CURLOPT_SSLVERSION, 4);
-            curl_setopt($ch, CURLOPT_CAINFO, dirname(__FILE__) . '/cacert.pem');
+            curl_setopt($ch, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
+            curl_setopt($ch, CURLOPT_CAINFO, __DIR__ . '/cacert.pem');
         }
 
         $result = curl_exec($ch);
 
         if (false === $result) {
-            $this->error = \JText::sprintf("LIB_PRISM_ERROR_PAYPAL_RECEIVING_DATA", $this->url) . "\n";
+            $this->error = \JText::sprintf('LIB_PRISM_ERROR_PAYPAL_RECEIVING_DATA', $this->url) . '\n';
             $this->error .= curl_error($ch);
             return;
         }
 
         // If the payment is verified then set the status as verified.
-        if ($result == "VERIFIED") {
+        if ($result === 'VERIFIED') {
             $this->status = self::VERIFIED;
         } else {
             $this->status = self::INVALID;
@@ -202,16 +194,12 @@ class Ipn
     {
         $transactions = array();
 
-        if (isset($this->data["transaction[0].id"])) {
-
+        if (isset($this->data['transaction[0].id'])) {
             foreach ($this->data as $key => $value) {
-
-                if (false !== strpos($key, "transaction[")) {
-
+                if (false !== strpos($key, 'transaction[')) {
                     preg_match("/\[([^\]]*)\]\.(\w+)$/i", $key, $matches);
 
                     if (isset($matches[1])) {
-
                         // Create an array.
                         if (!isset($transactions[$matches[1]]) or !is_array($transactions[$matches[1]])) {
                             $transactions[$matches[1]] = array();
@@ -221,14 +209,11 @@ class Ipn
                         if (!empty($matches[2])) {
                             $transactions[$matches[1]][$matches[2]] =  $value;
                         }
-
                     }
-
                 }
             }
         }
 
         return $transactions;
-
     }
 }

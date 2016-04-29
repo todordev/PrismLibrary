@@ -11,7 +11,7 @@ namespace Prism\Integration\Activity;
 
 defined('JPATH_PLATFORM') or die;
 
-\JLoader::register("Foundry", JPATH_ROOT . '/administrator/components/com_easysocial/includes/foundry.php');
+\JLoader::register('Foundry', JPATH_ROOT . '/administrator/components/com_easysocial/includes/foundry.php');
 
 /**
  * This class provides functionality to

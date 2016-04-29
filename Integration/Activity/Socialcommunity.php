@@ -9,6 +9,7 @@
 
 namespace Prism\Integration\Activity;
 
+use Prism\Database\TableTrait;
 use Socialcommunity\Activity\Activity;
 
 defined('JPATH_PLATFORM') or die;
@@ -24,6 +25,8 @@ jimport('Socialcommunity.init');
  */
 class Socialcommunity implements ActivityInterface
 {
+    use TableTrait;
+
     protected $id;
     protected $content;
     protected $image;
@@ -53,33 +56,6 @@ class Socialcommunity implements ActivityInterface
     }
 
     /**
-     * Set values to object properties.
-     *
-     * <code>
-     * $data = array(
-     *     "user_id" => 1,
-     *     "content" => "...",
-     * );
-     *
-     * $activity = new Prism\Integration\Activity\Socialcommunity();
-     * $activity->bind($data);
-     * </code>
-     *
-     * @param array $data
-     * @param array $excluded
-     */
-    public function bind($data, array $excluded = array())
-    {
-        foreach ($data as $key => $value) {
-            if (in_array($key, $excluded, true)) {
-                continue;
-            }
-
-            $this->$key = $value;
-        }
-    }
-
-    /**
      * Store information about activity.
      *
      * <code>
@@ -93,7 +69,7 @@ class Socialcommunity implements ActivityInterface
      */
     public function store()
     {
-        $activity = new Activity(\JFactory::getDbo());
+        $activity = new Activity($this->db);
 
         $activity->set('content', $this->content);
         $activity->set('user_id', $this->user_id);
