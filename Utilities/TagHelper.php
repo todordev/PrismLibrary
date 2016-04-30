@@ -66,6 +66,8 @@ class TagHelper extends \JHelper
         }
 
         if (!array_key_exists($hash, $this->itemTags)) {
+            $this->itemTags[$hash] = array();
+            
             $groups = ArrayHelper::getValue($options, 'access_groups', array(), 'array');
             if (!$groups) {
                 throw new \InvalidArgumentException(\JText::_('LIB_PRISM_ERROR_INVALID_ACCESS_GROUPS'));
