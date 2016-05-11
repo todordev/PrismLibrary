@@ -71,7 +71,7 @@ final class Factory
     {
         switch ($this->options->get('platform')) {
             case 'socialcommunity':
-                $activity = new SocialCommunity($this->options->get('user_id'));
+                $activity = new Socialcommunity($this->options->get('user_id'));
                 $activity->setUrl($this->options->get('url'));
                 $activity->setImage($this->options->get('image'));
                 break;

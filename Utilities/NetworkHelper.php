@@ -112,4 +112,42 @@ abstract class NetworkHelper
 
         return true;
     }
+
+    /**
+     * Return cURL version.
+     *
+     * @return string
+     */
+    public static function getCurlVersion()
+    {
+        $version = '--';
+
+        if (function_exists('curl_version')) {
+            $curlVersionInfo   = curl_version();
+            $version           = $curlVersionInfo['version'];
+        }
+
+        return $version;
+    }
+
+    /**
+     * Return Open SSL version.
+     *
+     * @return string
+     */
+    public static function getOpenSslVersion()
+    {
+        $openSSLVersion = '--';
+
+        if (function_exists('curl_version')) {
+            $curlVersionInfo   = curl_version();
+            $openSSLVersionRaw = $curlVersionInfo['ssl_version'];
+            // OpenSSL version typically reported as "OpenSSL/1.0.1e", I need to convert it to 1.0.1.5
+            $parts             = explode('/', $openSSLVersionRaw, 2);
+            $openSSLVersionRaw = (count($parts) > 1) ? $parts[1] : $openSSLVersionRaw;
+            $openSSLVersion    = substr($openSSLVersionRaw, 0, -1) . '.' . (ord(substr($openSSLVersionRaw, -1)) - 96);
+        }
+
+        return $openSSLVersion;
+    }
 }

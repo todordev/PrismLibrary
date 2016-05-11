@@ -210,6 +210,10 @@
 	margin-top: 0;
 }
 
+.mb-0 {
+	margin-bottom: 0;
+}
+
 .mb-10 {
 	margin-bottom: 10px;
 }

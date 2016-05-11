@@ -1,6 +1,10 @@
 Prism Library Changelog
 ==========================
 
+###v1.13
+* Added class Money and interface Currency.
+* Added functions to get cURL and OpenSSL version.
+
 ###v1.12
 * Added new third-party libraries - React\Promise, GuzzleHttp\Stream.
 * Upgraded some third-party libraries - Coinbase and GuzzleHttp.

@@ -69,7 +69,7 @@ final class Factory
     {
         switch ($this->options->get('platform')) {
             case 'socialcommunity':
-                $notification = new SocialCommunity($this->options->get('user_id'));
+                $notification = new Socialcommunity($this->options->get('user_id'));
                 $notification->setUrl($this->options->get('url'));
                 $notification->setImage($this->options->get('image'));
                 break;
