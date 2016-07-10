@@ -69,6 +69,8 @@ final class Factory
      */
     public function create()
     {
+        $activity = null;
+        
         switch ($this->options->get('platform')) {
             case 'socialcommunity':
                 $activity = new Socialcommunity($this->options->get('user_id'));
@@ -90,8 +92,6 @@ final class Factory
                 }
 
                 $activity = new JomSocial($this->options->get('user_id'));
-                $activity->setDb(\JFactory::getDbo());
-
                 $activity->setApp($this->options->get('app'));
                 break;
 
@@ -99,10 +99,10 @@ final class Factory
                 $activity = new EasySocial($this->options->get('user_id'));
                 $activity->setContextId($this->options->get('user_id'));
                 break;
+        }
 
-            default:
-                $activity = null;
-                break;
+        if ($activity !== null) {
+            $activity->setDb(\JFactory::getDbo());
         }
 
         return $activity;

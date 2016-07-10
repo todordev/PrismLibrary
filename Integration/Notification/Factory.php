@@ -88,17 +88,19 @@ final class Factory
                 }
 
                 $notification = new JomSocial($this->options->get('user_id'));
-                $notification->setDb(\JFactory::getDbo());
                 break;
 
             case 'easysocial':
                 $notification = new EasySocial($this->options->get('user_id'));
-                $notification->setDb(\JFactory::getDbo());
                 break;
 
             default:
                 $notification = null;
                 break;
+        }
+
+        if ($notification !== null) {
+            $notification->setDb(\JFactory::getDbo());
         }
 
         return $notification;

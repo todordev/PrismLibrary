@@ -28,7 +28,6 @@ JLoader::registerNamespace('Google', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('GuzzleHttp', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('JmesPath', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('League', PRISM_PATH_LIBRARY . '/libs');
-JLoader::registerNamespace('Money', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('Monolog', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('Prism', JPATH_LIBRARIES);
 JLoader::registerNamespace('Psr', PRISM_PATH_LIBRARY . '/libs');

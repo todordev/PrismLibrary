@@ -250,7 +250,7 @@ abstract class Collection implements \Iterator, \Countable, \ArrayAccess
      */
     public function toArray($resetKeys = false)
     {
-        return (array) (!$resetKeys) ? $this->items : array_values($this->items);
+        return (!$resetKeys) ? (array)$this->items : (array)array_values($this->items);
     }
 
     /**
@@ -341,16 +341,16 @@ abstract class Collection implements \Iterator, \Countable, \ArrayAccess
 
         foreach ($this->items as $item) {
             if (is_array($item)) {
-                if (!$suffix) {
-                    $options[] = array('value' => $item[$key], 'text' => $item[$text]);
-                } else {
+                if ($suffix !== '' and (array_key_exists($suffix, $item) and $item[$suffix] !== '')) {
                     $options[] = array('value' => $item[$key], 'text' => $item[$text] . ' ['.$item[$suffix].']');
+                } else {
+                    $options[] = array('value' => $item[$key], 'text' => $item[$text]);
                 }
             } elseif (is_object($item)) {
-                if (!$suffix) {
-                    $options[] = array('value' => $item->$key, 'text' => $item->$text);
-                } else {
+                if ($suffix !== '' and (isset($item->$suffix) and $item->$suffix !== '')) {
                     $options[] = array('value' => $item->$key, 'text' => $item->$text . ' ['.$item->$suffix.']');
+                } else {
+                    $options[] = array('value' => $item->$key, 'text' => $item->$text);
                 }
             }
         }

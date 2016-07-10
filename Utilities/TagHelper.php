@@ -9,7 +9,7 @@
 
 namespace Prism\Utilities;
 
-use Joomla\Utilities\ArrayHelper;
+use Joomla\Utilities\ArrayHelper as JArrayHelper;
 use Prism\Constants;
 
 defined('JPATH_PLATFORM') or die;
@@ -47,13 +47,13 @@ class TagHelper extends \JHelper
      */
     public function getItemTags($keys, array $options = array())
     {
-        $contentType = ArrayHelper::getValue($options, 'content_type');
+        $contentType = JArrayHelper::getValue($options, 'content_type');
         if (!$contentType) {
             throw new \InvalidArgumentException(\JText::_('LIB_PRISM_ERROR_INVALID_CONTENT_TYPE'));
         }
 
         if (is_array($keys)) {
-            $keys = ArrayHelper::toInteger($keys);
+            $keys = JArrayHelper::toInteger($keys);
             $keys = array_filter(array_unique($keys));
             $hash = md5(implode(',', $keys) .'_'.$contentType);
         } else {
@@ -68,7 +68,7 @@ class TagHelper extends \JHelper
         if (!array_key_exists($hash, $this->itemTags)) {
             $this->itemTags[$hash] = array();
             
-            $groups = ArrayHelper::getValue($options, 'access_groups', array(), 'array');
+            $groups = JArrayHelper::getValue($options, 'access_groups', array(), 'array');
             if (!$groups) {
                 throw new \InvalidArgumentException(\JText::_('LIB_PRISM_ERROR_INVALID_ACCESS_GROUPS'));
             }
@@ -92,7 +92,7 @@ class TagHelper extends \JHelper
             $query->where('t.access IN (' . implode(',', $groups) . ')');
 
             // Optionally filter on language
-            $language = ArrayHelper::getValue($options, 'language', 'all', 'string');
+            $language = JArrayHelper::getValue($options, 'language', 'all', 'string');
             if ($language !== 'all') {
                 if ($language === 'current_language') {
                     $language = $this->getCurrentLanguage();
@@ -101,7 +101,7 @@ class TagHelper extends \JHelper
                 $query->where($db->quoteName('language') . ' IN (' . $db->quote($language) . ', ' . $db->quote('*') . ')');
             }
 
-            $getTagData = ArrayHelper::getValue($options, 'get_tag_data', true, 'bool');
+            $getTagData = JArrayHelper::getValue($options, 'get_tag_data', true, 'bool');
             if ($getTagData) {
                 $query->select($db->quoteName('t') . '.*');
             }

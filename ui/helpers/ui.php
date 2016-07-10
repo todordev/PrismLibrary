@@ -329,6 +329,31 @@ abstract class PrismUI
     }
 
     /**
+     * Include jQuery AutoComplete library.
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('Prism.ui.jQueryAutoComplete');
+     * </code>
+     *
+     * @link https://github.com/devbridge/jQuery-Autocomplete jQuery AutoComplete documentation
+     */
+    public static function jQueryAutoComplete()
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/autocomplete/jquery.autocomplete.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/autocomplete/jquery.autocomplete.min.js');
+
+        self::$loaded[__METHOD__] = true;
+    }
+
+    /**
      * Include Parsley library.
      *
      * <code>

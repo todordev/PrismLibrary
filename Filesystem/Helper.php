@@ -78,7 +78,7 @@ final class Helper
      */
     public function getTemporaryMediaFolder($root = '')
     {
-        return \JPath::clean($root .'/'. $this->params->get('local_media_folder', 'images') . '/temporary', '/');
+        return \JPath::clean($root .'/'. $this->params->get('local_media_folder', 'media') . '/temporary', '/');
     }
 
     /**
@@ -88,7 +88,7 @@ final class Helper
      */
     public function getTemporaryMediaFolderUri()
     {
-        return $this->params->get('local_media_folder', 'images') . '/temporary';
+        return $this->params->get('local_media_folder', 'media') . '/temporary';
     }
 
     /**
@@ -106,7 +106,7 @@ final class Helper
                 break;
 
             default:
-                $folder = $this->params->get('local_media_folder', 'images');
+                $folder = $this->params->get('local_media_folder', 'media');
                 break;
         }
 
@@ -132,7 +132,7 @@ final class Helper
                 break;
 
             default:
-                $uriImages = \JUri::root() . $this->params->get('local_media_folder', 'images');
+                $uriImages = \JUri::root() . $this->params->get('local_media_folder', 'media');
                 break;
         }
 
