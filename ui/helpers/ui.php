@@ -145,7 +145,6 @@ abstract class PrismUI
         $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap2/editable/js/bootstrap-editable.min.js');
 
         self::$loaded[__METHOD__] = true;
-
     }
 
     /**
@@ -172,7 +171,6 @@ abstract class PrismUI
         $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/editable/js/bootstrap-editable.js');
 
         self::$loaded[__METHOD__] = true;
-
     }
 
     /**
@@ -578,16 +576,15 @@ abstract class PrismUI
 
         // Only display the triggers once for each control.
         if (!in_array($id, $done, true)) {
-
-            $calendarDateFormat = Prism\Utilities\DateHelper::formatCalendarDate($format);
+            $calendarDateFormat = Prism\Utilities\DateHelper::convertToMomentJsFormat($format);
 
             $document = JFactory::getDocument();
             $document
                 ->addScriptDeclaration(
                     'jQuery(document).ready(function($) {
                         jQuery("#' . $id . '_datepicker").datetimepicker({
-                            format: "' . $calendarDateFormat . '",
-                            locale: "' . \JString::strtolower($locale) . '",
+                            format: "' . strtoupper($calendarDateFormat) . '",
+                            locale: "' . strtolower($locale) . '",
                             allowInputToggle: true
                         });
                     });'
@@ -600,7 +597,7 @@ abstract class PrismUI
         $btn_style = ($readonly || $disabled) ? ' style="display:none;"' : '';
 
         return '<div class="input-group date" id="' . $id . '_datepicker">
-                    <input type="text" title="' . ($inputvalue ? JHtml::_('date', $value, null, null) : '') . '"
+                    <input type="text" title="' . $inputvalue . '"
                     name="' . $name . '" id="' . $id . '" value="' . htmlspecialchars($inputvalue, ENT_COMPAT, 'UTF-8') . '" ' . $attributes . ' />
                     <span class="input-group-addon" id="' . $id . '_img">
                         <span class="fa fa-calendar" id="' . $id . '_icon"' . $btn_style . '></span>
@@ -685,9 +682,7 @@ abstract class PrismUI
 
         JFactory::getDocument()->addScriptDeclaration($tabScriptLayout->render($dataLayout));
 
-        $html = $tabLayout->render($dataLayout);
-
-        return $html;
+        return $tabLayout->render($dataLayout);
     }
 
     /**
@@ -700,5 +695,45 @@ abstract class PrismUI
     public static function bootstrap3EndTab()
     {
         return '</div>';
+    }
+
+    /**
+     * Prepare title and content for popover.
+     * It will be used for an HTML element
+     *
+     * @param string $text
+     * @param string $title
+     *
+     * @return  string  HTML element attributes
+     */
+    public static function popoverText($text, $title = '')
+    {
+        $attributes = array();
+        if ($text !== null and $text !== '') {
+            $attributes[] = 'data-content = "'.htmlentities($text, ENT_QUOTES).'"';
+        }
+
+        if ($title !== '') {
+            $attributes[] = 'data-original-title = "'.htmlentities($title, ENT_QUOTES).'"';
+        }
+
+        return implode(' ', $attributes);
+    }
+
+    /**
+     * Display a date.
+     *
+     * @param string $date
+     * @param string $format
+     * @param string $default
+     *
+     * @throws  \InvalidArgumentException
+     * @return  string  HTML element attributes
+     */
+    public static function date($date, $format = '', $default = '--')
+    {
+        $dateValidator = new Prism\Validator\Date($date);
+
+        return $dateValidator->isValid() ? JHtml::_('date', $date, $format) : $default;
     }
 }

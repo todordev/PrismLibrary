@@ -21,7 +21,7 @@ defined('JPATH_PLATFORM') or die;
 interface ProfileInterface
 {
     public function getLink($route = true);
-    public function getAvatar();
+    public function getAvatar($size = 'small', $returnDefault = true);
     public function getLocation();
     public function getCountryCode();
 }

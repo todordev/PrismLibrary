@@ -31,7 +31,7 @@ abstract class ArrayHelper
      *
      * @return array
      */
-    public static function getIds(array $items, $column = 'id')
+    public static function getIds(array &$items, $column = 'id')
     {
         $result = array();
 

@@ -68,6 +68,8 @@ class Socialcommunity implements ProfilesInterface
      * </code>
      *
      * @param array $userIds
+     *
+     * @throws \RuntimeException
      */
     public function load(array $userIds)
     {
@@ -115,7 +117,7 @@ class Socialcommunity implements ProfilesInterface
             $link   = \JUri::root() . 'media/com_socialcommunity/images/' . $this->avatarSizes[$size]['default'];
         } else {
             // Get avatar size.
-            $avatar = (array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes[$size]['image'] : null;
+            $avatar = (!array_key_exists($size, $this->avatarSizes)) ? null : $this->avatarSizes[$size]['image'];
 
             if (!$avatar or !array_key_exists($userId, $this->profiles) or !$this->profiles[$userId]->$avatar) {
                 if ($returnDefault) {

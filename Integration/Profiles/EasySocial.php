@@ -72,6 +72,8 @@ class EasySocial implements ProfilesInterface
      * </code>
      *
      * @param array $userIds
+     *
+     * @throws \RuntimeException
      */
     public function load(array $userIds)
     {
@@ -170,12 +172,12 @@ class EasySocial implements ProfilesInterface
         $name = $user->user_id . ':' . $name;
 
         // Check if the permalink is set
-        if (\JString::strlen($user->permalink) > 0) {
+        if ($user->permalink !== null and $user->permalink !== '') {
             $name = $user->permalink;
         }
 
         // If alias exists and permalink doesn't we use the alias
-        if (\JString::strlen($user->alias) > 0 and !$user->permalink) {
+        if (!$user->permalink and ($user->alias !== null and $user->alias !== '')) {
             $name = $user->alias;
         }
 

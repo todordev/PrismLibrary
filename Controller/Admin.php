@@ -31,21 +31,24 @@ class Admin extends \JControllerAdmin
     public function __construct($config)
     {
         parent::__construct($config);
-        $this->defaultLink = 'index.php?option=' . \JString::strtolower($this->option);
+        $this->defaultLink = 'index.php?option=' . strtolower($this->option);
     }
 
     /**
      * Display a notice and redirect to a page
      *
-     * @param mixed  $messages   Could be array or string.
-     * @param string $options
-     *
+     * <code>
      * $options = array(
      *     "view"    => $view,
      *     "layout"  => $layout,
      *     "id"      => $itemId,
      *     "url_var" => $urlVar
      * );
+     * </code>
+     * @param mixed  $messages   Could be array or string.
+     * @param string $options
+     *
+     * @throws \InvalidArgumentException
      */
     protected function displayNotice($messages, $options)
     {
@@ -59,15 +62,19 @@ class Admin extends \JControllerAdmin
     /**
      * Display a warning and redirect to a page.
      *
-     * @param mixed  $messages   Could be array or string.
-     * @param string $options
-     *
+     * <code>
      * $options = array(
      *      "view"    => $view,
      *      "layout"  => $layout,
      *      "id"      => $itemId,
      *      "url_var" => $urlVar
      *  );
+     * </code>
+     *
+     * @param mixed  $messages   Could be array or string.
+     * @param string $options
+     *
+     * @throws \InvalidArgumentException
      */
     protected function displayWarning($messages, $options)
     {
@@ -81,15 +88,19 @@ class Admin extends \JControllerAdmin
     /**
      * Display a error and redirect to a page.
      *
-     * @param mixed  $messages   Could be array or string.
-     * @param string $options
-     *
+     * <code>
      * $options =  array(
      *      "view"    => $view,
      *      "layout"  => $layout,
      *      "id"      => $itemId,
      *       "url_var" => $urlVar
      * );
+     * </code>
+     *
+     * @param mixed  $messages   Could be array or string.
+     * @param string $options
+     *
+     * @throws \InvalidArgumentException
      */
     protected function displayError($messages, $options)
     {
@@ -103,14 +114,18 @@ class Admin extends \JControllerAdmin
     /**
      * Display a message and redirect to a page
      *
-     * @param mixed  $messages   Could be array or string
-     * @param string $options
+     * <code>
      * $options = array(
      *      "view"    => $view,
      *      "layout"  => $layout,
      *      "id"      => $itemId,
      *      "url_var" => $urlVar,
      * );
+     * </code>
+     * @param mixed  $messages   Could be array or string
+     * @param string $options
+     *
+     * @throws \InvalidArgumentException
      */
     protected function displayMessage($messages, $options)
     {
@@ -134,9 +149,7 @@ class Admin extends \JControllerAdmin
         $result = '';
 
         if (is_array($message)) {
-
             foreach ($message as $value) {
-
                 if (is_object($value)) {
                     if ($value instanceof \Exception) {
                         $result .= (string)$value->getMessage() . "\n";
@@ -144,11 +157,9 @@ class Admin extends \JControllerAdmin
                 } else {
                     $result .= (string)$value . "\n";
                 }
-
             }
 
         } elseif (is_object($message)) {
-
             if ($message instanceof \Exception) {
                 $result = (string)$message->getMessage();
             } else {
@@ -168,6 +179,7 @@ class Admin extends \JControllerAdmin
      *
      * @param array $options URL parameters used for generating redirect link.
      *
+     * @throws \InvalidArgumentException
      * @return string
      */
     protected function prepareRedirectLink($options)

@@ -60,7 +60,13 @@ class Date implements ValidatorInterface
      */
     public function isValid()
     {
-        $string = \JString::trim($this->date);
+        // Check for default SQL values.
+        $defaultDates = array('0000-00-00', '1000-01-01');
+        if (in_array($this->date, $defaultDates, true)) {
+            return false;
+        }
+
+        $string = trim($this->date);
         if ($string === '') {
             return false;
         }

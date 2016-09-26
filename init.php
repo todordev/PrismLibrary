@@ -19,20 +19,17 @@ jimport('joomla.filesystem.path');
 
 JLoader::registerNamespace('Abraham', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('AdamPaterson', PRISM_PATH_LIBRARY . '/libs');
-JLoader::registerNamespace('Aws', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('Carbon', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('Coinbase', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('Defuse', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('Facebook', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('Google', PRISM_PATH_LIBRARY . '/libs');
-JLoader::registerNamespace('GuzzleHttp', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('JmesPath', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('League', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('Monolog', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('Prism', JPATH_LIBRARIES);
 JLoader::registerNamespace('Psr', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('RandomLib', PRISM_PATH_LIBRARY . '/libs');
-JLoader::registerNamespace('React', PRISM_PATH_LIBRARY . '/libs');
 JLoader::registerNamespace('SecurityLib', PRISM_PATH_LIBRARY . '/libs');
 
 // Register some helpers.

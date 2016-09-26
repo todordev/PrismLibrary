@@ -31,21 +31,25 @@ class Form extends \JControllerForm
     public function __construct($config)
     {
         parent::__construct($config);
-        $this->defaultLink = 'index.php?option=' . \JString::strtolower($this->option);
+        $this->defaultLink = 'index.php?option=' . strtolower($this->option);
     }
 
     /**
      * Display a notice and redirect to a page.
      *
-     * @param mixed  $messages Could be array or string.
-     * @param string $options
-     *
+     * <code>
      * $options = array(
      *     "view"    => $view,
      *     "layout"  => $layout,
      *     "id"      => $itemId,
      *     "url_var" => $urlVar
      * );
+     * </code>
+     *
+     * @param mixed  $messages Could be array or string.
+     * @param string $options
+     *
+     * @throws \InvalidArgumentException
      */
     protected function displayNotice($messages, $options)
     {
@@ -59,15 +63,19 @@ class Form extends \JControllerForm
     /**
      * Display a warning and redirect to a page.
      *
-     * @param mixed  $messages Could be array or string.
-     * @param string $options
-     *
+     * <code>
      * $options = array(
      *     "view"    => $view,
      *     "layout"  => $layout,
      *     "id"      => $itemId,
      *     "url_var" => $urlVar
      * );
+     * </code>
+     *
+     * @param mixed  $messages Could be array or string.
+     * @param string $options
+     *
+     * @throws \InvalidArgumentException
      */
     protected function displayWarning($messages, $options)
     {
@@ -81,15 +89,19 @@ class Form extends \JControllerForm
     /**
      * Display a error and redirect to a page.
      *
-     * @param mixed  $messages Could be array or string.
-     * @param string $options
-     *
+     * <code>
      * $options = array(
      *     "view"    => $view,
      *     "layout"  => $layout,
      *     "id"      => $itemId,
      *     "url_var" => $urlVar
      * );
+     * </code>
+     *
+     * @param mixed  $messages Could be array or string.
+     * @param string $options
+     *
+     * @throws \InvalidArgumentException
      */
     protected function displayError($messages, $options)
     {
@@ -102,16 +114,19 @@ class Form extends \JControllerForm
 
     /**
      * Display a message and redirect to a page.
-     *
-     * @param mixed  $messages Could be array or string.
-     * @param string $options
-     *
+     * <code>
      * $options = array(
      *     "view"    => $view,
      *     "layout"  => $layout,
      *     "id"      => $itemId,
      *     "url_var" => $urlVar
      * );
+     * </code>
+     *
+     * @param mixed  $messages Could be array or string.
+     * @param string $options
+     *
+     * @throws \InvalidArgumentException
      */
     protected function displayMessage($messages, $options)
     {
@@ -133,7 +148,6 @@ class Form extends \JControllerForm
     protected function prepareMessage($message)
     {
         if (is_array($message)) {
-
             $result = '';
 
             foreach ($message as $value) {
@@ -147,7 +161,6 @@ class Form extends \JControllerForm
             }
 
         } elseif (is_object($message)) {
-
             if ($message instanceof \Exception) {
                 $result = (string)$message->getMessage();
             } else {
@@ -165,6 +178,8 @@ class Form extends \JControllerForm
      * This method prepare a link where the user will be redirected, when his action be done.
      *
      * @param array $options URL parameters used for generating redirect link.
+     *
+     * @throws \InvalidArgumentException
      *
      * @return string
      */

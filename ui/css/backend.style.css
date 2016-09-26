@@ -101,5 +101,5 @@
 }
 
 .table tbody tr.warning2 > td {
-    background-color: #fcedce;
+    background-color: #fcedce !important;
 }

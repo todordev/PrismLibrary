@@ -71,6 +71,8 @@ class CommunityBuilder extends TableImmutable implements ProfileInterface
      *
      * @param int|array $keys
      * @param array $options
+     *
+     * @throws \RuntimeException
      */
     public function load($keys, array $options = array())
     {
@@ -153,7 +155,7 @@ class CommunityBuilder extends TableImmutable implements ProfileInterface
         if ($this->avatar !== null) {
             $avatarSize = (!array_key_exists($size, $this->avatarSizes)) ? null : $this->avatarSizes[$size];
 
-            $file = \JString::trim($this->avatar);
+            $file = trim($this->avatar);
             $link = \JUri::root() . 'images/comprofiler/'  . $avatarSize.$file;
         } else {
             if ($returnDefault) {

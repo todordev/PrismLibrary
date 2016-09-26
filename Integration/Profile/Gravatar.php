@@ -68,6 +68,8 @@ class Gravatar extends TableImmutable implements ProfileInterface
      *
      * @param array $keys
      * @param array $options
+     *
+     * @throws \RuntimeException
      */
     public function load($keys, array $options = array())
     {
@@ -119,10 +121,11 @@ class Gravatar extends TableImmutable implements ProfileInterface
      * </code>
      *
      * @param string $size  One of the following sizes - icon, small, medium, large.
+     * @param bool $returnDefault
      *
      * @return string Return a link to the picture.
      */
-    public function getAvatar($size = 'small')
+    public function getAvatar($size = 'small', $returnDefault = true)
     {
         $avatarSize = (!array_key_exists($size, $this->avatarSizes)) ? null : (int)$this->avatarSizes[$size];
 

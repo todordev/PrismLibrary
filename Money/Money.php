@@ -89,6 +89,30 @@ class Money
     }
 
     /**
+     * Return currency object.
+     *
+     * <code>
+     * $currencyId = 1;
+     * $currency   = new Virtualcurrency\Currency\Currency(\JFactory::getDbo());
+     * $currency->load($currencyId);
+     *
+     * $language         = JFactory::getLanguage();
+     * $moneyFormatter   = new NumberFormatter($language->getTag(), NumberFormatter::PATTERN_DECIMAL, $this->params->get('currency_pattern'));
+     *
+     * $money   = new Prism\Money\Money($moneyFormatter);
+     * $money->setCurrency($currency);
+     *
+     * $currency = $money->getCurrency();
+     * </code>
+     *
+     * @return CurrencyInterface|null
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
      * This method returns an amount as currency including symbol or currency code.
      *
      * <code>
@@ -172,8 +196,7 @@ class Money
      */
     public function parse()
     {
-        $result = $this->formatter->parse($this->amount, \NumberFormatter::TYPE_DOUBLE);
-        return $result;
+        return $this->formatter->parse($this->amount, \NumberFormatter::TYPE_DOUBLE);
     }
 
     /**

@@ -1,6 +1,11 @@
 Prism Library Changelog
 ==========================
 
+###v1.15
+* Added LocaleHelper, UserHelper and DateHelper.
+* Removed deprecated classes.
+* Upgraded libraries Blockchain v1.3, GuzzleHttp v6.2.1, Stripe v3.23.0
+
 ###v1.14
 * Added [jQueryAutoComplete](https://github.com/devbridge/jQuery-Autocomplete) to Prism UI.
 * Added ArrayHelper and ItemHelper.
@@ -21,25 +26,25 @@ Prism Library Changelog
 * Added order constants.
 
 ###v1.10
-* Added [Abraham\TwitterOAuth] (https://github.com/abraham/twitteroauth) library.
-* Added [Facebook] (https://github.com/facebook/facebook-php-sdk-v4) library.
-* Added [Google] (https://github.com/google/google-api-php-client) library.
-* Added [Monolog] (https://github.com/Seldaek/monolog) library.
+* Added [Abraham\TwitterOAuth](https://github.com/abraham/twitteroauth) library.
+* Added [Facebook](https://github.com/facebook/facebook-php-sdk-v4) library.
+* Added [Google](https://github.com/google/google-api-php-client) library.
+* Added [Monolog](https://github.com/Seldaek/monolog) library.
 
 ###v1.9
-* Added [Filesystem] (http://flysystem.thephpleague.com/adapter/phpcr/) library to the package.
-* Added [GuzzleHttp] (https://github.com/guzzle/guzzle) library.
-* Added [OAuth2 Client] (http://thephpleague.com/oauth2-client/) library.
-* Upgraded [WePay] (https://github.com/wepay/php-sdk) and [Stripe] (https://github.com/stripe/stripe-php) libraries.
+* Added [Filesystem](http://flysystem.thephpleague.com/adapter/phpcr/) library to the package.
+* Added [GuzzleHttp](https://github.com/guzzle/guzzle) library.
+* Added [OAuth2 Client](http://thephpleague.com/oauth2-client/) library.
+* Upgraded [WePay](https://github.com/wepay/php-sdk) and [Stripe](https://github.com/stripe/stripe-php) libraries.
 * Moved Mollie, Stripe, WePay, Coinbase and Blockchain folders from Payment to libs.
 * Added Collection class that will replace Prism\Database\ArrayObject.
-* Upgraded [Cropper] (http://fengyuanchen.github.io/cropper/) to v2.2.5.
-* Upgraded [Bootstrap FileInput] (http://plugins.krajee.com/file-input) to v4.2.9.
-* Upgraded [Bootstrap MaxLength] (https://github.com/mimo84/bootstrap-maxlength) to v1.7.0.
-* Added the library [Defuse\Crypto\Crypto] (https://github.com/defuse/php-encryption).
-* Upgraded [pNotify] (https://sciactive.github.io/pnotify/) to v3.0.0.
+* Upgraded [Cropper](http://fengyuanchen.github.io/cropper/) to v2.2.5.
+* Upgraded [Bootstrap FileInput](http://plugins.krajee.com/file-input) to v4.2.9.
+* Upgraded [Bootstrap MaxLength](https://github.com/mimo84/bootstrap-maxlength) to v1.7.0.
+* Added the library [Defuse\Crypto\Crypto](https://github.com/defuse/php-encryption).
+* Upgraded [pNotify](https://sciactive.github.io/pnotify/) to v3.0.0.
 * Improved JavaScript PrismUIHelper. Added options for icon and styling to the methods that display pNotify messages.
-* Added [Carbon] (http://carbon.nesbot.com/) library.
+* Added [Carbon](http://carbon.nesbot.com/) library.
 
 ###v1.8
 * Improved code quality.

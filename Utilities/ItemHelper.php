@@ -17,6 +17,8 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package     Prism
  * @subpackage  Utilities
+ *
+ * @deprecated v1.18
  */
 abstract class ItemHelper
 {
@@ -32,7 +34,7 @@ abstract class ItemHelper
      *
      * @return array
      */
-    public static function fetchIds(array $items = array(), $column = 'id')
+    public static function fetchIds(array &$items, $column = 'id')
     {
         $result = array();
 

@@ -51,7 +51,6 @@ abstract class Helper
         $option = $app->input->get('option');
         
         switch ($option) {
-
             case 'com_jsn':
             case 'com_easysocial':
             case 'com_socialcommunity':

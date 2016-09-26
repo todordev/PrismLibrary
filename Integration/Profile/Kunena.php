@@ -73,6 +73,8 @@ class Kunena extends TableImmutable implements ProfileInterface
      *
      * @param array $keys
      * @param array $options
+     *
+     * @throws \RuntimeException
      */
     public function load($keys, array $options = array())
     {

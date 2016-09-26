@@ -235,6 +235,18 @@ abstract class StringHelper
      */
     public static function generateMd5Hash($name, $value)
     {
+        if (is_array($value)) {
+            $result = '';
+            foreach ($value as $key => $v) {
+                if (!is_scalar($v)) {
+                    continue;
+                }
+
+                $result .= trim($key).':'.trim($v);
+            }
+            $value = $result;
+        }
+
         return md5($name.':'.$value);
     }
 }

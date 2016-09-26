@@ -70,6 +70,8 @@ class EasyProfile implements ProfilesInterface
      * </code>
      *
      * @param array $userIds
+     *
+     * @throws \RuntimeException
      */
     public function load(array $userIds)
     {
@@ -118,12 +120,12 @@ class EasyProfile implements ProfilesInterface
             $avatar = (!array_key_exists($size, $this->avatarSizes)) ? null : $this->avatarSizes[$size];
 
             if (!empty($this->profiles[$userId]->avatar)) {
-                if (\JString::strlen($avatar) > 0) {
-                    $file = \JString::trim($this->profiles[$userId]->avatar);
+                if (strlen($avatar) > 0) {
+                    $file = trim($this->profiles[$userId]->avatar);
                     $fileSplit = explode('_', $file);
                     $link = \JUri::root() . $fileSplit[0]  . $avatar . $fileSplit[1];
                 } else {
-                    $link = \JUri::root() . \JString::trim($this->profiles[$userId]->avatar);
+                    $link = \JUri::root() . trim($this->profiles[$userId]->avatar);
                 }
 
             } else {

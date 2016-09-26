@@ -80,6 +80,8 @@ class Socialcommunity extends TableImmutable implements ProfileInterface
      *
      * @param array $keys
      * @param array $options
+     *
+     * @throws \RuntimeException
      */
     public function load($keys, array $options = array())
     {
@@ -162,7 +164,7 @@ class Socialcommunity extends TableImmutable implements ProfileInterface
     public function getAvatar($size = 'small', $returnDefault = true)
     {
         // Get avatar size.
-        $avatar = (array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes[$size] : null;
+        $avatar = (!array_key_exists($size, $this->avatarSizes)) ? null : $this->avatarSizes[$size];
 
         $link = '';
 

@@ -70,6 +70,8 @@ class Kunena implements ProfilesInterface
      * </code>
      *
      * @param array $userIds
+     *
+     * @throws \RuntimeException
      */
     public function load(array $userIds)
     {

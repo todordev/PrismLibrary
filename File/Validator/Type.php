@@ -133,6 +133,10 @@ class Type extends Validator
      */
     public function isValid()
     {
+        if (!extension_loaded('fileinfo')) {
+            throw new \RuntimeException(\JText::_('LIB_PRISM_ERROR_EXTENSION_FILEINFO'));
+        }
+
         if (!\JFile::exists($this->file)) {
             $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_DOES_NOT_EXISTS', $this->file);
             return false;

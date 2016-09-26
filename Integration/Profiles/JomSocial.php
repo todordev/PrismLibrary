@@ -72,6 +72,8 @@ class JomSocial implements ProfilesInterface
      * </code>
      *
      * @param array $userIds
+     *
+     * @throws \RuntimeException
      */
     public function load(array $userIds)
     {
@@ -114,7 +116,7 @@ class JomSocial implements ProfilesInterface
             $link = \JUri::root() . 'components/com_community/assets/default_thumb.jpg';
         } else {
             // Get avatar size.
-            $avatar = (array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes[$size] : null;
+            $avatar = (!array_key_exists($size, $this->avatarSizes)) ? null : $this->avatarSizes[$size];
 
             if (!$avatar or empty($this->profiles[$userId]->$avatar)) {
                 if ($returnDefault) {

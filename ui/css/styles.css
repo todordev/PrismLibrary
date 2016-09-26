@@ -102,6 +102,8 @@
 	font-weight: bolder;
 }
 
+/** Borders */
+
 .bb-solid-thin {
 	border-bottom: thin solid #d1d1d1;
 }
@@ -120,6 +122,26 @@
 
 .b-solid-thin {
 	border: thin solid #d1d1d1;
+}
+
+.bb-solid-thin {
+	border-bottom: thin dashed #d1d1d1;
+}
+
+.bt-dashed-thin {
+	border-top: thin dashed #d1d1d1;
+}
+
+.bl-dashed-thin {
+	border-left: thin dashed #b2b2b2;
+}
+
+.br-dashed-thin {
+	border-right: thin dashed #b2b2b2;
+}
+
+.b-dashed-thin {
+	border: thin dashed #d1d1d1;
 }
 
 /* Padding and Margin */
@@ -146,6 +168,14 @@
 
 .pt-5 {
 	padding-top: 5px;
+}
+
+.pt-10 {
+	padding-top: 10px;
+}
+
+.pt-20 {
+	padding-top: 20px;
 }
 
 .mt-5 {
@@ -229,6 +259,14 @@
 
 /* Fonts */
 
+.font-small {
+	font-size: small;
+}
+
+.font-xsmall {
+	font-size: x-small;
+}
+
 .font-xxsmall {
 	font-size: xx-small;
 }
@@ -236,6 +274,33 @@
 .font-smaller {
 	font-size: smaller;
 }
+
+.font-medium {
+	font-size: medium;
+}
+
+.font-large {
+	font-size: large;
+}
+
+.font-xlarge {
+	font-size: x-large;
+}
+
+.font-xxlarge {
+	font-size: xx-large;
+}
+
+.font-medium-bold {
+	font-size: medium;
+	font-weight: bold;
+}
+
+.font-large-bold {
+	font-size: large;
+	font-weight: bold;
+}
+
 
 .parsley-error-list li{
 	color: red;
@@ -301,4 +366,9 @@
 
 .inline-element {
 	display: inline !important;
+}
+
+/** Text Decoratioin */
+.text-capitalized {
+	text-transform: capitalize;
 }

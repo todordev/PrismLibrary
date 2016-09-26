@@ -70,6 +70,8 @@ class EasyProfile extends TableImmutable implements ProfileInterface
      *
      * @param array $keys
      * @param array $options
+     *
+     * @throws \RuntimeException
      */
     public function load($keys, array $options = array())
     {
@@ -139,7 +141,7 @@ class EasyProfile extends TableImmutable implements ProfileInterface
         $link = '';
 
         if ($this->avatar !== null) {
-            $file = \JString::trim($this->avatar);
+            $file = trim($this->avatar);
             $fileSplit = explode('_', $file);
             $link = \JUri::root() . $fileSplit[0]  . $avatar . $fileSplit[1];
         } else {

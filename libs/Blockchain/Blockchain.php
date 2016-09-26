@@ -1,71 +1,104 @@
 <?php
-/*
-    Blockchain PHP API
-    https://github.com/blockchain/api-v1-client-php/
-*/
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
-require_once(__DIR__.'/Blockchain/Exceptions.php');
+/**
+ * Short File Description
+ *
+ * PHP version 5
+ *
+ * @category   aCategory
+ * @package    aPackage
+ * @subpackage aSubPackage
+ * @author     anAuthor
+ * @copyright  2014 a Copyright
+ * @license    a License
+ * @link       http://www.aLink.com
+ */
+
+namespace Blockchain;
+
+use \Blockchain\Exception\Error;
+use \Blockchain\Exception\ApiError;
+use \Blockchain\Exception\HttpError;
+
+use \Blockchain\Create\Create;
+use \Blockchain\Explorer\Explorer;
+use \Blockchain\PushTX\Push;
+use \Blockchain\Rates\Rates;
+use \Blockchain\Stats\Stats;
+use \Blockchain\Wallet\Wallet;
+
+use \Blockchain\V2\Receive\Receive as ReceiveV2;
 
 // Check if BCMath module installed
 if(!function_exists('bcscale')) {
-    throw new Blockchain_Error("BC Math module not installed.");
+    throw new Error("BC Math module not installed.");
 }
 
 // Check if curl module installed
 if(!function_exists('curl_init')) {
-    throw new Blockchain_Error("cURL module not installed.");
+    throw new Error("cURL module not installed.");
 }
 
-require_once(__DIR__.'/Blockchain/Create.php');
-require_once(__DIR__.'/Blockchain/Explorer.php');
-require_once(__DIR__.'/Blockchain/PushTX.php');
-require_once(__DIR__.'/Blockchain/Rates.php');
-require_once(__DIR__.'/Blockchain/Receive.php');
-require_once(__DIR__.'/Blockchain/Stats.php');
-require_once(__DIR__.'/Blockchain/Wallet.php');
-
 class Blockchain {
-	const URL = 'https://blockchain.info/';
+    const URL = 'https://blockchain.info/';
 
+    private $ch;
+    private $api_code = null;
 
-	private $ch;
-	private $api_code = null;
+    const DEBUG = true;
+    public $log = Array();
 
-	const DEBUG = true;
-	public $log = Array();
+    public function __construct($api_code=null) {
+        $this->service_url = null;
 
-	public function __construct($api_code=null) {
-		if(!is_null($api_code)) {
-			$this->api_code = $api_code;
-		}
+        if(!is_null($api_code)) {
+            $this->api_code = $api_code;
+        }
 
-		$this->ch = curl_init();
-		curl_setopt($this->ch, CURLOPT_USERAGENT, 'Blockchain-PHP/1.0');
+        $this->ch = curl_init();
+        curl_setopt($this->ch, CURLOPT_USERAGENT, 'Blockchain-PHP/1.0');
         curl_setopt($this->ch, CURLOPT_HEADER, false);
         curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($this->ch, CURLOPT_CONNECTTIMEOUT, 30);
         curl_setopt($this->ch, CURLOPT_TIMEOUT, 60);
-        curl_setopt($this->ch, CURLOPT_CAINFO, __DIR__.'/Blockchain/ca-bundle.crt');
+        curl_setopt($this->ch, CURLOPT_CAINFO, dirname(__FILE__).'/Blockchain/ca-bundle.crt');
 
-        $this->Create = new Create($this);
-        $this->Explorer = new Explorer($this);
-        $this->Push = new Push($this);
-        $this->Rates = new Rates($this);
-        $this->Receive = new Receive($this);
-        $this->Stats = new Stats($this);
-        $this->Wallet = new Wallet($this);
-	}
+        $this->Create    = new Create($this);
+        $this->Explorer  = new Explorer($this);
+        $this->Push      = new Push($this);
+        $this->Rates     = new Rates($this);
+        $this->ReceiveV2 = new ReceiveV2($this->ch);
+        $this->Stats     = new Stats($this);
+        $this->Wallet    = new Wallet($this);
+    }
 
-	public function __deconstruct() {
-		curl_close($this->ch);
-	}
+    public function __destruct() {
+        curl_close($this->ch);
+    }
 
-	public function setTimeout($timeout) {
-		curl_setopt($this->ch, CURLOPT_TIMEOUT, intval($timeout));
-	}
+    public function setTimeout($timeout) {
+        curl_setopt($this->ch, CURLOPT_TIMEOUT, intval($timeout));
+    }
 
-	public function post($resource, $data=null) {
-		curl_setopt($this->ch, CURLOPT_URL, self::URL.$resource);
+    public function setServiceUrl($service_url) {
+        if (substr($service_url, -1, 1) != '/'){
+            $service_url = $service_url . '/';
+        }
+        $this->service_url = $service_url;
+    }
+
+    public function post($resource, $data=null) {
+        $url = Blockchain::URL;
+
+        if (($resource == "api/v2/create") || (substr($resource, 0, 8) === "merchant")) {
+            if ($this->service_url == null) {
+                throw new ApiError("When calling a merchant endpoint or creating a wallet, service_url must be set");
+            }
+            $url = $this->service_url;
+        }
+
+        curl_setopt($this->ch, CURLOPT_URL, $url.$resource);
         curl_setopt($this->ch, CURLOPT_POST, true);
 
         curl_setopt($this->ch, CURLOPT_HTTPHEADER, 
@@ -77,73 +110,58 @@ class Blockchain {
 
         curl_setopt($this->ch, CURLOPT_POSTFIELDS, http_build_query($data));
 
-		$json = $this->_call();
+        $json = $this->_call();
 
-		// throw ApiError if we get an 'error' field in the JSON
-		if(array_key_exists('error', $json)) {
-			throw new Blockchain_ApiError($json['error']);
-		}
+        // throw ApiError if we get an 'error' field in the JSON
+        if(array_key_exists('error', $json)) {
+            throw new ApiError($json['error']);
+        }
 
-		return $json;
-	}
+        return $json;
+    }
 
-	public function get($resource, $params=null) {
-		curl_setopt($this->ch, CURLOPT_POST, false);
+    public function get($resource, $params=null) {
+        $url = Blockchain::URL;
 
-		if(!is_null($this->api_code)) {
-			$params['api_code'] = $this->api_code;
-		}
+        if (($resource == "api/v2/create") || (substr($resource, 0, 8) === "merchant")) {
+            $url = SERVICE_URL;
+        }
+
+        curl_setopt($this->ch, CURLOPT_POST, false);
+
+        if(!is_null($this->api_code)) {
+            $params['api_code'] = $this->api_code;
+        }
         curl_setopt($this->ch, CURLOPT_HTTPHEADER, array());
 
-		$query = http_build_query($params);
-		curl_setopt($this->ch, CURLOPT_URL, self::URL.$resource.'?'.$query);
+        $query = http_build_query($params);
+        curl_setopt($this->ch, CURLOPT_URL, $url.$resource.'?'.$query);
 
-		return $this->_call();
-	}
-
-	private function _call() {
-		$t0 = microtime(true);
-		$response = curl_exec($this->ch);
-		$dt = microtime(true) - $t0;
-
-		if(curl_error($this->ch)) {
-			$info = curl_getinfo($this->ch);
-			throw new Blockchain_HttpError("Call to " . $info['url'] . " failed: " . curl_error($this->ch));
-		}
-		$json = json_decode($response, true);
-		if(is_null($json)) {
-			throw new Blockchain_Error("Unable to decode JSON response from Blockchain: " . $response);
-		}
-
-		if(self::DEBUG) {
-			$info = curl_getinfo($this->ch);
-			$this->log[] = array(
-				'curl_info' => $info,
-				'elapsed_ms' => round(1000*$dt)
-			);
-		}
-
-		return $json;
-	}
-}
-
-// Convert an incoming integer to a BTC string value
-function BTC_int2str($val) {
-    $a = bcmul($val, "1.0", 1);
-    return bcdiv($a, "100000000", 8);
-}
-// Convert a float value to BTC satoshi integer string
-function BTC_float2int($val) {
-    return bcmul($val, "100000000", 0);
-}
-// From comment on http://php.net/manual/en/ref.bc.php
-function bcconv($fNumber) {
-    $sAppend = '';
-    $iDecimals = ini_get('precision') - floor(log10(abs($fNumber)));
-    if (0 > $iDecimals) {
-        $fNumber *= pow(10, $iDecimals);
-        $sAppend = str_repeat('0', -$iDecimals);
-        $iDecimals = 0;
+        return $this->_call();
     }
-    return number_format($fNumber, $iDecimals, '.', '').$sAppend;
+
+    private function _call() {
+        $t0 = microtime(true);
+        $response = curl_exec($this->ch);
+        $dt = microtime(true) - $t0;
+
+        if(curl_error($this->ch)) {
+            $info = curl_getinfo($this->ch);
+            throw new HttpError("Call to " . $info['url'] . " failed: " . curl_error($this->ch));
+        }
+        $json = json_decode($response, true);
+        if(is_null($json)) {
+            throw new Error("Unable to decode JSON response from Blockchain: " . $response);
+        }
+
+        if(self::DEBUG) {
+            $info = curl_getinfo($this->ch);
+            $this->log[] = array(
+                'curl_info' => $info,
+                'elapsed_ms' => round(1000*$dt)
+            );
+        }
+
+        return $json;
+    }
 }

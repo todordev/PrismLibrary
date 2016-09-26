@@ -70,6 +70,8 @@ class Gravatar implements ProfilesInterface
      * </code>
      *
      * @param array $userIds
+     *
+     * @throws \RuntimeException
      */
     public function load(array $userIds)
     {
@@ -100,10 +102,11 @@ class Gravatar implements ProfilesInterface
      *
      * @param integer $userId
      * @param mixed   $size One of the following sizes - icon, small, medium, large.
+     * @param bool   $returnDefault
      *
      * @return string
      */
-    public function getAvatar($userId, $size = 'small')
+    public function getAvatar($userId, $size = 'small', $returnDefault = true)
     {
         if (!array_key_exists($userId, $this->profiles)) {
             $link = '';

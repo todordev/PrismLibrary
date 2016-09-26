@@ -254,6 +254,21 @@ abstract class Collection implements \Iterator, \Countable, \ArrayAccess
     }
 
     /**
+     * Convert all items to stdObject.
+     *
+     * @return array
+     */
+    public function toObjects()
+    {
+        $items_ = array();
+        foreach ($this->items as $item) {
+            $items_[] = (object)$item;
+        }
+
+        return $items_;
+    }
+
+    /**
      * Return the keys of the elements.
      *
      * <code>
@@ -403,9 +418,13 @@ abstract class Collection implements \Iterator, \Countable, \ArrayAccess
      *
      * @return string
      */
-    protected function getOptionOrderColumn(array $options, $default = null)
+    protected function getOptionOrderColumn(array $options, $default = '')
     {
-        return (!array_key_exists('order_column', $options)) ? $default : $options['order_column'];
+        if (!is_string($default)) {
+            $default = '';
+        }
+
+        return (!array_key_exists('order_column', $options)) ? $default : (string)$options['order_column'];
     }
 
     /**
@@ -428,11 +447,11 @@ abstract class Collection implements \Iterator, \Countable, \ArrayAccess
      * @param array $options
      * @param int $default
      *
-     * @return string
+     * @return int
      */
     protected function getOptionStart(array $options, $default = 0)
     {
-        return (!array_key_exists('start', $options)) ? $default : (int)$options['start'];
+        return (!array_key_exists('start', $options)) ? (int)$default : (int)$options['start'];
     }
 
     /**
@@ -441,11 +460,11 @@ abstract class Collection implements \Iterator, \Countable, \ArrayAccess
      * @param array $options
      * @param int $default
      *
-     * @return string
+     * @return int
      */
     protected function getOptionLimit(array $options, $default = 10)
     {
-        return (!array_key_exists('limit', $options)) ? $default : (int)$options['limit'];
+        return (!array_key_exists('limit', $options)) ? (int)$default : (int)$options['limit'];
     }
 
     /**
@@ -454,10 +473,14 @@ abstract class Collection implements \Iterator, \Countable, \ArrayAccess
      * @param array $options
      * @param int|null $default
      *
-     * @return string
+     * @return null|int
      */
     protected function getOptionState(array $options, $default = null)
     {
+        if ($default !== null and !is_int($default)) {
+            $default = null;
+        }
+
         return (!array_key_exists('state', $options)) ? $default : (int)$options['state'];
     }
 
@@ -479,7 +502,7 @@ abstract class Collection implements \Iterator, \Countable, \ArrayAccess
      * @param array $options
      * @param string $index
      *
-     * @return string
+     * @return int
      */
     protected function getOptionId(array $options, $index = 'id')
     {
@@ -492,7 +515,7 @@ abstract class Collection implements \Iterator, \Countable, \ArrayAccess
      * @param array $options
      * @param string $index
      *
-     * @return string
+     * @return array
      */
     protected function getOptionIds(array $options, $index = 'ids')
     {

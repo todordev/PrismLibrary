@@ -72,11 +72,12 @@ class CommunityBuilder implements ProfilesInterface
      * </code>
      *
      * @param array $userIds
+     *
+     * @throws \RuntimeException
      */
     public function load(array $userIds)
     {
         if (count($userIds) > 0) {
-
             // Create a new query object.
             $query = $this->db->getQuery(true);
             $query
@@ -122,7 +123,7 @@ class CommunityBuilder implements ProfilesInterface
             if (!empty($this->profiles[$userId]->avatar)) {
                 $avatarSize = (!array_key_exists($size, $this->avatarSizes)) ? null : $this->avatarSizes[$size];
 
-                $file = \JString::trim($this->profiles[$userId]->avatar);
+                $file = trim($this->profiles[$userId]->avatar);
                 $link = \JUri::root() . 'images/comprofiler/'  . $avatarSize.$file;
 
             } else {

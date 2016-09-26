@@ -29,6 +29,8 @@ abstract class Container
      * <code>
      * $container = Prism\Container::getContainer();
      * </code>
+     *
+     * @return \Joomla\DI\Container
      */
     public static function getContainer()
     {
