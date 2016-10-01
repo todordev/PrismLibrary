@@ -61,7 +61,7 @@ final class Helper
                 break;
 
             default:
-                $storageAdapter      = new Local(JPATH_BASE);
+                $storageAdapter      = new Local(JPATH_ROOT);
                 $storageFilesystem   = new Filesystem($storageAdapter);
                 break;
         }

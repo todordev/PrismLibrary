@@ -1,6 +1,10 @@
 Prism Library Changelog
 ==========================
 
+###v1.16
+* Upgraded libraries JmesPath v2.3.0, AWS SDK v3.19.12, Flysystem v1.0.27, Flysystem AWS-v3-S3 v1.0.13.
+* Replaced JPATH_BASE with JPATH_ROOT in Prism\Filesystem\Helper.
+
 ###v1.15
 * Added LocaleHelper, UserHelper and DateHelper.
 * Removed deprecated classes.
