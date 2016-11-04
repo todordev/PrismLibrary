@@ -73,6 +73,7 @@ abstract class StringHelper
      * @param string $currency Currency Code ( GBP, USD, EUR,...)
      * @param array $options Options - "intl", "locale", "symbol",...
      *
+     * @throws \InvalidArgumentException
      * @return string
      */
     public static function getAmount($amount, $currency, array $options = array())
@@ -96,7 +97,7 @@ abstract class StringHelper
 
         } else { // Generate a custom currency string.
 
-            if (\JString::strlen($symbol) > 0) { // Symbol
+            if ($symbol !== null and $symbol !== '') { // Symbol
 
                 if (0 === $position) { // Symbol at the beginning.
                     $result = $symbol . $amount;
@@ -144,8 +145,8 @@ abstract class StringHelper
      * </code>
      *
      * @param string $content
-     * @param integer $offset
-     * @param integer $length
+     * @param int $offset
+     * @param int $length
      *
      * @return string
      */
@@ -211,8 +212,9 @@ abstract class StringHelper
      */
     public static function stringUrlSafe($string)
     {
-        if ((int)\JFactory::getConfig()->get('unicodeslugs') === 1) {
-            return \JFilterOutput::stringURLUnicodeSlug($string);
+        $config = \JFactory::getConfig();
+        if ((int)$config->get('unicodeslugs') === 1) {
+            return \JFilterOutput::stringUrlUnicodeSlug($string);
         } else {
             return \JFilterOutput::stringURLSafe($string);
         }

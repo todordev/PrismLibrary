@@ -76,12 +76,12 @@ abstract class FileHelper
             $values[] = $uploadMaxFileSize * $KB;
         }
 
-        $postMaxSize  = (int)(ini_get('post_max_size'));
+        $postMaxSize  = (int)ini_get('post_max_size');
         if ($postMaxSize > 0) {
             $values[] = $postMaxSize * $KB;
         }
 
-        $memoryLimit = (int)(ini_get('memory_limit'));
+        $memoryLimit = (int)ini_get('memory_limit');
         if ($memoryLimit !== -1) {
             $memoryLimit *= $KB;
         }
@@ -93,5 +93,50 @@ abstract class FileHelper
         $result = min($values);
 
         return (($result > 0.0) and (strcmp($format, 'MB') === 0)) ? $result / $KB : $result;
+    }
+
+    /**
+     * Check if the file name has extension of an image.
+     *
+     * <code>
+     * $filename = 'picture1.png';
+     *
+     * if (Prism\Utilities\FileHelper::isImageExtension($filename)) {
+     * // ...
+     * }
+     * </code>
+     *
+     * @param string $filename
+     *
+     * @return bool
+     */
+    public static function isImageExtension($filename)
+    {
+        $extensions     = array('jpg', 'jpeg', 'bmp', 'gif', 'png');
+        $fileExtension  = \JFile::getExt($filename);
+
+        return (($fileExtension !== null and $fileExtension !== '') and in_array($fileExtension, $extensions, true));
+    }
+
+    /**
+     * Check if a mime type is an image.
+     *
+     * <code>
+     * $mimeType = 'image/png';
+     *
+     * if (Prism\Utilities\FileHelper::isImageMime($mimeType)) {
+     * // ...
+     * }
+     * </code>
+     *
+     * @param string $mimeType
+     *
+     * @return bool
+     */
+    public static function isImageMime($mimeType)
+    {
+        $mimeTypes     = array('image/png', 'image/gif', 'image/jpeg', 'image/pjpeg', 'image/bmp', 'image/x-windows-bmp');
+
+        return (($mimeType !== null and $mimeType !== '') and in_array($mimeType, $mimeTypes, true));
     }
 }

@@ -25,13 +25,13 @@ abstract class MathHelper
      *
      * <code>
      * // Displays 10 ( 10% )
-     * echo Prism\MathHelper::calculatePercentage(100, 1000);
+     * echo Prism\Utilities\MathHelper::calculatePercentage(100, 1000);
      *
      * </code>
      *
      * @param float $value1
      * @param float $value2
-     * @param int  $decimalPoint
+     * @param int   $decimalPoint
      *
      * @return float $result
      */
@@ -43,7 +43,7 @@ abstract class MathHelper
         $result = 0.0;
 
         if (($value1 !== 0.0) and ($value2 !== 0.0)) {
-            $value = ($value1 / $value2) * 100;
+            $value  = ($value1 / $value2) * 100;
             $result = round($value, $decimalPoint);
         }
 
@@ -58,12 +58,12 @@ abstract class MathHelper
      * $amount = "100"; // $100
      *
      * // Displays 10.00 ( $10.00 )
-     * echo Prism\MathHelper::calculateValueFromPercent($fee, $amount);;
+     * echo Prism\Utilities\MathHelper::calculateValueFromPercent($fee, $amount);;
      * </code>
      *
      * @param float $percent
      * @param float $value
-     * @param int  $decimalPoint
+     * @param int   $decimalPoint
      *
      * @return float
      */
@@ -75,7 +75,7 @@ abstract class MathHelper
         $result = 0.0;
 
         if (($percent !== 0.0) and ($value !== 0.0)) {
-            $value = ($percent / 100) * $value;
+            $value  = ($percent / 100) * $value;
             $result = round($value, $decimalPoint);
         }
 
@@ -88,12 +88,12 @@ abstract class MathHelper
      * <code>
      * $values = array(10, 10);
      *
-     * echo Prism\MathHelper::calculateTotal($values);
+     * echo Prism\Utilities\MathHelper::calculateTotal($values);
      * </code>
      *
-     * @param array $values
-     * @param string  $action ( M = multiplication, S = calculate sum )
-     * @param int  $decimalPoint
+     * @param array  $values
+     * @param string $action ( M = multiplication, S = calculate sum )
+     * @param int    $decimalPoint
      *
      * @return float
      */
@@ -102,20 +102,79 @@ abstract class MathHelper
         $result = (float)array_shift($values);
 
         switch ($action) {
-
             case 'M': // multiplication
                 foreach ($values as $value) {
-                    $result *=  (float)$value;
+                    $result *= (float)$value;
                 }
                 break;
 
             case 'S': // sum
                 foreach ($values as $value) {
-                    $result +=  (float)$value;
+                    $result += (float)$value;
                 }
                 break;
         }
 
         return round($result, $decimalPoint);
+    }
+
+    /**
+     * Convert KB, MB, GB, TB, PB to bytes.
+     *
+     * <code>
+     * $values = 5; // 5MB
+     *
+     * echo Prism\Utilities\MathHelper::convertToBytes($values, 'MB');
+     * </code>
+     *
+     * @param int  $value
+     * @param string $from
+     *
+     * @return int
+     */
+    public static function convertToBytes($value, $from)
+    {
+        $from   = strtoupper($from);
+        switch ($from) {
+            case 'KB':
+                return $value * 1024;
+            case 'MB':
+                return $value * pow(1024, 2);
+            case 'GB':
+                return $value * pow(1024, 3);
+            case 'TB':
+                return $value * pow(1024, 4);
+            case 'PB':
+                return $value * pow(1024, 5);
+            default:
+                return $value;
+        }
+    }
+
+    /**
+     * Convert bytes to KB, MB, GB, TB, PB.
+     *
+     * <code>
+     * $values = 5242880; // 5MB
+     *
+     * echo Prism\Utilities\MathHelper::convertFromBytes($values, 'MB');
+     * </code>
+     *
+     * @param int  $bytes
+     * @param int $precision
+     *
+     * @return int
+     */
+    public static function convertFromBytes($bytes, $precision = 2)
+    {
+        $units = array('B', 'KB', 'MB', 'GB', 'TB');
+
+        $bytes = max($bytes, 0);
+        $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+        $pow = min($pow, count($units) - 1);
+
+        $bytes /= (1 << (10 * $pow));
+
+        return round($bytes, $precision) . ' ' . $units[$pow];
     }
 }

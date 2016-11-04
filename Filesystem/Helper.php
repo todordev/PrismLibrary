@@ -18,8 +18,6 @@ use Aws\S3\S3Client;
 // no direct access
 defined('_JEXEC') or die;
 
-jimport('joomla.filesystem.path');
-
 /**
  * Filesystem helper.
  *
@@ -41,11 +39,19 @@ final class Helper
     /**
      * Prepare storage filesystem.
      *
+     * <code>
+     * $params = JComponentHelper::getParams('com_magicgallery');
+     *
+     * $filesystemHelper  = new Prism\Filesystem\Helper($params);
+     * $storageFilesystem = $filesystemHelper->getFilesystem();
+     * </code>
+     *
+     * @throws \InvalidArgumentException
      * @return Filesystem
      */
     public function getFilesystem()
     {
-        switch($this->params->get('filesystem', 'local')) {
+        switch ($this->params->get('filesystem', 'local')) {
             case 'amazon_s3':
                 $client = new S3Client([
                     'credentials' => [
@@ -72,6 +78,13 @@ final class Helper
     /**
      * Generate a path to the temporary media folder.
      *
+     * <code>
+     * $params = JComponentHelper::getParams('com_magicgallery');
+     *
+     * $filesystemHelper  = new Prism\Filesystem\Helper($params);
+     * $temporaryFolder   = $filesystemHelper->getTemporaryMediaFolder();
+     * </code>
+     *
      * @param string $root   A base path to the folder. It can be JPATH_BASE, JPATH_ROOT, JPATH_SITE,...
      *
      * @return string
@@ -84,6 +97,13 @@ final class Helper
     /**
      * Generate a URI path to the temporary media folder.
      *
+     * <code>
+     * $params = JComponentHelper::getParams('com_magicgallery');
+     *
+     * $filesystemHelper   = new Prism\Filesystem\Helper($params);
+     * $temporaryFolderUri = $filesystemHelper->getTemporaryMediaFolderUri();
+     * </code>
+     *
      * @return string
      */
     public function getTemporaryMediaFolderUri()
@@ -94,13 +114,22 @@ final class Helper
     /**
      * Generate a path to the folder where the media files wil be stored.
      *
-     * @param int    $userId User Id.
+     * <code>
+     * $params = JComponentHelper::getParams('com_magicgallery');
      *
+     * $filesystemHelper   = new Prism\Filesystem\Helper($params);
+     * $mediaFolder = $filesystemHelper->getMediaFolder();
+     * </code>
+     *
+     * @param int    $id Id.
+     * @param string $folderName
+     *
+     * @throws \UnexpectedValueException
      * @return string
      */
-    public function getMediaFolder($userId = 0)
+    public function getMediaFolder($id = 0, $folderName = 'user')
     {
-        switch($this->params->get('filesystem', 'local')) {
+        switch ($this->params->get('filesystem', 'local')) {
             case 'amazon_s3':
                 $folder = $this->params->get('remote_media_folder', 'media');
                 break;
@@ -110,41 +139,75 @@ final class Helper
                 break;
         }
 
-        if ((int)$userId > 0) {
-            $folder .= '/user' . (int)$userId;
+        if ((int)$id > 0) {
+            $folderName = $folderName ?: 'user';
+            $folder .= '/'.$folderName . (int)$id;
         }
 
-        return \JPath::clean($folder, '/');
+        return $folder ? \JPath::clean($folder, '/') : '';
     }
 
     /**
      * Generate a URI path to the folder, where the media files are stored.
      *
-     * @param int $userId User Id.
+     * <code>
+     * $params = JComponentHelper::getParams('com_magicgallery');
      *
-     * @return string
+     * $filesystemHelper  = new Prism\Filesystem\Helper($params);
+     * $mediaFolderUri    = $filesystemHelper->getMediaFolderUri();
+     * </code>
+     *
+     * @param int $id
+     * @param string $folderName
+     * @param string $uri
+     *
+     * @return string URL to the media folder
      */
-    public function getMediaFolderUri($userId = 0)
+    public function getMediaFolderUri($id = 0, $folderName = 'user', $uri = '')
     {
-        switch($this->params->get('filesystem', 'local')) {
+        switch ($this->params->get('filesystem', 'local')) {
             case 'amazon_s3':
-                $uriImages = $this->params->get('remote_domain') . $this->params->get('remote_media_folder', 'media');
+                $uri = ($uri !== '') ? $this->cleanUri($uri) : $this->cleanUri($this->params->get('remote_media_folder', 'media'));
+                $mediaUrl = $this->params->get('remote_domain') . $uri;
                 break;
 
             default:
-                $uriImages = \JUri::root() . $this->params->get('local_media_folder', 'media');
+                $uri = ($uri !== '') ? $this->cleanUri($uri) : $this->cleanUri($this->params->get('local_media_folder', 'media'));
+                $mediaUrl = \JUri::root() . $uri;
                 break;
         }
 
-        if ((int)$userId > 0) {
-            $uriImages .= '/user' . (int)$userId;
+        if ((int)$id > 0) {
+            $folderName = $folderName ?: 'user';
+            $mediaUrl .= '/'.$folderName . (int)$id;
         }
 
-        return $uriImages;
+        return $mediaUrl;
+    }
+
+    /**
+     * Remove first slash from URI string.
+     *
+     * @param $uri
+     *
+     * @return string
+     */
+    protected function cleanUri($uri)
+    {
+        return (string)preg_replace('/^\//', '', $uri);
     }
 
     /**
      * Check if it is local filesystem.
+     *
+     * <code>
+     * $params = JComponentHelper::getParams('com_magicgallery');
+     *
+     * $filesystemHelper   = new Prism\Filesystem\Helper($params);
+     * if ($filesystemHelper->isLocal()) {
+     * //....
+     * }
+     * </code>
      *
      * @return bool
      */

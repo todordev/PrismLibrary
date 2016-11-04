@@ -58,7 +58,7 @@ class Size extends Validator
      * Set a maximum allowed file size.
      *
      * <code>
-     * $fileSize  = 100000;
+     * $fileSize     = 100000;
      * $maxFileSize  = 600000;
      *
      * $validator = new Prism\File\Validator\Size($fileSize);
@@ -89,50 +89,32 @@ class Size extends Validator
      */
     public function isValid()
     {
-        $KB = 1024 * 1024;
+        $KB = 1024**2;
 
         // Verify file size
         $uploadMaxFileSize  = (int)ini_get('upload_max_filesize');
         $uploadMaxFileSize *= $KB;
 
-        $postMaxSize  = (int)(ini_get('post_max_size'));
+        $postMaxSize  = (int)ini_get('post_max_size');
         $postMaxSize *= $KB;
 
-        $memoryLimit = (int)(ini_get('memory_limit'));
+        $memoryLimit = (int)ini_get('memory_limit');
         if ($memoryLimit !== -1) {
             $memoryLimit *= $KB;
         }
 
-        if (
-            ($this->fileSize > $uploadMaxFileSize) or
+        if (($this->fileSize > $uploadMaxFileSize) or
             ($this->fileSize > $postMaxSize) or
             (($this->fileSize > $memoryLimit) and ($memoryLimit != -1))
-        ) { // Log error
-
-            $info  = \JText::sprintf(
-                'LIB_PRISM_ERROR_FILE_INFORMATION',
-                round($this->fileSize / $KB, 0),
-                round($uploadMaxFileSize / $KB, 0),
-                round($postMaxSize / $KB, 0),
-                round($memoryLimit / $KB, 0)
-            );
-
-            \JLog::add($info);
+        ) {
+            $this->additionalInformation = \JText::sprintf('LIB_PRISM_ERROR_FILE_INFORMATION', round($this->fileSize/$KB, 0), round($uploadMaxFileSize/$KB, 0), round($postMaxSize/$KB, 0), round($memoryLimit/$KB, 0));
             $this->message = \JText::_('LIB_PRISM_ERROR_WARNFILETOOLARGE');
             return false;
         }
 
         // Validate the max file size set by the user.
         if (($this->maxFileSize !== 0) and ($this->fileSize > $this->maxFileSize)) {
-
-            $info = \JText::sprintf(
-                'LIB_PRISM_ERROR_FILE_INFORMATION',
-                round($this->fileSize / $KB, 0),
-                round($this->maxFileSize / $KB, 0)
-            );
-
-            \JLog::add($info);
-
+            $this->additionalInformation = \JText::sprintf('LIB_PRISM_ERROR_FILE_INFORMATION', round($this->fileSize / $KB, 0), round($this->maxFileSize / $KB, 0));
             $this->message = \JText::_('LIB_PRISM_ERROR_WARNFILETOOLARGE');
             
             return false;

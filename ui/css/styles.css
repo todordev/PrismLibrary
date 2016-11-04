@@ -204,6 +204,14 @@
 	margin-left: 10px;
 }
 
+.mr-2 {
+	margin-right: 2px;
+}
+
+.mr-3 {
+	margin-right: 3px;
+}
+
 .mr-5 {
 	margin-right: 5px;
 }
@@ -214,6 +222,22 @@
 
 .mr-20 {
 	margin-right: 20px;
+}
+
+.ml-2 {
+	margin-left: 2px;
+}
+
+.ml-3 {
+	margin-left: 3px;
+}
+
+.ml-5 {
+	margin-left: 5px;
+}
+
+.ml-10 {
+	margin-left: 10px;
 }
 
 .m-10 {

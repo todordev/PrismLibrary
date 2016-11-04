@@ -89,7 +89,7 @@ class Socialcommunity extends TableImmutable implements ProfileInterface
         $query
             ->select(
                 'a.id, a.user_id, a.image_icon, a.image_small, a.image_square, a.image, a.active, ' .
-                $query->concatenate(array('a.id', 'a.alias'), ':') . ' AS slug, ' .
+                $query->concatenate(array('a.user_id', 'a.alias'), ':') . ' AS slug, ' .
                 'b.name as location, b.country_code'
             )
             ->from($this->db->quoteName('#__itpsc_profiles', 'a'))

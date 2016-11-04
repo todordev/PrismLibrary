@@ -24,7 +24,14 @@ abstract class Validator
      *
      * @var string
      */
-    protected $message;
+    protected $message = '';
+
+    /**
+     * Additional information about error.
+     *
+     * @var string
+     */
+    protected $additionalInformation = '';
 
     abstract public function isValid();
 
@@ -39,10 +46,28 @@ abstract class Validator
      * }
      * </code>
      *
-     * @return mixed
+     * @return string
      */
     public function getMessage()
     {
-        return $this->message;
+        return (string)$this->message;
+    }
+
+    /**
+     * Return additional information about error.
+     *
+     * <code>
+     * $validator = new Prism\Validator\Validator;
+     *
+     * if (!$validator->isValid()) {
+     *     echo $validator->getAdditionalInformation();
+     * }
+     * </code>
+     *
+     * @return string
+     */
+    public function getAdditionalInformation()
+    {
+        return (string)$this->additionalInformation;
     }
 }

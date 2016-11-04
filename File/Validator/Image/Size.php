@@ -40,7 +40,7 @@ class Size extends Validator
      */
     public function __construct($file = '')
     {
-        $this->file     = \JPath::clean($file);
+        $this->file = \JPath::clean($file);
     }
 
     /**

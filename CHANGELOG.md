@@ -1,6 +1,11 @@
 Prism Library Changelog
 ==========================
 
+###v1.17
+* Upgraded [Bootstrap FileInput](https://github.com/kartik-v/bootstrap-fileinput) library.
+* Added [SweetAlert](http://t4t5.github.io/sweetalert/).
+* Improved some classes and methods.
+
 ###v1.16
 * Upgraded libraries JmesPath v2.3.0, AWS SDK v3.19.12, Flysystem v1.0.27, Flysystem AWS-v3-S3 v1.0.13.
 * Replaced JPATH_BASE with JPATH_ROOT in Prism\Filesystem\Helper.

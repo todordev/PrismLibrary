@@ -25,6 +25,10 @@ class Constants
     const TRASHED            = -2;
     const AWAITING_APPROVAL  = -3;
 
+    const YES = 1;
+    const OK  = 1;
+    const NO  = 0;
+
     const APPROVED     = 1;
     const NOT_APPROVED = 0;
 

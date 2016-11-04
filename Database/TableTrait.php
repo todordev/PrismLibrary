@@ -65,21 +65,44 @@ trait TableTrait
      * $notification->bind($data);
      * </code>
      *
-     * @param array $data
+     * @param array||\stdClass $data
      * @param array $ignored
      */
     public function bind($data, array $ignored = array())
     {
         // Parse parameters of the object if they exists.
-        if (array_key_exists('params', $data) and !in_array('params', $ignored, true)) {
-            $this->params = new Registry($data['params']);
-            unset($data['params']);
-        }
-
-        foreach ($data as $key => $value) {
-            if (!in_array($key, $ignored, true)) {
-                $this->$key = $value;
+        if (is_array($data)) {
+            if (array_key_exists('params', $data) and !in_array('params', $ignored, true)) {
+                if ($data['params'] instanceof Registry) {
+                    $this->params = $data['params'];
+                } else {
+                    $this->params = new Registry($data['params']);
+                }
+                unset($data['params']);
             }
+
+            foreach ($data as $key => $value) {
+                if (!in_array($key, $ignored, true)) {
+                    $this->$key = $value;
+                }
+            }
+        } elseif (is_object($data)) {
+            if (property_exists($data, 'params') and !in_array('params', $ignored, true)) {
+                if ($data->params instanceof Registry) {
+                    $this->params = $data->params;
+                } else {
+                    $this->params = new Registry($data->params);
+                }
+                unset($data->params);
+            }
+
+            $data_ = get_object_vars($data);
+            foreach ($data_ as $key => $value) {
+                if (!in_array($key, $ignored, true)) {
+                    $this->$key = $value;
+                }
+            }
+            unset($data_);
         }
     }
 

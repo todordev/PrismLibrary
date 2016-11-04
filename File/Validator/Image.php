@@ -10,6 +10,7 @@
 namespace Prism\File\Validator;
 
 use Prism\Validator\Validator;
+use Joomla\String\StringHelper;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -23,7 +24,7 @@ defined('JPATH_PLATFORM') or die;
 class Image extends Validator
 {
     protected $file;
-    protected $fileName;
+    protected $filename;
 
     protected $mimeTypes;
     protected $imageExtensions;
@@ -33,18 +34,20 @@ class Image extends Validator
      *
      * <code>
      * $myFile     = '/tmp/myfile.tmp';
-     * $fileName   = 'myfile.jpg';
+     * $filename   = 'myfile.jpg';
      *
      * $validator = new Prism\File\Validator\Image($myFile, $fileName);
      * </code>
      *
      * @param string $file A path to the file.
-     * @param string $fileName File name
+     * @param string $filename File name
+     *
+     * @throws \UnexpectedValueException
      */
-    public function __construct($file = '', $fileName = '')
+    public function __construct($file = '', $filename = '')
     {
         $this->file     = \JPath::clean($file);
-        $this->fileName = \JFile::makeSafe(basename($fileName));
+        $this->filename = \JFile::makeSafe(basename($filename));
     }
 
     /**
@@ -58,6 +61,8 @@ class Image extends Validator
      * </code>
      *
      * @param string $file
+     *
+     * @throws \UnexpectedValueException
      */
     public function setFile($file)
     {
@@ -68,17 +73,17 @@ class Image extends Validator
      * Set a file name.
      *
      * <code>
-     * $fileName  = 'myfile.jpg';
+     * $filename  = 'myfile.jpg';
      *
      * $validator = new Prism\File\Validator\Image();
-     * $validator->setFileName($fileName);
+     * $validator->setFilename($filename);
      * </code>
      *
-     * @param string $fileName
+     * @param string $filename
      */
-    public function setFileName($fileName)
+    public function setFilename($filename)
     {
-        $this->fileName = \JFile::makeSafe($fileName);
+        $this->filename = \JFile::makeSafe($filename);
     }
 
     /**
@@ -129,6 +134,9 @@ class Image extends Validator
      * }
      * </code>
      *
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     *
      * @return bool
      */
     public function isValid()
@@ -146,10 +154,9 @@ class Image extends Validator
         }
 
         // Check file extension
-        $ext = \JString::strtolower(\JFile::getExt($this->fileName));
-
+        $ext = StringHelper::strtolower(\JFile::getExt($this->filename));
         if (!in_array($ext, $this->imageExtensions, true)) {
-            $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_EXTENSIONS_S', $this->file);
+            $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_EXTENSIONS_S', $this->filename);
             return false;
         }
 

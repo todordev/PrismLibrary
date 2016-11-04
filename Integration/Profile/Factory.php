@@ -59,6 +59,8 @@ final class Factory
      * $factory = new Prism\Integration\Profile\Factory($options);
      * $profile = $factory->create();
      * </code>
+     *
+     * @throws \RuntimeException
      */
     public function create()
     {
@@ -73,7 +75,10 @@ final class Factory
                 $url   = $filesystemHelper->getMediaFolderUri();
 
                 $profile = new Socialcommunity(\JFactory::getDbo());
-                $profile->load($this->options->get('user_id'));
+                $profile->load(array(
+                    'user_id' => $this->options->get('user_id')
+                ));
+
                 $profile->setMediaUrl($url);
                 break;
 

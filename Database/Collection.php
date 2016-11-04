@@ -10,6 +10,7 @@
 namespace Prism\Database;
 
 use Joomla\Utilities\ArrayHelper;
+use Joomla\Registry\Registry;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -166,7 +167,7 @@ abstract class Collection implements \Iterator, \Countable, \ArrayAccess
                 }
             }
         } else {
-            foreach ($$this->items as $item) {
+            foreach ($this->items as $item) {
                 if (array_key_exists($key, $item)) {
                     if (!array_key_exists($key, $results)) {
                         $results[$key] = 0;
@@ -239,6 +240,28 @@ abstract class Collection implements \Iterator, \Countable, \ArrayAccess
     public function offsetGet($offset)
     {
         return (!array_key_exists($offset, $this->items)) ? null : $this->items[$offset];
+    }
+
+    /**
+     * Return items as array indexed by column value.
+     *
+     * @param string $columnName
+     *
+     * @return array
+     */
+    public function toArrayByColumn($columnName)
+    {
+        $results = array();
+
+        foreach ($this->items as $item) {
+            if (is_array($item) and array_key_exists($columnName, $item)) {
+                $results[$item[$columnName]][] = $item;
+            } elseif (is_object($item) and property_exists($columnName, $item)) {
+                $results[$item->$columnName][] = $item;
+            }
+        }
+
+        return $results;
     }
 
     /**
@@ -374,7 +397,55 @@ abstract class Collection implements \Iterator, \Countable, \ArrayAccess
     }
 
     /**
-     * Search in the results of arrays.
+     * Search items and return all elements that match to column and value.
+     *
+     * <code>
+     * $groups = new Gamification\Group\Groups(JFactory::getDbo());
+     * $groups->load();
+     *
+     * $options = $groups->find(1, "gallery_id");
+     * </code>
+     *
+     * @return array
+     */
+    protected function prepareParameters()
+    {
+        foreach ($this->items as $key => $item) {
+            if (is_array($item)) {
+                if (array_key_exists('params', $item)) {
+                    if ($item['params'] === null or $item['params'] === '') {
+                        $item['params'] = '{}';
+                    }
+
+                    if (is_string($item['params']) and $item['params'] !== '') {
+                        $params = new Registry;
+                        $params->loadString($item['params']);
+                        $item['params'] = $params;
+                    }
+
+                    $this->items[$key] = $item;
+                    unset($item);
+                }
+            } elseif (is_object($item)) {
+                if (property_exists($item, 'params')) {
+                    if ($item->params === null or $item->params === '') {
+                        $item->params = '{}';
+                    }
+
+                    if (is_string($item->params) and $item->params !== '') {
+                        $params = new Registry;
+                        $params->loadString($item->params);
+
+                        $item->params = $params;
+                        unset($params);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Search for an item.
      *
      * <code>
      * $groups = new Gamification\Group\Groups(JFactory::getDbo());
@@ -386,20 +457,61 @@ abstract class Collection implements \Iterator, \Countable, \ArrayAccess
      * @param mixed $value The value that we will search.
      * @param string $column The column where we will search.
      *
-     * @return array
+     * @return null|array|\stdClass
      */
     public function find($value, $column)
     {
-        $result = array();
+        $result = null;
 
         foreach ($this->items as $item) {
-            if (array_key_exists($column, $item) and ($value == $item[$column])) {
-                $result = $item;
-                break;
+            if (is_array($item)) {
+                if (array_key_exists($column, $item) and ($value == $item[$column])) {
+                    $result = $item;
+                    break;
+                }
+            } elseif (is_object($item)) {
+                if (property_exists($item, $column) and ($value == $item->$column)) {
+                    $result = $item;
+                    break;
+                }
             }
         }
 
         return $result;
+    }
+
+    /**
+     * Search items and return all elements that match to column and value.
+     *
+     * <code>
+     * $groups = new Gamification\Group\Groups(JFactory::getDbo());
+     * $groups->load();
+     *
+     * $options = $groups->find(1, "gallery_id");
+     * </code>
+     *
+     * @param mixed $value The value that we will search.
+     * @param string $column The column where we will search.
+     *
+     * @return array
+     */
+    public function findAll($value, $column)
+    {
+        $results = array();
+
+        foreach ($this->items as $item) {
+            if (is_array($item)) {
+                if (array_key_exists($column, $item) and ($value == $item[$column])) {
+                    $results[] = $item;
+                }
+            } elseif (is_object($item)) {
+                if (property_exists($item, $column) and ($value == $item->$column)) {
+                    $results[] = $item;
+                }
+            }
+        }
+
+        return $results;
     }
 
     /**

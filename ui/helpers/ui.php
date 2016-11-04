@@ -223,6 +223,32 @@ abstract class PrismUI
     }
 
     /**
+     * Include Sweet Alert javascript library.
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('Prism.ui.sweetAlert');
+     * </code>
+     *
+     * @link http://t4t5.github.io/sweetalert/ Documentation of Sweet Alert
+     */
+    public static function sweetAlert()
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/sweetalert/sweetalert.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/sweetalert/sweetalert.min.js');
+
+        self::$loaded[__METHOD__] = true;
+    }
+
+    /**
      * Include Bootstrap Fileinput library (BS v3).
      *
      * <code>
@@ -244,6 +270,7 @@ abstract class PrismUI
 
         $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/css/fileinput.min.css');
         $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/js/fileinput.min.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/themes/fa/theme.js');
         $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/js/plugins/canvas-to-blob.min.js');
 
         self::$loaded[__METHOD__] = true;

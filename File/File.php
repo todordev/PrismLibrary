@@ -10,6 +10,7 @@
 namespace Prism\File;
 
 use Prism\Validator\Validator;
+use Joomla\String\StringHelper;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -19,23 +20,30 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package      Prism
  * @subpackage   Files
- *
- * @deprecated since v1.10
- * @todo rework it to be extended by Prism\File\Image
  */
 class File
 {
     protected $file;
+    protected $fileData = array();
 
     protected $errors = array();
+    protected $errorAdditionalInformation = array();
 
     /**
      * @var UploaderInterface
+     *
+     * @deprecated v1.17
      */
     protected $uploader;
 
+    /**
+     * @var array
+     *
+     * @deprecated v1.17
+     */
+    protected $removers   = array();
+
     protected $validators = array();
-    protected $removers = array();
 
     /**
      * Initialize the object.
@@ -47,13 +55,12 @@ class File
      * </code>
      *
      * @param  mixed $file
+     *
+     * @throws \UnexpectedValueException
      */
-    public function __construct($file = '')
+    public function __construct($file)
     {
-        if ($file !== '') {
-            $this->file = \JPath::clean($file);
-        }
-
+        $this->file = \JPath::clean($file);
     }
 
     /**
@@ -69,6 +76,8 @@ class File
      * </code>
      *
      * @param UploaderInterface $uploader
+     *
+     * @deprecated v1.17
      */
     public function setUploader(UploaderInterface $uploader)
     {
@@ -88,6 +97,8 @@ class File
      * </code>
      *
      * @return string
+     *
+     * @deprecated v1.17
      */
     public function getFile()
     {
@@ -110,6 +121,8 @@ class File
      *
      * @param  array $file An array that comes from JInput.
      * @param  string $destination Destination where the file is going to be saved.
+     *
+     * @deprecated v1.17
      */
     public function upload(array $file = array(), $destination = '')
     {
@@ -117,7 +130,7 @@ class File
             $this->uploader->setFile($file);
         }
 
-        if (\JString::strlen($destination) > 0) {
+        if (StringHelper::strlen($destination) > 0) {
             $this->uploader->setDestination($destination);
         }
 
@@ -166,6 +179,7 @@ class File
      * @param  bool $reset Reset existing removers.
      *
      * @return self
+     * @deprecated v1.17
      */
     public function addRemover(RemoverInterface $remover, $reset = false)
     {
@@ -204,6 +218,7 @@ class File
         foreach ($this->validators as $validator) {
             if (!$validator->isValid()) {
                 $this->errors[] = $validator->getMessage();
+                $this->errorAdditionalInformation[] = $validator->getAdditionalInformation();
                 return false;
             }
         }
@@ -224,6 +239,8 @@ class File
      *
      * $file->remove();
      * </code>
+     *
+     * @deprecated v1.17
      */
     public function remove()
     {
@@ -262,11 +279,11 @@ class File
      * Return last error message.
      *
      * <code>
-     * $myFile   = "/tmp/myfile.jpg";
+     * $filePath  = "/tmp/myfile.jpg";
      *
      * $validator = new Prism\File\Validator\Image();
      *
-     * $file = new Prism\File\File($myFile);
+     * $file = new Prism\File\File($filePath);
      * $file->addValidator($validator);
      *
      * if (!$file->isValid()) {
@@ -279,5 +296,206 @@ class File
     public function getError()
     {
         return end($this->errors);
+    }
+
+    /**
+     * Return latest record from the additional information about error.
+     *
+     * <code>
+     * $filePath  = "/tmp/myfile.jpg";
+     *
+     * $validator = new Prism\File\Validator\Image();
+     *
+     * $file = new Prism\File\File($filePath);
+     * $file->addValidator($validator);
+     *
+     * if (!$file->isValid()) {
+     *     echo $file->getErrorAdditionalInformation();
+     * )
+     * </code>
+     *
+     * @return string
+     */
+    public function getErrorAdditionalInformation()
+    {
+        return end($this->errorAdditionalInformation);
+    }
+
+    /**
+     * Check if the file name has extension of an image.
+     *
+     * <code>
+     * $filePath = '/tmp/picture1.png';
+     * $file     = new Prism\File\File($filePath);
+     *
+     * if ($file->isImage()) {
+     * // ...
+     * }
+     * </code>
+     *
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     *
+     * @return bool
+     */
+    public function isImage()
+    {
+        // Check file extension and its mime type.
+        return ($this->hasImageExtension() and $this->hasImageMime());
+    }
+
+    /**
+     * Check if file is a video.
+     *
+     * <code>
+     * $filePath = '/tmp/video.avi';
+     * $file     = new Prism\File\File($filePath);
+     *
+     * if ($file->isVideo()) {
+     * // ...
+     * }
+     * </code>
+     *
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     *
+     * @return bool
+     * @todo Under construction.
+     */
+    public function isVideo()
+    {
+        // Check file extension and its mime type.
+        return false;
+    }
+
+    /**
+     * Check if the file name has extension of an image.
+     *
+     * <code>
+     * $filePath = '/tmp/picture1.png';
+     * $file     = new Prism\File\File($filePath);
+     *
+     * $filetype = $file->getFiletype()
+     * </code>
+     *
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     *
+     * @return bool
+     */
+    public function getFiletype()
+    {
+        $filetype = '';
+        if ($this->isImage()) {
+            $filetype = 'image';
+        } elseif ($this->isVideo()) {
+            $filetype = 'video';
+        }
+
+
+        return $filetype;
+    }
+
+    /**
+     * Extract information about file using PHP Fileinfo.
+     *
+     * <code>
+     * $filePath = '/tmp/picture1.png';
+     * $file     = new Prism\File\File($filePath);
+     *
+     * $fileData = $file->extractFileData();
+     * </code>
+     *
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     *
+     * @return array
+     */
+    public function extractFileData()
+    {
+        // Get mime type.
+        if (function_exists('finfo_open')) {
+            $finfo        = finfo_open(FILEINFO_MIME_TYPE);
+            $this->fileData['mime'] = finfo_file($finfo, $this->file);
+            finfo_close($finfo);
+        }
+
+        $this->fileData['filename']  = basename($this->file);
+        $this->fileData['filesize']  = filesize($this->file);
+        $this->fileData['filetype']  = $this->getFiletype();
+        $this->fileData['extension'] = \JFile::getExt(basename($this->fileData['filename']));
+
+        if ($this->isImage()) {
+            $imageProperties = \JImage::getImageFileProperties($this->file);
+
+            $this->fileData['attributes'] = array(
+                'type'   => $imageProperties->type,
+                'width'  => $imageProperties->width,
+                'height' => $imageProperties->height
+            );
+        }
+
+        return $this->fileData;
+    }
+
+    /**
+     * Check if the file name has extension of an image.
+     *
+     * <code>
+     * $filePath = '/tmp/picture1.png';
+     * $file     = new Prism\File\File($filePath);
+     *
+     * if ($file->hasImageExtension()) {
+     * // ...
+     * }
+     * </code>
+     *
+     * @return bool
+     */
+    public function hasImageExtension()
+    {
+        $extensions     = array('jpg', 'jpeg', 'bmp', 'gif', 'png');
+        $fileExtension  = \JFile::getExt(basename($this->file));
+
+        return (($fileExtension !== null and $fileExtension !== '') and in_array($fileExtension, $extensions, true));
+    }
+
+    /**
+     * Check if a mime type is an image.
+     *
+     * <code>
+     * $filePath = '/tmp/picture1.png';
+     * $file     = new Prism\File\File($filePath);
+     *
+     * if ($file->hasImageMime()) {
+     * // ...
+     * }
+     * </code>
+     *
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     *
+     * @return bool
+     */
+    public function hasImageMime()
+    {
+        $result = false;
+
+        if (extension_loaded('gd') and function_exists('gd_info')) {
+            $mimeTypes     = array('image/png', 'image/gif', 'image/jpeg', 'image/pjpeg', 'image/bmp', 'image/x-windows-bmp');
+
+            if (count($this->fileData) > 0) {
+                $mimeType = $this->fileData['mime'];
+            } else {
+                $imageProperties = \JImage::getImageFileProperties($this->file);
+                $mimeType = $imageProperties->mime;
+            }
+
+            if (in_array($mimeType, $mimeTypes, true)) {
+                $result = true;
+            }
+        }
+
+        return $result;
     }
 }
