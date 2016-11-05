@@ -13,6 +13,10 @@ if (!defined('PRISM_PATH_LIBRARY')) {
     define('PRISM_PATH_LIBRARY', JPATH_LIBRARIES . '/Prism');
 }
 
+if (!defined('PRISM_PATH_UI_LAYOUTS')) {
+    define('PRISM_PATH_UI_LAYOUTS', PRISM_PATH_LIBRARY . '/ui/layouts');
+}
+
 jimport('joomla.filesystem.file');
 jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.path');

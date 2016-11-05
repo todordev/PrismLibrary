@@ -168,7 +168,7 @@ final class Helper
         switch ($this->params->get('filesystem', 'local')) {
             case 'amazon_s3':
                 $uri = ($uri !== '') ? $this->cleanUri($uri) : $this->cleanUri($this->params->get('remote_media_folder', 'media'));
-                $mediaUrl = $this->params->get('remote_domain') . $uri;
+                $mediaUrl = $this->params->get('remote_domain') . '/'. $uri;
                 break;
 
             default:

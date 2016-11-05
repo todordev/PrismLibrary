@@ -379,6 +379,31 @@ abstract class PrismUI
     }
 
     /**
+     * Include Select2 library.
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('Prism.ui.select2');
+     * </code>
+     *
+     * @link https://select2.github.io Select2
+     */
+    public static function select2()
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/select2/css/select2.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/select2/js/select2.min.js');
+
+        self::$loaded[__METHOD__] = true;
+    }
+
+    /**
      * Include Parsley library.
      *
      * <code>
