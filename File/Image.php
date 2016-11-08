@@ -10,7 +10,7 @@
 namespace Prism\File;
 
 use Joomla\Registry\Registry;
-use Joomla\Utilities\ArrayHelper;
+use Prism\Constants;
 use Prism\Utilities\StringHelper;
 
 defined('JPATH_PLATFORM') or die;
@@ -44,26 +44,25 @@ class Image
      */
     public function __construct($file)
     {
-        $this->file = \JPath::clean($file);
+        $this->file = $file;
     }
 
     /**
      * Resize the temporary file to new one.
      *
      * <code>
-     * $image = $this->input->files->get('media', array(), 'array');
-     * $rootFolder = "/root/joomla/tmp";
+     * $file = $this->input->files->get('media', array(), 'array');
+     * $destinationFolder = "/root/joomla/tmp";
      *
      * $resizeOptions = array(
      *    'width'  => $options['thumb_width'],
      *    'height' => $options['thumb_height'],
-     *    'scale'  => $options['thumb_scale']
+     *    'scale'  => \JImage::SCALE_INSIDE
      * );
      *
-     * $file = new Prism\File\Image($image, $rootFolder);
+     * $file = new Prism\File\Image($file['tmp_path']);
      *
-     * $file->upload();
-     * $fileData = $file->resize($resize);
+     * $fileData = $file->resize($destinationFolder, $resizeOptions);
      * </code>
      *
      * @param  string $destinationFolder The folder where the file will be stored.
@@ -86,9 +85,6 @@ class Image
             throw new \RuntimeException(\JText::sprintf('LIB_PRISM_ERROR_CANNOT_CREATE_FOLDER_S', $destinationFolder));
         }
 
-        $filename = \JFile::makeSafe(basename($this->file));
-        $ext      = \JFile::getExt($filename);
-
         // Resize image.
         $image = new \JImage();
         $image->loadFile($this->file);
@@ -102,8 +98,7 @@ class Image
         $height     = $options->get('height', 480);
         $height     = ($height < 50) ? 50 : $height;
         $scale      = $options->get('scale', \JImage::SCALE_INSIDE);
-        $quality    = (int)$options->get('quality', 80);
-        $createNew  = (bool)$options->get('create_new', true);
+        $createNew  = (bool)$options->get('create_new', Constants::NO);
 
         if ($createNew) {
             $image = $image->resize($width, $height, $createNew, $scale);
@@ -111,17 +106,107 @@ class Image
             $image->resize($width, $height, $createNew, $scale);
         }
 
-        // Generate new name.
-        $generatedName = StringHelper::generateRandomString($options->get('filename_length', 16)) .'.'.$ext;
+        return $this->saveFile($image, $destinationFolder, $options);
+    }
 
-        $prefix  = $options->get('prefix');
+    /**
+     * Crop an image.
+     *
+     * <code>
+     * $file = $this->input->files->get('media', array(), 'array');
+     * $destinationFolder = "/root/joomla/tmp";
+     *
+     * $resizeOptions = array(
+     *    'width'  => $options['thumb_width'],
+     *    'height' => $options['thumb_height'],
+     *    'x'  => 100,
+     *    'y'  => 100,
+     * );
+     *
+     * $file = new Prism\File\Image($file['tmp_path']);
+     *
+     * $fileData = $file->crop($destinationFolder, $resizeOptions);
+     * </code>
+     *
+     * @param  string $destinationFolder The folder where the file will be stored.
+     * @param  Registry $options
+     *
+     * @throws \RuntimeException
+     * @throws \LogicException
+     * @throws \InvalidArgumentException
+     * @throws \UnexpectedValueException
+     *
+     * @return array
+     */
+    public function crop($destinationFolder, Registry $options)
+    {
+        if (!$this->file) {
+            throw new \RuntimeException(\JText::sprintf('LIB_PRISM_ERROR_FILE_NOT_FOUND_S', $this->file));
+        }
+
+        if (!\JFolder::exists($destinationFolder) and !\JFolder::create($destinationFolder)) {
+            throw new \RuntimeException(\JText::sprintf('LIB_PRISM_ERROR_CANNOT_CREATE_FOLDER_S', $destinationFolder));
+        }
+
+        // Resize image.
+        $image = new \JImage();
+        $image->loadFile($this->file);
+        if (!$image->isLoaded()) {
+            throw new \RuntimeException(\JText::sprintf('LIB_PRISM_ERROR_FILE_NOT_IMAGE', $this->file));
+        }
+
+        // Resize to general size.
+        $width      = $options->get('width', 200);
+        $width      = ($width < 50) ? 50 : $width;
+        $height     = $options->get('height', 200);
+        $height     = ($height < 50) ? 50 : $height;
+        $left       = (int)abs($options->get('x', 0));
+        $left       = ($left > $width) ? 0 : $left;
+        $top        = (int)abs($options->get('y', 0));
+        $top        = ($top > $height) ? 0 : $top;
+        $createNew  = (bool)$options->get('create_new', Constants::NO);
+
+        if ($createNew) {
+            $image = $image->crop($width, $height, $left, $top, $createNew);
+        } else {
+            $image->crop($width, $height, $left, $top, $createNew);
+        }
+
+        return $this->saveFile($image, $destinationFolder, $options);
+    }
+
+    protected function saveFile(\JImage $image, $destinationFolder, Registry $options)
+    {
+        $filename = \JFile::makeSafe(basename($this->file));
+        $ext      = \JFile::getExt($filename);
+
+        // Generate new name.
+        $newFilename   = \JFile::makeSafe(basename($options->get('filename')));
+        $generatedName = $newFilename;
+        if (!$newFilename) {
+            $generatedName = StringHelper::generateRandomString($options->get('filename_length', 16));
+        }
+
+        // Set prefix
+        $prefix  = \JFile::makeSafe($options->get('prefix'));
         if (is_string($prefix) and $prefix !== '') {
             $generatedName = $prefix.$generatedName;
         }
-        $destinationFile = \JPath::clean($destinationFolder .'/'. $generatedName);
 
+        // Set suffix
+        $suffix  = \JFile::makeSafe($options->get('suffix'));
+        if (is_string($suffix) and $suffix !== '') {
+            $generatedName .= $suffix;
+        }
+
+        // Add the extension to the file.
+        $generatedName  .= '.'.$ext;
+        $destinationFile = \JPath::clean($destinationFolder .'/'. $generatedName, '/');
+
+        // Resize the image.
         switch ($ext) {
             case 'png':
+                $quality    = (int)$options->get('quality', Constants::QUALITY_HIGH);
                 $optimizationOptions = array();
                 if ($quality > 0) {
                     if ($quality > 9) {
@@ -136,6 +221,7 @@ class Image
 
             case 'jpg':
             case 'jpeg':
+                $quality    = (int)$options->get('quality', Constants::QUALITY_HIGH);
                 $optimizationOptions = array();
                 if ($quality > 0) {
                     $optimizationOptions = array('quality' => $quality);

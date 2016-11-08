@@ -32,6 +32,9 @@ class Constants
     const APPROVED     = 1;
     const NOT_APPROVED = 0;
 
+    const ALLOWED      = 1;
+    const NOT_ALLOWED  = 0;
+
     const FEATURED = 1;
     const NOT_FEATURED = 0;
 
@@ -119,4 +122,11 @@ class Constants
 
     // Locale
     const LOCALE_DEFAULT_LANGUAGE_CODE = 'en_GB';
+
+    // Images
+    const QUALITY_MAXIMUM = 100;
+    const QUALITY_VERY_HIGH = 80;
+    const QUALITY_HIGH = 60;
+    const QUALITY_MEDIUM = 30;
+    const QUALITY_LOW = 10;
 }

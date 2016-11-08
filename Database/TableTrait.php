@@ -65,7 +65,7 @@ trait TableTrait
      * $notification->bind($data);
      * </code>
      *
-     * @param array||\stdClass $data
+     * @param array|\stdClass $data
      * @param array $ignored
      */
     public function bind($data, array $ignored = array())

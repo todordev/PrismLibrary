@@ -1,6 +1,10 @@
 Prism Library Changelog
 ==========================
 
+###v1.17.1
+* Improved classes File\Image and File\File.
+* Added constants for image quality.
+
 ###v1.17
 * Upgraded [Bootstrap FileInput](https://github.com/kartik-v/bootstrap-fileinput) library.
 * Added [SweetAlert](http://t4t5.github.io/sweetalert/).

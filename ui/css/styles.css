@@ -190,6 +190,14 @@
     margin-top: 20px;
 }
 
+.mt-25 {
+	margin-top: 25px;
+}
+
+.mt-30 {
+	margin-top: 30px;
+}
+
 .mtb-5 {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -278,6 +286,18 @@
 
 .mb-15 {
 	margin-bottom: 15px;
+}
+
+.mb-20 {
+	margin-bottom: 20px;
+}
+
+.mb-25 {
+	margin-bottom: 25px;
+}
+
+.mb-30 {
+	margin-bottom: 30px;
 }
 
 .hr {
