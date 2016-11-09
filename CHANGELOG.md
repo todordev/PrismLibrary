@@ -1,6 +1,9 @@
 Prism Library Changelog
 ==========================
 
+###v1.17.2
+* It was made compatible with PHP 5.5.
+
 ###v1.17.1
 * Improved classes File\Image and File\File.
 * Added constants for image quality.

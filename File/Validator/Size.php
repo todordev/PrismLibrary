@@ -89,7 +89,7 @@ class Size extends Validator
      */
     public function isValid()
     {
-        $KB = 1024**2;
+        $KB = pow(1024, 2);
 
         // Verify file size
         $uploadMaxFileSize  = (int)ini_get('upload_max_filesize');
