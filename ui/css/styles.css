@@ -1,20 +1,35 @@
 @CHARSET "UTF-8";
 
 /* Help blocks */
-.help-block-xsmall {
+.help-block {
+	color: #a3a3a3;
 	font-style: italic;
+}
+
+.fm {
+	font-size: medium;
+}
+
+.fs {
+	font-size: small;
+}
+
+.fxs {
 	font-size: x-small;
 }
 
 .help-block-xxsmall {
-	font-style: italic;
-	font-size: xx-small;
+	font: xx-small italic;
 }
 
 /* Background colors */
 
 .bgcolor-gray-light {
     background-color: #e7e7e7;
+}
+
+.bgcolor-gray-lighter {
+    background-color: #f3f3f3;
 }
 
 .bgcolor-blue-light {
@@ -81,8 +96,17 @@
 	width: 600px !important;
 }
 
+.height-300px{
+	height: 300px !important;
+}
+.height-400px{
+	height: 400px !important;
+}
+.height-500px{
+	height: 500px !important;
+}
 .height-600px{
-	height: 600px;
+	height: 600px !important;
 }
 
 .relative {

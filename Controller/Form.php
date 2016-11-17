@@ -187,7 +187,7 @@ class Form extends \JControllerForm
     {
         // Return predefined link
         $forceDirection = ArrayHelper::getValue($options, 'force_direction');
-        if (null !== $forceDirection) {
+        if ($forceDirection !== null) {
             return $forceDirection;
         }
         $link = $this->defaultLink;
@@ -201,10 +201,10 @@ class Form extends \JControllerForm
         unset($options['view'], $options['layout'], $options['url_var'], $options['id']);
 
         // Redirect to different of common views
-        if (null !== $view) {
+        if ($view !== null) {
             $link .= '&view=' . $view;
         }
-        if (null !== $layout) {
+        if ($layout !== null) {
             $link .= '&layout=' . $layout;
         }
 

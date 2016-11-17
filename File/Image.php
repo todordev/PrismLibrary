@@ -161,9 +161,7 @@ class Image
         $height     = $options->get('height', 200);
         $height     = ($height < 50) ? 50 : $height;
         $left       = (int)abs($options->get('x', 0));
-        $left       = ($left > $width) ? 0 : $left;
         $top        = (int)abs($options->get('y', 0));
-        $top        = ($top > $height) ? 0 : $top;
         $createNew  = (bool)$options->get('create_new', Constants::NO);
 
         if ($createNew) {

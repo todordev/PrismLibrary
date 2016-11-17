@@ -1,6 +1,10 @@
 Prism Library Changelog
 ==========================
 
+###v1.17.3
+* Fixed Prism\File\Image::crop().
+* Improved Prism\Utilities\NetworkHelper::isValidIp().
+
 ###v1.17.2
 * It was made compatible with PHP 5.5.
 
