@@ -50,6 +50,35 @@ abstract class PrismUI
     }
 
     /**
+     * Include jQuery plugin LoadingOverlay
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('Prism.ui.loadingOverlay');
+     * </code>
+     *
+     * @link http://gasparesganga.com/labs/jquery-loading-overlay/#get-it
+     */
+    public static function loadingOverlay($progress = false)
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/loadingoverlay/loadingoverlay.min.js');
+
+        if ($progress) {
+            $document->addScript(JUri::root() . 'libraries/Prism/ui/loadingoverlay/loadingoverlay_progress.min.js');
+        }
+
+        self::$loaded[__METHOD__] = true;
+    }
+
+    /**
      * Include backend styles.
      *
      * <code>
@@ -91,6 +120,128 @@ abstract class PrismUI
         $document = JFactory::getDocument();
 
         $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/css/styles.css');
+
+        self::$loaded[__METHOD__] = true;
+    }
+
+    /**
+     * Include AnimateCSS stiles.
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('Prism.ui.animateCss');
+     * </code>
+     *
+     * @link https://github.com/daneden/animate.css
+     */
+    public static function animateCss()
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/animation/animate.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/animation/animate.js');
+
+        self::$loaded[__METHOD__] = true;
+    }
+
+    /**
+     * Include Magic Animations stiles.
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('Prism.ui.magicAnimations');
+     * </code>
+     *
+     * @link https://www.minimamente.com/example/magic_animations/
+     */
+    public static function magicAnimations()
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/animation/magic.min.css');
+
+        self::$loaded[__METHOD__] = true;
+    }
+
+    /**
+     * Include Readmore.js library.
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('Prism.ui.readMore');
+     * </code>
+     *
+     * @link https://github.com/jedfoster/Readmore.js
+     */
+    public static function readMore()
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/readmore.min.js');
+
+        self::$loaded[__METHOD__] = true;
+    }
+    
+    /**
+     * Include Favico JS library.
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('Prism.ui.favicoJs');
+     * </code>
+     *
+     * @link http://lab.ejci.net/favico.js/
+     */
+    public static function favicoJs()
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/animation/favico.min.js');
+
+        self::$loaded[__METHOD__] = true;
+    }
+
+    /**
+     * Include CSSpin styles.
+     * Types - balls, boxes, bubbles, eclipse, flip, heart, hue, meter, morph, meter, pinwheel, round, skeleton.
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('Prism.ui.cssSpin');
+     * </code>
+     *
+     * @link https://webkul.github.io/csspin/
+     */
+    public static function cssSpin($type)
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/csspin/csspin-'.$type.'.css');
 
         self::$loaded[__METHOD__] = true;
     }

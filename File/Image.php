@@ -173,10 +173,67 @@ class Image
         return $this->saveFile($image, $destinationFolder, $options);
     }
 
+    /**
+     * Save the image file. It could be converted to another image type.
+     *
+     * <code>
+     * $file = $this->input->files->get('media', array(), 'array');
+     * $destinationFolder = "/root/joomla/tmp";
+     *
+     * $resizeOptions = array(
+     *    'filename_length'  => 16,
+     *    'suffix'           => '_image',
+     *    'quality'          => Prism\Constants::QUALITY_HIGH,
+     *    'image_type'       => 'png'
+     * );
+     *
+     * $file     = new Prism\File\Image($file['tmp_path']);
+     *
+     * $fileData = $file->toFile($destinationFolder, $options);
+     * </code>
+     *
+     * @param  string $destinationFolder The folder where the file will be stored.
+     * @param  Registry $options
+     *
+     * @throws \RuntimeException
+     * @throws \LogicException
+     * @throws \InvalidArgumentException
+     * @throws \UnexpectedValueException
+     *
+     * @return array
+     */
+    public function toFile($destinationFolder, Registry $options)
+    {
+        if (!$this->file) {
+            throw new \RuntimeException(\JText::sprintf('LIB_PRISM_ERROR_FILE_NOT_FOUND_S', $this->file));
+        }
+
+        if (!\JFolder::exists($destinationFolder) and !\JFolder::create($destinationFolder)) {
+            throw new \RuntimeException(\JText::sprintf('LIB_PRISM_ERROR_CANNOT_CREATE_FOLDER_S', $destinationFolder));
+        }
+
+        // Resize image.
+        $image = new \JImage();
+        $image->loadFile($this->file);
+        if (!$image->isLoaded()) {
+            throw new \RuntimeException(\JText::sprintf('LIB_PRISM_ERROR_FILE_NOT_IMAGE', $this->file));
+        }
+
+        return $this->saveFile($image, $destinationFolder, $options);
+    }
+
     protected function saveFile(\JImage $image, $destinationFolder, Registry $options)
     {
+        $imageTypes = array('png', 'jpg', 'gif');
+
         $filename = \JFile::makeSafe(basename($this->file));
         $ext      = \JFile::getExt($filename);
+
+        // Set new image type.
+        $imageType  = $options->get('image_type');
+        if ($imageType and in_array($imageType, $imageTypes, true)) {
+            $ext = $imageType;
+        }
 
         // Generate new name.
         $newFilename   = \JFile::makeSafe(basename($options->get('filename')));
