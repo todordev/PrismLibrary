@@ -786,7 +786,7 @@ abstract class PrismUI
                 ->addScriptDeclaration(
                     'jQuery(document).ready(function($) {
                         jQuery("#' . $id . '_datepicker").datetimepicker({
-                            format: "' . strtoupper($calendarDateFormat) . '",
+                            format: "' . $calendarDateFormat . '",
                             locale: "' . strtolower($locale) . '",
                             allowInputToggle: true
                         });
