@@ -3,7 +3,7 @@
  * @package      Prism
  * @subpackage   Responses
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -244,9 +244,15 @@ class Json
     {
         $response = array(
             'success' => $this->success,
-            'title'   => $this->title,
-            'text'    => $this->text
         );
+
+        if ($this->title) {
+            $response['title'] = $this->title;
+        }
+
+        if ($this->text) {
+            $response['text'] = $this->text;
+        }
 
         if (null !== $this->data) {
             $response['data'] = $this->data;

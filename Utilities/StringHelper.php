@@ -3,7 +3,7 @@
  * @package      Prism
  * @subpackage   Utilities
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -250,5 +250,31 @@ abstract class StringHelper
         }
 
         return md5($name.':'.$value);
+    }
+
+    /**
+     * Generate a URI string by a given list of parameters.
+     *
+     * <code>
+     * $params = array(
+     *     'view' => 'details',
+     *     'id' => 1
+     * );
+     *
+     * $urlParameters = Prism\Utilities\StringHelper::generate($params);
+     * </code>
+     *
+     * @param array $params
+     *
+     * @return string
+     */
+    public static function generateUrlParams($params)
+    {
+        $result = '';
+        foreach ($params as $key => $param) {
+            $result .= '&' . rawurlencode($key) . '=' . rawurlencode($param);
+        }
+
+        return $result;
     }
 }

@@ -3,7 +3,7 @@
  * @package      Prism
  * @subpackage   Filesystem
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -87,6 +87,8 @@ final class Helper
      *
      * @param string $root   A base path to the folder. It can be JPATH_BASE, JPATH_ROOT, JPATH_SITE,...
      *
+     * @throws \UnexpectedValueException
+     *
      * @return string
      */
     public function getTemporaryMediaFolder($root = '')
@@ -104,11 +106,13 @@ final class Helper
      * $temporaryFolderUri = $filesystemHelper->getTemporaryMediaFolderUri();
      * </code>
      *
+     * @param string $root A base path to the folder. It could be \JUri::root(), https://domain.com/path,...
+     *
      * @return string
      */
-    public function getTemporaryMediaFolderUri()
+    public function getTemporaryMediaFolderUri($root = '')
     {
-        return $this->params->get('local_media_folder', 'media') . '/temporary';
+        return $root . $this->params->get('local_media_folder', 'media') . '/temporary';
     }
 
     /**

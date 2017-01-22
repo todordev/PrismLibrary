@@ -3,7 +3,7 @@
  * @package      Prism
  * @subpackage   Files
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -233,6 +233,11 @@ class Image
         $imageType  = $options->get('image_type');
         if ($imageType and in_array($imageType, $imageTypes, true)) {
             $ext = $imageType;
+        }
+
+        // Check for valid file extensions.
+        if (!in_array($ext, $imageTypes, true)) {
+            throw new \RuntimeException(\JText::sprintf('LIB_PRISM_ERROR_IMAGE_EXTENSION', $this->file));
         }
 
         // Generate new name.

@@ -3,7 +3,7 @@
  * @package         Prism
  * @subpackage      Database\Collections
  * @author          Todor Iliev
- * @copyright       Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright       Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -397,14 +397,7 @@ abstract class Collection implements \Iterator, \Countable, \ArrayAccess
     }
 
     /**
-     * Search items and return all elements that match to column and value.
-     *
-     * <code>
-     * $groups = new Gamification\Group\Groups(JFactory::getDbo());
-     * $groups->load();
-     *
-     * $options = $groups->find(1, "gallery_id");
-     * </code>
+     * Prepare the parameters of the items.
      *
      * @return array
      */

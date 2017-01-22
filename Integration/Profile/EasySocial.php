@@ -3,7 +3,7 @@
  * @package      Prism
  * @subpackage   Integrations\Profile
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -22,7 +22,7 @@ defined('JPATH_PLATFORM') or die;
  * @package      Prism
  * @subpackage   Integrations\Profile
  */
-class EasySocial extends TableImmutable implements ProfileInterface
+class EasySocial extends TableImmutable implements ProfileInterface, ProfileMapper
 {
     protected $user_id;
     protected $avatar;
@@ -30,8 +30,9 @@ class EasySocial extends TableImmutable implements ProfileInterface
     protected $username;
     protected $permalink;
     protected $alias;
-    protected $location;
+    protected $city;
     protected $country_code;
+    protected $slug;
 
     /**
      * Predefined image sizes.
@@ -60,6 +61,34 @@ class EasySocial extends TableImmutable implements ProfileInterface
             'small' => 'medium',
             'medium' => 'square',
             'large' => 'large',
+        );
+    }
+
+    /**
+     * Return an array that determine object propeties.
+     *
+     * <code>
+     * $userId = 1;
+     *
+     * $profile = new Prism\Integration\Profile\EasyProfile(\JFactory::getDbo());
+     * $profile->load($userId);
+     *
+     * $mapping = $profile->getMapping();
+     * </code>
+     *
+     * @return string
+     */
+    public function getMapping()
+    {
+        return array(
+            'user_id'       => 'user_id',
+            'name'          => 'name',
+            'username'      => 'username',
+            'city'          => 'city',
+            'location'      => 'city',
+            'avatar'        => 'avatar',
+            'slug'          => 'slug',
+            'country_code'  => 'country_code',
         );
     }
 
@@ -96,6 +125,8 @@ class EasySocial extends TableImmutable implements ProfileInterface
         $result = (array)$this->db->loadAssoc();
 
         $this->bind($result);
+
+        $this->slug = $this->getSlug();
     }
 
     /**
@@ -119,7 +150,7 @@ class EasySocial extends TableImmutable implements ProfileInterface
         $link = '';
 
         if ($route) {
-            $options = array('id' => $this->getAlias());
+            $options = array('id' => $this->slug);
             $link = \FRoute::profile($options);
         }
 
@@ -160,7 +191,7 @@ class EasySocial extends TableImmutable implements ProfileInterface
         return $link;
     }
 
-    protected function getAlias()
+    protected function getSlug()
     {
         $config = \Foundry::config();
 
@@ -200,11 +231,11 @@ class EasySocial extends TableImmutable implements ProfileInterface
      */
     public function getLocation()
     {
-        if ($this->location !== null) {
+        if ($this->city === null) {
             $this->prepareLocation();
         }
 
-        return $this->location;
+        return $this->city;
     }
 
     /**
@@ -223,7 +254,7 @@ class EasySocial extends TableImmutable implements ProfileInterface
      */
     public function getCountryCode()
     {
-        if ($this->country_code !== null) {
+        if ($this->country_code === null) {
             $this->prepareLocation();
         }
 
@@ -258,12 +289,14 @@ class EasySocial extends TableImmutable implements ProfileInterface
 
             if ($result !== '') {
                 $result = json_decode($result, true);
-            } else {
+            }
+
+            if (!$result) {
                 $result = array();
             }
         }
 
-        $this->location = (array_key_exists('city', $result)) ? $result['city'] : '';
-        $this->country_code = (array_key_exists('country', $result)) ? $result['country'] : '';
+        $this->city         = array_key_exists('city', $result) ? $result['city'] : '';
+        $this->country_code = array_key_exists('country', $result) ? $result['country'] : '';
     }
 }

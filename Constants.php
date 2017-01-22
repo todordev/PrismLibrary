@@ -3,7 +3,7 @@
  * @package      Prism
  * @subpackage   Constants
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -47,6 +47,9 @@ class Constants
     const FOLLOWED     = 1;
     const UNFOLLOWED   = 0;
 
+    const FAVORITE     = 1;
+    const NOT_FAVORITE = 0;
+
     const DISPLAY          = 1;
     const DO_NOT_DISPLAY   = 0;
 
@@ -89,6 +92,9 @@ class Constants
     const ACCESS_FRIENDS = 3;
     const ACCESS_FOLLOWERS_FRIENDS = 5;
 
+    /**
+     * @deprecated 1.17.4
+     */
     const ORDER_MOST_RECENT_FIRST = 'rdate';
     const ORDER_OLDEST_FIRST = 'date';
     const ORDER_TITLE_ALPHABETICAL = 'alpha';
@@ -99,6 +105,16 @@ class Constants
     const ORDER_LEAST_HITS = 'rhits';
     const ORDER_RANDOM_ORDER = 'random';
     const ORDER_ITEM_MANAGER_ORDER = 'order';
+
+    // Ordering
+    const ORDER_BY_TITLE = 'title';
+    const ORDER_BY_RTITLE = 'rtitle';
+    const ORDER_BY_CREATED = 'created';
+    const ORDER_BY_RCREATED = 'rcreated';
+    const ORDER_BY_HITS = 'hits';
+    const ORDER_BY_RHITS = 'rhits';
+    const ORDER_BY_ORDERING = 'ordering';
+    const ORDER_BY_RORDERING = 'rordering';
 
     // Time
     const TIME_SECONDS_24H = 86400;

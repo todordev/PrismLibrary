@@ -3,7 +3,7 @@
  * @package      Prism
  * @subpackage   Integrations\Profiles
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -11,6 +11,7 @@ namespace Prism\Integration\Profile;
 
 use Joomla\Registry\Registry;
 use Prism\Filesystem\Helper;
+use Prism\Integration\Profile\Adapter;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -24,9 +25,17 @@ defined('JPATH_PLATFORM') or die;
 final class Factory
 {
     /**
+     * @var \JDatabaseDriver
+     */
+    protected $db;
+
+    /**
      * @var Registry
      */
     protected $options;
+
+    protected $keys;
+    protected $userId;
 
     /**
      * Initialize the object.
@@ -41,10 +50,14 @@ final class Factory
      * </code>
      *
      * @param  Registry  $options Options used in the process of building profile object.
+     * @param  \JDatabaseDriver  $db
      */
-    public function __construct(Registry $options)
+    public function __construct(Registry $options, \JDatabaseDriver $db = null)
     {
         $this->options = $options;
+        $this->db      = $db ?: \JFactory::getDbo();
+        $this->keys    = $this->options->get('keys');
+        $this->userId  = $this->options->get('user_id');
     }
 
     /**
@@ -64,32 +77,33 @@ final class Factory
      */
     public function create()
     {
+        $keys = (is_array($this->keys) and count($this->keys) > 0) ? $this->keys : $this->userId;
+
         switch ($this->options->get('platform')) {
             case 'socialcommunity':
                 jimport('Socialcommunity.init');
+
+                $keys = (is_array($this->keys) and count($this->keys) > 0) ? $this->keys : ['user_id' => $this->userId];
+
+                $profile = new Socialcommunity($this->db);
+                $profile->load($keys);
 
                 /** @var  $params Registry */
                 $params = \JComponentHelper::getParams('com_socialcommunity');
                 $filesystemHelper = new Helper($params);
 
                 $url   = $filesystemHelper->getMediaFolderUri();
-
-                $profile = new Socialcommunity(\JFactory::getDbo());
-                $profile->load(array(
-                    'user_id' => $this->options->get('user_id')
-                ));
-
                 $profile->setMediaUrl($url);
                 break;
 
             case 'gravatar':
-                $profile = new Gravatar(\JFactory::getDbo());
-                $profile->load($this->options->get('user_id'));
+                $profile = new Gravatar($this->db);
+                $profile->load($keys);
                 break;
 
             case 'kunena':
-                $profile = new Kunena(\JFactory::getDbo());
-                $profile->load($this->options->get('user_id'));
+                $profile = new Kunena($this->db);
+                $profile->load($keys);
                 break;
 
             case 'jomsocial':
@@ -98,8 +112,8 @@ final class Factory
                     \JLoader::register('CRoute', JPATH_SITE.'/components/com_community/libraries/core.php');
                 }
 
-                $profile = new JomSocial(\JFactory::getDbo());
-                $profile->load($this->options->get('user_id'));
+                $profile = new JomSocial($this->db);
+                $profile->load($keys);
 
                 // Load language file.
                 $lang = \JFactory::getLanguage();
@@ -107,18 +121,23 @@ final class Factory
                 break;
 
             case 'easysocial':
-                $profile = new EasySocial(\JFactory::getDbo());
-                $profile->load($this->options->get('user_id'));
+                $profile = new EasySocial($this->db);
+                $profile->load($keys);
                 break;
 
             case 'easyprofile':
-                $profile = new EasyProfile(\JFactory::getDbo());
-                $profile->load($this->options->get('user_id'));
+                $profile = new EasyProfile($this->db);
+                $profile->load($keys);
                 break;
 
             case 'communitybuilder':
-                $profile = new CommunityBuilder(\JFactory::getDbo());
-                $profile->load($this->options->get('user_id'));
+                $profile = new CommunityBuilder($this->db);
+                $profile->load($keys);
+                break;
+
+            case 'joomlaprofile':
+                $profile = new Adapter\JoomlaProfile($this->db);
+                $profile->load($keys);
                 break;
 
             default:

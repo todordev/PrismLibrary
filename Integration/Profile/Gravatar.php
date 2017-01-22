@@ -3,7 +3,7 @@
  * @package      Prism
  * @subpackage   Integrations\Profile
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -20,7 +20,7 @@ defined('JPATH_PLATFORM') or die;
  * @package      Prism
  * @subpackage   Integrations\Profile
  */
-class Gravatar extends TableImmutable implements ProfileInterface
+class Gravatar extends TableImmutable implements ProfileInterface, ProfileMapper
 {
     protected $user_id;
     protected $hash;
@@ -53,6 +53,28 @@ class Gravatar extends TableImmutable implements ProfileInterface
             'small' => '80',
             'medium' => '160',
             'large' => '200',
+        );
+    }
+
+    /**
+     * Return an array that determine object propeties.
+     *
+     * <code>
+     * $userId = 1;
+     *
+     * $profile = new Prism\Integration\Profile\Gravatar(\JFactory::getDbo());
+     * $profile->load($userId);
+     *
+     * $mapping = $profile->getMapping();
+     * </code>
+     *
+     * @return string
+     */
+    public function getMapping()
+    {
+        return array(
+            'user_id'       => 'user_id',
+            'name'          => 'name',
         );
     }
 

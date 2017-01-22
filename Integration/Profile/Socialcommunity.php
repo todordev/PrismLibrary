@@ -3,7 +3,7 @@
  * @package      Prism
  * @subpackage   Integrations\Profile
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -22,7 +22,7 @@ jimport('Socialcommunity.init');
  * @package      Prism
  * @subpackage   Integrations\Profile
  */
-class Socialcommunity extends TableImmutable implements ProfileInterface
+class Socialcommunity extends TableImmutable implements ProfileInterface, ProfileMapper
 {
     protected $id;
     protected $user_id;
@@ -49,7 +49,7 @@ class Socialcommunity extends TableImmutable implements ProfileInterface
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\Kunena(\JFactory::getDbo());
+     * $profile = new Prism\Integration\Profile\Socialcommunity(\JFactory::getDbo());
      * </code>
      *
      * @param \JDatabaseDriver $db
@@ -63,6 +63,32 @@ class Socialcommunity extends TableImmutable implements ProfileInterface
             'small' => 'image_square',
             'medium' => 'image_small',
             'large' => 'image',
+        );
+    }
+
+    /**
+     * Return an array that determine object propeties.
+     *
+     * <code>
+     * $userId = 1;
+     *
+     * $profile = new Prism\Integration\Profile\Socialcommunity(\JFactory::getDbo());
+     * $profile->load($userId);
+     *
+     * $mapping = $profile->getMapping();
+     * </code>
+     *
+     * @return string
+     */
+    public function getMapping()
+    {
+        return array(
+            'user_id'   => 'user_id',
+            'slug'      => 'slug',
+            'city'      => 'location',
+            'location'  => 'city',
+            'country_code'  => 'country_code',
+            'avatar'    => 'image_small',
         );
     }
 

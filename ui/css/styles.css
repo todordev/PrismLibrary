@@ -109,6 +109,30 @@
 	height: 600px !important;
 }
 
+.width-30p {
+    width: 30% !important;
+}
+
+.width-68p {
+    width: 68% !important;
+}
+
+.width-65p {
+    width: 65% !important;
+}
+
+.width-45p {
+    width: 45% !important;
+}
+
+.width-48p {
+    width: 48% !important;
+}
+
+.width-100p {
+    width: 100% !important;
+}
+
 .relative {
     position: relative;
 }
@@ -230,6 +254,11 @@
 .mtb-10 {
 	margin-top: 10px;
 	margin-bottom: 10px;
+}
+
+.mtb-20 {
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 .ml-10 {
@@ -373,9 +402,27 @@
 	font-weight: bold;
 }
 
-
+/* Parsley Error Classes */
 .parsley-error-list li{
 	color: red;
+}
+
+.invalid-form-group-bl {
+	border-left: #ff706d solid thin;
+    padding-left: 3px;
+}
+
+/* Display Table */
+.prism-inline-table {
+    display: inline-table;
+}
+
+.prism-table-row {
+    display: table-row;
+}
+
+.prism-table-cell {
+    display: table-cell;
 }
 
 /* YouTube Responsive */

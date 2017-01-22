@@ -3,13 +3,14 @@
  * @package      Prism
  * @subpackage   Integrations\Profile
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace Prism\Integration\Profile;
 
 use Prism\Database\TableImmutable;
+use Joomla\String\StringHelper;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -22,7 +23,7 @@ defined('JPATH_PLATFORM') or die;
  * @package      Prism
  * @subpackage   Integrations\Profile
  */
-class JomSocial extends TableImmutable implements ProfileInterface
+class JomSocial extends TableImmutable implements ProfileInterface, ProfileMapper
 {
     protected $user_id;
     protected $avatar;
@@ -57,6 +58,31 @@ class JomSocial extends TableImmutable implements ProfileInterface
             'small' => 'thumb',
             'medium' => 'avatar',
             'large' => 'avatar',
+        );
+    }
+
+    /**
+     * Return an array that determine object propeties.
+     *
+     * <code>
+     * $userId = 1;
+     *
+     * $profile = new Prism\Integration\Profile\JomSocial(\JFactory::getDbo());
+     * $profile->load($userId);
+     *
+     * $mapping = $profile->getMapping();
+     * </code>
+     *
+     * @return string
+     */
+    public function getMapping()
+    {
+        return array(
+            'user_id'       => 'user_id',
+            'name'          => 'name',
+            'city'          => 'location',
+            'location'      => 'location',
+            'country'       => 'country',
         );
     }
 
@@ -143,7 +169,7 @@ class JomSocial extends TableImmutable implements ProfileInterface
 
         $link = '';
 
-        if ($avatar === null or \JString::strlen($this->$avatar) === 0) {
+        if ($avatar === null or StringHelper::strlen($this->$avatar) === 0) {
             if ($returnDefault) {
                 $link = \JUri::root() . 'components/com_community/assets/default_thumb.jpg';
             }

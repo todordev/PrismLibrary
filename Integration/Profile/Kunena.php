@@ -3,13 +3,14 @@
  * @package      Prism
  * @subpackage   Integrations\Profile
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace Prism\Integration\Profile;
 
 use Prism\Database\TableImmutable;
+use Joomla\String\StringHelper;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -20,16 +21,11 @@ defined('JPATH_PLATFORM') or die;
  * @package      Prism
  * @subpackage   Integrations\Profile
  */
-class Kunena extends TableImmutable implements ProfileInterface
+class Kunena extends TableImmutable implements ProfileInterface, ProfileMapper
 {
     protected $user_id;
     protected $avatar;
-    protected $name;
-    protected $username;
-    protected $permalink;
-    protected $alias;
     protected $location;
-    protected $country_code;
 
     /**
      * Predefined image sizes.
@@ -58,6 +54,30 @@ class Kunena extends TableImmutable implements ProfileInterface
             'small' => array('folder' => 'size72', 'noimage' => 's_nophoto.jpg'),
             'medium' => array('folder' => 'size72', 'noimage' => 'nophoto.jpg'),
             'large' => array('folder' => 'size200', 'noimage' => 'nophoto.jpg'),
+        );
+    }
+
+    /**
+     * Return an array that determine object propeties.
+     *
+     * <code>
+     * $userId = 1;
+     *
+     * $profile = new Prism\Integration\Profile\Kunena(\JFactory::getDbo());
+     * $profile->load($userId);
+     *
+     * $mapping = $profile->getMapping();
+     * </code>
+     *
+     * @return string
+     */
+    public function getMapping()
+    {
+        return array(
+            'user_id'   => 'user_id',
+            'city'      => 'location',
+            'location'  => 'city',
+            'avatar'    => 'avatar',
         );
     }
 
@@ -142,7 +162,7 @@ class Kunena extends TableImmutable implements ProfileInterface
         $link = '';
 
         // Get avatar size.
-        if (\JString::strlen($this->avatar) > 0) {
+        if (StringHelper::strlen($this->avatar) > 0) {
             $folder = (!array_key_exists($size, $this->avatarSizes)) ? $this->avatarSizes['small']['folder'] : $this->avatarSizes[$size]['folder'];
             $link = \JUri::root() . 'media/kunena/avatars/resized/' . $folder . '/'. $this->avatar;
         } else {

@@ -3,7 +3,7 @@
  * @package      Prism
  * @subpackage   Utilities
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -79,59 +79,63 @@ abstract class NetworkHelper
      * Ensures an ip address is both a valid IP and does not fall within
      * a private network range.
      *
-     * @param string $ip
+     * @param string $ipAddress
+     * @param bool $additionalCheck
      *
      * @return bool
      */
-    public static function isValidIp($ip)
+    public static function isValidIp($ipAddress, $additionalCheck = false)
     {
-        if (strpos($ip, ':') === false) { // IPv4
-            if (strtolower($ip) === 'unknown') {
+        if (strpos($ipAddress, ':') === false) { // IPv4
+            if (strtolower($ipAddress) === 'unknown') {
                 return false;
             }
 
-            // generate ipv4 network address
-            $ip = ip2long($ip);
+            if (!filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+                return false;
+            }
 
-            // if the ip is set and not equivalent to 255.255.255.255
-            if ($ip !== false && $ip !== -1) {
-                // make sure to get unsigned long representation of ip
-                // due to discrepancies between 32 and 64 bit OSes and
-                // signed numbers (ints default to signed in PHP)
-                $ip = sprintf('%u', $ip);
+            if ($additionalCheck) {
+                // generate ipv4 network address
+                $ip = ip2long($ipAddress);
 
-                // do private network range checking.
-                if ($ip >= 0 && $ip <= 50331647) {
-                    return false;
-                }
-                if ($ip >= 167772160 && $ip <= 184549375) {
-                    return false;
-                }
-                if ($ip >= 2130706432 && $ip <= 2147483647) {
-                    return false;
-                }
-                if ($ip >= 2851995648 && $ip <= 2852061183) {
-                    return false;
-                }
-                if ($ip >= 2886729728 && $ip <= 2887778303) {
-                    return false;
-                }
-                if ($ip >= 3221225984 && $ip <= 3221226239) {
-                    return false;
-                }
-                if ($ip >= 3232235520 && $ip <= 3232301055) {
-                    return false;
-                }
-                if ($ip >= 4294967040) {
-                    return false;
-                }
+                // if the ip is set and not equivalent to 255.255.255.255
+                if ($ip !== false && $ip !== -1) {
+                    // make sure to get unsigned long representation of ip
+                    // due to discrepancies between 32 and 64 bit OSes and
+                    // signed numbers (ints default to signed in PHP)
+                    $ip = sprintf('%u', $ip);
 
-                if (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
-                    return false;
+                    // do private network range checking.
+                    if ($ip >= 0 && $ip <= 50331647) {
+                        return false;
+                    }
+                    if ($ip >= 167772160 && $ip <= 184549375) {
+                        return false;
+                    }
+                    if ($ip >= 2130706432 && $ip <= 2147483647) {
+                        return false;
+                    }
+                    if ($ip >= 2851995648 && $ip <= 2852061183) {
+                        return false;
+                    }
+                    if ($ip >= 2886729728 && $ip <= 2887778303) {
+                        return false;
+                    }
+                    if ($ip >= 3221225984 && $ip <= 3221226239) {
+                        return false;
+                    }
+                    if ($ip >= 3232235520 && $ip <= 3232301055) {
+                        return false;
+                    }
+                    if ($ip >= 4294967040) {
+                        return false;
+                    }
                 }
             }
+
         } else {
-            if (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+            if (!filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
                 return false;
             }
         }
