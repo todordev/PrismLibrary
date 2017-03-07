@@ -46,6 +46,12 @@ class JFormFieldPrismText extends JFormField
         $cssLayout   = array_key_exists('css_layout', $elements) ? (string)$elements['css_layout'] : 'b2';
         $prefix      = array_key_exists('prefix', $elements) ? (string)$this->element['prefix'] : null;
         $suffix      = array_key_exists('suffix', $elements) ? (string)$this->element['suffix'] : null;
+        $translate   = array_key_exists('translate', $elements) ? (bool)$this->element['translate'] : false;
+
+        if ($translate) {
+            $prefix = JText::_($prefix);
+            $suffix = JText::_($suffix);
+        }
 
         // Initialize JavaScript field attributes.
         $onchange = $this->element['onchange'] ? ' onchange="' . (string)$this->element['onchange'] . '"' : '';

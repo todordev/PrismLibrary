@@ -26,14 +26,14 @@ class Log
     protected $data;
     protected $recordDate;
 
-    /**
-     * @var array
-     *
-     * @deprecated since v1.10
-     */
-    protected $writers = array();
-
     protected $adapters = array();
+
+    /**
+     * Excluded properties.
+     *
+     * @var array
+     */
+    protected $exclude  = array('db');
 
     /**
      * Initialize the object.
@@ -63,26 +63,6 @@ class Log
         $this->setTitle($title);
         $this->setType($type);
         $this->setData($data);
-    }
-
-    /**
-     * Initialize the object.
-     *
-     * <code>
-     * $file   = "/logs/com_crowdfunding.log";
-     * $writer = new Prism\Log\Adapter\File($file);
-     *
-     * $log = new Prism\Log();
-     * $log->addWriter($writer);
-     * </code>
-     *
-     * @param WriterInterface $writer
-     *
-     * @deprecated since v1.10
-     */
-    public function addWriter(WriterInterface $writer)
-    {
-        $this->writers[] = $writer;
     }
 
     /**
@@ -218,19 +198,54 @@ class Log
      * $log->setData($data);
      * </code>
      *
-     * @param array $data
+     * @param mixed $data
      *
      * @return self
      */
     public function setData($data)
     {
-        if (!is_scalar($data)) {
+        if (is_object($data)) {
+            $data = $this->prepareObjectData($data);
+            $data = var_export($data, true);
+
+        } elseif (is_array($data)) {
+            foreach ($this->exclude as $excludedProperty) {
+                if (array_key_exists($excludedProperty, $data)) {
+                    unset($excludedProperty);
+                }
+            }
+
+            $data = var_export($data, true);
+        } elseif (is_bool($data)) {
             $data = var_export($data, true);
         }
 
         $this->data = $data;
 
         return $this;
+    }
+
+    protected function prepareObjectData($data)
+    {
+        if (method_exists($data, 'getProperties')) {
+            $data = (array)$data->getProperties();
+        } else {
+            $data = (array)get_object_vars($data);
+        }
+
+        foreach ($this->exclude as $excludedProperty) {
+            if (array_key_exists($excludedProperty, $data)) {
+                unset($data[$excludedProperty]);
+            }
+        }
+
+        foreach ($data as $key => $value) {
+            if (is_object($value)) {
+                $data[$key] = $this->prepareObjectData($value);
+            }
+        }
+
+        return $data;
     }
 
     /**
@@ -320,5 +335,26 @@ class Log
             $adapter->setDate($this->getRecordDate());
             $adapter ->store();
         }
+    }
+
+    /**
+     * Set excluded properties.
+     *
+     * <code>
+     * $exclude = array("db", "params");
+     *
+     * $log   = new Prism\Log();
+     * $log->setExcluded($exclude);
+     * </code>
+     *
+     * @param array $properties
+     *
+     * @return self
+     */
+    public function setExcluded(array $properties)
+    {
+        $this->exclude = $properties;
+
+        return $this;
     }
 }

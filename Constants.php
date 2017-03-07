@@ -130,11 +130,17 @@ class Constants
     const NUMBER_DEFAULT_MONEY_FORMAT = '#,##0.00';
 
     // Payment statuses
-    const PAYMENT_STATUS_COMPLETED = 1;
-    const PAYMENT_STATUS_PENDING = 2;
-    const PAYMENT_STATUS_CANCELED = 4;
-    const PAYMENT_STATUS_REFUNDED = 8;
-    const PAYMENT_STATUS_FAILED = 16;
+    const PAYMENT_STATUS_COMPLETED = 'completed';
+    const PAYMENT_STATUS_PENDING = 'pending';
+    const PAYMENT_STATUS_CANCELED = 'canceled';
+    const PAYMENT_STATUS_REFUNDED = 'refunded';
+    const PAYMENT_STATUS_FAILED = 'failed';
+
+    const PAYMENT_STATUS_COMPLETED_BIT = 1;
+    const PAYMENT_STATUS_PENDING_BIT = 2;
+    const PAYMENT_STATUS_CANCELED_BIT = 4;
+    const PAYMENT_STATUS_REFUNDED_BIT = 8;
+    const PAYMENT_STATUS_FAILED_BIT = 16;
 
     // Locale
     const LOCALE_DEFAULT_LANGUAGE_CODE = 'en_GB';

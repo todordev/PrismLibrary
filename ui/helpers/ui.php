@@ -282,6 +282,8 @@ abstract class PrismUI
      * JHtml::_('Prism.ui.cssSpin');
      * </code>
      *
+     * @param string $type
+     *
      * @link https://webkul.github.io/csspin/
      */
     public static function cssSpin($type)
@@ -317,8 +319,8 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/pnotify/css/jquery.pnotify.css');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/pnotify/js/jquery.pnotify.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/pnotify/jquery.pnotify.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/pnotify/jquery.pnotify.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -683,19 +685,19 @@ abstract class PrismUI
     }
 
     /**
-     * Include D3 library.
+     * Include ChartJS library.
      *
      * <code>
      * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
      *
-     * JHtml::_('Prism.ui.d3');
+     * JHtml::_('Prism.ui.chartjs');
      * </code>
      *
-     * @param bool $cdn Include the library from content delivery network.
+     * @param bool $bundle Use bundle file that includes MomentJs.
      *
-     * @link http://d3js.org/ Documentation of D3
+     * @link http://www.chartjs.org/
      */
-    public static function d3($cdn = false)
+    public static function chartjs($bundle = false)
     {
         // Only load once
         if (!empty(self::$loaded[__METHOD__])) {
@@ -704,10 +706,41 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        if (!$cdn) {
-            $document->addScript(JUri::root() . 'libraries/Prism/ui/d3/js/d3.min.js');
+        if (!$bundle) {
+            $document->addScript(JUri::root() . 'libraries/Prism/ui/chartjs/Chart.min.js');
         } else {
-            $document->addScript('//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js');
+            $document->addScript(JUri::root() . 'libraries/Prism/ui/chartjs/Chart.bundle.min.js');
+        }
+
+        self::$loaded[__METHOD__] = true;
+    }
+
+    /**
+     * Include MomentJs library.
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('Prism.ui.momentjs');
+     * </code>
+     *
+     * @param bool $locales Load the file that contains all locales.
+     *
+     * @link http://momentjs.com/
+     */
+    public static function momentjs($locales = false)
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+
+        if (!$locales) {
+            $document->addScript(JUri::root() . 'libraries/Prism/ui/momentjs/moment.min.js');
+        } else {
+            $document->addScript(JUri::root() . 'libraries/Prism/ui/momentjs/moment-with-locales.min.js');
         }
 
         self::$loaded[__METHOD__] = true;
@@ -733,8 +766,8 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/cropper/js/cropper.min.js');
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/cropper/css/cropper.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/cropper/cropper.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/cropper/cropper.min.css');
 
         self::$loaded[__METHOD__] = true;
     }

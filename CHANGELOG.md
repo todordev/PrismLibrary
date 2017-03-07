@@ -1,6 +1,19 @@
 Prism Library Changelog
 ==========================
 
+###v1.19.1
+* Upgraded [jQuery Cropper](https://fengyuanchen.github.io/cropper/) to v2.3.4.
+* Fixed an issue with wrong image quality when save a file.
+* Improved PrismUIHelper.
+
+###v1.19
+* Added [ChartJs](http://www.chartjs.org/) to UI library.
+* Added [MomentJS](http://momentjs.com/) to UI library.
+* Added [League\Fractal](http://fractal.thephpleague.com/) library.
+* Removed [D3](https://d3js.org/) library.
+* Added class Payment\Result.
+* Upgraded Coinbase library to v2.5.0.
+
 ###v1.18
 * Added [Remodal](http://vodkabears.github.io/remodal/) to UI library.
 * Upgraded [jQuery AutoComplete](https://github.com/devbridge/jQuery-Autocomplete) to v1.2.27.

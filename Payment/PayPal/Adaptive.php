@@ -182,25 +182,25 @@ class Adaptive
      */
     public function doPreppproval()
     {
-        $url = $this->url . "Preapproval";
+        $url = $this->url . 'Preapproval';
 
         $data = array(
-            "cancelUrl"                   => $this->options->get("urls.cancel"),
-            "returnUrl"                   => $this->options->get("urls.return"),
-            "ipnNotificationUrl"          => $this->options->get("urls.notify"),
+            'cancelUrl'                   => $this->options->get('urls.cancel'),
+            'returnUrl'                   => $this->options->get('urls.return'),
+            'ipnNotificationUrl'          => $this->options->get('urls.notify'),
 
-            "startingDate"                => $this->options->get("payment.starting_date"),
-            "endingDate"                  => $this->options->get("payment.ending_date"),
-            "maxAmountPerPayment"         => $this->options->get("payment.max_amount"),
-            "maxTotalAmountOfAllPayments" => $this->options->get("payment.max_total_amount"),
-            "maxNumberOfPayments"         => $this->options->get("payment.number_of_payments"),
-            "currencyCode"                => $this->options->get("payment.currency_code"),
+            'startingDate'                => $this->options->get('payment.starting_date'),
+            'endingDate'                  => $this->options->get('payment.ending_date'),
+            'maxAmountPerPayment'         => $this->options->get('payment.max_amount'),
+            'maxTotalAmountOfAllPayments' => $this->options->get('payment.max_total_amount'),
+            'maxNumberOfPayments'         => $this->options->get('payment.number_of_payments'),
+            'currencyCode'                => $this->options->get('payment.currency_code'),
 
-            "feesPayer"                   => $this->options->get("payment.fees_payer"),
-            "memo"                        => $this->options->get("payment.memo"),
+            'feesPayer'                   => $this->options->get('payment.fees_payer'),
+            'memo'                        => $this->options->get('payment.memo'),
 
-            "pinType"                     => $this->options->get("payment.ping_type"),
-            "requestEnvelope"             => $this->options->get("request.envelope"),
+            'pinType'                     => $this->options->get('payment.ping_type'),
+            'requestEnvelope'             => $this->options->get('request.envelope'),
         );
 
         // Encode data to JSON.
@@ -212,12 +212,11 @@ class Adaptive
         // Make a request.
         $response = $this->transport->post($url, $jsonData, $headers);
 
-        $response = $this->parseResponse($response, "json");
+        $response = $this->parseResponse($response, 'json');
 
         $response = new Response($response);
 
         if ($response->isFailure()) { // Failure
-
             $this->error     = $response->getErrorMessage();
             $this->errorCode = $response->getErrorCode();
 
@@ -247,23 +246,23 @@ class Adaptive
      */
     public function doCapture()
     {
-        $url = $this->url . "Pay";
+        $url = $this->url . 'Pay';
 
         $data = array(
-            "cancelUrl"                   => $this->options->get("urls.cancel"),
-            "returnUrl"                   => $this->options->get("urls.return"),
-            "ipnNotificationUrl"          => $this->options->get("urls.notify"),
+            'cancelUrl'          => $this->options->get('urls.cancel'),
+            'returnUrl'          => $this->options->get('urls.return'),
+            'ipnNotificationUrl' => $this->options->get('urls.notify'),
 
-            "actionType"                  => $this->options->get("payment.action_type"),
+            'actionType'         => $this->options->get('payment.action_type'),
 
-            "feesPayer"                   => $this->options->get("payment.fees_payer"),
-            "memo"                        => $this->options->get("payment.memo"),
+            'feesPayer'          => $this->options->get('payment.fees_payer'),
+            'memo'               => $this->options->get('payment.memo'),
 
-            "preapprovalKey"              => $this->options->get("payment.preapproval_key"),
-            "currencyCode"                => $this->options->get("payment.currency_code"),
-            "receiverList"                => $this->options->get("payment.receiver_list"),
+            'preapprovalKey'     => $this->options->get('payment.preapproval_key'),
+            'currencyCode'       => $this->options->get('payment.currency_code'),
+            'receiverList'       => $this->options->get('payment.receiver_list'),
 
-            "requestEnvelope"             => $this->options->get("request.envelope"),
+            'requestEnvelope'    => $this->options->get('request.envelope'),
         );
 
         // Encode data to JSON.
@@ -275,7 +274,7 @@ class Adaptive
         // Make a request.
         $response = $this->transport->post($url, $jsonData, $headers);
 
-        $response = $this->parseResponse($response, "json");
+        $response = $this->parseResponse($response, 'json');
 
         $response = new Response($response);
 
@@ -309,11 +308,11 @@ class Adaptive
      */
     public function doVoid()
     {
-        $url = $this->url . "CancelPreapproval";
+        $url = $this->url . 'CancelPreapproval';
 
         $data = array(
-            "preapprovalKey"              => $this->options->get("payment.preapproval_key"),
-            "requestEnvelope"             => $this->options->get("request.envelope"),
+            'preapprovalKey'  => $this->options->get('payment.preapproval_key'),
+            'requestEnvelope' => $this->options->get('request.envelope'),
         );
 
         // Encode data to JSON.
@@ -325,7 +324,7 @@ class Adaptive
         // Make a request.
         $response = $this->transport->post($url, $jsonData, $headers);
 
-        $response = $this->parseResponse($response, "json");
+        $response = $this->parseResponse($response, 'json');
 
         $response = new Response($response);
 
@@ -347,21 +346,20 @@ class Adaptive
      *
      * @return array
      */
-    protected function parseResponse($response, $mode = "nv")
+    protected function parseResponse($response, $mode = 'nv')
     {
         $body = array();
 
         switch ($mode) {
-
-            case "json":
+            case 'json':
                 $body = json_decode($response->body, true);
                 break;
 
             default: // Named values
-                $body_ = explode("&", $response->body);
+                $body_ = explode('&', $response->body);
                 foreach ($body_ as $value) {
                     $value_ = rawurldecode($value);
-                    $values = explode("=", $value_);
+                    $values = explode('=', $value_);
 
                     $body[$values[0]] = rawurldecode($values[1]);
                 }
@@ -385,16 +383,15 @@ class Adaptive
     protected function getHeaders($jsonData)
     {
         return array(
-            "X-PAYPAL-SECURITY-USERID" => $this->options->get("credentials.username"),
-            "X-PAYPAL-SECURITY-PASSWORD" => $this->options->get("credentials.password"),
-            "X-PAYPAL-SECURITY-SIGNATURE" => $this->options->get("credentials.signature"),
-            "X-PAYPAL-APPLICATION-ID" => $this->options->get("credentials.app_id"),
-//            "X-PAYPAL-DEVICE-IPADDRESS" => $this->options->get("credentials.ip_address"),
-            "X-PAYPAL-REQUEST-DATA-FORMAT" => "JSON",
-            "X-PAYPAL-RESPONSE-DATA-FORMAT" => "JSON",
+            'X-PAYPAL-SECURITY-USERID' => $this->options->get('credentials.username'),
+            'X-PAYPAL-SECURITY-PASSWORD' => $this->options->get('credentials.password'),
+            'X-PAYPAL-SECURITY-SIGNATURE' => $this->options->get('credentials.signature'),
+            'X-PAYPAL-APPLICATION-ID' => $this->options->get('credentials.app_id'),
+//            'X-PAYPAL-DEVICE-IPADDRESS' => $this->options->get('credentials.ip_address'),
+            'X-PAYPAL-REQUEST-DATA-FORMAT' => 'JSON',
+            'X-PAYPAL-RESPONSE-DATA-FORMAT' => 'JSON',
             'Content-Type'          => 'application/json',
             'Content-Length'        => strlen($jsonData)
         );
-
     }
 }

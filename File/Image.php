@@ -271,6 +271,7 @@ class Image
                 if ($quality > 0) {
                     if ($quality > 9) {
                         $quality /= 10;
+                        $quality  = ($quality >= 10) ? 9 : $quality;
                     }
 
                     $optimizationOptions = array('quality' => $quality);
