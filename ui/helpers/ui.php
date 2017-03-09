@@ -225,6 +225,30 @@ abstract class PrismUI
     }
 
     /**
+     * Include Sticky Kit.
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('Prism.ui.stickyKit');
+     * </code>
+     *
+     * @link http://leafo.net/sticky-kit/
+     */
+    public static function stickyKit()
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/jquery.sticky-kit.min.js');
+
+        self::$loaded[__METHOD__] = true;
+    }
+
+    /**
      * Include Readmore.js library.
      *
      * <code>

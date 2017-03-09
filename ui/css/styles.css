@@ -18,6 +18,14 @@
 	font-size: x-small;
 }
 
+.fxxs {
+	font-size: xx-small;
+}
+
+.italic {
+	font-style: italic;
+}
+
 .help-block-xxsmall {
 	font: xx-small italic;
 }

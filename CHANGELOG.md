@@ -1,6 +1,9 @@
 Prism Library Changelog
 ==========================
 
+###v1.19.2
+* Added [Sticky Kit](http://leafo.net/sticky-kit/).
+
 ###v1.19.1
 * Upgraded [jQuery Cropper](https://fengyuanchen.github.io/cropper/) to v2.3.4.
 * Fixed an issue with wrong image quality when save a file.
