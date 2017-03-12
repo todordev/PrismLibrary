@@ -25,12 +25,12 @@
  * DAMAGE.
  *
  * @license     Berkeley Software Distribution License (BSD-License 2) http://www.opensource.org/licenses/bsd-license.php
- * @author      Mollie B.V. <info@mollie.nl>
+ * @author      Mollie B.V. <info@mollie.com>
  * @copyright   Mollie B.V.
- * @link        https://www.mollie.nl
+ * @link        https://www.mollie.com
  *
- * @method Mollie_API_Object_Payment[]|Mollie_API_Object_List all($offset = 0, $limit = 0)
- * @method Mollie_API_Object_Payment create(array $data)
+ * @method Mollie_API_Object_Payment[]|Mollie_API_Object_List all($offset = 0, $limit = 0, array $filters = array())
+ * @method Mollie_API_Object_Payment create(array $data, array $filters = array())
  */
 class Mollie_API_Resource_Payments extends Mollie_API_Resource_Base
 {
@@ -53,35 +53,52 @@ class Mollie_API_Resource_Payments extends Mollie_API_Resource_Base
 	 * Will throw a Mollie_API_Exception if the payment id is invalid or the resource cannot be found.
 	 *
 	 * @param string $payment_id
-	 *
-	 * @throws Mollie_API_Exception
+	 * @param array $filters
 	 * @return Mollie_API_Object_Payment
+	 * @throws Mollie_API_Exception
 	 */
-	public function get($payment_id)
+	public function get ($payment_id, array $filters = array())
 	{
 		if (empty($payment_id) || strpos($payment_id, self::RESOURCE_ID_PREFIX) !== 0)
 		{
 			throw new Mollie_API_Exception("Invalid payment ID: '{$payment_id}'. A payment ID should start with '" . self::RESOURCE_ID_PREFIX . "'.");
 		}
 
-		return parent::get($payment_id);
+		return parent::get($payment_id, $filters);
 	}
 
 	/**
+	 * Issue a refund for the given payment.
+	 *
+	 * The $filters parameter may either be an array of endpoint parameters, a float value to
+	 * initiate a partial refund, or empty to do a full refund.
+	 *
 	 * @param Mollie_API_Object_Payment $payment
-	 * @param float|NULL $amount Amount to refund, or NULL to refund full amount.
+	 * @param array|float|NULL $filters
+	 * 
 	 * @return Mollie_API_Object_Payment_Refund
 	 */
-	public function refund (Mollie_API_Object_Payment $payment, $amount = NULL)
+	public function refund (Mollie_API_Object_Payment $payment, $filters = array())
 	{
-		$resource = "{$this->getResourceName()}/" . urlencode($payment->id) . "/refunds";
+		$resource = "{$this->getResourcePath()}/" . urlencode($payment->id) . "/refunds";
+
+		if (!is_array($filters))
+		{
+			if ((is_numeric($filters))) {
+				// $filters is numeric, so it must be an amount
+				$filters = array('amount' => $filters);
+			}
+			else
+			{
+				// $filters is not an array, but also not an amount, so reset $filters
+				$filters = array();
+			}
+		}
 
 		$body = NULL;
-		if ($amount)
+		if (count($filters) > 0)
 		{
-			$body = json_encode(
-				array("amount" => $amount)
-			);
+			$body = json_encode($filters);
 		}
 
 		$result = $this->performApiCall(self::REST_CREATE, $resource, $body);
@@ -91,10 +108,7 @@ class Mollie_API_Resource_Payments extends Mollie_API_Resource_Base
 		 */
 		if (!empty($result->payment))
 		{
-			foreach ($result->payment as $payment_key => $payment_value)
-			{
-				$payment->{$payment_key} = $payment_value;
-			}
+			$this->copy($result->payment, $payment);
 		}
 
 		return $this->copy($result, new Mollie_API_Object_Payment_Refund);

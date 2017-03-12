@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2013, Mollie B.V.
+ * Copyright (c) 2015, Mollie B.V.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,27 +28,41 @@
  * @author      Mollie B.V. <info@mollie.com>
  * @copyright   Mollie B.V.
  * @link        https://www.mollie.com
+ *
+ * @method Mollie_API_Object_Profile[]|Mollie_API_Object_List all($offset = 0, $limit = 0, array $filters = array())
+ * @method Mollie_API_Object_Profile get($profile_id, array $filters = array())
+ * @method Mollie_API_Object_Profile create(array $data = array(), array $filters = array())
+ * @method Mollie_API_Object_Profile delete($profile_id0)
  */
-class Mollie_API_Exception extends Exception
+class Mollie_API_Resource_Profiles extends Mollie_API_Resource_Base
 {
 	/**
-	 * @var string
+	 * @return Mollie_API_Object_Profile
 	 */
-	protected $_field;
-
-	/**
-	 * @return string
-	 */
-	public function getField ()
+	protected function getResourceObject ()
 	{
-		return $this->_field;
+		return new Mollie_API_Object_Profile;
 	}
 
-	/**
-	 * @param string $field
-	 */
-	public function setField ($field)
-	{
-		$this->_field = (string) $field;
-	}
+    /**
+     * @param Mollie_API_Object_Profile $profile
+     *
+     * @return Mollie_API_Object_Profile
+     */
+    public function update (Mollie_API_Object_Profile $profile)
+    {
+        $body = json_encode(array(
+            "name" => $profile->name,
+            "website" => $profile->website,
+            "email" => $profile->email,
+            "phone" => $profile->phone,
+            "categoryCode" => $profile->categoryCode,
+            "mode" => $profile->mode
+        ));
+
+        /** @var Mollie_API_Object_Profile $updated_profile */
+        $updated_profile = $this->rest_update($this->getResourcePath(), $profile->id, $body);
+
+        return $updated_profile;
+    }
 }

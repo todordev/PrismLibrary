@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2013, Mollie B.V.
+ * Copyright (c) 2016, Mollie B.V.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,27 +28,37 @@
  * @author      Mollie B.V. <info@mollie.com>
  * @copyright   Mollie B.V.
  * @link        https://www.mollie.com
+ *
+ * @method Mollie_API_Object_Customer_Subscription[]|Mollie_API_Object_List all($offset = 0, $limit = 0, array $filters = array())
+ * @method Mollie_API_Object_Customer_Subscription get($subscription_id, array $filters = array())
+ * @method Mollie_API_Object_Customer_Subscription create(array $data = array(), array $filters = array())
+ * @method Mollie_API_Object_Customer_Subscription delete($subscription_id)
  */
-class Mollie_API_Exception extends Exception
+class Mollie_API_Resource_Customers_Subscriptions extends Mollie_API_Resource_Base
 {
 	/**
 	 * @var string
 	 */
-	protected $_field;
+	protected $resource_path = "customers_subscriptions";
 
 	/**
-	 * @return string
+	 * @return Mollie_API_Object_Customer_Subscription
 	 */
-	public function getField ()
+	protected function getResourceObject ()
 	{
-		return $this->_field;
+		return new Mollie_API_Object_Customer_Subscription;
 	}
 
 	/**
-	 * @param string $field
+	 * Cancel the given Subscription. This is just an alias of the 'delete' method.
+	 *
+	 * @param string $subscription_id
+	 *
+	 * @return Mollie_API_Object_Customer_Subscription
+	 * @throws Mollie_API_Exception
 	 */
-	public function setField ($field)
+	public function cancel ($subscription_id)
 	{
-		$this->_field = (string) $field;
+		return $this->delete($subscription_id);
 	}
 }

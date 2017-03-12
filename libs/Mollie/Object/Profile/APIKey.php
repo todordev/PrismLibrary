@@ -29,26 +29,45 @@
  * @copyright   Mollie B.V.
  * @link        https://www.mollie.com
  */
-class Mollie_API_Exception extends Exception
+class Mollie_API_Object_Profile_APIKey
 {
-	/**
-	 * @var string
-	 */
-	protected $_field;
+	const TEST_KEY = "test";
+	const LIVE_KEY = "live";
 
 	/**
-	 * @return string
+	 * The mode ('live' or 'test') functions as the ID of the API key.
+	 *
+	 * @var string
 	 */
-	public function getField ()
+	public $id;
+
+	/**
+	 * The API key (live_... or test_...)
+	 *
+	 * @var string
+	 */
+	public $key;
+
+	/**
+	 * The datetime at which the API key was created in ISO-8601 format.
+	 *
+	 * @var string
+	 */
+	public $createdDatetime;
+
+	/**
+	 * @return bool
+	 */
+	public function isLiveKey ()
 	{
-		return $this->_field;
+		return $this->id == self::LIVE_KEY;
 	}
 
 	/**
-	 * @param string $field
+	 * @return bool
 	 */
-	public function setField ($field)
+	public function isTestKey ()
 	{
-		$this->_field = (string) $field;
+		return $this->id == self::TEST_KEY;
 	}
 }

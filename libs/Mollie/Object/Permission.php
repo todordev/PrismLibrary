@@ -29,26 +29,33 @@
  * @copyright   Mollie B.V.
  * @link        https://www.mollie.com
  */
-class Mollie_API_Exception extends Exception
+class Mollie_API_Object_Permission
 {
 	/**
+	 * Id of the permission.
+	 *
 	 * @var string
 	 */
-	protected $_field;
+	public $id;
 
 	/**
-	 * @return string
+	 * Description of the permission.
+	 *
+	 * @var string
 	 */
-	public function getField ()
-	{
-		return $this->_field;
-	}
+	public $description;
 
 	/**
-	 * @param string $field
+	 * Warning for the permission.
+	 *
+	 * @var string|NULL
 	 */
-	public function setField ($field)
-	{
-		$this->_field = (string) $field;
-	}
+	public $warning;
+
+	/**
+	 * True if this permission is granted.
+	 *
+	 * @var boolean
+	 */
+	public $granted;
 }

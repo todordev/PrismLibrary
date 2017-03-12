@@ -29,26 +29,67 @@
  * @copyright   Mollie B.V.
  * @link        https://www.mollie.com
  */
-class Mollie_API_Exception extends Exception
+class Mollie_API_Object_Organization
 {
+	/**
+	 * Id of the organization.
+	 *
+	 * @var string
+	 */
+	public $id;
+
 	/**
 	 * @var string
 	 */
-	protected $_field;
+	public $name;
 
 	/**
-	 * @return string
+	 * @var string
 	 */
-	public function getField ()
-	{
-		return $this->_field;
-	}
+	public $email;
 
 	/**
-	 * @param string $field
+	 * @var string
 	 */
-	public function setField ($field)
-	{
-		$this->_field = (string) $field;
-	}
+	public $address;
+
+	/**
+	 * @var string
+	 */
+	public $postalCode;
+
+	/**
+	 * @var string
+	 */
+	public $city;
+
+	/**
+	 * @var string
+	 */
+	public $country;
+
+	/**
+	 * @var string
+	 */
+	public $countryCode;
+
+	/**
+	 * @var string
+	 */
+	public $registrationType;
+
+	/**
+	 * @var string
+	 */
+	public $registrationNumber;
+
+	/**
+	 * @var string
+	 */
+	public $registrationDatetime;
+
+	/**
+	 * @var string
+	 */
+	public $verifiedDatetime;
 }

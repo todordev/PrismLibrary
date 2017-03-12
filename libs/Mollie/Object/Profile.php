@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2013, Mollie B.V.
+ * Copyright (c) 2015, Mollie B.V.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,26 +29,81 @@
  * @copyright   Mollie B.V.
  * @link        https://www.mollie.com
  */
-class Mollie_API_Exception extends Exception
+class Mollie_API_Object_Profile
 {
+	/**
+	 * Id of the payment profile.
+	 *
+	 * @var string
+	 */
+	public $id;
+
+	/**
+	 * Either "live" or "test". Indicates this being a test or a live (verified) profile.
+	 *
+	 * @var string
+	 */
+	public $mode;
+
 	/**
 	 * @var string
 	 */
-	protected $_field;
+	public $name;
 
 	/**
-	 * @return string
+	 * @var string
 	 */
-	public function getField ()
-	{
-		return $this->_field;
-	}
+	public $website;
 
 	/**
-	 * @param string $field
+	 * @var string
 	 */
-	public function setField ($field)
-	{
-		$this->_field = (string) $field;
-	}
+	public $email;
+
+	/**
+	 * @var string
+	 */
+	public $phone;
+
+	/**
+	 * Merchant category code.
+	 *
+	 * @see https://www.mollie.com/en/docs/profiles#profiles-object
+	 * @var int
+	 */
+	public $categoryCode;
+
+	/**
+	 * Profile status. "unverified", "verified" or "blocked".
+	 *
+	 * @var string
+	 */
+	public $status;
+
+	/**
+	 * Review object with "status" property that's either "pending" or "rejected".
+	 *
+	 * @see https://www.mollie.com/en/docs/profiles#profiles-object
+	 *
+	 * @var object|null
+	 */
+	public $review;
+
+	/**
+	 * @var string
+	 */
+	public $createdDatetime;
+
+	/**
+	 * @var string
+	 */
+	public $updatedDatetime;
+
+	/**
+	 * If the App owner is also owner this profile, then links may contain a link
+	 * to the live and test API keys of this profile.
+	 *
+	 * @var object
+	 */
+	public $links;
 }

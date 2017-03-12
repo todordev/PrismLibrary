@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2013, Mollie B.V.
+ * Copyright (c) 2016, Mollie B.V.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,26 +29,104 @@
  * @copyright   Mollie B.V.
  * @link        https://www.mollie.com
  */
-class Mollie_API_Exception extends Exception
+class Mollie_API_Object_Customer_Subscription
 {
+	const STATUS_ACTIVE    = "active";
+	const STATUS_PENDING   = "pending";   // Waiting for a valid mandate.
+	const STATUS_CANCELLED = "cancelled";
+	const STATUS_SUSPENDED = "suspended"; // Active, but mandate became invalid.
+	const STATUS_COMPLETED = "completed";
+
 	/**
 	 * @var string
 	 */
-	protected $_field;
+	public $resource;
 
 	/**
-	 * @return string
+	 * @var string
 	 */
-	public function getField ()
+	public $id;
+
+	/**
+	 * @var string
+	 */
+	public $customerId;
+
+	/**
+	 * Either "live" or "test" depending on the customer's mode.
+	 *
+	 * @var string
+	 */
+	public $mode;
+
+	/**
+	 * ISO 8601 format.
+	 *
+	 * @var string
+	 */
+	public $createdDatetime;
+
+	/**
+	 * @var string
+	 */
+	public $status;
+
+	/**
+	 * @var string
+	 */
+	public $amount;
+
+	/**
+	 * @var int|null
+	 */
+	public $times;
+
+	/**
+	 * @var string
+	 */
+	public $interval;
+
+	/**
+	 * @var string
+	 */
+	public $description;
+
+	/**
+	 * @var string|null
+	 */
+	public $method;
+
+	/**
+	 * ISO 8601 format.
+	 *
+	 * @var string|null
+	 */
+	public $cancelledDatetime;
+
+	/**
+	 * Contains an optional 'webhookUrl'.
+	 *
+	 * @var object|null
+	 */
+	public $links;
+
+	/**
+	 * Returns whether the Subscription is valid or not.
+	 *
+	 * @return bool
+	 */
+	public function isValid ()
 	{
-		return $this->_field;
+		return $this->status === self::STATUS_ACTIVE;
 	}
 
 	/**
-	 * @param string $field
+	 * Returns whether the Subscription is cancelled or not.
+	 *
+	 * @return bool
 	 */
-	public function setField ($field)
+	public function isCancelled ()
 	{
-		$this->_field = (string) $field;
+		return $this->status === self::STATUS_CANCELLED;
 	}
 }

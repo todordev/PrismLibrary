@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2013, Mollie B.V.
+ * Copyright (c) 2015, Mollie B.V.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,27 +28,35 @@
  * @author      Mollie B.V. <info@mollie.com>
  * @copyright   Mollie B.V.
  * @link        https://www.mollie.com
+ *
+ * @method Mollie_API_Object_Permission[]|Mollie_API_Object_List all($offset = 0, $limit = 0, array $filters = array())
+ * @method Mollie_API_Object_Permission get($id, array $filters = array())
  */
-class Mollie_API_Exception extends Exception
+class Mollie_API_Resource_Permissions extends Mollie_API_Resource_Base
 {
 	/**
-	 * @var string
+	 * @return Mollie_API_Object_Permission
 	 */
-	protected $_field;
-
-	/**
-	 * @return string
-	 */
-	public function getField ()
+	protected function getResourceObject ()
 	{
-		return $this->_field;
+		return new Mollie_API_Object_Permission;
 	}
 
 	/**
-	 * @param string $field
+	 * Returns true if the requested permission is granted, false otherwise.
+	 *
+	 * @param string $permission_id
+	 * @return bool
 	 */
-	public function setField ($field)
+	public function isGranted ($permission_id)
 	{
-		$this->_field = (string) $field;
+		$permission = $this->get($permission_id);
+
+		if ($permission && $permission->granted)
+		{
+			return TRUE;
+		}
+
+		return FALSE;
 	}
 }

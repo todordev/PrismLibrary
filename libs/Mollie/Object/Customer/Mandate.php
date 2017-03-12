@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2013, Mollie B.V.
+ * Copyright (c) 2016, Mollie B.V.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,26 +29,52 @@
  * @copyright   Mollie B.V.
  * @link        https://www.mollie.com
  */
-class Mollie_API_Exception extends Exception
+class Mollie_API_Object_Customer_Mandate
 {
+	const STATUS_PENDING = "pending";
+	const STATUS_VALID   = "valid";
+	const STATUS_INVALID = "invalid";
+
 	/**
 	 * @var string
 	 */
-	protected $_field;
+	public $resource;
 
 	/**
-	 * @return string
+	 * @var string
 	 */
-	public function getField ()
-	{
-		return $this->_field;
-	}
+	public $id;
 
 	/**
-	 * @param string $field
+	 * @var string
 	 */
-	public function setField ($field)
+	public $status;
+
+	/**
+	 * @var string
+	 */
+	public $method;
+
+	/**
+	 * @var string
+	 */
+	public $customerId;
+
+	/**
+	 * @var object|null
+	 */
+	public $details;
+
+	/**
+	 * @var string
+	 */
+	public $createdDatetime;
+
+	/**
+	 * @return bool
+	 */
+	public function isValid ()
 	{
-		$this->_field = (string) $field;
+		return $this->status === self::STATUS_VALID;
 	}
 }

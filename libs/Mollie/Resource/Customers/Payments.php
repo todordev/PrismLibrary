@@ -28,27 +28,14 @@
  * @author      Mollie B.V. <info@mollie.com>
  * @copyright   Mollie B.V.
  * @link        https://www.mollie.com
+ *
+ * @method Mollie_API_Object_Payment[]|Mollie_API_Object_List all($offset = 0, $limit = 0, array $filters = array())
+ * @method Mollie_API_Object_Payment create(array $data, array $filters = array())
  */
-class Mollie_API_Exception extends Exception
+class Mollie_API_Resource_Customers_Payments extends Mollie_API_Resource_Payments
 {
 	/**
 	 * @var string
 	 */
-	protected $_field;
-
-	/**
-	 * @return string
-	 */
-	public function getField ()
-	{
-		return $this->_field;
-	}
-
-	/**
-	 * @param string $field
-	 */
-	public function setField ($field)
-	{
-		$this->_field = (string) $field;
-	}
+	protected $resource_path = "customers_payments";
 }

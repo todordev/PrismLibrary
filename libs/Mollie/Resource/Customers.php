@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2013, Mollie B.V.
+ * Copyright (c) 2015, Mollie B.V.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,27 +28,38 @@
  * @author      Mollie B.V. <info@mollie.com>
  * @copyright   Mollie B.V.
  * @link        https://www.mollie.com
+ *
+ * @method Mollie_API_Object_Customer[]|Mollie_API_Object_List all($offset = 0, $limit = 0, array $filters = array())
+ * @method Mollie_API_Object_Customer get($id, array $filters = array())
+ * @method Mollie_API_Object_Customer create(array $data, array $filters = array())
  */
-class Mollie_API_Exception extends Exception
+class Mollie_API_Resource_Customers extends Mollie_API_Resource_Base
 {
 	/**
-	 * @var string
+	 * @param Mollie_API_Object_Customer $customer
+	 *
+	 * @return Mollie_API_Object_Customer
 	 */
-	protected $_field;
-
-	/**
-	 * @return string
-	 */
-	public function getField ()
+	public function update (Mollie_API_Object_Customer $customer)
 	{
-		return $this->_field;
+		$body = json_encode(array(
+			"name" => $customer->name,
+			"email" => $customer->email,
+			"locale" => $customer->locale,
+			"metadata" => $customer->metadata,
+		));
+
+		/** @var Mollie_API_Object_Customer $updated_customer */
+		$updated_customer = $this->rest_update($this->getResourcePath(), $customer->id, $body);
+
+		return $updated_customer;
 	}
 
 	/**
-	 * @param string $field
+	 * @return Mollie_API_Object_Customer
 	 */
-	public function setField ($field)
+	protected function getResourceObject ()
 	{
-		$this->_field = (string) $field;
+		return new Mollie_API_Object_Customer;
 	}
 }

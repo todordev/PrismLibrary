@@ -25,9 +25,9 @@
  * DAMAGE.
  *
  * @license     Berkeley Software Distribution License (BSD-License 2) http://www.opensource.org/licenses/bsd-license.php
- * @author      Mollie B.V. <info@mollie.nl>
+ * @author      Mollie B.V. <info@mollie.com>
  * @copyright   Mollie B.V.
- * @link        https://www.mollie.nl
+ * @link        https://www.mollie.com
  */
 abstract class Mollie_API_Resource_Base
 {
@@ -40,7 +40,7 @@ abstract class Mollie_API_Resource_Base
 	/**
 	 * Default number of objects to retrieve when listing all objects.
 	 */
-	const DEFAULT_LIMIT = 10;
+	const DEFAULT_LIMIT = 50;
 
 	/**
 	 * @var Mollie_API_Client
@@ -48,33 +48,61 @@ abstract class Mollie_API_Resource_Base
 	protected $api;
 
 	/**
+	 * @var string
+	 */
+	protected $resource_path;
+
+	/**
+	 * @var string|null
+	 */
+	protected $parent_id;
+
+	/**
 	 * @param Mollie_API_Client $api
 	 */
 	public function __construct(Mollie_API_Client $api)
 	{
 		$this->api = $api;
+
+		if (empty($this->resource_path))
+		{
+			$class_parts         = explode("_", get_class($this));
+			$this->resource_path = strtolower(end($class_parts));
+		}
 	}
 
 	/**
+	 * @param array $filters
 	 * @return string
+	 * @throws Mollie_API_Exception
 	 */
-	protected function getResourceName ()
+	private function buildQueryString (array $filters)
 	{
-		$class_parts = explode("_", get_class($this));
+		if (empty($filters))
+		{
+			return "";
+		}
 
-		return mb_strtolower(end($class_parts));
+		// Force & because of some PHP 5.3 defaults.
+		return "?" . http_build_query($filters, "", "&");
 	}
 
 	/**
-	 * @param $rest_resource
-	 * @param $body
-	 *
+	 * @param string $rest_resource
+	 * @param        $body
+	 * @param array $filters
 	 * @return object
+	 * @throws Mollie_API_Exception
 	 */
-	private function rest_create($rest_resource, $body)
+	private function rest_create($rest_resource, $body, array $filters)
 	{
-		$result = $this->performApiCall(self::REST_CREATE, $rest_resource, $body);
-		return $this->copy($result, $this->getResourceObject($rest_resource));
+		$result = $this->performApiCall(
+			self::REST_CREATE,
+			$rest_resource . $this->buildQueryString($filters),
+			$body
+		);
+
+		return $this->copy($result, $this->getResourceObject());
 	}
 
 	/**
@@ -82,10 +110,11 @@ abstract class Mollie_API_Resource_Base
 	 *
 	 * @param string $rest_resource Resource name.
 	 * @param string $id            Id of the object to retrieve.
-	 * @throws Mollie_API_Exception
+	 * @param array  $filters
 	 * @return object
+	 * @throws Mollie_API_Exception
 	 */
-	private function rest_read ($rest_resource, $id)
+	private function rest_read ($rest_resource, $id, array $filters)
 	{
 		if (empty($id))
 		{
@@ -93,9 +122,69 @@ abstract class Mollie_API_Resource_Base
 		}
 
 		$id     = urlencode($id);
-		$result = $this->performApiCall(self::REST_READ, "{$rest_resource}/{$id}");
+		$result = $this->performApiCall(
+			self::REST_READ,
+			"{$rest_resource}/{$id}" . $this->buildQueryString($filters)
+		);
 
-		return $this->copy($result, $this->getResourceObject($rest_resource));
+		return $this->copy($result, $this->getResourceObject());
+	}
+
+	/**
+	 * Sends a DELETE request to a single Molle API object.
+	 *
+	 * @param string $rest_resource
+	 * @param string $id
+	 *
+	 * @return object
+	 * @throws Mollie_API_Exception
+	 */
+	private function rest_delete ($rest_resource, $id)
+	{
+		if (empty($id))
+		{
+			throw new Mollie_API_Exception("Invalid resource id.");
+		}
+
+		$id     = urlencode($id);
+		$result = $this->performApiCall(
+			self::REST_DELETE,
+			"{$rest_resource}/{$id}"
+		);
+
+		if ($result === NULL)
+		{
+			return NULL;
+		}
+
+		return $this->copy($result, $this->getResourceObject());
+	}
+
+	/**
+	 * Sends a POST request to a single Molle API object to update it.
+	 *
+	 * @param string $rest_resource
+	 * @param string $id
+	 * @param string $body
+	 *
+	 * @return object
+	 * @throws Mollie_API_Exception
+	 */
+	protected function rest_update ($rest_resource, $id, $body)
+	{
+		if (empty($id))
+		{
+			throw new Mollie_API_Exception("Invalid resource id.");
+		}
+
+		$id     = urlencode($id);
+		$result = $this->performApiCall(
+			self::REST_UPDATE,
+			"{$rest_resource}/{$id}",
+			$body
+		);
+
+		return $this->copy($result, $this->getResourceObject());
 	}
 
 	/**
@@ -104,12 +193,15 @@ abstract class Mollie_API_Resource_Base
 	 * @param $rest_resource
 	 * @param int $offset
 	 * @param int $limit
+	 * @param array $filters
 	 *
 	 * @return Mollie_API_Object_List
 	 */
-	private function rest_list($rest_resource, $offset = 0, $limit = self::DEFAULT_LIMIT)
+	private function rest_list($rest_resource, $offset = 0, $limit = self::DEFAULT_LIMIT, array $filters)
 	{
-		$api_path = $rest_resource . "?" . http_build_query(array("offset" => $offset, "count" => $limit));
+		$filters = array_merge(array("offset" => $offset, "count" => $limit), $filters);
+
+		$api_path = $rest_resource . $this->buildQueryString($filters);
 
 		$result = $this->performApiCall(self::REST_LIST, $api_path);
 
@@ -136,10 +228,7 @@ abstract class Mollie_API_Resource_Base
 	{
 		foreach ($api_result as $property => $value)
 		{
-			if (property_exists(get_class($object), $property))
-			{
-				$object->$property = $value;
-			}
+			$object->$property = $value;
 		}
 
 		return $object;
@@ -156,11 +245,12 @@ abstract class Mollie_API_Resource_Base
 	 * Create a resource with the remote API.
 	 *
 	 * @param array $data An array containing details on the resource. Fields supported depend on the resource created.
+	 * @param array $filters
 	 *
-	 * @throws Mollie_API_Exception
 	 * @return object
+	 * @throws Mollie_API_Exception
 	 */
-	public function create(array $data = array())
+	public function create(array $data = array(), array $filters = array())
 	{
 		$encoded = json_encode($data);
 
@@ -179,7 +269,7 @@ abstract class Mollie_API_Resource_Base
 			}
 		}
 
-		return $this->rest_create($this->getResourceName(), $encoded);
+		return $this->rest_create($this->getResourcePath(), $encoded, $filters);
 	}
 
 	/**
@@ -188,13 +278,29 @@ abstract class Mollie_API_Resource_Base
 	 * Will throw a Mollie_API_Exception if the resource cannot be found.
 	 *
 	 * @param string $resource_id
+	 * @param array  $filters
 	 *
-	 * @throws Mollie_API_Exception
 	 * @return object
+	 * @throws Mollie_API_Exception
 	 */
-	public function get($resource_id)
+	public function get ($resource_id, array $filters = array())
 	{
-		return $this->rest_read($this->getResourceName(), $resource_id);
+		return $this->rest_read($this->getResourcePath(), $resource_id, $filters);
+	}
+
+	/**
+	 * Delete a single resource from Mollie.
+	 *
+	 * Will throw a Mollie_API_Exception if the resource cannot be found.
+	 *
+	 * @param string $resource_id
+	 *
+	 * @return object
+	 * @throws Mollie_API_Exception
+	 */
+	public function delete ($resource_id)
+	{
+		return $this->rest_delete($this->getResourcePath(), $resource_id);
 	}
 
 	/**
@@ -202,12 +308,13 @@ abstract class Mollie_API_Resource_Base
 	 *
 	 * @param int $offset
 	 * @param int $limit
+	 * @param array $filters
 	 *
 	 * @return Mollie_API_Object_List
 	 */
-	public function all ($offset = 0, $limit = 0)
+	public function all ($offset = 0, $limit = 0, array $filters = array())
 	{
-		return $this->rest_list($this->getResourceName(), $offset, $limit);
+		return $this->rest_list($this->getResourcePath(), $offset, $limit, $filters);
 	}
 
 	/**
@@ -224,7 +331,19 @@ abstract class Mollie_API_Resource_Base
 	{
 		$body = $this->api->performHttpCall($http_method, $api_method, $http_body);
 
-		if (!($object = @json_decode($body)))
+		if ($this->api->getLastHttpResponseStatusCode() == Mollie_API_Client::HTTP_STATUS_NO_CONTENT)
+		{
+			return NULL;
+		}
+
+		if (empty($body))
+		{
+			throw new Mollie_API_Exception("Unable to decode Mollie response: '{$body}'.");
+		}
+
+		$object = @json_decode($body);
+
+		if (json_last_error() != JSON_ERROR_NONE)
 		{
 			throw new Mollie_API_Exception("Unable to decode Mollie response: '{$body}'.");
 		}
@@ -242,5 +361,56 @@ abstract class Mollie_API_Resource_Base
 		}
 
 		return $object;
+	}
+
+	/**
+	 * @param string $resource_path
+	 */
+	public function setResourcePath ($resource_path)
+	{
+		$this->resource_path = strtolower($resource_path);
+	}
+
+	/**
+	 * @return string
+	 * @throws Mollie_API_Exception
+	 */
+	public function getResourcePath ()
+	{
+		if (strpos($this->resource_path, "_") !== FALSE)
+		{
+			list($parent_resource, $child_resource) = explode("_", $this->resource_path, 2);
+
+			if (!strlen($this->parent_id))
+			{
+				throw new Mollie_API_Exception("Subresource '{$this->resource_path}' used without parent '$parent_resource' ID.");
+			}
+
+			return "$parent_resource/{$this->parent_id}/$child_resource";
+		}
+
+		return $this->resource_path;
+	}
+
+	/**
+	 * @param string $parent_id
+	 * @return $this
+	 */
+	public function withParentId ($parent_id)
+	{
+		$this->parent_id = $parent_id;
+
+		return $this;
+	}
+
+	/**
+	 * Set the resource to use a certain parent. Use this method before performing a get() or all() call.
+	 *
+	 * @param Mollie_API_Object_Payment|object $parent An object with an 'id' property
+	 * @return $this
+	 */
+	public function with ($parent)
+	{
+		return $this->withParentId($parent->id);
 	}
 }

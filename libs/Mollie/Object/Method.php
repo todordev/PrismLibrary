@@ -25,20 +25,71 @@
  * DAMAGE.
  *
  * @license     Berkeley Software Distribution License (BSD-License 2) http://www.opensource.org/licenses/bsd-license.php
- * @author      Mollie B.V. <info@mollie.nl>
+ * @author      Mollie B.V. <info@mollie.com>
  * @copyright   Mollie B.V.
- * @link        https://www.mollie.nl
+ * @link        https://www.mollie.com
  */
 class Mollie_API_Object_Method
 {
-	const IDEAL        = "ideal";
-	const PAYSAFECARD  = "paysafecard";
-	const CREDITCARD   = "creditcard";
-	const MISTERCASH   = "mistercash";
-	const SOFORT       = "sofort";
-	const BANKTRANSFER = "banktransfer";
-	const PAYPAL       = "paypal";
-	const BITCOIN      = "bitcoin";
+	/**
+	 * @link https://mollie.com/ideal
+	 */
+	const IDEAL             = "ideal";
+
+	/**
+	 * @link https://mollie.com/paysafecard
+	 */
+	const PAYSAFECARD       = "paysafecard";
+
+	/**
+	 * @link https://mollie.com/creditcard
+	 */
+	const CREDITCARD        = "creditcard";
+
+	/**
+	 * @link https://mollie.com/mistercash
+	 */
+	const MISTERCASH        = "mistercash";
+
+	/**
+	 * @link https://mollie.com/sofort
+	 */
+	const SOFORT            = "sofort";
+
+	/**
+	 * @link https://mollie.com/banktransfer
+	 */
+	const BANKTRANSFER      = "banktransfer";
+
+	/**
+	 * @link https://mollie.com/directdebit
+	 */
+	const DIRECTDEBIT       = "directdebit";
+
+	/**
+	 * @link https://mollie.com/paypal
+	 */
+	const PAYPAL            = "paypal";
+
+	/**
+	 * @link https://mollie.com/bitcoin
+	 */
+	const BITCOIN           = "bitcoin";
+
+	/**
+	 * @link https://mollie.com/belfiusdirectnet
+	 */
+	const BELFIUS           = "belfius";
+
+	/**
+	 * @link https://mollie.com/giftcards
+	 */
+	const PODIUMCADEAUKAART = "podiumcadeaukaart";
+
+	/**
+	 * @link https://www.mollie.com/nl/kbccbc
+	 */
+	const KBC               = "kbc";
 
 	/**
 	 * Id of the payment method.

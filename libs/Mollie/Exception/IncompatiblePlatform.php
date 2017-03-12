@@ -29,26 +29,10 @@
  * @copyright   Mollie B.V.
  * @link        https://www.mollie.com
  */
-class Mollie_API_Exception extends Exception
+class Mollie_API_Exception_IncompatiblePlatform extends Mollie_API_Exception
 {
-	/**
-	 * @var string
-	 */
-	protected $_field;
-
-	/**
-	 * @return string
-	 */
-	public function getField ()
-	{
-		return $this->_field;
-	}
-
-	/**
-	 * @param string $field
-	 */
-	public function setField ($field)
-	{
-		$this->_field = (string) $field;
-	}
+	const INCOMPATIBLE_PHP_VERSION    = 1000;
+	const INCOMPATIBLE_CURL_EXTENSION = 2000;
+	const INCOMPATIBLE_CURL_FUNCTION  = 2500;
+	const INCOMPATIBLE_JSON_EXTENSION = 3000;
 }

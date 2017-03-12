@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2013, Mollie B.V.
+ * Copyright (c) 2015, Mollie B.V.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,27 +28,17 @@
  * @author      Mollie B.V. <info@mollie.com>
  * @copyright   Mollie B.V.
  * @link        https://www.mollie.com
+ *
+ * @method Mollie_API_Object_Settlement[]|Mollie_API_Object_List all($offset = 0, $limit = 0, array $filters = array())
+ * @method Mollie_API_Object_Settlement get($settlement_id, array $filters = array())
  */
-class Mollie_API_Exception extends Exception
+class Mollie_API_Resource_Settlements extends Mollie_API_Resource_Base
 {
 	/**
-	 * @var string
+	 * @return Mollie_API_Object_Settlement
 	 */
-	protected $_field;
-
-	/**
-	 * @return string
-	 */
-	public function getField ()
+	protected function getResourceObject ()
 	{
-		return $this->_field;
-	}
-
-	/**
-	 * @param string $field
-	 */
-	public function setField ($field)
-	{
-		$this->_field = (string) $field;
+		return new Mollie_API_Object_Settlement;
 	}
 }

@@ -38,7 +38,7 @@ class Version
      *
      * @var integer
      */
-    public $devLevel = '19.2';
+    public $devLevel = '19.3';
 
     /**
      * Release Type

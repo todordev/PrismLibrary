@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2013, Mollie B.V.
+ * Copyright (c) 2015, Mollie B.V.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,27 +28,30 @@
  * @author      Mollie B.V. <info@mollie.com>
  * @copyright   Mollie B.V.
  * @link        https://www.mollie.com
+ *
+ * @method Mollie_API_Object_Organization[]|Mollie_API_Object_List all($offset = 0, $limit = 0, array $filters = array())
+ * @method Mollie_API_Object_Organization get($id, array $filters = array())
  */
-class Mollie_API_Exception extends Exception
+class Mollie_API_Resource_Organizations extends Mollie_API_Resource_Base
 {
 	/**
-	 * @var string
+	 * @return Mollie_API_Object_Organization
 	 */
-	protected $_field;
-
-	/**
-	 * @return string
-	 */
-	public function getField ()
+	protected function getResourceObject ()
 	{
-		return $this->_field;
+		return new Mollie_API_Object_Organization;
 	}
 
 	/**
-	 * @param string $field
+	 * Retrieve information on the currently logged in organization.
+	 *
+	 * Will throw a Mollie_API_Exception if the resource cannot be found.
+	 *
+	 * @return Mollie_API_Object_Organization
+	 * @throws Mollie_API_Exception
 	 */
-	public function setField ($field)
+	public function me ()
 	{
-		$this->_field = (string) $field;
+		return $this->get('me');
 	}
 }

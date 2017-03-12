@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2013, Mollie B.V.
+ * Copyright (c) 2015, Mollie B.V.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,26 +29,54 @@
  * @copyright   Mollie B.V.
  * @link        https://www.mollie.com
  */
-class Mollie_API_Exception extends Exception
+class Mollie_API_Object_Customer
 {
 	/**
 	 * @var string
 	 */
-	protected $_field;
+	public $resource;
 
 	/**
-	 * @return string
+	 * Id of the customer.
+	 *
+	 * @var string
 	 */
-	public function getField ()
-	{
-		return $this->_field;
-	}
+	public $id;
 
 	/**
-	 * @param string $field
+	 * Either "live" or "test". Indicates this being a test or a live (verified) customer.
+	 *
+	 * @var string
 	 */
-	public function setField ($field)
-	{
-		$this->_field = (string) $field;
-	}
+	public $mode;
+
+	/**
+	 * @var string
+	 */
+	public $name;
+
+	/**
+	 * @var string
+	 */
+	public $email;
+
+	/**
+	 * @var string|null
+	 */
+	public $locale;
+
+	/**
+	 * @var object|mixed|null
+	 */
+	public $metadata;
+
+	/**
+	 * @var string[]|array
+	 */
+	public $recentlyUsedMethods;
+
+	/**
+	 * @var string
+	 */
+	public $createdDatetime;
 }

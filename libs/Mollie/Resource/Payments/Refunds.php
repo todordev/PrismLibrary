@@ -25,22 +25,24 @@
  * DAMAGE.
  *
  * @license     Berkeley Software Distribution License (BSD-License 2) http://www.opensource.org/licenses/bsd-license.php
- * @author      Mollie B.V. <info@mollie.nl>
+ * @author      Mollie B.V. <info@mollie.com>
  * @copyright   Mollie B.V.
- * @link        https://www.mollie.nl
+ * @link        https://www.mollie.com
  *
- * @method Mollie_API_Object_Payment_Refund[]|Mollie_API_Object_List all($offset = 0, $limit = 0)
- * @method Mollie_API_Object_Payment_Refund get($resource_id)
+ * @method Mollie_API_Object_Payment_Refund[]|Mollie_API_Object_List all($offset = 0, $limit = 0, array $filters = array())
+ * @method Mollie_API_Object_Payment_Refund get($refund_id, array $filters = array())
+ * @method Mollie_API_Object_Payment_Refund create(array $data = array(), array $filters = array())
+ * @method Mollie_API_Object_Payment_Refund delete($refund_id)
  */
 class Mollie_API_Resource_Payments_Refunds extends Mollie_API_Resource_Base
 {
 	/**
 	 * @var string
 	 */
-	private $payment_id;
+	protected $resource_path = "payments_refunds";
 
 	/**
-	 * @return Mollie_API_Object_Method
+	 * @return Mollie_API_Object_Payment_Refund
 	 */
 	protected function getResourceObject ()
 	{
@@ -48,22 +50,15 @@ class Mollie_API_Resource_Payments_Refunds extends Mollie_API_Resource_Base
 	}
 
 	/**
-	 * @return string
-	 */
-	protected function getResourceName ()
-	{
-		return "payments/" . urlencode($this->payment_id) . "/refunds";
-	}
-
-	/**
-	 * Set the resource to use a certain payment. Use this method before performing a get() or all() call.
+	 * Cancel the given Refund. This is just an alias of the 'delete' method.
 	 *
-	 * @param Mollie_API_Object_Payment $payment
-	 * @return self
+	 * @param string $refund_id
+	 *
+	 * @return Mollie_API_Object_Payment_Refund
+	 * @throws Mollie_API_Exception
 	 */
-	public function with(Mollie_API_Object_Payment $payment)
+	public function cancel ($refund_id)
 	{
-		$this->payment_id = $payment->id;
-		return $this;
+		return $this->delete($refund_id);
 	}
 }

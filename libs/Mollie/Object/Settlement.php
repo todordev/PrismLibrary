@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2013, Mollie B.V.
+ * Copyright (c) 2015, Mollie B.V.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,26 +29,46 @@
  * @copyright   Mollie B.V.
  * @link        https://www.mollie.com
  */
-class Mollie_API_Exception extends Exception
+class Mollie_API_Object_Settlement
 {
+	/**
+	 * Id of the settlement.
+	 *
+	 * @var string
+	 */
+	public $id;
+
+	/**
+	 * The settlement reference. This corresponds to an invoice that's in your Dashboard.
+	 *
+	 * @var string
+	 */
+	public $reference;
+
+	/**
+	 * Total settlement amount in euros.
+	 *
+	 * @var double
+	 */
+	public $amount;
+
 	/**
 	 * @var string
 	 */
-	protected $_field;
+	public $settledDatetime;
 
 	/**
-	 * @return string
+	 * Revenues and costs nested per year, per month, and per payment method.
+	 *
+	 * @see https://www.mollie.com/en/docs/settlements#settlements-object
+	 * @var object
 	 */
-	public function getField ()
-	{
-		return $this->_field;
-	}
+	public $periods;
 
 	/**
-	 * @param string $field
+	 * Payment IDs that were settled (either paid out or reversed).
+	 *
+	 * @var string[]
 	 */
-	public function setField ($field)
-	{
-		$this->_field = (string) $field;
-	}
+	public $paymentIds;
 }

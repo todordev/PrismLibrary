@@ -1,6 +1,9 @@
 Prism Library Changelog
 ==========================
 
+###v1.19.3
+* Upgraded [Mollie API PHP](https://github.com/mollie/mollie-api-php) to v1.9.2 library.
+
 ###v1.19.2
 * Added [Sticky Kit](http://leafo.net/sticky-kit/).
 
