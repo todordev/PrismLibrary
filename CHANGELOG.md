@@ -1,6 +1,11 @@
 Prism Library Changelog
 ==========================
 
+###v1.19.4
+* Added [VueJS](https://vuejs.org/).
+* Added Prism\Utilities\DatabaseHelper.
+* Upgraded [jQuery LoadingOverlay](http://gasparesganga.com/labs/jquery-loading-overlay/) to v1.5.3.
+
 ###v1.19.3
 * Upgraded [Mollie API PHP](https://github.com/mollie/mollie-api-php) to v1.9.2 library.
 

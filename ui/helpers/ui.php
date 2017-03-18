@@ -53,6 +53,30 @@ abstract class PrismUI
     }
 
     /**
+     * Include Vue.js
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('Prism.ui.vue');
+     * </code>
+     *
+     * @link https://vuejs.org/
+     */
+    public static function vue()
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/vue/vue.min.js');
+
+        self::$loaded[__METHOD__] = true;
+    }
+
+    /**
      * Include jQuery plugin AreYouSure.
      *
      * <code>
