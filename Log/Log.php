@@ -10,6 +10,7 @@
 namespace Prism\Log;
 
 use Prism\Log\Adapter\AdapterInterface;
+use Prism\Utilities\ObjectHelper;
 
 defined('JPATH_PLATFORM') or die;
 

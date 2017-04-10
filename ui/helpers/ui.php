@@ -53,6 +53,90 @@ abstract class PrismUI
     }
 
     /**
+     * Include jQuery plugin iziModal
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('Prism.ui.iziModal');
+     * </code>
+     *
+     * @link http://izimodal.marcelodolce.com
+     */
+    public static function iziModal()
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/izimodal/iziModal.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/izimodal/iziModal.min.js');
+
+        self::$loaded[__METHOD__] = true;
+    }
+
+    /**
+     * Include jQuery plugin Modaal.
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('Prism.ui.modaal');
+     * </code>
+     *
+     * @link http://humaan.com/modaal/
+     */
+    public static function modaal()
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/modaal/modaal.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/modaal/modaal.min.js');
+
+        self::$loaded[__METHOD__] = true;
+    }
+
+    /**
+     * Include jQuery plugin Tooltipster
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('Prism.ui.tooltipster');
+     * </code>
+     *
+     * @param string $theme The themes are light, borderless, punk, noir, shadow
+     *
+     * @link http://iamceege.github.io/tooltipster/
+     */
+    public static function tooltipster($theme = '')
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/tooltipster/js/tooltipster.bundle.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/tooltipster/css/tooltipster.bundle.min.css');
+
+        if ($theme) {
+            $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/tooltipster/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-'.$theme.'.min.css');
+        }
+
+        self::$loaded[__METHOD__] = true;
+    }
+
+    /**
      * Include Vue.js
      *
      * <code>
@@ -295,6 +379,30 @@ abstract class PrismUI
 
         self::$loaded[__METHOD__] = true;
     }
+
+    /**
+     * Include jQuery Expander.
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('Prism.ui.expander');
+     * </code>
+     *
+     * @link https://github.com/kswedberg/jquery-expander
+     */
+    public static function expander()
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/jquery.expander.min.js');
+
+        self::$loaded[__METHOD__] = true;
+    }
     
     /**
      * Include Favico JS library.
@@ -475,7 +583,7 @@ abstract class PrismUI
     }
 
     /**
-     * Include Sweet Alert javascript library.
+     * Include SweetAlert2 JavaScript library.
      *
      * <code>
      * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
@@ -483,7 +591,7 @@ abstract class PrismUI
      * JHtml::_('Prism.ui.sweetAlert');
      * </code>
      *
-     * @link http://t4t5.github.io/sweetalert/ Documentation of Sweet Alert
+     * @link https://github.com/limonte/sweetalert2 Documentation of Sweet Alert
      */
     public static function sweetAlert()
     {
@@ -494,8 +602,8 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/sweetalert/sweetalert.css');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/sweetalert/sweetalert.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/sweetalert/sweetalert2.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/sweetalert/sweetalert2.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -699,6 +807,28 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
         $document->addScript(JUri::root() . 'libraries/Prism/ui/joomla/helper.js');
+
+        self::$loaded[__METHOD__] = true;
+    }
+
+    /**
+     * This method loads a script that initializes an object used for showing messages.
+     *
+     * <code>
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     *
+     * JHtml::_('Prism.ui.message');
+     * </code>
+     */
+    public static function message()
+    {
+        // Only load once
+        if (!empty(self::$loaded[__METHOD__])) {
+            return;
+        }
+
+        $document = JFactory::getDocument();
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/prism.message.js');
 
         self::$loaded[__METHOD__] = true;
     }

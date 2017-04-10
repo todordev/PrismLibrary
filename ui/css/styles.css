@@ -492,7 +492,15 @@
 }
 
 .inline-element {
-	display: inline !important;
+	display: inline;
+}
+
+.inline {
+	display: inline;
+}
+
+.inline-block {
+	display: inline-block;
 }
 
 /** Text Decoratioin */

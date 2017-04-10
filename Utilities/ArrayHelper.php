@@ -26,7 +26,7 @@ abstract class ArrayHelper
      * $userIds = Prism\Utilities\ArrayHelper::getIds($items);
      * </code>
      *
-     * @param array $items
+     * @param array  $items
      * @param string $column
      *
      * @return array

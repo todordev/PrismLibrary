@@ -20,8 +20,7 @@ defined('JPATH_PLATFORM') or die;
 class Json
 {
     protected $success = true;
-    protected $title = '';
-    protected $text = '';
+    protected $message = array();
     protected $data;
     protected $redirectUrl;
 
@@ -29,19 +28,22 @@ class Json
      * Initialize the object.
      *
      * <code>
-     * $title = "My title...";
-     * $text  = "My message...";
+     * $title   = "My title...";
+     * $content = "My message...";
      *
-     * $response = new Prism\Response\Json($title, $text);
+     * $response = new Prism\Response\Json($title, $content);
      * </code>
      *
      * @param string $title
-     * @param string $text
+     * @param string $content
      */
-    public function __construct($title = '', $text = '')
+    public function __construct($title = '', $content = '')
     {
-        $this->title = $title;
-        $this->text  = $text;
+        $this->message = array(
+            'title'     => $title,
+            'content'   => $content,
+            'type'      => '',
+        );
     }
 
     /**
@@ -49,9 +51,9 @@ class Json
      *
      * <code>
      * $title = "My title...";
-     * $text  = "My message...";
+     * $content  = "My message...";
      *
-     * $response = new Prism\Response\Json($title, $text);
+     * $response = new Prism\Response\Json($title, $content);
      * $response->success();
      * </code>
      *
@@ -60,6 +62,7 @@ class Json
     public function success()
     {
         $this->success = true;
+        $this->message['type'] = 'success';
 
         return $this;
     }
@@ -69,9 +72,9 @@ class Json
      *
      * <code>
      * $title = "My title...";
-     * $text  = "My message...";
+     * $content  = "My message...";
      *
-     * $response = new Prism\Response\Json($title, $text);
+     * $response = new Prism\Response\Json($title, $content);
      * $response->failure();
      * </code>
      *
@@ -80,6 +83,49 @@ class Json
     public function failure()
     {
         $this->success = false;
+        $this->message['type'] = 'error';
+
+        return $this;
+    }
+
+    /**
+     * Set the response as warning message.
+     *
+     * <code>
+     * $title = "My title...";
+     * $content  = "My message...";
+     *
+     * $response = new Prism\Response\Json($title, $content);
+     * $response->warning();
+     * </code>
+     *
+     * @return self
+     */
+    public function warning()
+    {
+        $this->success = false;
+        $this->message['type'] = 'warning';
+
+        return $this;
+    }
+
+    /**
+     * Set the response as info message.
+     *
+     * <code>
+     * $title = "My title...";
+     * $content  = "My message...";
+     *
+     * $response = new Prism\Response\Json($title, $content);
+     * $response->info();
+     * </code>
+     *
+     * @return self
+     */
+    public function info()
+    {
+        $this->success = true;
+        $this->message['type'] = 'type';
 
         return $this;
     }
@@ -96,7 +142,7 @@ class Json
      */
     public function getTitle()
     {
-        return $this->title;
+        return $this->message['title'];
     }
 
     /**
@@ -115,7 +161,7 @@ class Json
      */
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->message['title'] = $title;
 
         return $this;
     }
@@ -125,33 +171,73 @@ class Json
      *
      * <code>
      * $response = new Prism\Response\Json();
-     * $text = $response->getText();
+     * $content = $response->getText();
      * </code>
      *
      * @return string
+     *
+     * @deprecated v1.19.5
      */
     public function getText()
     {
-        return $this->text;
+        return $this->getContent();
     }
 
     /**
      * Set a response text to the object.
      *
      * <code>
-     * $text = "My text....";
+     * $content = "My text....";
      *
      * $response = new Prism\Response\Json();
-     * $response->setText($text);
+     * $response->setText($content);
      * </code>
      *
-     * @param string $text
+     * @param string $content
+     *
+     * @return self
+     *
+     * @deprecated v1.19.5
+     */
+    public function setText($content)
+    {
+        $this->setContent($content);
+
+        return $this;
+    }
+
+    /**
+     * Return a response content ( message ).
+     *
+     * <code>
+     * $response = new Prism\Response\Json();
+     * $content = $response->getContent();
+     * </code>
+     *
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->message['content'];
+    }
+
+    /**
+     * Set a response content to the object.
+     *
+     * <code>
+     * $content = "My text....";
+     *
+     * $response = new Prism\Response\Json();
+     * $response->setText($content);
+     * </code>
+     *
+     * @param string $content
      *
      * @return self
      */
-    public function setText($text)
+    public function setContent($content)
     {
-        $this->text = $text;
+        $this->message['content'] = $content;
 
         return $this;
     }
@@ -243,22 +329,26 @@ class Json
     public function __toString()
     {
         $response = array(
-            'success' => $this->success,
+            'success' => $this->success
         );
 
-        if ($this->title) {
-            $response['title'] = $this->title;
+        if ($this->message['content']) {
+            $response['message'] = $this->message;
+
+            // Remove this when I am ready to remove deprecated code.
+            $response['text']    = $this->message['content'];
+            if ($this->message['title']) {
+                $response['title'] = $this->message['title'];
+            } else {
+                unset($this->message['title']);
+            }
         }
 
-        if ($this->text) {
-            $response['text'] = $this->text;
-        }
-
-        if (null !== $this->data) {
+        if ($this->data !== null) {
             $response['data'] = $this->data;
         }
 
-        if (null !== $this->redirectUrl) {
+        if ($this->redirectUrl !== null) {
             $response['redirect_url'] = $this->redirectUrl;
         }
 

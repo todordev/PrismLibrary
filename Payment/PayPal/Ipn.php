@@ -24,7 +24,7 @@ class Ipn
     const INVALID  = 'INVALID';
 
     protected $url = '';
-    protected $data = array();
+    protected $data;
     protected $status;
 
     protected $error;
@@ -46,7 +46,7 @@ class Ipn
      * @param string $url
      * @param array $data
      */
-    public function __construct($url, $data)
+    public function __construct($url, array $data = array())
     {
         $this->url  = $url;
         $this->data = $data;
@@ -104,22 +104,10 @@ class Ipn
             return;
         }
 
-        // Decode data
-        foreach ($this->data as $key => $value) {
-            $this->data[rawurldecode($key)] = rawurldecode($value);
-        }
-
-        // Strip slashes if magic quotes are enabled
-        if (function_exists('get_magic_quotes_gpc') and (1 === (int)get_magic_quotes_gpc())) {
-            foreach ($this->data as $key => $value) {
-                $this->data[stripslashes($key)] = stripslashes($value);
-            }
-        }
-
         // Prepare request data
         $request = 'cmd=_notify-validate';
         foreach ($this->data as $key => $value) {
-            $request .= '&' . rawurlencode($key) . '=' . rawurlencode($value);
+            $request .= '&' . $key . '=' . urlencode($value);
         }
 
         $ch = curl_init($this->url);
@@ -128,34 +116,57 @@ class Ipn
             return;
         }
 
-        curl_setopt($ch, CURLOPT_HTTP_VERSION, 2);
-        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+        curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
         curl_setopt($ch, CURLOPT_SSLVERSION, 6);
-        curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: Close'));
+        curl_setopt($ch, CURLOPT_SSL_CIPHER_LIST, 'TLSv1');
+
+        curl_setopt($ch, CURLOPT_VERBOSE, false);
+        curl_setopt($ch, CURLOPT_FORBID_REUSE, true);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLINFO_HEADER_OUT, false);
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'User-Agent: CrowdfundingPlatform',
+            'Connection: Close'
+        ));
 
         if ($loadCertificate) {
             curl_setopt($ch, CURLOPT_CAINFO, __DIR__ . '/cacert.pem');
         }
 
+        @curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+
         $result = curl_exec($ch);
 
-        if (false === $result) {
-            $this->error = \JText::sprintf('LIB_PRISM_ERROR_PAYPAL_RECEIVING_DATA', $this->url) . '\n';
-            $this->error .= curl_error($ch);
+        $errNo        = curl_errno($ch);
+        $error        = curl_error($ch);
+        $lastHttpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        curl_close($ch);
+
+        if ($errNo > 0 and !empty($error)) {
+            $this->error  = 'Data from PayPal IPN: ' . $this->url. "\n";
+            $this->error .= $error;
             return;
         }
 
-        // If the payment is verified then set the status as verified.
-        if ($result === 'VERIFIED') {
-            $this->status = self::VERIFIED;
-        } else {
-            $this->status = self::INVALID;
+        if ($lastHttpCode >= 400) {
+            $this->error  = 'Invalid HTTP status '. $lastHttpCode .' verifying PayPal IPN';
         }
+
+        if ($result === self::INVALID) {
+            $this->error = 'PayPal claims the IPN data is INVALID – Possible fraud!';
+        }
+
+        // If the payment is verified then set the status as verified.
+        $this->status = ($result === 'VERIFIED') ? self::VERIFIED : self::INVALID;
     }
 
     /**
@@ -183,6 +194,54 @@ class Ipn
     public function getError()
     {
         return $this->error;
+    }
+
+    /**
+     * Return raw data from post request.
+     *
+     * <code>
+     * $url = "https://www.paypal.com/cgi-bin/webscr";
+     * $data = array(
+     *     "property1" => 1,
+     *     "property2" => 2,
+     * ...
+     * );
+     *
+     * $data = Prism\PayPal\Ipn::getRawPostData();
+     *
+     * $ipn = new Prism\PayPal\Ipn($url, $data);
+     * $ipn->verify();
+     *
+     * if (!$ipn->isVerified()) {
+     *     echo $ipn->getError();
+     * }
+     *
+     * </code>
+     *
+     * @return array
+     */
+    public static function getRawPostData()
+    {
+        $rawPostData = file_get_contents('php://input');
+        $rawPostArray = explode('&', $rawPostData);
+
+        $myPost = array();
+
+        foreach ($rawPostArray as $keyval) {
+            $keyval = explode('=', $keyval);
+            if (count($keyval) === 2) {
+                // Since we do not want the plus in the datetime string to be encoded to a space, we manually encode it.
+                if ($keyval[0] === 'payment_date') {
+                    if (substr_count($keyval[1], '+') === 1) {
+                        $keyval[1] = str_replace('+', '%2B', $keyval[1]);
+                    }
+                }
+
+                $myPost[$keyval[0]] = urldecode($keyval[1]);
+            }
+        }
+
+        return $myPost;
     }
 
     /**
@@ -215,5 +274,15 @@ class Ipn
         }
 
         return $transactions;
+    }
+
+    public function getProperties()
+    {
+        return [
+            'url' => $this->url,
+            'data' => $this->data,
+            'status' => $this->status,
+            'error' => $this->error
+        ];
     }
 }

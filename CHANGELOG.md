@@ -1,6 +1,15 @@
 Prism Library Changelog
 ==========================
 
+###v1.19.5
+* Added [Tooltipster](http://iamceege.github.io/tooltipster/).
+* Added [jQuer Expander](https://github.com/kswedberg/jquery-expander).
+* Added [Modaal](http://humaan.com/modaal/).
+* Added [iziModal](http://izimodal.marcelodolce.com).
+* Upgraded [jQuery AutoComplete](https://github.com/devbridge/jQuery-Autocomplete) to v1.3.0.
+* Upgraded [Bootstrap Datetime Picker](https://github.com/Eonasdan/bootstrap-datetimepicker) to v4.17.47.
+* Improved PayPal IPN Listener.
+
 ###v1.19.4
 * Added [VueJS](https://vuejs.org/).
 * Added Prism\Utilities\DatabaseHelper.

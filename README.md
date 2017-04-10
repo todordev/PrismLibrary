@@ -1,6 +1,6 @@
 Prism Library 
 ==========================
-( Version 1.19.4 )
+( Version 1.19.5 )
 - - -
 
 This is a collection of PHP classes used in many ITPrism extensions. 
