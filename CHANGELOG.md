@@ -1,6 +1,13 @@
 Prism Library Changelog
 ==========================
 
+###v1.19.6
+* Improved Log class.
+* Upgraded [WePay PHP SDK](https://github.com/devbridge/jQuery-Autocomplete) to v0.3.1.
+* Upgraded [VueJS](https://vuejs.org/) to v2.2.6.
+* Upgraded [SweetAlert](https://vuejs.org/) to v6.6.1.
+* Fixed the method (_notifyAdministrator_) that sends email to the administrator if payment plugin initialization filed.
+
 ###v1.19.5
 * Added [Tooltipster](http://iamceege.github.io/tooltipster/).
 * Added [jQuer Expander](https://github.com/kswedberg/jquery-expander).

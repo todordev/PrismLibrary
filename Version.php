@@ -38,7 +38,7 @@ class Version
      *
      * @var integer
      */
-    public $devLevel = '19.5';
+    public $devLevel = '19.6';
 
     /**
      * Release Type

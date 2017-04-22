@@ -26,7 +26,7 @@ class WePay
     /**
      * Version number - sent in user agent string
      */
-    const VERSION = '0.2.6';
+    const VERSION = '0.3.1';
 
     /**
      * Scope fields
@@ -102,10 +102,13 @@ class WePay
      * Generate URI used during oAuth authorization
      * Redirect your user to this URI where they can grant your application
      * permission to make API calls
+     *
      * @link https://www.wepay.com/developer/reference/oauth2
-     * @param  array  $scope        List of scope fields for which your application wants access
-     * @param  string $redirect_uri Where user goes after logging in at WePay (domain must match application settings)
-     * @param  array  $options      optional  user_name, user_email, user_country which will be pre-filled on login form, state to be returned in querystring of redirect_uri
+     *
+     * @param  array  $scope        List of scope fields for which your application wants access.
+     * @param  string $redirect_uri Where user goes after logging in at WePay (domain must match application settings).
+     * @param  array  $options      `user_name,user_email` which will be pre-filled on login form, state to be returned
+     *                              in query string of redirect_uri. The default value is an empty array.
      * @return string URI to which you must redirect your user to grant access to your application
      */
     public static function getAuthorizationUri(array $scope, $redirect_uri, array $options = array())
@@ -268,6 +271,11 @@ class WePay
         curl_setopt(self::$ch, CURLOPT_TIMEOUT, 30); // 30-second timeout, adjust to taste
         curl_setopt(self::$ch, CURLOPT_POST, !empty($values)); // WePay's API is not strictly RESTful, so all requests are sent as POST unless there are no request values
 
+        // Force TLS 1.2 connections
+        curl_setopt(self::$ch, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt(self::$ch, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt(self::$ch, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
+
         $uri = self::getDomain() . $endpoint;
         curl_setopt(self::$ch, CURLOPT_URL, $uri);
 
@@ -283,8 +291,10 @@ class WePay
             }
             throw new Exception('cURL error while making API call to WePay: cURL Errno - ' . $errno . ', ' . curl_error(self::$ch), $errno);
         }
+
         $result = json_decode($raw);
         $httpCode = curl_getinfo(self::$ch, CURLINFO_HTTP_CODE);
+
         if ($httpCode >= 400) {
             if (!isset($result->error_code)) {
                 throw new WePayServerException("WePay returned an error response with no error_code, please alert api@wepay.com. Original message: $result->error_description", $httpCode, $result, 0);
@@ -306,18 +316,28 @@ class WePay
 
     /**
      * Make API calls against authenticated user
-     * @param  string         $endpoint - API call to make (ex. 'user', 'account/find')
-     * @param  array          $values   - Associative array of values to send in API call
+     * @param  string         $endpoint     - API call to make (ex. 'user', 'account/find')
+     * @param  array          $values       - Associative array of values to send in API call
+     * @param  string         $risk_token   - WePay-supplied risk token associated with this API call
+     * @param  string         $client_ip    - Client's IP address associated with this API call
      * @return StdClass
      * @throws WePayException on failure
      * @throws Exception      on catastrophic failure (non-WePay-specific cURL errors)
      */
-    public function request($endpoint, array $values = array())
+    public function request($endpoint, array $values = array(), $risk_token = null, $client_ip = null)
     {
         $headers = array();
 
         if ($this->token) { // if we have an access_token, add it to the Authorization header
             $headers[] = "Authorization: Bearer $this->token";
+        }
+
+        if ($risk_token) { // if we have a risk_token, add it to the WePay-Risk-Token header
+            $headers[] = "WePay-Risk-Token: " . $risk_token;
+        }
+
+        if ($client_ip) { // if we have a client_ip, add it to the Client-IP header
+            $headers[] = "Client-IP: " . $client_ip;
         }
 
         $result = self::make_request($endpoint, $values, $headers);

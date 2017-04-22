@@ -10,7 +10,6 @@
 namespace Prism\Log;
 
 use Prism\Log\Adapter\AdapterInterface;
-use Prism\Utilities\ObjectHelper;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -212,7 +211,7 @@ class Log
         } elseif (is_array($data)) {
             foreach ($this->exclude as $excludedProperty) {
                 if (array_key_exists($excludedProperty, $data)) {
-                    unset($excludedProperty);
+                    $data[$excludedProperty] = '# Excluded by the system to prevent recursion';
                 }
             }
 
@@ -221,29 +220,40 @@ class Log
             $data = var_export($data, true);
         }
 
-        $this->data = $data;
+        $this->data = stripslashes($data);
 
         return $this;
     }
 
     protected function prepareObjectData($data)
     {
-        if (method_exists($data, 'getProperties')) {
-            $data = (array)$data->getProperties();
-        } else {
-            $data = (array)get_object_vars($data);
-        }
+        try {
+            // Try to export properties.
+            // If there is a recursion,
+            // catch the error and get the properties by get_object_vars.
+            $data = var_export($data, true);
+        } catch (\Exception $e) {
+            $className = get_class($data);
 
-        foreach ($this->exclude as $excludedProperty) {
-            if (array_key_exists($excludedProperty, $data)) {
-                unset($data[$excludedProperty]);
+            if (method_exists($data, 'getProperties')) {
+                $data = (array)$data->getProperties();
+            } else {
+                $data = (array)get_object_vars($data);
             }
-        }
 
-        foreach ($data as $key => $value) {
-            if (is_object($value)) {
-                $data[$key] = $this->prepareObjectData($value);
+            foreach ($this->exclude as $excludedProperty) {
+                if (array_key_exists($excludedProperty, $data)) {
+                    $data[$excludedProperty] = '# Excluded by the system to prevent recursion';
+                }
             }
+
+            foreach ($data as $key => $value) {
+                if (is_object($value)) {
+                    $data[$key] = $this->prepareObjectData($value);
+                }
+            }
+
+            $data = [$className => $data];
         }
 
         return $data;
