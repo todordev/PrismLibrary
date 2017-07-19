@@ -17,7 +17,7 @@ composer require itprism/prism-library
 
 Follow next steps to build a package that you will be able to install on your Joomla! website.
 
-_**NOTE**: You need [Apache Ant](http://ant.apache.org/manual/install.html) to build the package.
+_**NOTE**: You need [Apache Ant](http://ant.apache.org/manual/install.html) to build the package._
 
 1. Download this repository via Composer.
 2. Open your console and go to folder __build__.
