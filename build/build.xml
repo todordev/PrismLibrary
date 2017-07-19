@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="prism" default="build" basedir=".">
+	<description>Prism Library Ant Build File</description>
+
+	<!-- load variables from config file -->
+	<property name="cfg.configFile" location="antconfig.txt" />
+	<loadproperties srcfile="${cfg.configFile}" />
+	
+	<!-- source directories -->
+	<property name="cfg.srcDir" location="${cfg.sourceDir}/src" />
+	<property name="cfg.testsDir" location="${cfg.sourceDir}/tests" />
+	<property name="cfg.packagesDir" location="${cfg.sourceDir}/packages" />
+	<property name="cfg.vendorSourceDir" location="${cfg.sourceDir}/vendor" />
+	<property name="cfg.vendor2SourceDir" location="${cfg.sourceDir}/vendor2" />
+	<property name="cfg.vendorDir" location="${cfg.packagesDir}/vendor" />
+	
+	<target name="build" depends="vendors, build_component, clean, info" />
+    
+	<target name="vendors" description="copy vendors">
+		<copy todir="${cfg.vendorDir}/Abraham/TwitterOAuth">
+			<fileset dir="${cfg.vendorSourceDir}/abraham/twitteroauth/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/AdamPaterson/OAuth2/Client/Provider">
+			<fileset dir="${cfg.vendorSourceDir}/adam-paterson/oauth2-stripe/src" />
+	    </copy>
+	    <copy todir="${cfg.vendorDir}/Aws">
+			<fileset dir="${cfg.vendorSourceDir}/aws/aws-sdk-php/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/Defuse/Crypto">
+			<fileset dir="${cfg.vendorSourceDir}/defuse/php-encryption/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/GuzzleHttp">
+			<fileset dir="${cfg.vendorSourceDir}/guzzlehttp/guzzle/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/GuzzleHttp">
+			<fileset dir="${cfg.vendorSourceDir}/guzzlehttp/guzzle/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/GuzzleHttp/Promise">
+			<fileset dir="${cfg.vendorSourceDir}/guzzlehttp/promises/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/GuzzleHttp/Psr7">
+			<fileset dir="${cfg.vendorSourceDir}/guzzlehttp/psr7/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/Hashids">
+			<fileset dir="${cfg.vendorSourceDir}/hashids/hashids/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/League/OAuth2/Client">
+			<fileset dir="${cfg.vendorSourceDir}/league/oauth2-client/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/League/Fractal">
+			<fileset dir="${cfg.vendorSourceDir}/league/fractal/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/League/Flysystem">
+			<fileset dir="${cfg.vendorSourceDir}/league/flysystem/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/League/Flysystem/AwsS3v3">
+			<fileset dir="${cfg.vendorSourceDir}/league/flysystem-aws-s3-v3/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/Psr/Http/Message">
+			<fileset dir="${cfg.vendorSourceDir}/psr/http-message/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/Psr/Cache">
+			<fileset dir="${cfg.vendorSourceDir}/psr/cache/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/Psr/Log">
+			<fileset dir="${cfg.vendorSourceDir}/psr/log/Psr/Log" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/Ramsey/Uuid">
+			<fileset dir="${cfg.vendorSourceDir}/ramsey/uuid/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/Carbon">
+			<fileset dir="${cfg.vendorSourceDir}/nesbot/carbon/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/Ramsey/Uuid">
+			<fileset dir="${cfg.vendorSourceDir}/ramsey/uuid/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/Ramsey/Uuid">
+			<fileset dir="${cfg.vendorSourceDir}/ramsey/uuid/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/JmesPath">
+			<fileset dir="${cfg.vendorSourceDir}/mtdowling/jmespath.php/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/Monolog">
+			<fileset dir="${cfg.vendorSourceDir}/monolog/monolog/src/Monolog" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/Facebook">
+			<fileset dir="${cfg.vendorSourceDir}/facebook/graph-sdk/src/Facebook" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/RandomLib">
+			<fileset dir="${cfg.vendorSourceDir}/ircmaxell/random-lib/lib/RandomLib" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/SecurityLib">
+			<fileset dir="${cfg.vendorSourceDir}/ircmaxell/security-lib/lib/SecurityLib" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/Stripe">
+			<fileset dir="${cfg.vendorSourceDir}/stripe/stripe-php/lib" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/Google">
+			<fileset dir="${cfg.vendorSourceDir}/google/apiclient/src/Google" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/Google/Auth">
+			<fileset dir="${cfg.vendorSourceDir}/google/auth/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/Google/Service/Plus">
+			<fileset dir="${cfg.vendorSourceDir}/google/apiclient-services/src/Google/Service/Plus" />
+	    </copy>
+		<copy file="${cfg.vendorSourceDir}/google/apiclient-services/src/Google/Service/Plus.php" tofile="${cfg.vendorDir}/Google/Service/Plus.php"/>
+		
+		<copy todir="${cfg.vendorDir}/Mollie">
+			<fileset dir="${cfg.vendor2SourceDir}/Mollie" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/PesaPal">
+			<fileset dir="${cfg.vendor2SourceDir}/PesaPal" />
+	    </copy>
+		
+		<copy file="${cfg.vendorSourceDir}/wepay/php-sdk/wepay.php" todir="${cfg.vendorDir}/WePay"/>
+		
+	</target>
+	
+	<!-- build component -->
+	<target name="build_component" depends="vendors" description="packages the finally component file">
+		<zip destfile="${cfg.packagesDir}/${cfg.name}_${cfg.version}.zip">
+			<fileset dir="${cfg.srcDir}" />
+			<zipfileset dir="${cfg.vendorDir}" prefix="vendor" />
+		</zip>
+	</target>
+    
+	<target name="clean" depends="build_component" description="remove temporary files (vendor)">
+		<delete dir="${cfg.vendorDir}" />
+	</target>
+	
+	<target name="info" description="prints information">
+		<echo message="Project: ${cfg.name}" />
+		<tstamp>
+			<format property="buildtime" pattern="yyyy-MM-dd'T'HH:mm:ss" />
+		</tstamp>
+		<echo message="Buildtime: ${buildtime}" />
+	</target>
+
+</project>

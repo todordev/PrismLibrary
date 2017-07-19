@@ -1,0 +1,4 @@
+cfg.name=lib_prism
+cfg.version=v1.20
+cfg.buildDir=packages
+cfg.sourceDir=..FULL_PATH../lib_prism

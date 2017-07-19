@@ -1,0 +1,39 @@
+{
+    "name": "itprism/prism-library",
+    "description": "Prism library used in all ITPrism projects.",
+    "keywords": ["library", "composer", "package", "joomla", "laravel"],
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Todor Iliev",
+            "email": "todor@itprism.com"
+        }
+    ],
+    "type": "library",
+    "require": {
+		"php": ">=5.6",
+        "abraham/twitteroauth": "^0.7.4",
+        "adam-paterson/oauth2-stripe": "^2.0",
+        "ramsey/uuid": "^3.6",
+        "aws/aws-sdk-php": "^3.31",
+        "nesbot/carbon": "^1.22",
+        "defuse/php-encryption": "^2.1",
+        "hashids/hashids": "^2.0",
+        "league/fractal": "^0.16.0",
+        "league/flysystem": "^1.0",
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "facebook/graph-sdk": "^5.5",
+        "google/apiclient": "^2.2",
+        "ircmaxell/random-lib": "^1.2",
+        "stripe/stripe-php": "^5.1",
+        "wepay/php-sdk": "^0.3.1"
+    },
+	"require-dev": {
+		"phpunit/phpunit": "5.2.*"
+    },
+	"autoload": {
+        "psr-4": {
+            "Prism\\": "src/"
+        }
+    }
+}
