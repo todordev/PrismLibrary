@@ -3,6 +3,7 @@
     "description": "Prism library used in all ITPrism projects.",
     "keywords": ["library", "composer", "package", "joomla", "laravel"],
     "license": "GPL-3.0",
+	"version": "1.20.0",
     "authors": [
         {
             "name": "Todor Iliev",
