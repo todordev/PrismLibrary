@@ -9,21 +9,19 @@
 
 namespace Prism;
 
-defined('JPATH_PLATFORM') or die;
-
 /**
  * This is a class that provides functionality for managing dates.
  *
  * @package      Prism
  * @subpackage   Dates
  */
-class Date extends \JDate
+class Date extends \DateTime
 {
     /**
      * Return last date.
      *
      * <code>
-     * $date = new PrismDate();
+     * $date = new Prism\Date();
      *
      * $yesterday = $date->getLastDay();
      * </code>
@@ -42,7 +40,7 @@ class Date extends \JDate
      * Return the begin of a day.
      *
      * <code>
-     * $date = new PrismDate();
+     * $date = new Prism\Date();
      *
      * $beginOfDay = $date->getBeginOfDay();
      * </code>
@@ -53,7 +51,7 @@ class Date extends \JDate
     {
         $day = clone $this;
 
-        $day->setTime(0, 0, 0);
+        $day->setTime(0, 0);
 
         return $day;
     }
@@ -62,7 +60,7 @@ class Date extends \JDate
      * Return the end of a day.
      *
      * <code>
-     * $date = new PrismDate();
+     * $date = new Prism\Date();
      *
      * $endOfDay = $date->getEndOfDay();
      * </code>
@@ -73,7 +71,7 @@ class Date extends \JDate
     {
         $day = clone $this;
 
-        $day->setTime(0, 0, 0);
+        $day->setTime(0, 0);
 
         $endOfDay = clone $day;
         $endOfDay->modify('tomorrow');
@@ -86,7 +84,7 @@ class Date extends \JDate
      * Return a day of last week.
      *
      * <code>
-     * $date = new PrismDate();
+     * $date = new Prism\Date();
      *
      * $lastWeekDay = $date->getLastWeek();
      * </code>
@@ -105,7 +103,7 @@ class Date extends \JDate
      * Return the first day of last week.
      *
      * <code>
-     * $date = new PrismDate();
+     * $date = new Prism\Date();
      *
      * $beginOfWeek = $date->getBeginOfWeek();
      * </code>
@@ -124,7 +122,7 @@ class Date extends \JDate
      * Return the last day of last week.
      *
      * <code>
-     * $date = new PrismDate();
+     * $date = new Prism\Date();
      *
      * $endOfWeek = $date->getEndOfWeek();
      * </code>
@@ -143,7 +141,7 @@ class Date extends \JDate
      * Return the first day of a month.
      *
      * <code>
-     * $date = new PrismDate();
+     * $date = new Prism\Date();
      *
      * $beginOfMonth = $date->getBeginOfMonth();
      * </code>
@@ -162,7 +160,7 @@ class Date extends \JDate
      * Return the last day of a month.
      *
      * <code>
-     * $date = new PrismDate();
+     * $date = new Prism\Date();
      *
      * $endOfMonth = $date->getEndOfMonth();
      * </code>
@@ -181,7 +179,7 @@ class Date extends \JDate
      * Return the first day of an year.
      *
      * <code>
-     * $date = new PrismDate();
+     * $date = new Prism\Date();
      *
      * $beginOfYear = $date->getBeginOfYear();
      * </code>
@@ -204,7 +202,7 @@ class Date extends \JDate
      * Return the last day of an year.
      *
      * <code>
-     * $date = new PrismDate();
+     * $date = new Prism\Date();
      *
      * $endOfYear = $date->getEndOfYear();
      * </code>
@@ -227,20 +225,22 @@ class Date extends \JDate
      * Return a period between two dates in days.
      *
      * <code>
-     * $date  = new PrismDate();
+     * $date  = new Prism\Date();
      *
-     * $date1 = new PrismDate("now");
-     * $date2 = new PrismDate("01-01-2020);
+     * $date1 = new Prism\Date("now");
+     * $date2 = new Prism\Date("01-01-2020);
      *
      * $period = $date->getDaysPeriod($date1, $date2);
      * </code>
      *
-     * @param \JDate $date1
-     * @param \JDate $date2
+     * @param \DateTime $date1
+     * @param \DateTime $date2
      *
-     * @return self
+     * @return \DatePeriod
+     *
+     * @throws \Exception
      */
-    public function getDaysPeriod(\JDate $date1, \JDate $date2)
+    public function getDaysPeriod(\DateTime $date1, \DateTime $date2)
     {
         $period = new \DatePeriod(
             $date1,
@@ -257,7 +257,7 @@ class Date extends \JDate
      * <code>
      * $days   = 30;
      *
-     * $date   = new PrismDate("now");
+     * $date   = new Prism\Date("now");
      *
      * $endDate = $date->calculateEndDate();
      * </code>
@@ -278,7 +278,7 @@ class Date extends \JDate
      * Check whether the date is part of the current week.
      *
      * <code>
-     * $date   = new PrismDate("05-06-2014");
+     * $date   = new Prism\Date("05-06-2014");
      *
      * if ($date->isCurrentWeekDay()) {
      * ...
@@ -293,10 +293,6 @@ class Date extends \JDate
         $startOfWeek  = $today->getBeginOfWeek();
         $endOfWeek    = $today->getEndOfWeek();
 
-        if ($startOfWeek <= $this and $this <= $endOfWeek) {
-            return true;
-        } else {
-            return false;
-        }
+        return (bool)($startOfWeek <= $this and $this <= $endOfWeek);
     }
 }

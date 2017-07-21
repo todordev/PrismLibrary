@@ -25,6 +25,7 @@ class JoomlaDatabaseSession implements TransactionalSession
     {
         $this->db = $db;
     }
+
     public function executeAtomically(callable $operation)
     {
         $this->db->transactionStart();

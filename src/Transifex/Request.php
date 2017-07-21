@@ -11,9 +11,6 @@ namespace Prism\Transifex;
 
 use Joomla\Utilities\ArrayHelper;
 
-// no direct access
-defined('JPATH_PLATFORM') or die;
-
 /**
  * This class provides functionality for making requests to Transifex servers.
  *

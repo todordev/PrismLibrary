@@ -8,8 +8,7 @@
 
 namespace Prism\Video;
 
-// no direct access
-defined('JPATH_PLATFORM') or die;
+use Joomla\Uri\Uri;
 
 /**
  * This class provides functionality for parsing video URLs
@@ -56,18 +55,18 @@ class Embed
      */
     public function parse()
     {
-        $uri  = new \JUri($this->url);
+        $uri  = new Uri($this->url);
         $host = $uri->getHost();
 
         // Youtube
-        if ((false !== strpos($host, 'youtu')) and (preg_match($this->patternYouTube, $this->url, $matches))) {
+        if ((false !== strpos($host, 'youtu')) and preg_match($this->patternYouTube, $this->url, $matches)) {
             $this->code    = $matches[0];
             $this->service = 'youtube';
             return;
         }
 
         // Vimeo
-        if ((false !== strpos($host, 'vimeo')) and (preg_match($this->patternVimeo, $this->url, $matches))) {
+        if ((false !== strpos($host, 'vimeo')) and preg_match($this->patternVimeo, $this->url, $matches)) {
             $this->code    = $matches[5];
             $this->service = 'vimeo';
             return;
@@ -110,7 +109,6 @@ class Embed
     public function getHtmlCode()
     {
         switch ($this->service) {
-
             case 'youtube':
                 $html = '<iframe width="560" height="315" src="//www.youtube.com/embed/' . $this->code . '" frameborder="0" allowfullscreen></iframe>';
                 break;
@@ -120,7 +118,7 @@ class Embed
                 break;
 
             default:
-                $html = \JText::_('LIB_PRISM_ERROR_INVALID_VIDEO_SERVICE');
+                $html = '';
                 break;
         }
 

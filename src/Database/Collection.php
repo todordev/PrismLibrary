@@ -20,6 +20,8 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package         Prism
  * @subpackage      Database\Collections
+ *
+ * @deprecated v1.19
  */
 abstract class Collection implements \Iterator, \Countable, \ArrayAccess
 {

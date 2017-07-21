@@ -8,9 +8,6 @@
 
 namespace Prism\Utilities;
 
-// no direct access
-defined('JPATH_PLATFORM') or die;
-
 /**
  * This class provides functionality for generating short URL,
  * using some services like bitly, google, tinycc,...
@@ -112,7 +109,6 @@ class ShortUrl
         }
 
         switch ($this->service) {
-
             case 'jmp':
                 $this->getBitlyURL('j.mp');
                 break;

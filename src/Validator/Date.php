@@ -8,9 +8,6 @@
 
 namespace Prism\Validator;
 
-// no direct access
-defined('JPATH_PLATFORM') or die;
-
 /**
  * This class validates date.
  *
@@ -90,10 +87,6 @@ class Date implements ValidatorInterface
         $day   = $date->format('d');
         $year  = $date->format('Y');
 
-        if (checkdate($month, $day, $year)) {
-            return true;
-        } else {
-            return false;
-        }
+        return (bool)checkdate($month, $day, $year);
     }
 }

@@ -11,9 +11,6 @@ namespace Prism\Utilities;
 
 use Joomla\Utilities\ArrayHelper as JArrayHelper;
 
-// no direct access
-defined('JPATH_PLATFORM') or die;
-
 /**
  * This class contains methods that are used for handling strings.
  *
@@ -75,6 +72,8 @@ abstract class StringHelper
      *
      * @throws \InvalidArgumentException
      * @return string
+     *
+     * @deprecated 1.19
      */
     public static function getAmount($amount, $currency, array $options = array())
     {

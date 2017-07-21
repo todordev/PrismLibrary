@@ -9,8 +9,6 @@
 
 namespace Prism\Utilities;
 
-defined('JPATH_PLATFORM') or die;
-
 /**
  * This class provides functionality for handling arrays.
  *

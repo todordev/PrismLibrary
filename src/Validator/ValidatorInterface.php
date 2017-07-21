@@ -8,9 +8,6 @@
 
 namespace Prism\Validator;
 
-// no direct access
-defined('JPATH_PLATFORM') or die;
-
 /**
  * This interface describes validator methods.
  *

@@ -26,7 +26,7 @@ abstract class ArrayObject implements \Iterator, \Countable, \ArrayAccess
 
     /**
      * Database driver.
-     * 
+     *
      * @var \JDatabaseDriver
      */
     protected $db;

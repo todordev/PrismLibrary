@@ -19,6 +19,8 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package         Prism
  * @subpackage      Database\Tables
+ *
+ * @deprecated v1.19
  */
 abstract class TableObservable extends Table implements \JObservableInterface
 {

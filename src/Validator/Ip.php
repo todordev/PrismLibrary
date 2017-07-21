@@ -8,16 +8,13 @@
 
 namespace Prism\Validator;
 
-// no direct access
-defined('JPATH_PLATFORM') or die;
-
 /**
  * This class validates IP addresses.
  *
  * @package      Prism
  * @subpackage   Validators
  */
-class IP implements ValidatorInterface
+class Ip implements ValidatorInterface
 {
     /**
      * IP address.
@@ -73,7 +70,7 @@ class IP implements ValidatorInterface
         }
 
         // Validate by allowed IP addresses.
-        if (!empty($this->allowed) and (!in_array($ip, $this->allowed))) {
+        if (count($this->allowed) > 0 and !in_array($ip, $this->allowed)) {
             return false;
         }
 

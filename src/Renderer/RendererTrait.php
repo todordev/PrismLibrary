@@ -9,8 +9,6 @@
 
 namespace Prism\Renderer;
 
-defined('JPATH_PLATFORM') or die;
-
 /**
  * Provides interface and functionality for objects
  * that render output by a layout.

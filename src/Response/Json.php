@@ -9,8 +9,6 @@
 
 namespace Prism\Response;
 
-defined('JPATH_PLATFORM') or die;
-
 /**
  * This class provides functionality to manage JSON response.
  *

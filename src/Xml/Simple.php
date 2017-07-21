@@ -9,8 +9,6 @@
 
 namespace Prism\Xml;
 
-defined('JPATH_PLATFORM') or die;
-
 /**
  * This class extends the native PHP class Simple XML.
  *
@@ -49,7 +47,7 @@ class Simple extends \SimpleXMLElement
      * $sxml->addChildCData("body", "<strong>This text contains HTML code.</strong>");
      * </code>
      *
-     * @return Simple
+     * @return \SimpleXMLElement
      */
     public function addChildCData($name, $value = null)
     {

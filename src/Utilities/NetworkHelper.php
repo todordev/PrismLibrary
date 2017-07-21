@@ -9,9 +9,6 @@
 
 namespace Prism\Utilities;
 
-// no direct access
-defined('JPATH_PLATFORM') or die;
-
 /**
  * This class contains methods that are used for handling strings.
  *

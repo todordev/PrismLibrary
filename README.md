@@ -7,7 +7,7 @@ This is a collection of PHP classes used in many ITPrism extensions.
 
 ## Installation
 
-The preferred method of installation to PHP Frameworks is via [Packagist][] and [Composer][]. Run the following command to install the package and add it as a requirement to your project's `composer.json`:
+The preferred method of installation to PHP Frameworks is via [Packagist](https://packagist.org/packages/itprism/prism-library) and [Composer](https://getcomposer.org/). Run the following command to install the package and add it as a requirement to your project's `composer.json`:
 
 ```bash
 composer require itprism/prism-library
@@ -19,11 +19,12 @@ Follow next steps to build a package that you will be able to install on your Jo
 
 _**NOTE**: You need [Apache Ant](http://ant.apache.org/manual/install.html) to build the package._
 
-1. Download this repository via Composer.
-2. Open your console and go to folder __build__.
-3. Rename file _antconfig.dist.txt_ to _antconfig.txt_.
-4. Enter the path to the folder where you downloaded this files. You have to enter the path as value of variable __cfg.sourceDir__ in _antconfig.txt_.
-5. Execute `ant` in your console.
+1. Clone this repository.
+2. Install required packages executing `composer update`.
+3. Go to folder __build__.
+4. Rename file _antconfig.dist.txt_ to _antconfig.txt_.
+5. Enter the path to the folder where you cloned this repository. You have to enter the path as value of variable __cfg.sourceDir__ in _antconfig.txt_.
+6. Execute `ant` in your console.
 
 ```bash
 ant

@@ -9,9 +9,6 @@
 
 namespace Prism\Transifex;
 
-// no direct access
-defined('JPATH_PLATFORM') or die;
-
 /**
  * This class provides methods for managing Transifex Response.
  *

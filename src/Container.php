@@ -9,9 +9,6 @@
 
 namespace Prism;
 
-// no direct access
-defined('JPATH_PLATFORM') or die;
-
 /**
  * This class provides DI container everywhere where we need it, especially in ITPrism's extensions.
  * NOTE: It will be removed when Joomla! PLT implements DI containers in the CMS.

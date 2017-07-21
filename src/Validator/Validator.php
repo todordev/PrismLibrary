@@ -9,8 +9,6 @@
 
 namespace Prism\Validator;
 
-defined('JPATH_PLATFORM') or die;
-
 /**
  * This is the abstract class of validators.
  *

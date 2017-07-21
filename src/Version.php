@@ -9,8 +9,6 @@
 
 namespace Prism;
 
-defined('JPATH_PLATFORM') or die;
-
 /**
  * Prism Library version information
  *

@@ -9,9 +9,6 @@
 
 namespace Prism\Utilities;
 
-// no direct access
-defined('JPATH_PLATFORM') or die;
-
 /**
  * This class provides methods used for interaction with database servers.
  *
@@ -43,5 +40,18 @@ abstract class DatabaseHelper
         }
 
         return $isMariaDb;
+    }
+
+    /**
+     * Add table prefix to table name.
+     *
+     * @param string $tableName
+     * @param string $prefix
+     *
+     * @return string
+     */
+    public static function prefix($tableName, $prefix)
+    {
+        return (string)str_replace('#__', $prefix, $tableName);
     }
 }

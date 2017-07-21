@@ -15,9 +15,6 @@ use League\Flysystem\Adapter\Local;
 use League\Flysystem\AwsS3v3\AwsS3Adapter;
 use Aws\S3\S3Client;
 
-// no direct access
-defined('_JEXEC') or die;
-
 /**
  * Filesystem helper.
  *
