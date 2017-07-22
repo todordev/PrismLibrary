@@ -34,7 +34,7 @@ trait ToOptionsMethod
         foreach ($this->items as $item) {
             $properties = $item->getProperties();
 
-            if ($suffix !== '' and (array_key_exists($suffix, $properties) and (string)$item[$suffix] !== '')) {
+            if ($suffix !== '' and (array_key_exists($suffix, $properties) and (string)$properties[$suffix] !== '')) {
                 $options[] = array('value' => $properties[$key], 'text' => $properties[$text] . ' ['.(string)$properties[$suffix].']');
             } else {
                 $options[] = array('value' => $properties[$key], 'text' => $properties[$text]);
