@@ -11,8 +11,6 @@ namespace Prism\Integration;
 
 use Joomla\Utilities\ArrayHelper;
 
-defined('JPATH_PLATFORM') or die;
-
 /**
  * This class contains methods which creates social profile object,
  * based on social extension name.
@@ -146,10 +144,8 @@ abstract class Helper
 
         $result = null;
         if ($needles) {
-
             foreach ($needles as $view => $ids) {
                 if (array_key_exists($view, self::$lookup)) {
-
                     foreach ($ids as $id) {
                         if (array_key_exists((int)$id, self::$lookup[$view])) {
                             $result = self::$lookup[$view][(int)$id];

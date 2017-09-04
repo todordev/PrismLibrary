@@ -12,4 +12,5 @@ namespace Prism\Domain;
 interface Gatewayed
 {
     public function getGateway();
+    public function setGateway($gateway);
 }

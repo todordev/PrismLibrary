@@ -10,6 +10,7 @@
 namespace Prism\Database;
 
 use Illuminate\Database\Query\Builder as QueryBuilder;
+use Prism\Database\Request\Request;
 
 /**
  * Base class of Larave Database Gateway.
@@ -55,4 +56,6 @@ abstract class LaravelDatabase
     {
         return $this->db;
     }
+
+    abstract protected function getQuery(Request $request = null);
 }

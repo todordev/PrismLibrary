@@ -9,9 +9,31 @@
 
 namespace Prism\Domain;
 
+use Prism\Database\Request\Request;
+
+/**
+ * Interface with main fetch methods.
+ *
+ * @package Prism\Domain
+ */
 interface Fetcher
 {
-    public function fetchById($id);
-    public function fetch(array $conditions = array());
-    public function fetchCollection(array $conditions = array());
+    /**
+     * Return an item by its ID.
+     *
+     * @param int $id
+     * @param Request $request
+     *
+     * @return array
+     */
+    public function fetchById($id, Request $request = null);
+
+    /**
+     * Return an item filtering the result by conditions.
+     *
+     * @param Request $request
+     *
+     * @return array
+     */
+    public function fetch(Request $request);
 }

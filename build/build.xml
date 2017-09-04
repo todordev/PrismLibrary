@@ -77,6 +77,9 @@
 		<copy todir="${cfg.vendorDir}/Ramsey/Uuid">
 			<fileset dir="${cfg.vendorSourceDir}/ramsey/uuid/src" />
 	    </copy>
+		<copy todir="${cfg.vendorDir}/GraphQL">
+			<fileset dir="${cfg.vendorSourceDir}/webonyx/graphql-php/src" />
+	    </copy>
 		<copy todir="${cfg.vendorDir}/JmesPath">
 			<fileset dir="${cfg.vendorSourceDir}/mtdowling/jmespath.php/src" />
 	    </copy>

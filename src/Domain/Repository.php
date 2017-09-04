@@ -9,6 +9,8 @@
 
 namespace Prism\Domain;
 
+use Prism\Database\Request\Request;
+
 abstract class Repository
 {
     /**
@@ -27,16 +29,17 @@ abstract class Repository
     }
 
     /**
-     * @param array $conditions
+     * @param Request $request
      *
      * @return Entity
      */
-    abstract public function fetch(array $conditions = array());
+    abstract public function fetch(Request $request);
 
     /**
-     * @param $id
+     * @param int $id
+     * @param Request $request
      *
      * @return Entity
      */
-    abstract public function fetchById($id);
+    abstract public function fetchById($id, Request $request = null);
 }

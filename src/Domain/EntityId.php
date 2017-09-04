@@ -16,11 +16,11 @@ trait EntityId
     /**
      * Get the ID of this object (unique to the object type)
      *
-     * @return int
+     * @return string|int
      */
     public function getId()
     {
-        return (int)$this->id;
+        return $this->id;
     }
 
     /**
@@ -29,7 +29,8 @@ trait EntityId
      * @param int $id
      * @return self
      *
-     * @throws \Exception If the id on the object is already set
+     * @throws \BadMethodCallException
+     * @throws \InvalidArgumentException
      */
     public function setId($id)
     {
@@ -37,11 +38,11 @@ trait EntityId
             throw new \BadMethodCallException('The ID for this entity has been set already.');
         }
 
-        if (!is_int($id) || $id < 1) {
+        if ($id === null || (is_numeric($id) && (int)$id < 1)) {
             throw new \InvalidArgumentException('The entity ID is invalid.');
         }
 
-        $this->id = (int)$id;
+        $this->id = is_numeric($id) ? (int)$id : (string)$id;
 
         return $this;
     }

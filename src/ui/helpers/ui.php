@@ -475,8 +475,8 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/pnotify/jquery.pnotify.css');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/pnotify/jquery.pnotify.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/pnotify/pnotify.custom.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/ui/pnotify/pnotify.custom.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -617,9 +617,12 @@ abstract class PrismUI
      * JHtml::_('Prism.ui.bootstrap3FileInput');
      * </code>
      *
+     * @param string $theme
+     * @param string $locale
+     *
      * @link https://github.com/kartik-v/bootstrap-fileinput Documentation of Bootstrap Fileinput
      */
-    public static function bootstrap3FileInput()
+    public static function bootstrap3FileInput($theme = 'fa', $locale = '')
     {
         // Only load once
         if (!empty(self::$loaded[__METHOD__])) {
@@ -630,8 +633,27 @@ abstract class PrismUI
 
         $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/css/fileinput.min.css');
         $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/js/fileinput.min.js');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/themes/fa/theme.js');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/js/plugins/canvas-to-blob.min.js');
+
+        switch ($theme) {
+            case 'explorer':
+                $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/themes/explorer/theme.min.js');
+                $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/themes/explorer/theme.min.css');
+                break;
+            case 'explorer-fa':
+                $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/themes/explorer-fa/theme.min.js');
+                $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/themes/explorer-fa/theme.min.css');
+                break;
+            case 'gly':
+                $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/themes/gly/theme.min.js');
+                break;
+            default:
+                $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/themes/fa/theme.min.js');
+                break;
+        }
+
+        if ($locale) {
+            $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/js/locales/'.$locale.'.js');
+        }
 
         self::$loaded[__METHOD__] = true;
     }
@@ -674,6 +696,8 @@ abstract class PrismUI
      * </code>
      *
      * @link http://plugins.upbootstrap.com/bootstrap-ajax-typeahead/#docs Documentation of Bootstrap 2 Typeahead
+     *
+     * @deprecated 1.20 Use AutoComplete
      */
     public static function bootstrap2Typeahead()
     {
@@ -698,6 +722,8 @@ abstract class PrismUI
      * </code>
      *
      * @link https://github.com/twitter/typeahead.js Documentation of Bootstrap 3 Typeahead
+     *
+     * @deprecated 1.20 Use AutoComplete
      */
     public static function bootstrap3Typeahead()
     {
@@ -797,6 +823,8 @@ abstract class PrismUI
      *
      * JHtml::_('Prism.ui.joomlaHelper');
      * </code>
+     *
+     * @deprecated v1.20 Use Prism.ui.message
      */
     public static function joomlaHelper()
     {
@@ -958,6 +986,8 @@ abstract class PrismUI
      *
      * JHtml::_('Prism.ui.joomlaList');
      * </code>
+     *
+     * @deprecated v1.20
      */
     public static function joomlaList()
     {

@@ -36,7 +36,7 @@ abstract class Mapper
      */
     public function save(Entity $object)
     {
-        if ($object->getId() === null) {
+        if (!$object->getId()) {
             $this->insertObject($object);
         } else {
             $this->updateObject($object);

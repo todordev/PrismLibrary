@@ -9,9 +9,7 @@
 
 namespace Prism\Integration\Notification;
 
-use Joomla\Utilities\ArrayHelper;
-
-defined('JPATH_PLATFORM') or die;
+use Joomla\Registry\Registry;
 
 /**
  * This class contains methods which creates social profile object,
@@ -19,116 +17,44 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package      Prism
  * @subpackage   Integrations\Notifications
- *
- * @deprecated v1.20
  */
-class Builder
+abstract class Builder
 {
-    protected $config = array();
-    protected $notification;
-
     /**
-     * Initialize the object.
+     * Build Notification object.
      *
      * <code>
-     * $options = array(
-     *    "social_platform" => "socialcommunity",
-     *    "user_id" => 1
-     * );
+     * $config = new Registry([
+     *    "env" => 'joomla', // It could be joomla, laravel, symfony
+     *    "platform" => "socialcommunity",
+     * ]);
      *
-     * $notificationBuilder = new Prism\Integration\Notification\Builder($options);
+     * $data = new Registry([
+     *      'content' => '....',
+     *      'created_at' => '2012-12-12',
+     *      'status' => 'new',
+     *      'image' => '...',
+     *      'url' => '...',
+     *      'target_id' => 2
+     * ]);
+     *
+     * $notification = Prism\Integration\Notification\Builder::build($config, $data);
      * </code>
      *
-     * @param  array  $config Options used in the process of building profile object.
+     * @param  Registry  $config Options used in the process of building an object.
+     * @param  Registry  $data
      *
+     * @return Notification|null
      */
-    public function __construct(array $config = array())
+    public static function build(Registry $config, Registry $data)
     {
-        $this->config = $config;
-    }
-
-    /**
-     * Build a social profile object.
-     *
-     * <code>
-     * $options = array(
-     *    "social_platform" => "socialcommunity",
-     *    "user_id" => 1
-     * );
-     *
-     * $notificationBuilder = new Prism\Integration\Notification\Builder($options);
-     * $notificationBuilder->build();
-     *
-     * $notification = $notificationBuilder->getNotification();
-     * </code>
-     */
-    public function build()
-    {
-        $type   = ArrayHelper::getValue($this->config, 'social_platform');
-        $userId = ArrayHelper::getValue($this->config, 'user_id');
-        $url    = ArrayHelper::getValue($this->config, 'url');
-        $image  = ArrayHelper::getValue($this->config, 'image');
-        $title  = ArrayHelper::getValue($this->config, 'title');
-
-        switch ($type) {
-
-            case 'socialcommunity':
-                $notification = new SocialCommunity($userId);
-                $notification->setUrl($url);
-                $notification->setImage($image);
-                break;
-
-            case 'gamification':
-                $notification = new Gamification($userId);
-                $notification->setTitle($title);
-                $notification->setUrl($url);
-                $notification->setImage($image);
-                break;
-
-            case 'jomsocial':
-
-                // Register JomSocial Router
-                if (!class_exists('CRoute')) {
-                    \JLoader::register('CRoute', JPATH_SITE.'/components/com_community/libraries/core.php');
-                }
-
-                $notification = new JomSocial($userId);
-                $notification->setDb(\JFactory::getDbo());
-
-                break;
-
-            case 'easysocial':
-                $notification = new EasySocial($userId);
-                $notification->setDb(\JFactory::getDbo());
-                break;
-
-            default:
-                $notification = null;
-                break;
+        $notification = null;
+        $class = 'Prism\\Integration\\Notification\\Builder\\'.ucfirst($config->get('env'));
+        if ($config->get('env') and class_exists($class)) {
+            $builder = new $class($config, $data);
+            $notification = $builder->build();
         }
 
-        $this->notification = $notification;
-    }
-
-    /**
-     * Return a notification object.
-     *
-     * <code>
-     * $options = array(
-     *    "social_platform" => "socialcommunity",
-     *    "user_id" => 1
-     * );
-     *
-     * $notificationBuilder = new Prism\Integration\Notification\Builder($options);
-     * $notificationBuilder->build();
-     *
-     * $notification = $notificationBuilder->getNotification();
-     * </code>
-     *
-     * @return null|NotificationInterface
-     */
-    public function getNotification()
-    {
-        return $this->notification;
+        return $notification;
     }
 }

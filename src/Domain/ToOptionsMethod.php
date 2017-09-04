@@ -32,9 +32,9 @@ trait ToOptionsMethod
 
         /** @var EntityProperties $item */
         foreach ($this->items as $item) {
-            $properties = $item->getProperties();
+            $properties = is_object($item) ? $item->getProperties() : $item;
 
-            if ($suffix !== '' and (array_key_exists($suffix, $properties) and (string)$properties[$suffix] !== '')) {
+            if ($suffix !== '' && (array_key_exists($suffix, $properties) && (string)$properties[$suffix] !== '')) {
                 $options[] = array('value' => $properties[$key], 'text' => $properties[$text] . ' ['.(string)$properties[$suffix].']');
             } else {
                 $options[] = array('value' => $properties[$key], 'text' => $properties[$text]);

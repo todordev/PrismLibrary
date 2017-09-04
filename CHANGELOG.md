@@ -2,14 +2,15 @@ Prism Library Changelog
 ==========================
 
 ### v1.20
-* Upgraded [VueJS](https://vuejs.org/) to v2.4.1.
+* Upgraded [VueJS](https://vuejs.org/) to v2.4.2.
 * Upgraded [jQuery AutoComplete](https://github.com/devbridge/jQuery-Autocomplete) to v1.4.1.
 * Upgraded [jQuery File Upload](https://github.com/blueimp/jQuery-File-Upload) to v9.18.0.
 * Upgraded [SweetAlert2](https://limonte.github.io/sweetalert2/) to v6.6.5.
 * Upgraded [Parsley JS](http://parsleyjs.org/) to v2.7.2.
 * Improved _Prism\Payment\Result_ class. Added options to skipp some events and processes during the transaction process.
 * Improved _Prism\Money_ classes.
-* Added _Prism\Domain_ classes that will be used for implementing domain models based on Domain Driven Design.
+* Added _Prism\Domain_ classes that will be used for implementing domain models based on Domain-Driven Design.
+* Added _Prism\Database_ classes that will be used in the new core architecture based on Domain-Driven Design.
 * Added [Ramsey/Uuid](https://github.com/ramsey/uuid).
 * Added [Hashids](https://github.com/ivanakimov/hashids.php).
 * Renamed folder __libs__ to __vendor__.

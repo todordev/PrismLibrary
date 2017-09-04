@@ -87,11 +87,11 @@ final class Factory
                     \JLoader::register('CRoute', JPATH_SITE.'/components/com_community/libraries/core.php');
                 }
 
-                $notification = new JomSocial($this->options->get('user_id'));
+                $notification = new Jomsocial($this->options->get('user_id'));
                 break;
 
             case 'easysocial':
-                $notification = new EasySocial($this->options->get('user_id'));
+                $notification = new Easysocial($this->options->get('user_id'));
                 break;
 
             default:

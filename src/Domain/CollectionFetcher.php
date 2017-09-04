@@ -9,12 +9,14 @@
 
 namespace Prism\Domain;
 
+use Prism\Database\Request\Request;
+
 interface CollectionFetcher
 {
     /**
-     * @param array $conditions
+     * @param Request $request
      *
      * @return Collection
      */
-    public function fetchCollection(array $conditions = array());
+    public function fetchCollection(Request $request);
 }

@@ -37,6 +37,7 @@ JLoader::registerNamespace('Psr', PRISM_PATH_LIBRARY . '/vendor');
 JLoader::registerNamespace('RandomLib', PRISM_PATH_LIBRARY . '/vendor');
 JLoader::registerNamespace('SecurityLib', PRISM_PATH_LIBRARY . '/vendor');
 JLoader::registerNamespace('Ramsey', PRISM_PATH_LIBRARY . '/vendor');
+JLoader::registerNamespace('GraphQL', PRISM_PATH_LIBRARY . '/vendor');
 
 // Register some helpers.
 JHtml::addIncludePath(PRISM_PATH_LIBRARY . '/ui/helpers');
