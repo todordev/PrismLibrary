@@ -18,7 +18,7 @@ namespace Prism\Domain;
 trait PropertiesMethods
 {
     /**
-     * Returns object properties as associative array;
+     * Returns object properties as associative array.
      *
      * @return  array
      */

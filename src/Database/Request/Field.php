@@ -45,12 +45,20 @@ class Field
      */
     protected $raw;
 
+    /**
+     * It shows us the column name is an alias of expression.
+     *
+     * @var string
+     */
+    protected $is_alias = false;
+
     public function __construct(array $data)
     {
-        $this->raw    = array_key_exists('raw', $data) ? (string)$data['raw'] : '';
-        $this->alias  = array_key_exists('alias', $data) ? (string)$data['alias'] : '';
-        $this->column = array_key_exists('column', $data) ? (string)$data['column'] : '';
-        $this->table  = array_key_exists('table', $data) ? (string)$data['table'] : '';
+        $this->raw      = array_key_exists('raw', $data) ? (string)$data['raw'] : '';
+        $this->alias    = array_key_exists('alias', $data) ? (string)$data['alias'] : '';
+        $this->column   = array_key_exists('column', $data) ? (string)$data['column'] : '';
+        $this->table    = array_key_exists('table', $data) ? (string)$data['table'] : '';
+        $this->is_alias = array_key_exists('is_alias', $data) ? (bool)$data['is_alias'] : false;
     }
 
     /**
@@ -115,5 +123,15 @@ class Field
     public function setRaw($raw)
     {
         $this->raw = $raw;
+    }
+
+    /**
+     * Check if the filed is an alias of expression.
+     *
+     * @return bool
+     */
+    public function isAlias()
+    {
+        return (bool)$this->is_alias;
     }
 }

@@ -126,10 +126,11 @@ abstract class JoomlaDatabaseGateway
      *
      * @param Request $request
      * @param array $defaultFields
+     * @param array $aliasFields
      *
      * @return array
      */
-    protected function prepareFields($request, array $defaultFields)
+    protected function prepareFields($request, array $defaultFields, array $aliasFields = array())
     {
         $fields = array();
 
@@ -140,16 +141,20 @@ abstract class JoomlaDatabaseGateway
             if (count($requiredFields) > 0) {
                 /** @var Field $field */
                 foreach ($requiredFields as $field) {
-                    $requireField = $field->getTable() ? $field->getTable() . '.' . $field->getColumn() : 'a.' . $field->getColumn();
-                    if (!in_array($requireField, $defaultFields, true)) {
-                        continue;
-                    }
+                    if ($field->isAlias() && array_key_exists($field->getColumn(), $aliasFields)) {
+                        $fields[] = $aliasFields[$field->getColumn()];
+                    } else {
+                        $requireField = $field->getTable() ? $field->getTable() . '.' . $field->getColumn() : 'a.' . $field->getColumn();
+                        if (!in_array($requireField, $defaultFields, true)) {
+                            continue;
+                        }
 
-                    if ($field->getAlias()) {
-                        $requireField .= ' AS ' . $field->getAlias();
-                    }
+                        if ($field->getAlias()) {
+                            $requireField .= ' AS ' . $field->getAlias();
+                        }
 
-                    $fields[] = $requireField;
+                        $fields[] = $requireField;
+                    }
                 }
             }
         }

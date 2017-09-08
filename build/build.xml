@@ -21,20 +21,21 @@
 			<fileset dir="${cfg.vendorSourceDir}/abraham/twitteroauth/src" />
 	    </copy>
 		<copy todir="${cfg.vendorDir}/AdamPaterson/OAuth2/Client/Provider">
-			<fileset dir="${cfg.vendorSourceDir}/adam-paterson/oauth2-stripe/src" />
+			<fileset dir="${cfg.vendorSourceDir}/adam-paterson/oauth2-stripe/src/Provider" />
 	    </copy>
 	    <copy todir="${cfg.vendorDir}/Aws">
 			<fileset dir="${cfg.vendorSourceDir}/aws/aws-sdk-php/src" />
 	    </copy>
+		<copy file="${cfg.vendorSourceDir}/aws/prism/init.php" todir="${cfg.vendorDir}/Aws" />
+		
 		<copy todir="${cfg.vendorDir}/Defuse/Crypto">
 			<fileset dir="${cfg.vendorSourceDir}/defuse/php-encryption/src" />
 	    </copy>
 		<copy todir="${cfg.vendorDir}/GuzzleHttp">
 			<fileset dir="${cfg.vendorSourceDir}/guzzlehttp/guzzle/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/GuzzleHttp">
-			<fileset dir="${cfg.vendorSourceDir}/guzzlehttp/guzzle/src" />
-	    </copy>
+		<copy file="${cfg.vendorSourceDir}/guzzlehttp/prism/init.php" todir="${cfg.vendorDir}/GuzzleHttp" />
+		
 		<copy todir="${cfg.vendorDir}/GuzzleHttp/Promise">
 			<fileset dir="${cfg.vendorSourceDir}/guzzlehttp/promises/src" />
 	    </copy>
@@ -69,7 +70,7 @@
 			<fileset dir="${cfg.vendorSourceDir}/ramsey/uuid/src" />
 	    </copy>
 		<copy todir="${cfg.vendorDir}/Carbon">
-			<fileset dir="${cfg.vendorSourceDir}/nesbot/carbon/src" />
+			<fileset dir="${cfg.vendorSourceDir}/nesbot/carbon/src/Carbon" />
 	    </copy>
 		<copy todir="${cfg.vendorDir}/Ramsey/Uuid">
 			<fileset dir="${cfg.vendorSourceDir}/ramsey/uuid/src" />
@@ -96,8 +97,13 @@
 			<fileset dir="${cfg.vendorSourceDir}/ircmaxell/security-lib/lib/SecurityLib" />
 	    </copy>
 		<copy todir="${cfg.vendorDir}/Stripe">
-			<fileset dir="${cfg.vendorSourceDir}/stripe/stripe-php/lib" />
+			<fileset dir="${cfg.vendorSourceDir}/stripe/stripe-php" >
+				<include name="lib/**" />
+				<include name="data/**" />
+			</fileset>
 	    </copy>
+		<copy file="${cfg.vendorSourceDir}/stripe/prism/init.php" todir="${cfg.vendorDir}/Stripe" />
+		
 		<copy todir="${cfg.vendorDir}/Google">
 			<fileset dir="${cfg.vendorSourceDir}/google/apiclient/src/Google" />
 	    </copy>

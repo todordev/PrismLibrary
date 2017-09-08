@@ -3,6 +3,7 @@ Prism Library Changelog
 
 ### v1.20
 * Upgraded [VueJS](https://vuejs.org/) to v2.4.2.
+* Upgraded [jQuery Cropper](https://fengyuanchen.github.io/cropper/) to v3.0.0.
 * Upgraded [jQuery AutoComplete](https://github.com/devbridge/jQuery-Autocomplete) to v1.4.1.
 * Upgraded [jQuery File Upload](https://github.com/blueimp/jQuery-File-Upload) to v9.18.0.
 * Upgraded [SweetAlert2](https://limonte.github.io/sweetalert2/) to v6.6.5.
@@ -16,6 +17,7 @@ Prism Library Changelog
 * Renamed folder __libs__ to __vendor__.
 * The antbuilder reworked. Now, it builds Joomla! package from current source.
 * Published to Packagist. The library can be installed to any framework via Composer.
+* It was decreased minimum image size to 25 when resize or crop.
 
 ### v1.19.6
 * Improved Log class.

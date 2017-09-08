@@ -9,6 +9,7 @@
 
 namespace Prism\Database\Request;
 
+use Prism\Database\Condition\Condition;
 use Prism\Database\Condition\Conditions;
 use Prism\Database\Condition\Order;
 use Prism\Database\Condition\Ordering;
@@ -50,10 +51,10 @@ class Request
 
     public function __construct()
     {
-        $this->fields     = new Fields();
-        $this->conditions = new Conditions();
-        $this->ordering   = new Ordering();
-        $this->limit      = new Limit();
+        $this->fields     = new Fields;
+        $this->conditions = new Conditions;
+        $this->ordering   = new Ordering;
+        $this->limit      = new Limit;
     }
 
     /**
@@ -134,5 +135,41 @@ class Request
     public function getLimit()
     {
         return $this->limit;
+    }
+
+    /**
+     * @param Condition $condition
+     *
+     * @return self
+     */
+    public function addCondition(Condition $condition)
+    {
+        $this->conditions->addCondition($condition);
+
+        return $this;
+    }
+
+    /**
+     * @param Field $field
+     *
+     * @return self
+     */
+    public function requestField(Field $field)
+    {
+        $this->fields->addField($field);
+
+        return $this;
+    }
+
+    /**
+     * @param Order $condition
+     *
+     * @return self
+     */
+    public function addOrderCondition(Order $condition)
+    {
+        $this->ordering->addCondition($condition);
+
+        return $this;
     }
 }

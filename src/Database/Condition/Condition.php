@@ -55,8 +55,8 @@ class Condition
         $this->raw        = array_key_exists('raw', $data) ? (string)$data['raw'] : '';
         $this->column     = array_key_exists('column', $data) ? (string)$data['column'] : '';
         $this->value      = array_key_exists('value', $data) ? $data['value'] : '';
-        $this->table      = array_key_exists('table', $data) ? (string)$data['table'] : '';
-        $this->operator   = array_key_exists('operator', $data) ? (string)$data['operator'] : '';
+        $this->table      = array_key_exists('table', $data) ? (string)$data['table'] : 'a';
+        $this->operator   = array_key_exists('operator', $data) ? (string)$data['operator'] : '=';
     }
 
     /**

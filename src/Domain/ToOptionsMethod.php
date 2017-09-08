@@ -35,7 +35,7 @@ trait ToOptionsMethod
             $properties = is_object($item) ? $item->getProperties() : $item;
 
             if ($suffix !== '' && (array_key_exists($suffix, $properties) && (string)$properties[$suffix] !== '')) {
-                $options[] = array('value' => $properties[$key], 'text' => $properties[$text] . ' ['.(string)$properties[$suffix].']');
+                $options[] = array('value' => $properties[$key], 'text' => $properties[$text] . ', '.(string)$properties[$suffix]);
             } else {
                 $options[] = array('value' => $properties[$key], 'text' => $properties[$text]);
             }

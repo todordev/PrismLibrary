@@ -94,9 +94,9 @@ class Image
 
         // Resize to general size.
         $width      = $options->get('width', 640);
-        $width      = ($width < 50) ? 50 : $width;
+        $width      = ($width < 25) ? 25 : $width;
         $height     = $options->get('height', 480);
-        $height     = ($height < 50) ? 50 : $height;
+        $height     = ($height < 25) ? 25 : $height;
         $scale      = $options->get('scale', \JImage::SCALE_INSIDE);
         $createNew  = (bool)$options->get('create_new', Constants::NO);
 
@@ -157,9 +157,9 @@ class Image
 
         // Resize to general size.
         $width      = $options->get('width', 200);
-        $width      = ($width < 50) ? 50 : $width;
+        $width      = ($width < 25) ? 25 : $width;
         $height     = $options->get('height', 200);
-        $height     = ($height < 50) ? 50 : $height;
+        $height     = ($height < 25) ? 25 : $height;
         $left       = (int)abs($options->get('x', 0));
         $top        = (int)abs($options->get('y', 0));
         $createNew  = (bool)$options->get('create_new', Constants::NO);
