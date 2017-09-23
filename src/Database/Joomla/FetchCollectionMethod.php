@@ -24,9 +24,9 @@ trait FetchCollectionMethod
      *
      * <code>
      * // Prepare specific conditions.
-     * $usersIds    = new \Prism\Database\Condition\Condition(['column' => 'user_id', 'value' => [1,2,3,4], 'operator' => 'IN']);
+     * $usersIds    = new \Prism\Database\Request\Condition(['column' => 'user_id', 'value' => [1,2,3,4], 'operator' => 'IN']);
      *
-     * $conditions  = new \Prism\Database\Condition\Conditions;
+     * $conditions  = new \Prism\Database\Request\Conditions;
      * $conditions->addSpecificCondition($usersIds);
      *
      * // Prepare database request.

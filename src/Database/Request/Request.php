@@ -9,12 +9,6 @@
 
 namespace Prism\Database\Request;
 
-use Prism\Database\Condition\Condition;
-use Prism\Database\Condition\Conditions;
-use Prism\Database\Condition\Order;
-use Prism\Database\Condition\Ordering;
-use Prism\Database\Condition\Limit;
-
 /**
  * Condition used for generating a query during the process of fetching data.
  *
@@ -49,12 +43,35 @@ class Request
      */
     protected $limit;
 
-    public function __construct()
+    public function __construct(array $request = array())
     {
         $this->fields     = new Fields;
+        if (array_key_exists('fields', $request)) {
+            if (is_array($request['fields'])) {
+                $this->requestFields($request['fields']);
+            } elseif ($request['fields'] instanceof Fields) {
+                $this->fields = $request['fields'];
+            }
+        }
+
         $this->conditions = new Conditions;
+        if (array_key_exists('conditions', $request)) {
+            if (is_array($request['conditions'])) {
+                $this->addConditions($request['conditions']);
+            } elseif ($request['conditions'] instanceof Conditions) {
+                $this->conditions = $request['conditions'];
+            }
+        }
+
         $this->ordering   = new Ordering;
+        if (array_key_exists('ordering', $request) && ($request['ordering'] instanceof Ordering)) {
+            $this->ordering = $request['conditions'];
+        }
+
         $this->limit      = new Limit;
+        if (array_key_exists('limit', $request) && ($request['limit'] instanceof Limit)) {
+            $this->limit = $request['limit'];
+        }
     }
 
     /**
@@ -150,6 +167,38 @@ class Request
     }
 
     /**
+     * @param string $key
+     * @param Condition $condition
+     *
+     * @return self
+     * @throws \InvalidArgumentException
+     */
+    public function addSpecificCondition($key, Condition $condition)
+    {
+        $this->conditions->addSpecificCondition($key, $condition);
+
+        return $this;
+    }
+
+    /**
+     * Simple way to add conditions.
+     *
+     * @param array $conditions
+     *
+     * @return self
+     */
+    public function addConditions(array $conditions)
+    {
+        foreach ($conditions as $columnName => $value) {
+            if (is_string($columnName)) {
+                $this->conditions->addCondition(new Condition(['column' => $columnName, 'value' => $value]));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * @param Field $field
      *
      * @return self
@@ -161,6 +210,23 @@ class Request
         return $this;
     }
 
+    /**
+     * Simple way to request fields.
+     *
+     * @param array $fields
+     *
+     * @return self
+     */
+    public function requestFields(array $fields)
+    {
+        foreach ($fields as $columnName) {
+            if (is_string($columnName)) {
+                $this->fields->addField(new Field(['column' => $columnName]));
+            }
+        }
+
+        return $this;
+    }
     /**
      * @param Order $condition
      *

@@ -7,17 +7,18 @@
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Database\Condition;
+namespace Prism\Database\Request;
 
 /**
- * Collection of conditions used for generating a query for ordering.
+ * Collection of conditions used for filtering the data that should be fetched.
  *
  * @package         Prism\Database
  * @subpackage      Conditions
  */
-class Ordering implements \Iterator, \Countable, \ArrayAccess
+class Conditions implements \Iterator, \Countable, \ArrayAccess
 {
     protected $items = array();
+    protected $specific = array();
 
     protected $position = 0;
 
@@ -100,14 +101,14 @@ class Ordering implements \Iterator, \Countable, \ArrayAccess
      */
     public function offsetSet($offset, $value)
     {
-        if ($value instanceof Order) {
+        if ($value instanceof Condition) {
             if (null === $offset) {
                 $this->items[] = $value;
             } else {
                 $this->items[$offset] = $value;
             }
         } else {
-            throw new \InvalidArgumentException('Invalid value type. It should be a Order type.');
+            throw new \InvalidArgumentException('Invalid value type. It should be a Condition type.');
         }
     }
 
@@ -166,16 +167,50 @@ class Ordering implements \Iterator, \Countable, \ArrayAccess
     }
 
     /**
-     * Add an order condition to the collection.
+     * Add a condition to the collection.
      *
-     * @param Order $condition
+     * @param Condition $condition
      *
      * @return $this
      */
-    public function addCondition(Order $condition)
+    public function addCondition(Condition $condition)
     {
         $this->items[] = $condition;
 
         return $this;
+    }
+
+    /**
+     * @param string $key
+     * @param Condition $condition
+     *
+     * @throws \InvalidArgumentException
+     * @return $this
+     */
+    public function addSpecificCondition($key, Condition $condition)
+    {
+        if (!is_string($key)) {
+            throw new \InvalidArgumentException('Invalid key type.');
+        }
+
+        $this->specific[$key] = $condition;
+
+        return $this;
+    }
+
+    /**
+     * @param string $key
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return Condition|null
+     */
+    public function getSpecificCondition($key)
+    {
+        if (!is_string($key)) {
+            throw new \InvalidArgumentException('Invalid key type.');
+        }
+
+        return array_key_exists($key, $this->specific) ? $this->specific[$key] : null;
     }
 }

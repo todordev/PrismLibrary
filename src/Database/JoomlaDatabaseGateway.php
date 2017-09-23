@@ -9,11 +9,11 @@
 
 namespace Prism\Database;
 
-use Prism\Database\Condition\Condition;
-use Prism\Database\Condition\Limit;
-use Prism\Database\Condition\Order;
-use Prism\Database\Request\Field;
-use Prism\Database\Request\Request;
+use \Prism\Database\Request\Condition;
+use \Prism\Database\Request\Limit;
+use \Prism\Database\Request\Order;
+use \Prism\Database\Request\Field;
+use \Prism\Database\Request\Request;
 
 /**
  * Base class of Joomla Database Gateway.

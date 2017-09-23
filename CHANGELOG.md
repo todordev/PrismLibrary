@@ -1,6 +1,10 @@
 Prism Library Changelog
 ==========================
 
+### v1.21
+* Removed some deprecated classes.
+* Upgraded some third-party libraries.
+
 ### v1.20
 * Upgraded [VueJS](https://vuejs.org/) to v2.4.2.
 * Upgraded [jQuery Cropper](https://fengyuanchen.github.io/cropper/) to v3.0.0.

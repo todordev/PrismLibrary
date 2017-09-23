@@ -7,7 +7,7 @@
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Database\Condition;
+namespace Prism\Database\Request;
 
 /**
  * Order condition used for generating query for ordering during the process of fetching data.

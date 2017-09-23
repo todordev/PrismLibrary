@@ -9,8 +9,8 @@
 
 namespace Prism\Database\Joomla;
 
-use Prism\Database\Condition\Order;
-use Prism\Database\Request\Request;
+use \Prism\Database\Request\Order;
+use \Prism\Database\Request\Request;
 
 /**
  * Fetch methods for Joomla repository.

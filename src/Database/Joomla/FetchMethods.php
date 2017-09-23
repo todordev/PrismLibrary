@@ -71,10 +71,10 @@ trait FetchMethods
      *
      * <code>
      * // Prepare conditions.
-     * $userId      = new \Prism\Database\Condition\Condition(['column' => 'user_id', 'value' => $userId, 'operator' => '=']);
-     * $createAt    = new \Prism\Database\Condition\Condition(['column' => 'created_at', 'value' => '2012-10-12', 'operator' => '=']);
+     * $userId      = new \Prism\Database\Request\Condition(['column' => 'user_id', 'value' => $userId, 'operator' => '=']);
+     * $createAt    = new \Prism\Database\Request\Condition(['column' => 'created_at', 'value' => '2012-10-12', 'operator' => '=']);
      *
-     * $conditions  = new \Prism\Database\Condition\Conditions;
+     * $conditions  = new \Prism\Database\Request\Conditions;
      * $conditions
      *  ->addCondition($userId)
      *  ->addCondition($createAt);

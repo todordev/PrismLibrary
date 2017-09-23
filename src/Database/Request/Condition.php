@@ -7,7 +7,7 @@
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Database\Condition;
+namespace Prism\Database\Request;
 
 /**
  * Condition used for generating a query during the process of fetching data.
