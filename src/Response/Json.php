@@ -123,7 +123,7 @@ class Json
     public function info()
     {
         $this->success = true;
-        $this->message['type'] = 'type';
+        $this->message['type'] = 'info';
 
         return $this;
     }

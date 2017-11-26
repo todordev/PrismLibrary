@@ -57,7 +57,7 @@ class Version
      *
      * @var string
      */
-    public $releaseDate = '20 September, 2017';
+    public $releaseDate = '26 November, 2017';
 
     /**
      * License

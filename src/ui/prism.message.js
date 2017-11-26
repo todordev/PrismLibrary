@@ -4,6 +4,10 @@ if (Prism == undefined) {
 
 Prism.message = {
 	show: function(message) {
+	    if (!message) {
+	        throw new Error('Invalid message object!');
+        }
+
 	    let pNotifyOptions = {
             text: message.content
         };

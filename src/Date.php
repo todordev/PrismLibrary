@@ -293,6 +293,6 @@ class Date extends \DateTime
         $startOfWeek  = $today->getBeginOfWeek();
         $endOfWeek    = $today->getEndOfWeek();
 
-        return (bool)($startOfWeek <= $this and $this <= $endOfWeek);
+        return ($startOfWeek <= $this and $this <= $endOfWeek);
     }
 }

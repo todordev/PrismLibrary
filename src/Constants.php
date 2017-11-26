@@ -27,6 +27,12 @@ class Constants
     const OK  = 1;
     const NO  = 0;
 
+    const LEGACY  = true;
+    const NOT_LEGACY  = false;
+
+    const VALID    = true;
+    const INVALID  = false;
+
     const APPROVED     = 1;
     const NOT_APPROVED = 0;
 

@@ -188,10 +188,6 @@ abstract class StringHelper
             }
         }
 
-        if (!is_array($result)) {
-            $result = array();
-        }
-
         return $result;
     }
 

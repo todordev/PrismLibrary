@@ -10,17 +10,18 @@
 namespace Prism\Money;
 
 /**
- * This is the currency interface.
+ * Currency interface.
  *
  * @package      Prism
  * @subpackage   Money
- *
- * @deprecated v1.21 Use LegalTender
  */
-interface CurrencyInterface
+interface LegalTender
 {
     public function getTitle();
     public function getCode();
     public function getSymbol();
     public function getPosition();
+    public function equals(LegalTender $other);
+    public function symbolAfter();
+    public function symbolBefore();
 }

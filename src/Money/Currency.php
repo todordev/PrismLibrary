@@ -16,18 +16,21 @@ use Prism\Domain\PopulatorImmutable;
  *
  * @package      Prism
  * @subpackage   Money
+ *
+ * @deprecated v1.21 Removed the populator - method bind();
+ * @todo Change the code where use this class with bind();
  */
-final class Currency
+final class Currency implements LegalTender
 {
     use PopulatorImmutable;
 
     const SYMBOL_BEFORE = 0;
-    const SYMBOL_AFTER = 1;
+    const SYMBOL_AFTER  = 1;
 
-    protected $title;
-    protected $code;
-    protected $symbol;
-    protected $position;
+    private $title;
+    private $code;
+    private $symbol;
+    private $position;
 
     public function __construct(array $properties = array())
     {
@@ -48,9 +51,7 @@ final class Currency
      *     'position' => '0'
      * );
      *
-     * $currency  = new Prism\Money\Currency();
-     * $currency->bind($data);
-     *
+     * $currency  = new Prism\Money\Currency($data);
      * echo $currency->getTitle();
      * </code>
      *
@@ -72,9 +73,7 @@ final class Currency
      *     'position' => '0'
      * );
      *
-     * $currency  = new Prism\Money\Currency();
-     * $currency->bind($data);
-     *
+     * $currency  = new Prism\Money\Currency($data);
      * echo $currency->getCode();
      * </code>
      *
@@ -96,9 +95,7 @@ final class Currency
      *     'position' => '0'
      * );
      *
-     * $currency  = new Prism\Money\Currency();
-     * $currency->bind($data);
-     *
+     * $currency  = new Prism\Money\Currency($data);
      * echo $currency->getSymbol();
      * </code>
      *
@@ -120,12 +117,8 @@ final class Currency
      *     'position' => '0'
      * );
      *
-     * $currency  = new Prism\Money\Currency();
-     * $currency->bind($data);
-     *
-     * // Return 0 = beginning; 1 = end;
+     * $currency  = new Prism\Money\Currency($data);
      * if (0 === $currency->getPosition()) {
-     * ...
      * }
      * </code>
      *
@@ -147,12 +140,8 @@ final class Currency
      *     'position' => '0'
      * );
      *
-     * $currency  = new Prism\Money\Currency();
-     * $currency->bind($data);
-     *
-     * // Return 0 = beginning; 1 = end;
+     * $currency  = new Prism\Money\Currency($data);
      * if ($currency->symbolBefore()) {
-     * ...
      * }
      * </code>
      *
@@ -160,7 +149,7 @@ final class Currency
      */
     public function symbolBefore()
     {
-        return (bool)(self::SYMBOL_BEFORE === $this->getPosition());
+        return (self::SYMBOL_BEFORE === $this->getPosition());
     }
 
     /**
@@ -174,12 +163,8 @@ final class Currency
      *     'position' => '0'
      * );
      *
-     * $currency  = new Prism\Money\Currency();
-     * $currency->bind($data);
-     *
-     * // Return 0 = beginning; 1 = end;
+     * $currency  = new Prism\Money\Currency($data);
      * if ($currency->symbolAfter()) {
-     * ...
      * }
      * </code>
      *
@@ -187,18 +172,18 @@ final class Currency
      */
     public function symbolAfter()
     {
-        return (bool)(self::SYMBOL_AFTER === $this->getPosition());
+        return (self::SYMBOL_AFTER === $this->getPosition());
     }
 
     /**
      * Checks whether this currency is the same as an other.
      *
-     * @param Currency $other
+     * @param LegalTender $other
      *
      * @return bool
      */
-    public function equals(Currency $other)
+    public function equals(LegalTender $other)
     {
-        return $this->code === $other->code;
+        return $this->code === $other->getCode();
     }
 }

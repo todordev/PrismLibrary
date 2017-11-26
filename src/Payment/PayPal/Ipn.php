@@ -17,6 +17,8 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package     Prism
  * @subpackage  Payment\PayPal
+ *
+ * @deprecated v1.21 Use PayPal PPIPNMessage
  */
 class Ipn
 {

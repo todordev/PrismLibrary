@@ -22,14 +22,14 @@ final class Money
      *
      * @var mixed
      */
-    protected $amount;
+    private $amount;
 
     /**
      * Currency object.
      *
      * @var Currency
      */
-    protected $currency;
+    private $currency;
 
     /**
      * Initialize the object.
@@ -37,16 +37,14 @@ final class Money
      * <code>
      * $amount = 1,500.25;
      *
-     * $language = JFactory::getLanguage();
      * $currency = new Currency();
-     *
      * $money    = new Prism\Money\Money($amount, $currency);
      * </code>
      *
-     * @param mixed    $amount
-     * @param Currency $currency
+     * @param mixed       $amount
+     * @param LegalTender $currency
      */
-    public function __construct($amount, Currency $currency)
+    public function __construct($amount, LegalTender $currency)
     {
         $this->amount   = $amount;
         $this->currency = $currency;
@@ -57,9 +55,7 @@ final class Money
      *
      * <code>
      * $currency = new Currency();
-     *
-     * $money   = new Prism\Money\Money($moneyFormatter);
-     * $money->setCurrency($currency);
+     * $money    = new Prism\Money\Money($amount, $currency);
      *
      * $currency = $money->getCurrency();
      * </code>
@@ -94,12 +90,10 @@ final class Money
      * Set an amount returning a new Money object because it is immutable.
      *
      * <code>
-     * $amount   = 1,500.25;
-     *
      * $currency = new Currency();
-     * $money    = new Prism\Money\Money(0.00, $currency);
+     * $money    = new Prism\Money\Money(1,500.25, $currency);
      *
-     * $money2   = $money->setAmount($amount);
+     * $money2   = $money->setAmount(1,000.00);
      * </code>
      *
      * @param float $amount

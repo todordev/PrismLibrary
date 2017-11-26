@@ -26,12 +26,12 @@ trait PropertiesMethods
     {
         $vars = get_object_vars($this);
 
-        if (array_key_exists('params', $vars) and method_exists($this, 'getParams')) {
+        if (array_key_exists('params', $vars) && method_exists($this, 'getParams')) {
             $vars['params'] = $this->getParams();
         }
 
         foreach ($vars as $key => $v) {
-            if (is_object($v) and method_exists($v, 'getProperties')) {
+            if (is_object($v) && method_exists($v, 'getProperties')) {
                 $vars[$key] = $v->getProperties();
             }
         }

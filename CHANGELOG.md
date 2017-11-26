@@ -4,6 +4,13 @@ Prism Library Changelog
 ### v1.21
 * Removed some deprecated classes.
 * Upgraded some third-party libraries.
+* Added PayPal SDK and PayPal Adaptive SDK to the vendors.
+* Upgrade [iziModal](http://izimodal.marcelodolce.com) to v1.5.1
+* Upgraded [VueJS](https://vuejs.org/) to v2.4.4.
+* Upgraded [jQuery AutoComplete](https://github.com/devbridge/jQuery-Autocomplete) to v1.4.3.
+* Upgraded [jQuery File Upload](https://github.com/blueimp/jQuery-File-Upload) to v9.19.1.
+* Upgraded [SweetAlert2](https://limonte.github.io/sweetalert2/) to v6.10.1.
+* Upgraded [Parsley JS](http://parsleyjs.org/) to v2.8.0.
 
 ### v1.20
 * Upgraded [VueJS](https://vuejs.org/) to v2.4.2.

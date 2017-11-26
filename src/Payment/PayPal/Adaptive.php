@@ -23,6 +23,7 @@ jimport("joomla.http.transport.curl");
  *
  * @package     Prism
  * @subpackage  Payment\PayPal
+ * @deprecated v1.21 Use PayPal AdaptivePaymentsService
  */
 class Adaptive
 {

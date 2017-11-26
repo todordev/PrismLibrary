@@ -124,6 +124,14 @@
 		
 		<copy file="${cfg.vendorSourceDir}/wepay/php-sdk/wepay.php" todir="${cfg.vendorDir}/WePay"/>
 		
+		<copy todir="${cfg.vendorDir}/PayPal">
+			<fileset dir="${cfg.vendorSourceDir}/paypal/sdk-core-php/lib/PayPal" />
+	    </copy>
+		
+		<copy todir="${cfg.vendorDir}/PayPal">
+			<fileset dir="${cfg.vendorSourceDir}/paypal/adaptivepayments-sdk-php/lib/PayPal" />
+	    </copy>
+		
 	</target>
 	
 	<!-- build component -->

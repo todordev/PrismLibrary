@@ -190,7 +190,9 @@ class Request
     public function addConditions(array $conditions)
     {
         foreach ($conditions as $columnName => $value) {
-            if (is_string($columnName)) {
+            if ($value instanceof Condition) {
+                $this->conditions->addCondition($value);
+            } elseif (is_string($columnName)) {
                 $this->conditions->addCondition(new Condition(['column' => $columnName, 'value' => $value]));
             }
         }

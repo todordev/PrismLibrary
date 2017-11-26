@@ -9,7 +9,7 @@
 
 namespace Prism\Payment;
 
-defined('JPATH_PLATFORM') or die;
+use Prism\Domain\PropertiesMethods;
 
 /**
  * The class should be used for object returned by payment plugins.
@@ -19,6 +19,8 @@ defined('JPATH_PLATFORM') or die;
  */
 class Result
 {
+    use PropertiesMethods;
+
     const EVENT_AFTER_PAYMENT_NOTIFY = 'after_payment_notify';
     const EVENT_AFTER_PAYMENT = 'after_payment';
 
@@ -26,6 +28,8 @@ class Result
     const ACTION_REMOVE_PAYMENT_SESSION  = 'remove_payment_session';
 
     public $transaction;
+    public $project;
+    public $reward;
     public $paymentSession;
     public $serviceProvider;
     public $serviceAlias;
@@ -33,6 +37,11 @@ class Result
     public $response;
     public $message;
 
+    /**
+     * Data that will be transferred between payment events.
+     *
+     * @var array
+     */
     public $paymentData = array();
 
     protected $events = array(
@@ -55,12 +64,15 @@ class Result
      * </code>
      *
      * @param $eventName
+     * @return self
      */
     public function skipEvent($eventName)
     {
         if (is_string($eventName)) {
             $this->events[$eventName] = false;
         }
+
+        return $this;
     }
 
     /**
@@ -73,12 +85,15 @@ class Result
      * </code>
      *
      * @param $actionName
+     * @return self
      */
     public function skipAction($actionName)
     {
         if (is_string($actionName)) {
             $this->actions[$actionName] = false;
         }
+
+        return $this;
     }
 
     /**

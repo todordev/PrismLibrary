@@ -46,7 +46,7 @@ class Order
         $this->direction  = array_key_exists('direction', $data) ? (string)$data['direction'] : '';
         $this->column     = array_key_exists('column', $data) ? (string)$data['column'] : '';
         $this->value      = array_key_exists('value', $data) ? (string)$data['value'] : '';
-        $this->table      = array_key_exists('table', $data) ? (string)$data['table'] : '';
+        $this->table      = array_key_exists('table', $data) ? (string)$data['table'] : 'a';
     }
 
     /**

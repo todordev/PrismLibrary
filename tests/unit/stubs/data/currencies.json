@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "title": "EURO",
+    "code": "EUR",
+    "symbol": "€",
+    "position": "0"
+  },
+  {
+  "id": "2",
+  "title": "Bulgarian Lev",
+  "code": "BGN",
+  "symbol": "лв",
+  "position": "1"
+  }
+]

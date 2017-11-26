@@ -74,11 +74,11 @@ class MoneyFormatter
      * $money->setCurrency($currency);
      * </code>
      *
-     * @param CurrencyInterface $currency
+     * @param LegalTender $currency
      *
      * @return self
      */
-    public function setCurrency(CurrencyInterface $currency)
+    public function setCurrency(LegalTender $currency)
     {
         $this->currency = $currency;
 

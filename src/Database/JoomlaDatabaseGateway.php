@@ -73,7 +73,6 @@ abstract class JoomlaDatabaseGateway
     {
         $conditions = $request->getConditions();
 
-        // Filter by other conditions.
         /** @var Condition $condition */
         foreach ($conditions as $condition) {
             if (!$condition->getOperator()) {
@@ -159,7 +158,11 @@ abstract class JoomlaDatabaseGateway
             }
         }
 
-        return count($fields) > 0 ? $fields : $defaultFields;
+        if (count($fields) === 0) {
+            $fields = array_merge($defaultFields, $aliasFields);
+        }
+
+        return $fields;
     }
 
     abstract protected function getQuery(Request $request = null);
