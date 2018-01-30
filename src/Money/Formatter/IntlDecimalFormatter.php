@@ -9,6 +9,7 @@
 
 namespace Prism\Money\Formatter;
 
+use Prism\Constants;
 use Prism\Money\Money;
 use Prism\Money\Formatter;
 
@@ -68,12 +69,20 @@ final class IntlDecimalFormatter implements Formatter
      */
     public function formatCurrency(Money $money)
     {
-        $amount = $this->formatter->format($money->getAmount());
+        $amount   = $this->formatter->format($money->getAmount());
+        $currency = $money->getCurrency();
 
-        if ($money->getCurrency()->getSymbol()) {
-            $amount = $money->getCurrency()->getSymbol().$amount;
-        } elseif ($money->getCurrency()->getCode()) {
-            $amount .= ' '. $money->getCurrency()->getCode();
+        if ($currency !== null) {
+            if ($currency->getSymbol()) {
+                if ($currency->getPosition() === Constants::RIGHT) {
+                    $amount .= $currency->getSymbol();
+                } else {
+                    $amount = $currency->getSymbol().$amount;
+                }
+
+            } elseif ($currency->getCode()) {
+                $amount .= ' '. $currency->getCode();
+            }
         }
 
         return $amount;

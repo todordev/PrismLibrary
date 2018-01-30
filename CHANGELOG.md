@@ -1,6 +1,9 @@
 Prism Library Changelog
 ==========================
 
+### v1.22
+* Upgrade vendor libraries.
+
 ### v1.21
 * Removed some deprecated classes.
 * Upgraded some third-party libraries.

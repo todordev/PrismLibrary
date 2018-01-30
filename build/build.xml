@@ -2,7 +2,7 @@
 <project name="prism" default="build" basedir=".">
 	<description>Prism Library Ant Build File</description>
 
-	<!-- load variables from config file -->
+	<!-- load variables from configuration file -->
 	<property name="cfg.configFile" location="antconfig.txt" />
 	<loadproperties srcfile="${cfg.configFile}" />
 	
@@ -17,121 +17,138 @@
 	<target name="build" depends="vendors, build_component, clean, info" />
     
 	<target name="vendors" description="copy vendors">
-		<copy todir="${cfg.vendorDir}/Abraham/TwitterOAuth">
+		<copy file="${cfg.vendorSourceDir}/autoload.php" todir="${cfg.vendorDir}"/>
+		
+		<copy todir="${cfg.vendorDir}/composer">
+			<fileset dir="${cfg.vendorSourceDir}/composer" >
+				<exclude name="installed.json" />
+				<exclude name="LICENSE" />
+			</fileset>
+	    </copy>
+		
+		<copy todir="${cfg.vendorDir}/abraham/twitteroauth/src">
 			<fileset dir="${cfg.vendorSourceDir}/abraham/twitteroauth/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/AdamPaterson/OAuth2/Client/Provider">
-			<fileset dir="${cfg.vendorSourceDir}/adam-paterson/oauth2-stripe/src/Provider" />
+		<copy todir="${cfg.vendorDir}/adam-paterson/oauth2-stripe/src">
+			<fileset dir="${cfg.vendorSourceDir}/adam-paterson/oauth2-stripe/src" />
 	    </copy>
-	    <copy todir="${cfg.vendorDir}/Aws">
+	    <copy todir="${cfg.vendorDir}/aws/aws-sdk-php/src">
 			<fileset dir="${cfg.vendorSourceDir}/aws/aws-sdk-php/src" />
 	    </copy>
-		<copy file="${cfg.vendorSourceDir}/aws/prism/init.php" todir="${cfg.vendorDir}/Aws" />
 		
-		<copy todir="${cfg.vendorDir}/Defuse/Crypto">
+		<copy todir="${cfg.vendorDir}/defuse/php-encryption/src">
 			<fileset dir="${cfg.vendorSourceDir}/defuse/php-encryption/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/GuzzleHttp">
+		<copy todir="${cfg.vendorDir}/guzzlehttp/guzzle/src">
 			<fileset dir="${cfg.vendorSourceDir}/guzzlehttp/guzzle/src" />
 	    </copy>
-		<copy file="${cfg.vendorSourceDir}/guzzlehttp/prism/init.php" todir="${cfg.vendorDir}/GuzzleHttp" />
 		
-		<copy todir="${cfg.vendorDir}/GuzzleHttp/Promise">
+		<copy todir="${cfg.vendorDir}/guzzlehttp/promises/src">
 			<fileset dir="${cfg.vendorSourceDir}/guzzlehttp/promises/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/GuzzleHttp/Psr7">
+		<copy todir="${cfg.vendorDir}/guzzlehttp/psr7/src">
 			<fileset dir="${cfg.vendorSourceDir}/guzzlehttp/psr7/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/Hashids">
+		<copy todir="${cfg.vendorDir}/hashids/hashids/src">
 			<fileset dir="${cfg.vendorSourceDir}/hashids/hashids/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/League/OAuth2/Client">
+		<copy todir="${cfg.vendorDir}/league/oauth2-client/src">
 			<fileset dir="${cfg.vendorSourceDir}/league/oauth2-client/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/League/Fractal">
+		<copy todir="${cfg.vendorDir}/league/fractal/src">
 			<fileset dir="${cfg.vendorSourceDir}/league/fractal/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/League/Flysystem">
+		<copy todir="${cfg.vendorDir}/league/flysystem/src">
 			<fileset dir="${cfg.vendorSourceDir}/league/flysystem/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/League/Flysystem/AwsS3v3">
+		<copy todir="${cfg.vendorDir}/league/flysystem-aws-s3-v3/src">
 			<fileset dir="${cfg.vendorSourceDir}/league/flysystem-aws-s3-v3/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/Psr/Http/Message">
+		<copy todir="${cfg.vendorDir}/psr/http-message/src">
 			<fileset dir="${cfg.vendorSourceDir}/psr/http-message/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/Psr/Cache">
+		<copy todir="${cfg.vendorDir}/psr/cache/src">
 			<fileset dir="${cfg.vendorSourceDir}/psr/cache/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/Psr/Log">
+		<copy todir="${cfg.vendorDir}/psr/log/Psr/Log">
 			<fileset dir="${cfg.vendorSourceDir}/psr/log/Psr/Log" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/Ramsey/Uuid">
+		<copy todir="${cfg.vendorDir}/ramsey/uuid/src">
 			<fileset dir="${cfg.vendorSourceDir}/ramsey/uuid/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/Carbon">
-			<fileset dir="${cfg.vendorSourceDir}/nesbot/carbon/src/Carbon" />
+		<copy todir="${cfg.vendorDir}/nesbot/carbon/src">
+			<fileset dir="${cfg.vendorSourceDir}/nesbot/carbon/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/Ramsey/Uuid">
+		<copy todir="${cfg.vendorDir}/ramsey/uuid/src">
 			<fileset dir="${cfg.vendorSourceDir}/ramsey/uuid/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/Ramsey/Uuid">
+		<copy todir="${cfg.vendorDir}/ramsey/uuid/src">
 			<fileset dir="${cfg.vendorSourceDir}/ramsey/uuid/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/GraphQL">
+		<copy todir="${cfg.vendorDir}/webonyx/graphql-php/src">
 			<fileset dir="${cfg.vendorSourceDir}/webonyx/graphql-php/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/JmesPath">
+		<copy todir="${cfg.vendorDir}/mtdowling/jmespath.php/src">
 			<fileset dir="${cfg.vendorSourceDir}/mtdowling/jmespath.php/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/Monolog">
-			<fileset dir="${cfg.vendorSourceDir}/monolog/monolog/src/Monolog" />
+		<copy todir="${cfg.vendorDir}/monolog/monolog/src">
+			<fileset dir="${cfg.vendorSourceDir}/monolog/monolog/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/Facebook">
-			<fileset dir="${cfg.vendorSourceDir}/facebook/graph-sdk/src/Facebook" />
+		<copy todir="${cfg.vendorDir}/facebook/graph-sdk/src">
+			<fileset dir="${cfg.vendorSourceDir}/facebook/graph-sdk/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/RandomLib">
-			<fileset dir="${cfg.vendorSourceDir}/ircmaxell/random-lib/lib/RandomLib" />
+		<copy todir="${cfg.vendorDir}/phpseclib/phpseclib/phpseclib">
+			<fileset dir="${cfg.vendorSourceDir}/phpseclib/phpseclib/phpseclib" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/SecurityLib">
-			<fileset dir="${cfg.vendorSourceDir}/ircmaxell/security-lib/lib/SecurityLib" />
+		<copy todir="${cfg.vendorDir}/ircmaxell/random-lib/lib">
+			<fileset dir="${cfg.vendorSourceDir}/ircmaxell/random-lib/lib" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/Stripe">
+		<copy todir="${cfg.vendorDir}/ircmaxell/security-lib/lib">
+			<fileset dir="${cfg.vendorSourceDir}/ircmaxell/security-lib/lib" />
+	    </copy>
+		<copy todir="${cfg.vendorDir}/stripe/stripe-php">
 			<fileset dir="${cfg.vendorSourceDir}/stripe/stripe-php" >
 				<include name="lib/**" />
 				<include name="data/**" />
 			</fileset>
 	    </copy>
-		<copy file="${cfg.vendorSourceDir}/stripe/prism/init.php" todir="${cfg.vendorDir}/Stripe" />
 		
-		<copy todir="${cfg.vendorDir}/Google">
-			<fileset dir="${cfg.vendorSourceDir}/google/apiclient/src/Google" />
+		<copy todir="${cfg.vendorDir}/google/apiclient/src">
+			<fileset dir="${cfg.vendorSourceDir}/google/apiclient/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/Google/Auth">
+		<copy todir="${cfg.vendorDir}/google/auth/src">
 			<fileset dir="${cfg.vendorSourceDir}/google/auth/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/Google/Service/Plus">
+		<copy todir="${cfg.vendorDir}/google/apiclient-services/src/Google/Service/Plus">
 			<fileset dir="${cfg.vendorSourceDir}/google/apiclient-services/src/Google/Service/Plus" />
 	    </copy>
-		<copy file="${cfg.vendorSourceDir}/google/apiclient-services/src/Google/Service/Plus.php" tofile="${cfg.vendorDir}/Google/Service/Plus.php"/>
+		<copy file="${cfg.vendorSourceDir}/google/apiclient-services/src/Google/Service/Plus.php" tofile="${cfg.vendorDir}/google/apiclient-services/src/Google/Service/Plus.php"/>
 		
-		<copy todir="${cfg.vendorDir}/Mollie">
-			<fileset dir="${cfg.vendor2SourceDir}/Mollie" />
-	    </copy>
-		<copy todir="${cfg.vendorDir}/PesaPal">
-			<fileset dir="${cfg.vendor2SourceDir}/PesaPal" />
-	    </copy>
+		<copy file="${cfg.vendorSourceDir}/wepay/php-sdk/wepay.php" todir="${cfg.vendorDir}/wepay/php-sdk"/>
 		
-		<copy file="${cfg.vendorSourceDir}/wepay/php-sdk/wepay.php" todir="${cfg.vendorDir}/WePay"/>
-		
-		<copy todir="${cfg.vendorDir}/PayPal">
-			<fileset dir="${cfg.vendorSourceDir}/paypal/sdk-core-php/lib/PayPal" />
+		<copy todir="${cfg.vendorDir}/paypal/sdk-core-php/lib">
+			<fileset dir="${cfg.vendorSourceDir}/paypal/sdk-core-php/lib" />
 	    </copy>
 		
-		<copy todir="${cfg.vendorDir}/PayPal">
-			<fileset dir="${cfg.vendorSourceDir}/paypal/adaptivepayments-sdk-php/lib/PayPal" />
+		<copy todir="${cfg.vendorDir}/paypal/adaptivepayments-sdk-php/lib">
+			<fileset dir="${cfg.vendorSourceDir}/paypal/adaptivepayments-sdk-php/lib" />
 	    </copy>
 		
+		<copy todir="${cfg.vendorDir}/mollie/mollie-api-php/src">
+			<fileset dir="${cfg.vendorSourceDir}/mollie/mollie-api-php/src" />
+	    </copy>
+		
+		<copy todir="${cfg.vendorDir}/myclabs/deep-copy/src">
+			<fileset dir="${cfg.vendorSourceDir}/myclabs/deep-copy/src" />
+	    </copy>
+		
+		<copy todir="${cfg.vendorDir}/symfony/polyfill-mbstring">
+			<fileset dir="${cfg.vendorSourceDir}/symfony/polyfill-mbstring" >
+				<exclude name="composer.json" />
+				<exclude name="LICENSE" />
+				<exclude name="README.md" />
+			</fileset>
+	    </copy>
 	</target>
 	
 	<!-- build component -->

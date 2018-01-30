@@ -146,7 +146,7 @@ class CurrencyTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $jsonData = file_get_contents(PRISM_TESTS_FOLDER_STUBS_DATA.'currency.json');
+        $jsonData = file_get_contents(PATH_PRISM_LIBRARY_TESTS_STUBS_DATA.DIRECTORY_SEPARATOR.'currency.json');
         $data     = json_decode($jsonData, true);
 
         $this->object = new Currency();

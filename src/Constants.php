@@ -60,6 +60,9 @@ class Constants
     const INACTIVE = 0;
     const ACTIVE = 1;
 
+    const LEFT   = 0;
+    const RIGHT  = 1;
+
     // Mail modes - html and plain text.
     const MAIL_MODE_HTML  = true;
     const MAIL_MODE_PLAIN = false;

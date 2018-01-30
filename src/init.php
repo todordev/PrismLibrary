@@ -23,22 +23,7 @@ jimport('joomla.filesystem.path');
 
 JLoader::registerNamespace('Prism', JPATH_LIBRARIES);
 
-JLoader::registerNamespace('Abraham', PRISM_PATH_LIBRARY . '/vendor');
-JLoader::registerNamespace('AdamPaterson', PRISM_PATH_LIBRARY . '/vendor');
-JLoader::registerNamespace('Carbon', PRISM_PATH_LIBRARY . '/vendor');
-JLoader::registerNamespace('Coinbase', PRISM_PATH_LIBRARY . '/vendor');
-JLoader::registerNamespace('Defuse', PRISM_PATH_LIBRARY . '/vendor');
-JLoader::registerNamespace('Facebook', PRISM_PATH_LIBRARY . '/vendor');
-JLoader::registerNamespace('Google', PRISM_PATH_LIBRARY . '/vendor');
-JLoader::registerNamespace('JmesPath', PRISM_PATH_LIBRARY . '/vendor');
-JLoader::registerNamespace('League', PRISM_PATH_LIBRARY . '/vendor');
-JLoader::registerNamespace('Monolog', PRISM_PATH_LIBRARY . '/vendor');
-JLoader::registerNamespace('Psr', PRISM_PATH_LIBRARY . '/vendor');
-JLoader::registerNamespace('RandomLib', PRISM_PATH_LIBRARY . '/vendor');
-JLoader::registerNamespace('SecurityLib', PRISM_PATH_LIBRARY . '/vendor');
-JLoader::registerNamespace('Ramsey', PRISM_PATH_LIBRARY . '/vendor');
-JLoader::registerNamespace('GraphQL', PRISM_PATH_LIBRARY . '/vendor');
-JLoader::registerNamespace('PayPal', PRISM_PATH_LIBRARY . '/vendor');
+require_once PRISM_PATH_LIBRARY.'/vendor/autoload.php';
 
 // Register some helpers.
 JHtml::addIncludePath(PRISM_PATH_LIBRARY . '/ui/helpers');
