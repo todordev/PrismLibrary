@@ -26,12 +26,6 @@
 			</fileset>
 	    </copy>
 		
-		<copy todir="${cfg.vendorDir}/abraham/twitteroauth/src">
-			<fileset dir="${cfg.vendorSourceDir}/abraham/twitteroauth/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDir}/adam-paterson/oauth2-stripe/src">
-			<fileset dir="${cfg.vendorSourceDir}/adam-paterson/oauth2-stripe/src" />
-	    </copy>
 	    <copy todir="${cfg.vendorDir}/aws/aws-sdk-php/src">
 			<fileset dir="${cfg.vendorSourceDir}/aws/aws-sdk-php/src" />
 	    </copy>
@@ -42,7 +36,6 @@
 		<copy todir="${cfg.vendorDir}/guzzlehttp/guzzle/src">
 			<fileset dir="${cfg.vendorSourceDir}/guzzlehttp/guzzle/src" />
 	    </copy>
-		
 		<copy todir="${cfg.vendorDir}/guzzlehttp/promises/src">
 			<fileset dir="${cfg.vendorSourceDir}/guzzlehttp/promises/src" />
 	    </copy>
@@ -51,9 +44,6 @@
 	    </copy>
 		<copy todir="${cfg.vendorDir}/hashids/hashids/src">
 			<fileset dir="${cfg.vendorSourceDir}/hashids/hashids/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDir}/league/oauth2-client/src">
-			<fileset dir="${cfg.vendorSourceDir}/league/oauth2-client/src" />
 	    </copy>
 		<copy todir="${cfg.vendorDir}/league/fractal/src">
 			<fileset dir="${cfg.vendorSourceDir}/league/fractal/src" />
@@ -85,9 +75,6 @@
 		<copy todir="${cfg.vendorDir}/ramsey/uuid/src">
 			<fileset dir="${cfg.vendorSourceDir}/ramsey/uuid/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/webonyx/graphql-php/src">
-			<fileset dir="${cfg.vendorSourceDir}/webonyx/graphql-php/src" />
-	    </copy>
 		<copy todir="${cfg.vendorDir}/mtdowling/jmespath.php/src">
 			<fileset dir="${cfg.vendorSourceDir}/mtdowling/jmespath.php/src" />
 	    </copy>
@@ -106,13 +93,9 @@
 		<copy todir="${cfg.vendorDir}/ircmaxell/security-lib/lib">
 			<fileset dir="${cfg.vendorSourceDir}/ircmaxell/security-lib/lib" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/stripe/stripe-php">
-			<fileset dir="${cfg.vendorSourceDir}/stripe/stripe-php" >
-				<include name="lib/**" />
-				<include name="data/**" />
-			</fileset>
+		<copy todir="${cfg.vendorDir}/ircmaxell/password-compat/lib">
+			<fileset dir="${cfg.vendorSourceDir}/ircmaxell/password-compat/lib" />
 	    </copy>
-		
 		<copy todir="${cfg.vendorDir}/google/apiclient/src">
 			<fileset dir="${cfg.vendorSourceDir}/google/apiclient/src" />
 	    </copy>
@@ -123,27 +106,18 @@
 			<fileset dir="${cfg.vendorSourceDir}/google/apiclient-services/src/Google/Service/Plus" />
 	    </copy>
 		<copy file="${cfg.vendorSourceDir}/google/apiclient-services/src/Google/Service/Plus.php" tofile="${cfg.vendorDir}/google/apiclient-services/src/Google/Service/Plus.php"/>
-		
-		<copy file="${cfg.vendorSourceDir}/wepay/php-sdk/wepay.php" todir="${cfg.vendorDir}/wepay/php-sdk"/>
-		
-		<copy todir="${cfg.vendorDir}/paypal/sdk-core-php/lib">
-			<fileset dir="${cfg.vendorSourceDir}/paypal/sdk-core-php/lib" />
-	    </copy>
-		
-		<copy todir="${cfg.vendorDir}/paypal/adaptivepayments-sdk-php/lib">
-			<fileset dir="${cfg.vendorSourceDir}/paypal/adaptivepayments-sdk-php/lib" />
-	    </copy>
-		
-		<copy todir="${cfg.vendorDir}/mollie/mollie-api-php/src">
-			<fileset dir="${cfg.vendorSourceDir}/mollie/mollie-api-php/src" />
-	    </copy>
-		
 		<copy todir="${cfg.vendorDir}/myclabs/deep-copy/src">
 			<fileset dir="${cfg.vendorSourceDir}/myclabs/deep-copy/src" />
 	    </copy>
-		
 		<copy todir="${cfg.vendorDir}/symfony/polyfill-mbstring">
 			<fileset dir="${cfg.vendorSourceDir}/symfony/polyfill-mbstring" >
+				<exclude name="composer.json" />
+				<exclude name="LICENSE" />
+				<exclude name="README.md" />
+			</fileset>
+	    </copy>
+		<copy todir="${cfg.vendorDir}/symfony/polyfill-php55">
+			<fileset dir="${cfg.vendorSourceDir}/symfony/polyfill-php55" >
 				<exclude name="composer.json" />
 				<exclude name="LICENSE" />
 				<exclude name="README.md" />
