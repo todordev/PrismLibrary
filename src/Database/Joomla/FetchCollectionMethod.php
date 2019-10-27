@@ -1,20 +1,20 @@
 <?php
 /**
- * @package         Prism\Database
+ * @package         Prism\Library\Database
  * @subpackage      Joomla
  * @author          Todor Iliev
  * @copyright       Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Database\Joomla;
+namespace Prism\Library\Database\Joomla;
 
-use Prism\Database\Request\Request;
+use Prism\Library\Database\Request\Request;
 
 /**
  * Fetch method for collections used in Joomla database gateways.
  *
- * @package         Prism\Database
+ * @package         Prism\Library\Database
  * @subpackage      Joomla
  */
 trait FetchCollectionMethod
@@ -24,13 +24,13 @@ trait FetchCollectionMethod
      *
      * <code>
      * // Prepare specific conditions.
-     * $usersIds    = new \Prism\Database\Request\Condition(['column' => 'user_id', 'value' => [1,2,3,4], 'operator' => 'IN']);
+     * $usersIds    = new Prism\Library\Database\Request\Condition(['column' => 'user_id', 'value' => [1,2,3,4], 'operator' => 'IN']);
      *
-     * $conditions  = new \Prism\Database\Request\Conditions;
+     * $conditions  = new Prism\Library\Database\Request\Conditions;
      * $conditions->addSpecificCondition($usersIds);
      *
      * // Prepare database request.
-     * $databaseRequest = new \Prism\Database\Request\Request;
+     * $databaseRequest = new Prism\Library\Database\Request\Request;
      * $databaseRequest->setConditions($conditions);
      *
      * $gateway = new JoomlaGateway(\JFactory::getDbo());

@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism;
+namespace Prism\Library;
 
 /**
  * Prism Library version information

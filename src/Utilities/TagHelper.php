@@ -7,10 +7,10 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Utilities;
+namespace Prism\Library\Utilities;
 
 use Joomla\Utilities\ArrayHelper as JArrayHelper;
-use Prism\Constants;
+use Prism\Library\Constants;
 
 defined('JPATH_PLATFORM') or die;
 

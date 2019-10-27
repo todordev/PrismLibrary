@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Integration\Notification;
+namespace Prism\Library\Integration\Notification;
 
-use Prism\Database\TableTrait;
+use Prism\Library\Database\TableTrait;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -46,7 +46,7 @@ class JomSocial implements NotificationInterface
      * $userId = 1;
      * $content = "....";
      *
-     * $notification = new Prism\Integration\Notification\JomSocial($userId, $content);
+     * $notification = new Prism\Library\Integration\Notification\JomSocial($userId, $content);
      * </code>
      *
      * @param  integer $userId A user ID of the target.
@@ -65,7 +65,7 @@ class JomSocial implements NotificationInterface
      * $userId = 1;
      * $content = "....";
      *
-     * $notification = new Prism\Integration\Notification\JomSocial($userId, $content);
+     * $notification = new Prism\Library\Integration\Notification\JomSocial($userId, $content);
      * $notification->setDb(\JFactory::getDbo());
      *
      * $notification->send();
@@ -120,7 +120,7 @@ class JomSocial implements NotificationInterface
      * $userId = 1;
      * $content = "....";
      *
-     * $notification = new Prism\Integration\Notification\JomSocial($userId, $content);
+     * $notification = new Prism\Library\Integration\Notification\JomSocial($userId, $content);
      * $notification->send();
      *
      * if (!$notification->getId()) {
@@ -139,7 +139,7 @@ class JomSocial implements NotificationInterface
      * Return the content of the notification.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\JomSocial();
+     * $notification = new Prism\Library\Integration\Notification\JomSocial();
      * $content = $notification->getContent();
      * </code>
      *
@@ -154,7 +154,7 @@ class JomSocial implements NotificationInterface
      * Return an image that is part of the notification.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\JomSocial();
+     * $notification = new Prism\Library\Integration\Notification\JomSocial();
      * $image        = $notification->getImage();
      * </code>
      *
@@ -169,7 +169,7 @@ class JomSocial implements NotificationInterface
      * Return an URL which is part of the notification.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\JomSocial();
+     * $notification = new Prism\Library\Integration\Notification\JomSocial();
      * $url          = $notification->getUrl();
      * </code>
      *
@@ -184,7 +184,7 @@ class JomSocial implements NotificationInterface
      * Return an actor ID.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\JomSocial();
+     * $notification = new Prism\Library\Integration\Notification\JomSocial();
      * $actorId      = $notification->getActorId();
      * </code>
      *
@@ -199,7 +199,7 @@ class JomSocial implements NotificationInterface
      * Return the status of the notification.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\JomSocial();
+     * $notification = new Prism\Library\Integration\Notification\JomSocial();
      * $status = $notification->getStatus();
      * </code>
      *
@@ -214,7 +214,7 @@ class JomSocial implements NotificationInterface
      * Return a target user ID.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\JomSocial();
+     * $notification = new Prism\Library\Integration\Notification\JomSocial();
      * $targetId    = $notification->getTargetId();
      * </code>
      *
@@ -231,7 +231,7 @@ class JomSocial implements NotificationInterface
      * <code>
      * $content = "...";
      *
-     * $notification = new Prism\Integration\Notification\JomSocial();
+     * $notification = new Prism\Library\Integration\Notification\JomSocial();
      * $notification->setContent($content);
      * </code>
      *
@@ -252,7 +252,7 @@ class JomSocial implements NotificationInterface
      * <code>
      * $image = "...";
      *
-     * $notification = new Prism\Integration\Notification\JomSocial();
+     * $notification = new Prism\Library\Integration\Notification\JomSocial();
      * $notification->setImage($image);
      * </code>
      *
@@ -273,7 +273,7 @@ class JomSocial implements NotificationInterface
      * <code>
      * $url = "...";
      *
-     * $notification = new Prism\Integration\Notification\JomSocial();
+     * $notification = new Prism\Library\Integration\Notification\JomSocial();
      * $notification->setUrl($url);
      * </code>
      *
@@ -294,7 +294,7 @@ class JomSocial implements NotificationInterface
      * <code>
      * $created = "2014-01-01";
      *
-     * $notification = new Prism\Integration\Notification\JomSocial();
+     * $notification = new Prism\Library\Integration\Notification\JomSocial();
      * $notification->setCreated($created);
      * </code>
      *
@@ -315,7 +315,7 @@ class JomSocial implements NotificationInterface
      * <code>
      * $status = "...";
      *
-     * $notification = new Prism\Integration\Notification\JomSocial();
+     * $notification = new Prism\Library\Integration\Notification\JomSocial();
      * $notification->setStatus($status);
      * </code>
      *
@@ -336,7 +336,7 @@ class JomSocial implements NotificationInterface
      * <code>
      * $targetId = 1;
      *
-     * $notification = new Prism\Integration\Notification\JomSocial();
+     * $notification = new Prism\Library\Integration\Notification\JomSocial();
      * $notification->setTargetId($targetId);
      * </code>
      *
@@ -357,7 +357,7 @@ class JomSocial implements NotificationInterface
      * <code>
      * $cmdType = "...";
      *
-     * $notification = new Prism\Integration\Notification\JomSocial();
+     * $notification = new Prism\Library\Integration\Notification\JomSocial();
      * $notification->setCmdType($cmdType);
      * </code>
      *
@@ -376,7 +376,7 @@ class JomSocial implements NotificationInterface
      * Return the command type of a notification.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\JomSocial();
+     * $notification = new Prism\Library\Integration\Notification\JomSocial();
      * $cmdType = $notification->getCmdType();
      * </code>
      *
@@ -393,7 +393,7 @@ class JomSocial implements NotificationInterface
      * <code>
      * $actorId = 1;
      *
-     * $notification = new Prism\Integration\Notification\JomSocial();
+     * $notification = new Prism\Library\Integration\Notification\JomSocial();
      * $notification->setActorId($actorId);
      * </code>
      *
@@ -412,7 +412,7 @@ class JomSocial implements NotificationInterface
      * Return an actor ID.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\JomSocial();
+     * $notification = new Prism\Library\Integration\Notification\JomSocial();
      * $actorId      = $notification->getActorId();
      * </code>
      *
@@ -429,7 +429,7 @@ class JomSocial implements NotificationInterface
      * <code>
      * $type = "...";
      *
-     * $notification = new Prism\Integration\Notification\JomSocial();
+     * $notification = new Prism\Library\Integration\Notification\JomSocial();
      * $notification->setType($type);
      * </code>
      *
@@ -448,7 +448,7 @@ class JomSocial implements NotificationInterface
      * Return notification type.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\JomSocial();
+     * $notification = new Prism\Library\Integration\Notification\JomSocial();
      * $type      = $notification->getType();
      * </code>
      *

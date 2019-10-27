@@ -7,51 +7,76 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Controller;
+namespace Prism\Library\Controller;
 
+use Exception;
+use Joomla\CMS\MVC\Controller\BaseController as JoomlaBaseController;
+use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
 use Joomla\Utilities\ArrayHelper;
 
 defined('JPATH_PLATFORM') or die;
 
 /**
- * This class contains common methods and properties
- * used in work with forms.
+ * This class contains common methods and properties.
  *
  * @package      Prism
  * @subpackage   Controllers
  */
-class Form extends \JControllerForm
+class BaseController extends JoomlaBaseController
 {
+    /**
+     * The URL option for the component.
+     *
+     * @var    string
+     * @since  12.2
+     */
+    protected $option;
+
     /**
      * A default link to the extension
      * @var string
      */
     protected $defaultLink = '';
 
-    public function __construct($config)
+    /**
+     * DefaultController constructor.
+     *
+     * @param                          $config
+     * @param MVCFactoryInterface|null $factory
+     * @param null                     $app
+     * @param null                     $input
+     *
+     * @throws Exception
+     */
+    public function __construct($config, MVCFactoryInterface $factory = null, $app = null, $input = null)
     {
-        parent::__construct($config);
+        parent::__construct($config, $factory, $app, $input);
+
+        // Guess the option as com_NameOfController
+        if ($this->option === null) {
+            $this->option = 'com_' . strtolower($this->getName());
+        }
+
         $this->defaultLink = 'index.php?option=' . strtolower($this->option);
     }
 
     /**
-     * Display a notice and redirect to a page.
      *
-     * <code>
-     * $options = array(
-     *     "view"    => $view,
-     *     "layout"  => $layout,
-     *     "id"      => $itemId,
-     *     "url_var" => $urlVar
-     * );
-     * </code>
+     * Display a notice and redirect to a page
      *
-     * @param mixed  $messages Could be array or string.
+     * @param mixed  $messages Could be array or string
      * @param array $options
+     *
+     * $options = array(
+     *      "view"    => $view,
+     *      "layout"  => $layout,
+     *      "id"      => $itemId,
+     *      "url_var" => $urlVar
+     * );
      *
      * @throws \InvalidArgumentException
      */
-    protected function displayNotice($messages, $options)
+    protected function displayNotice($messages, array $options)
     {
         $message = $this->prepareMessage($messages);
         $this->setMessage($message, 'notice');
@@ -61,23 +86,22 @@ class Form extends \JControllerForm
     }
 
     /**
-     * Display a warning and redirect to a page.
      *
-     * <code>
-     * $options = array(
-     *     "view"    => $view,
-     *     "layout"  => $layout,
-     *     "id"      => $itemId,
-     *     "url_var" => $urlVar
-     * );
-     * </code>
+     * Display a warning and redirect to a page
      *
-     * @param mixed  $messages Could be array or string.
+     * @param mixed  $messages Could be array or string
      * @param array $options
+     *
+     * $options = array(
+     *      "view"    => $view,
+     *      "layout"  => $layout,
+     *      "id"      => $itemId,
+     *      "url_var" => $urlVar
+     * );
      *
      * @throws \InvalidArgumentException
      */
-    protected function displayWarning($messages, $options)
+    protected function displayWarning($messages, array $options)
     {
         $message = $this->prepareMessage($messages);
         $this->setMessage($message, 'warning');
@@ -87,23 +111,24 @@ class Form extends \JControllerForm
     }
 
     /**
-     * Display a error and redirect to a page.
+     *
+     * Display a error and redirect to a page
+     *
+     * @param mixed  $messages Could be array or string
+     * @param array  $options
      *
      * <code>
      * $options = array(
-     *     "view"    => $view,
-     *     "layout"  => $layout,
-     *     "id"      => $itemId,
-     *     "url_var" => $urlVar
+     *      "view"    => $view,
+     *      "layout"  => $layout,
+     *      "id"      => $itemId,
+     *      "url_var" => $urlVar
      * );
      * </code>
      *
-     * @param mixed  $messages Could be array or string.
-     * @param array $options
-     *
      * @throws \InvalidArgumentException
      */
-    protected function displayError($messages, $options)
+    protected function displayError($messages, array $options)
     {
         $message = $this->prepareMessage($messages);
         $this->setMessage($message, 'error');
@@ -113,25 +138,27 @@ class Form extends \JControllerForm
     }
 
     /**
-     * Display a message and redirect to a page.
+     *
+     * Display a message and redirect to a page
+     *
+     * @param mixed  $messages Could be array or string
+     * @param array  $options
+     *
      * <code>
      * $options = array(
-     *     "view"    => $view,
-     *     "layout"  => $layout,
-     *     "id"      => $itemId,
-     *     "url_var" => $urlVar
+     *      "view"    => $view,
+     *      "layout"  => $layout,
+     *      "id"      => $itemId,
+     *      "url_var" => $urlVar,
      * );
      * </code>
      *
-     * @param mixed  $messages Could be array or string.
-     * @param array $options
-     *
      * @throws \InvalidArgumentException
      */
-    protected function displayMessage($messages, $options)
+    protected function displayMessage($messages, array $options)
     {
         $message = $this->prepareMessage($messages);
-        $this->setMessage($message, 'message');
+        $this->setMessage($message);
 
         $link = $this->prepareRedirectLink($options);
         $this->setRedirect(\JRoute::_($link, false));
@@ -145,26 +172,27 @@ class Form extends \JControllerForm
      *
      * @return string
      */
-    protected function prepareMessage($message)
+    protected function prepareMessage($message): string
     {
         if (is_array($message)) {
             $result = '';
 
             foreach ($message as $value) {
                 if (is_object($value)) {
-                    if ($value instanceof \Exception) {
-                        $result .= (string)$value->getMessage() . "\n";
+                    if ($value instanceof Exception) {
+                        $result .= $value->getMessage() . "\n";
                     }
                 } else {
-                    $result .= (string)$value . "\n";
+                    $result .= $value . "\n";
                 }
+
             }
 
         } elseif (is_object($message)) {
-            if ($message instanceof \Exception) {
+            if ($message instanceof Exception) {
                 $result = (string)$message->getMessage();
             } else {
-                $result = (string)$message . "\n";
+                $result = $message . "\n";
             }
 
         } else {
@@ -175,43 +203,36 @@ class Form extends \JControllerForm
     }
 
     /**
-     * This method prepare a link where the user will be redirected, when his action be done.
+     * This method prepare a link where the user will be redirected
+     * after action he has done.
      *
      * @param array $options URL parameters used for generating redirect link.
      *
      * @throws \InvalidArgumentException
-     *
      * @return string
      */
-    protected function prepareRedirectLink($options)
+    protected function prepareRedirectLink(array $options): string
     {
         // Return predefined link
         $forceDirection = ArrayHelper::getValue($options, 'force_direction');
-        if ($forceDirection !== null) {
+        if (null !== $forceDirection) {
             return $forceDirection;
         }
+
         $link = $this->defaultLink;
 
         $view   = ArrayHelper::getValue($options, 'view');
         $layout = ArrayHelper::getValue($options, 'layout');
-        $itemId = ArrayHelper::getValue($options, 'id', 0, 'uint');
-        $urlVar = ArrayHelper::getValue($options, 'url_var', 'id');
 
         // Remove standard parameters
-        unset($options['view'], $options['layout'], $options['url_var'], $options['id']);
+        unset($options['view'], $options['layout']);
 
-        // Redirect to different of common views
+        // Set the view value
         if ($view !== null) {
             $link .= '&view=' . $view;
         }
         if ($layout !== null) {
             $link .= '&layout=' . $layout;
-        }
-
-        if ($itemId > 0) {
-            $link .= $this->getRedirectToItemAppend($itemId, $urlVar);
-        } else {
-            $link .= $this->getRedirectToListAppend();
         }
 
         // Generate additional parameters
@@ -227,7 +248,7 @@ class Form extends \JControllerForm
      *
      * @return string
      */
-    protected function prepareExtraParameters(array $options)
+    protected function prepareExtraParameters(array $options): string
     {
         $uriString = '';
 
@@ -236,17 +257,5 @@ class Form extends \JControllerForm
         }
 
         return $uriString;
-    }
-
-    /**
-     * This method does cancel action.
-     *
-     * @param string $key
-     *
-     * @return void
-     */
-    public function cancel($key = null)
-    {
-        $this->setRedirect(\JRoute::_($this->defaultLink . '&view=' . $this->view_list . $this->getRedirectToListAppend(), false));
     }
 }

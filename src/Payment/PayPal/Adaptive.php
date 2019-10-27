@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Payment\PayPal;
+namespace Prism\Library\Payment\PayPal;
 
-use Prism\Payment\PayPal\Adaptive\Response;
+use Prism\Library\Payment\PayPal\Adaptive\Response;
 use Joomla\Registry\Registry;
 
 // no direct access

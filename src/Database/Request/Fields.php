@@ -1,18 +1,18 @@
 <?php
 /**
- * @package         Prism\Database
+ * @package         Prism\Library\Database
  * @subpackage      Request
  * @author          Todor Iliev
  * @copyright       Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Database\Request;
+namespace Prism\Library\Database\Request;
 
 /**
  * Collection of fields that will be fetched from database.
  *
- * @package         Prism\Database
+ * @package         Prism\Library\Database
  * @subpackage      Request
  */
 class Fields implements \Iterator, \Countable, \ArrayAccess

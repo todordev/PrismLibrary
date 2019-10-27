@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Money;
+namespace Prism\Library\Money;
 
-use Prism\Domain\PopulatorImmutable;
+use Prism\Library\Domain\PopulatorImmutable;
 
 /**
  * This class contains methods that are used for managing currency.
@@ -51,7 +51,7 @@ final class Currency implements LegalTender
      *     'position' => '0'
      * );
      *
-     * $currency  = new Prism\Money\Currency($data);
+     * $currency  = new Prism\Library\Money\Currency($data);
      * echo $currency->getTitle();
      * </code>
      *
@@ -73,7 +73,7 @@ final class Currency implements LegalTender
      *     'position' => '0'
      * );
      *
-     * $currency  = new Prism\Money\Currency($data);
+     * $currency  = new Prism\Library\Money\Currency($data);
      * echo $currency->getCode();
      * </code>
      *
@@ -95,7 +95,7 @@ final class Currency implements LegalTender
      *     'position' => '0'
      * );
      *
-     * $currency  = new Prism\Money\Currency($data);
+     * $currency  = new Prism\Library\Money\Currency($data);
      * echo $currency->getSymbol();
      * </code>
      *
@@ -117,7 +117,7 @@ final class Currency implements LegalTender
      *     'position' => '0'
      * );
      *
-     * $currency  = new Prism\Money\Currency($data);
+     * $currency  = new Prism\Library\Money\Currency($data);
      * if (0 === $currency->getPosition()) {
      * }
      * </code>
@@ -140,7 +140,7 @@ final class Currency implements LegalTender
      *     'position' => '0'
      * );
      *
-     * $currency  = new Prism\Money\Currency($data);
+     * $currency  = new Prism\Library\Money\Currency($data);
      * if ($currency->symbolBefore()) {
      * }
      * </code>
@@ -163,7 +163,7 @@ final class Currency implements LegalTender
      *     'position' => '0'
      * );
      *
-     * $currency  = new Prism\Money\Currency($data);
+     * $currency  = new Prism\Library\Money\Currency($data);
      * if ($currency->symbolAfter()) {
      * }
      * </code>

@@ -1,18 +1,18 @@
 <?php
 /**
- * @package      Prism\Utilities
+ * @package      Prism\Library\Utilities
  * @subpackage   Array
  * @author       Todor Iliev
  * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Utilities;
+namespace Prism\Library\Utilities;
 
 /**
  * This class provides functionality for handling arrays.
  *
- * @package      Prism\Utilities
+ * @package      Prism\Library\Utilities
  * @subpackage   Array
  */
 abstract class ArrayHelper
@@ -21,7 +21,7 @@ abstract class ArrayHelper
      * Return array with IDs extracted from items.
      *
      * <code>
-     * $userIds = Prism\Utilities\ArrayHelper::getIds($items);
+     * $userIds = Prism\Library\Utilities\ArrayHelper::getIds($items);
      * </code>
      *
      * @param array  $items

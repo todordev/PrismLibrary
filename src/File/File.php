@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\File;
+namespace Prism\Library\File;
 
-use Prism\Validator\Validator;
+use Prism\Library\Validator\Validator;
 use Joomla\String\StringHelper;
 
 defined('JPATH_PLATFORM') or die;
@@ -51,7 +51,7 @@ class File
      * <code>
      * $myFile   = "/tmp/myfile.txt";
      *
-     * $file = new Prism\File\File($myFile);
+     * $file = new Prism\Library\File\File($myFile);
      * </code>
      *
      * @param  mixed $file
@@ -69,9 +69,9 @@ class File
      * <code>
      * $myFile   = "/tmp/myfile.txt";
      *
-     * $uploader = new Prism\File\Uploader\Local();
+     * $uploader = new Prism\Library\File\Uploader\Local();
      *
-     * $file = new Prism\File\File($myFile);
+     * $file = new Prism\Library\File\File($myFile);
      * $file->setUploader($uploader);
      * </code>
      *
@@ -90,7 +90,7 @@ class File
      * <code>
      * $myFile   = "/tmp/myfile.txt";
      *
-     * $file = new Prism\File\File($myFile);
+     * $file = new Prism\Library\File\File($myFile);
      * $file->upload();
      *
      * $myNewFileLocation = $file->getFile();
@@ -111,9 +111,9 @@ class File
      * <code>
      * $myFile   = "/tmp/myfile.txt";
      *
-     * $uploader = new Prism\File\Uploader\Local();
+     * $uploader = new Prism\Library\File\Uploader\Local();
      *
-     * $file = new Prism\File\File($myFile);
+     * $file = new Prism\Library\File\File($myFile);
      * $file->setUploader($uploader);
      *
      * $file->upload();
@@ -143,9 +143,9 @@ class File
      * Add an object that validates the file.
      *
      * <code>
-     * $validator = new Prism\File\Validator\Image();
+     * $validator = new Prism\Library\File\Validator\Image();
      *
-     * $file = new Prism\File\File();
+     * $file = new Prism\Library\File\File();
      * $file->addValidator($validator);
      * </code>
      *
@@ -169,9 +169,9 @@ class File
      * Add an object that removes the file.
      *
      * <code>
-     * $remover = new Prism\File\Remover\Local();
+     * $remover = new Prism\Library\File\Remover\Local();
      *
-     * $file = new Prism\File\File();
+     * $file = new Prism\Library\File\File();
      * $file->addRemover($remover);
      * </code>
      *
@@ -202,9 +202,9 @@ class File
      * <code>
      * $myFile   = "/tmp/myfile.jpg";
      *
-     * $validator = new Prism\File\Validator\Image();
+     * $validator = new Prism\Library\File\Validator\Image();
      *
-     * $file = new Prism\File\File($myFile);
+     * $file = new Prism\Library\File\File($myFile);
      * $file->addValidator($validator);
      *
      * if (!$file->isValid()) {
@@ -232,9 +232,9 @@ class File
      * <code>
      * $myFile   = "/tmp/myfile.jpg";
      *
-     * $remover = new Prism\File\Remover\Local();
+     * $remover = new Prism\Library\File\Remover\Local();
      *
-     * $file = new Prism\File\File($myFile);
+     * $file = new Prism\Library\File\File($myFile);
      * $file->addRemover($remover);
      *
      * $file->remove();
@@ -258,9 +258,9 @@ class File
      * <code>
      * $myFile   = "/tmp/myfile.jpg";
      *
-     * $validator = new Prism\File\Validator\Image();
+     * $validator = new Prism\Library\File\Validator\Image();
      *
-     * $file = new Prism\File\Image($myFile);
+     * $file = new Prism\Library\File\Image($myFile);
      * $file->addValidator($validator);
      *
      * if (!$file->isValid()) {
@@ -281,9 +281,9 @@ class File
      * <code>
      * $filePath  = "/tmp/myfile.jpg";
      *
-     * $validator = new Prism\File\Validator\Image();
+     * $validator = new Prism\Library\File\Validator\Image();
      *
-     * $file = new Prism\File\File($filePath);
+     * $file = new Prism\Library\File\File($filePath);
      * $file->addValidator($validator);
      *
      * if (!$file->isValid()) {
@@ -304,9 +304,9 @@ class File
      * <code>
      * $filePath  = "/tmp/myfile.jpg";
      *
-     * $validator = new Prism\File\Validator\Image();
+     * $validator = new Prism\Library\File\Validator\Image();
      *
-     * $file = new Prism\File\File($filePath);
+     * $file = new Prism\Library\File\File($filePath);
      * $file->addValidator($validator);
      *
      * if (!$file->isValid()) {
@@ -326,7 +326,7 @@ class File
      *
      * <code>
      * $filePath = '/tmp/picture1.png';
-     * $file     = new Prism\File\File($filePath);
+     * $file     = new Prism\Library\File\File($filePath);
      *
      * if ($file->isImage()) {
      * // ...
@@ -349,7 +349,7 @@ class File
      *
      * <code>
      * $filePath = '/tmp/video.avi';
-     * $file     = new Prism\File\File($filePath);
+     * $file     = new Prism\Library\File\File($filePath);
      *
      * if ($file->isVideo()) {
      * // ...
@@ -373,7 +373,7 @@ class File
      *
      * <code>
      * $filePath = '/tmp/picture1.png';
-     * $file     = new Prism\File\File($filePath);
+     * $file     = new Prism\Library\File\File($filePath);
      *
      * $filetype = $file->getFiletype()
      * </code>
@@ -401,7 +401,7 @@ class File
      *
      * <code>
      * $filePath = '/tmp/picture1.png';
-     * $file     = new Prism\File\File($filePath);
+     * $file     = new Prism\Library\File\File($filePath);
      *
      * $fileData = $file->extractFileData();
      * </code>
@@ -443,7 +443,7 @@ class File
      *
      * <code>
      * $filePath = '/tmp/picture1.png';
-     * $file     = new Prism\File\File($filePath);
+     * $file     = new Prism\Library\File\File($filePath);
      *
      * if ($file->hasImageExtension()) {
      * // ...
@@ -465,7 +465,7 @@ class File
      *
      * <code>
      * $filePath = '/tmp/picture1.png';
-     * $file     = new Prism\File\File($filePath);
+     * $file     = new Prism\Library\File\File($filePath);
      *
      * if ($file->hasImageMime()) {
      * // ...

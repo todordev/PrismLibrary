@@ -14,20 +14,9 @@ if (!defined('PRISM_PATH_LIBRARY')) {
 }
 
 if (!defined('PRISM_PATH_UI_LAYOUTS')) {
-    define('PRISM_PATH_UI_LAYOUTS', PRISM_PATH_LIBRARY . '/ui/layouts');
+    define('PRISM_PATH_UI_LAYOUTS', PRISM_PATH_LIBRARY . '/Ui/layouts');
 }
 
-jimport('joomla.filesystem.file');
-jimport('joomla.filesystem.folder');
-jimport('joomla.filesystem.path');
+JLoader::registerNamespace('\\Prism\\Library', PRISM_PATH_LIBRARY, false, false, 'psr4');
 
-JLoader::registerNamespace('Prism', JPATH_LIBRARIES);
-
-require_once PRISM_PATH_LIBRARY.'/vendor/autoload.php';
-
-// Register some helpers.
-JHtml::addIncludePath(PRISM_PATH_LIBRARY . '/ui/helpers');
-
-// Load library language.
-$lang = JFactory::getLanguage();
-$lang->load('lib_prism', PRISM_PATH_LIBRARY);
+require_once PRISM_PATH_LIBRARY . '/vendor/autoload.php';

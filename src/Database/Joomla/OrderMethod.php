@@ -1,21 +1,21 @@
 <?php
 /**
- * @package         Prism\Database
+ * @package         Prism\Library\Database
  * @subpackage      Joomla
  * @author          Todor Iliev
  * @copyright       Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Database\Joomla;
+namespace Prism\Library\Database\Joomla;
 
-use \Prism\Database\Request\Order;
-use \Prism\Database\Request\Request;
+use Prism\Library\Database\Request\Order;
+use Prism\Library\Database\Request\Request;
 
 /**
  * Fetch methods for Joomla repository.
  *
- * @package         Prism\Database
+ * @package         Prism\Library\Database
  * @subpackage      Joomla
  */
 trait OrderMethod

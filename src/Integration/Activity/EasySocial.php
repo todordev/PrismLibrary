@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Integration\Activity;
+namespace Prism\Library\Integration\Activity;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -90,7 +90,7 @@ class EasySocial implements ActivityInterface
      * $userId = 1;
      * $content = '...';
      *
-     * $activity = new Prism\Integration\Activity\EasySocial($userId, $content);
+     * $activity = new Prism\Library\Integration\Activity\EasySocial($userId, $content);
      * </code>
      *
      * @param  integer $userId Target ID
@@ -109,7 +109,7 @@ class EasySocial implements ActivityInterface
      * $userId = 1;
      * $content = "...";
      *
-     * $activity = new Prism\Integration\Activity\EasySocial($userId, $content);
+     * $activity = new Prism\Library\Integration\Activity\EasySocial($userId, $content);
      * $activity->store();
      * </code>
      *
@@ -158,7 +158,7 @@ class EasySocial implements ActivityInterface
      * Return a title.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\EasySocial();
+     * $activity = new Prism\Library\Integration\Activity\EasySocial();
      * $title = $activity->getTitle();
      * </code>
      *
@@ -173,7 +173,7 @@ class EasySocial implements ActivityInterface
      * Return a content.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\EasySocial();
+     * $activity = new Prism\Library\Integration\Activity\EasySocial();
      * $content = $activity->getContent();
      * </code>
      *
@@ -188,7 +188,7 @@ class EasySocial implements ActivityInterface
      * Return a content type.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\EasySocial();
+     * $activity = new Prism\Library\Integration\Activity\EasySocial();
      * $siteWide = $activity->getSiteWide();
      * </code>
      *
@@ -203,7 +203,7 @@ class EasySocial implements ActivityInterface
      * Return a context type.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\EasySocial();
+     * $activity = new Prism\Library\Integration\Activity\EasySocial();
      * $contextType = $activity->getContext();
      * </code>
      *
@@ -218,7 +218,7 @@ class EasySocial implements ActivityInterface
      * Return a verb
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\EasySocial();
+     * $activity = new Prism\Library\Integration\Activity\EasySocial();
      * $verb = $activity->getVerbContext();
      * </code>
      *
@@ -233,7 +233,7 @@ class EasySocial implements ActivityInterface
      * Return an actor ID.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\EasySocial();
+     * $activity = new Prism\Library\Integration\Activity\EasySocial();
      * $actorId = $activity->getActorId();
      * </code>
      *
@@ -248,7 +248,7 @@ class EasySocial implements ActivityInterface
      * Return an actor type.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\EasySocial();
+     * $activity = new Prism\Library\Integration\Activity\EasySocial();
      * $actorType = $activity->getActorType();
      * </code>
      *
@@ -263,7 +263,7 @@ class EasySocial implements ActivityInterface
      * Return a user ID of the target.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\EasySocial();
+     * $activity = new Prism\Library\Integration\Activity\EasySocial();
      * $targetId = $activity->getTargetId();
      * </code>
      *
@@ -278,7 +278,7 @@ class EasySocial implements ActivityInterface
      * Return a activity type.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\EasySocial();
+     * $activity = new Prism\Library\Integration\Activity\EasySocial();
      * $type = $activity->getType();
      * </code>
      *
@@ -295,7 +295,7 @@ class EasySocial implements ActivityInterface
      * <code>
      * $title = "...";
      *
-     * $activity = new Prism\Integration\Activity\EasySocial();
+     * $activity = new Prism\Library\Integration\Activity\EasySocial();
      * $activity->setTitle($title);
      * </code>
      *
@@ -316,7 +316,7 @@ class EasySocial implements ActivityInterface
      * <code>
      * $content = "...";
      *
-     * $activity = new Prism\Integration\Activity\EasySocial();
+     * $activity = new Prism\Library\Integration\Activity\EasySocial();
      * $activity->setContent($content);
      * </code>
      *
@@ -337,7 +337,7 @@ class EasySocial implements ActivityInterface
      * <code>
      * $siteWide = "...";
      *
-     * $activity = new Prism\Integration\Activity\EasySocial();
+     * $activity = new Prism\Library\Integration\Activity\EasySocial();
      * $activity->setSiteWide($siteWide);
      * </code>
      *
@@ -358,7 +358,7 @@ class EasySocial implements ActivityInterface
      * <code>
      * $contextId = 1;
      *
-     * $activity = new Prism\Integration\Activity\EasySocial();
+     * $activity = new Prism\Library\Integration\Activity\EasySocial();
      * $activity->setContextId($contextId);
      * </code>
      *
@@ -379,7 +379,7 @@ class EasySocial implements ActivityInterface
      * <code>
      * $contextType = "...";
      *
-     * $activity = new Prism\Integration\Activity\EasySocial();
+     * $activity = new Prism\Library\Integration\Activity\EasySocial();
      * $activity->setContextType($contextType);
      * </code>
      *
@@ -401,7 +401,7 @@ class EasySocial implements ActivityInterface
      * <code>
      * $verb = "...";
      *
-     * $activity = new Prism\Integration\Activity\EasySocial();
+     * $activity = new Prism\Library\Integration\Activity\EasySocial();
      * $activity->setVerb($verb);
      * </code>
      *
@@ -422,7 +422,7 @@ class EasySocial implements ActivityInterface
      * <code>
      * $actorId = 1;
      *
-     * $activity = new Prism\Integration\Activity\EasySocial();
+     * $activity = new Prism\Library\Integration\Activity\EasySocial();
      * $activity->setActorId($actorId);
      * </code>
      *
@@ -443,7 +443,7 @@ class EasySocial implements ActivityInterface
      * <code>
      * $actorType = "...";
      *
-     * $activity = new Prism\Integration\Activity\EasySocial();
+     * $activity = new Prism\Library\Integration\Activity\EasySocial();
      * $activity->setActorType($actorType);
      * </code>
      *
@@ -464,7 +464,7 @@ class EasySocial implements ActivityInterface
      * <code>
      * $targetId = 1;
      *
-     * $activity = new Prism\Integration\Activity\EasySocial();
+     * $activity = new Prism\Library\Integration\Activity\EasySocial();
      * $activity->setTargetId($targetId);
      * </code>
      *
@@ -487,7 +487,7 @@ class EasySocial implements ActivityInterface
      * <code>
      * $type = 1;
      *
-     * $activity = new Prism\Integration\Activity\EasySocial();
+     * $activity = new Prism\Library\Integration\Activity\EasySocial();
      * $activity->setType($type);
      * </code>
      *
@@ -508,7 +508,7 @@ class EasySocial implements ActivityInterface
      * <code>
      * $targetId = 1;
      *
-     * $activity = new Prism\Integration\Activity\EasySocial();
+     * $activity = new Prism\Library\Integration\Activity\EasySocial();
      * $activity->setUserId($targetId);
      * </code>
      *
@@ -525,7 +525,7 @@ class EasySocial implements ActivityInterface
      * Return a user ID of the target.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\EasySocial();
+     * $activity = new Prism\Library\Integration\Activity\EasySocial();
      * $targetId = $activity->getUserId();
      * </code>
      *

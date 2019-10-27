@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Database;
+namespace Prism\Library\Database;
 
-use Prism\Domain\TransactionalSession;
+use Prism\Library\Domain\TransactionalSession;
 
 /**
  * Joomla database gateway for a session.

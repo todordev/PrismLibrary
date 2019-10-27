@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\File;
+namespace Prism\Library\File;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -31,7 +31,7 @@ class Type
      * <code>
      * $mimeType = 'image/jpeg';
      *
-     * $filetype = new Prism\File\Type($mimeType);
+     * $filetype = new Prism\Library\File\Type($mimeType);
      * </code>
      *
      * @param  string $mime MIME type
@@ -67,7 +67,7 @@ class Type
      * <code>
      * $mimeType = 'image/jpeg';
      *
-     * $filetype = new Prism\File\Type($mimeType);
+     * $filetype = new Prism\Library\File\Type($mimeType);
      *
      * if ($filetype->isImage()) {
      * // ...
@@ -87,7 +87,7 @@ class Type
      * <code>
      * $mimeType = 'video/mp4';
      *
-     * $filetype = new Prism\File\Type($mimeType);
+     * $filetype = new Prism\Library\File\Type($mimeType);
      *
      * if ($filetype->isVideo()) {
      * // ...
@@ -107,7 +107,7 @@ class Type
      * <code>
      * $mimeType = 'image/jpeg';
      *
-     * $filetype = new Prism\File\Type($mimeType);
+     * $filetype = new Prism\Library\File\Type($mimeType);
      * $type     = $filetype->getType();
      * </code>
      *
@@ -133,7 +133,7 @@ class Type
      * <code>
      * $mimeType = 'image/jpeg';
      *
-     * $filetype  = new Prism\File\Type($mimeType);
+     * $filetype  = new Prism\Library\File\Type($mimeType);
      * $iconClass = $filetype->getIcon();
      * </code>
      *
@@ -158,7 +158,7 @@ class Type
      * $key   = 'image';
      * $iconClass = 'file-image-o';
      *
-     * $filetype     = new Prism\File\Type($mimeType);
+     * $filetype     = new Prism\Library\File\Type($mimeType);
      * $oldIconClass = $filetype->setIcon($key, $iconClass);
      * </code>
      *
@@ -187,7 +187,7 @@ class Type
      * $key   = 'pdf';
      * $types = array('application/pdf');
      *
-     * $filetype     = new Prism\File\Type($mimeType);
+     * $filetype     = new Prism\Library\File\Type($mimeType);
      * $oldIconClass = $filetype->setTypes($key, $types);
      * </code>
      *
@@ -216,7 +216,7 @@ class Type
      * $key   = 'image';
      * $type  = 'image/jpeg';
      *
-     * $filetype     = new Prism\File\Type($mimeType);
+     * $filetype     = new Prism\Library\File\Type($mimeType);
      * $filetype->addType($key, $type);
      * </code>
      *

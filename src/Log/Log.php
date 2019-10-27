@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Log;
+namespace Prism\Library\Log;
 
-use Prism\Log\Adapter\AdapterInterface;
+use Prism\Library\Log\Adapter\AdapterInterface;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -47,9 +47,9 @@ class Log
      * );
      *
      * $file   = "/logs/com_crowdfunding.log";
-     * $writer = new Prism\Log\Adapter\File($file);
+     * $writer = new Prism\Library\Log\Adapter\File($file);
      *
-     * $log = new Prism\Log($title, $type, $data);
+     * $log = new Prism\Library\Log($title, $type, $data);
      * $log->addWriter($writer);
      * $log->store();
      * </code>
@@ -70,9 +70,9 @@ class Log
      *
      * <code>
      * $file   = "/logs/com_crowdfunding.log";
-     * $writer = new Prism\Log\Adapter\File($file);
+     * $writer = new Prism\Library\Log\Adapter\File($file);
      *
-     * $log = new Prism\Log();
+     * $log = new Prism\Library\Log();
      * $log->addWriter($writer);
      * </code>
      *
@@ -87,7 +87,7 @@ class Log
      * Get a title that is going to be stored.
      *
      * <code>
-     * $log   = new Prism\Log();
+     * $log   = new Prism\Library\Log();
      * $title = $log->getTitle();
      * </code>
      *
@@ -102,7 +102,7 @@ class Log
      * Get a type of the logged information.
      *
      * <code>
-     * $log   = new Prism\Log();
+     * $log   = new Prism\Library\Log();
      * $type  = $log->getType();
      * </code>
      *
@@ -117,7 +117,7 @@ class Log
      * Get the data that is going to be logged.
      *
      * <code>
-     * $log   = new Prism\Log();
+     * $log   = new Prism\Library\Log();
      * $data  = $log->getData();
      * </code>
      *
@@ -132,7 +132,7 @@ class Log
      * Get the date of the log record.
      *
      * <code>
-     * $log   = new Prism\Log();
+     * $log   = new Prism\Library\Log();
      * $date  = $log->getRecordDate();
      * </code>
      *
@@ -149,7 +149,7 @@ class Log
      * <code>
      * $title = "My title...";
      *
-     * $log   = new Prism\Log();
+     * $log   = new Prism\Library\Log();
      * $log->setTitle($title);
      * </code>
      *
@@ -170,7 +170,7 @@ class Log
      * <code>
      * $type = "MY_TYPE";
      *
-     * $log   = new Prism\Log();
+     * $log   = new Prism\Library\Log();
      * $log->setType($type);
      * </code>
      *
@@ -194,7 +194,7 @@ class Log
      *     "currency" => "USD"
      * );
      *
-     * $log   = new Prism\Log();
+     * $log   = new Prism\Library\Log();
      * $log->setData($data);
      * </code>
      *
@@ -265,7 +265,7 @@ class Log
      * <code>
      * $date  = "30-01-2014";
      *
-     * $log   = new Prism\Log();
+     * $log   = new Prism\Library\Log();
      * $log->setRecordDate($date);
      * </code>
      *
@@ -292,9 +292,9 @@ class Log
      * );
      *
      * $file   = "/logs/com_crowdfunding.log";
-     * $writer = new Prism\Log\Adapter\File($file);
+     * $writer = new Prism\Library\Log\Adapter\File($file);
      *
-     * $log   = new Prism\Log();
+     * $log   = new Prism\Library\Log();
      * $log->addWriter($writer);
      *
      * $log->add($title, $type, $data);
@@ -328,9 +328,9 @@ class Log
      * );
      *
      * $file   = "/logs/com_crowdfunding.log";
-     * $writer = new Prism\Log\Adapter\File($file);
+     * $writer = new Prism\Library\Log\Adapter\File($file);
      *
-     * $log = new Prism\Log($title, $type, $data);
+     * $log = new Prism\Library\Log($title, $type, $data);
      * $log->addWriter($writer);
      *
      * $log->store();
@@ -354,7 +354,7 @@ class Log
      * <code>
      * $exclude = array("db", "params");
      *
-     * $log   = new Prism\Log();
+     * $log   = new Prism\Library\Log();
      * $log->setExcluded($exclude);
      * </code>
      *

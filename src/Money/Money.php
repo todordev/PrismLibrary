@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Money;
+namespace Prism\Library\Money;
 
 /**
  * This class contains methods that are used for managing an amount.
@@ -38,7 +38,7 @@ final class Money
      * $amount = 1,500.25;
      *
      * $currency = new Currency();
-     * $money    = new Prism\Money\Money($amount, $currency);
+     * $money    = new Prism\Library\Money\Money($amount, $currency);
      * </code>
      *
      * @param mixed       $amount
@@ -55,7 +55,7 @@ final class Money
      *
      * <code>
      * $currency = new Currency();
-     * $money    = new Prism\Money\Money($amount, $currency);
+     * $money    = new Prism\Library\Money\Money($amount, $currency);
      *
      * $currency = $money->getCurrency();
      * </code>
@@ -74,7 +74,7 @@ final class Money
      * $amount   = 1,500.25;
      *
      * $currency = new Currency();
-     * $money    = new Prism\Money\Money($amount, $currency);
+     * $money    = new Prism\Library\Money\Money($amount, $currency);
      *
      * echo $money->getAmount();
      * </code>
@@ -91,7 +91,7 @@ final class Money
      *
      * <code>
      * $currency = new Currency();
-     * $money    = new Prism\Money\Money(1,500.25, $currency);
+     * $money    = new Prism\Library\Money\Money(1,500.25, $currency);
      *
      * $money2   = $money->setAmount(1,000.00);
      * </code>

@@ -7,7 +7,7 @@
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Log;
+namespace Prism\Library\Log;
 
 defined('JPATH_PLATFORM') or die;
 

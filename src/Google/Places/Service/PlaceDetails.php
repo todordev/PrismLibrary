@@ -1,22 +1,22 @@
 <?php
 /**
- * @package      Prism\Google
+ * @package      Prism\Library\Google
  * @subpackage   Places
  * @author       Todor Iliev
  * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Google\Places\Service;
+namespace Prism\Library\Google\Places\Service;
 
-use Prism\Google\Places\Place;
-use Prism\Google\Places\Client;
-use Prism\Google\Exception\ApiException;
+use Prism\Library\Google\Places\Place;
+use Prism\Library\Google\Places\Client;
+use Prism\Library\Google\Exception\ApiException;
 
 /**
  * Google Place Details Service.
  *
- * @package     Prism\Google
+ * @package     Prism\Library\Google
  * @subpackage  Places
  *
  * @link https://developers.google.com/places/web-service/autocomplete
@@ -39,7 +39,7 @@ class PlaceDetails
      *     'output' => 'json' // xml or json
      * ]);
      *
-     * $client  = new Prism\Google\Places\Client($key, $options);
+     * $client  = new Prism\Library\Google\Places\Client($key, $options);
      * $service = new PlaceDetails($client);
      * </code>
      *
@@ -59,8 +59,8 @@ class PlaceDetails
      *     'output' => 'json' // xml or json
      * ]);
      *
-     * $client  = new Prism\Google\Places\Client($key, $options);
-     * $service = new Prism\Google\Places\Service\PlaceDetails($client);
+     * $client  = new Prism\Library\Google\Places\Client($key, $options);
+     * $service = new Prism\Library\Google\Places\Service\PlaceDetails($client);
      *
      * $params   = [
      *    'language' => 'en'

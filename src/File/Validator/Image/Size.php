@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\File\Validator\Image;
+namespace Prism\Library\File\Validator\Image;
 
-use Prism\validator\Validator;
+use Prism\Library\validator\Validator;
 
 defined('JPATH_PLATFORM') or die;
 

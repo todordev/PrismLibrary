@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\File\Validator;
+namespace Prism\Library\File\Validator;
 
-use Prism\Validator\Validator;
+use Prism\Library\Validator\Validator;
 use Joomla\String\StringHelper;
 
 defined('JPATH_PLATFORM') or die;
@@ -36,7 +36,7 @@ class Image extends Validator
      * $myFile     = '/tmp/myfile.tmp';
      * $filename   = 'myfile.jpg';
      *
-     * $validator = new Prism\File\Validator\Image($myFile, $fileName);
+     * $validator = new Prism\Library\File\Validator\Image($myFile, $fileName);
      * </code>
      *
      * @param string $file A path to the file.
@@ -56,7 +56,7 @@ class Image extends Validator
      * <code>
      * $myFile     = '/tmp/myfile.jpg';
      *
-     * $validator = new Prism\File\Validator\Image();
+     * $validator = new Prism\Library\File\Validator\Image();
      * $validator->setFile($myFile);
      * </code>
      *
@@ -75,7 +75,7 @@ class Image extends Validator
      * <code>
      * $filename  = 'myfile.jpg';
      *
-     * $validator = new Prism\File\Validator\Image();
+     * $validator = new Prism\Library\File\Validator\Image();
      * $validator->setFilename($filename);
      * </code>
      *
@@ -92,7 +92,7 @@ class Image extends Validator
      * <code>
      * $mimeTypes  = array('image/jpeg', 'image/gif');
      *
-     * $validator = new Prism\File\Validator\Image();
+     * $validator = new Prism\Library\File\Validator\Image();
      * $validator->setMimeTypes($mimeTypes);
      * </code>
      *
@@ -109,7 +109,7 @@ class Image extends Validator
      * <code>
      * $imageExtensions  = array('jpg', 'png');
      *
-     * $validator = new Prism\File\Validator\Image();
+     * $validator = new Prism\Library\File\Validator\Image();
      * $validator->setImageExtensions($imageExtensions);
      * </code>
      *
@@ -127,7 +127,7 @@ class Image extends Validator
      * $myFile     = '/tmp/myfile.jpg';
      * $fileName   = 'myfile.jpg';
      *
-     * $validator = new Prism\File\Validator\Image($myFile, $fileName);
+     * $validator = new Prism\Library\File\Validator\Image($myFile, $fileName);
      *
      * if (!$validator->isValid()) {
      *     echo $validator->getMessage();

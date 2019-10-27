@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Integration\Profiles;
+namespace Prism\Library\Integration\Profiles;
 
-use Prism\Database\Collection;
+use Prism\Library\Database\Collection;
 
 defined('JPATH_PLATFORM') or die;
 

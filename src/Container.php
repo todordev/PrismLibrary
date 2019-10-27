@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism;
+namespace Prism\Library;
 
 /**
  * This class provides DI container everywhere where we need it, especially in ITPrism's extensions.
@@ -24,7 +24,7 @@ abstract class Container
      * Return DI Container.
      *
      * <code>
-     * $container = Prism\Container::getContainer();
+     * $container = Prism\Library\Container::getContainer();
      * </code>
      *
      * @return \Joomla\DI\Container

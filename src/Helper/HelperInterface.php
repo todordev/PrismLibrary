@@ -7,7 +7,7 @@
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Helper;
+namespace Prism\Library\Helper;
 
 /**
  * Interface for helper command.
@@ -17,5 +17,5 @@ namespace Prism\Helper;
  */
 interface HelperInterface
 {
-    public function handle(&$data, array $options = array());
+    public function handle(&$data, array $options = array()): void;
 }

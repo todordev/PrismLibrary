@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Integration\Profiles;
+namespace Prism\Library\Integration\Profiles;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -63,7 +63,7 @@ class Socialcommunity implements ProfilesInterface
      * <code>
      * $ids = array(1, 2, 3, 4);
      *
-     * $profiles = new Prism\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
      * $profiles->load(array('ids' => $ids));
      * </code>
      *
@@ -98,7 +98,7 @@ class Socialcommunity implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $avatar = $profiles->getAvatar($userId);
@@ -139,7 +139,7 @@ class Socialcommunity implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $link = $profiles->getLink($userId);
@@ -171,7 +171,7 @@ class Socialcommunity implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $location = $profiles->getLocation($userId);
@@ -197,7 +197,7 @@ class Socialcommunity implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $countryCode = $profiles->getCountryCode($userId);
@@ -222,7 +222,7 @@ class Socialcommunity implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $url = "/images/profiles;
      *
-     * $profiles = new Prism\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
      * $profiles->setMediaUrl($url);
      * </code>
      *
@@ -242,7 +242,7 @@ class Socialcommunity implements ProfilesInterface
      * <code>
      * $ids = array(1, 2, 3, 4);
      *
-     * $profiles = new Prism\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Integration\Profiles\Socialcommunity(\JFactory::getDbo());
      * $url = $profiles->getMediaUrl();
      * </code>
      *

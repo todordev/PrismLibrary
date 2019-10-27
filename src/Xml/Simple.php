@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Xml;
+namespace Prism\Library\Xml;
 
 /**
  * This class extends the native PHP class Simple XML.
@@ -21,7 +21,7 @@ class Simple extends \SimpleXMLElement
      * Include a CDATA element to an XML content.
      *
      * <code>
-     * $sxml = new Prism\Xml\Simple();
+     * $sxml = new Prism\Library\Xml\Simple();
      *
      * $sxml->addCData("<strong>This text contains HTML code.</strong>");
      * </code>
@@ -42,7 +42,7 @@ class Simple extends \SimpleXMLElement
      * @param mixed  $value
      *
      * <code>
-     * $sxml = new Prism\Xml\Simple();
+     * $sxml = new Prism\Library\Xml\Simple();
      *
      * $sxml->addChildCData("body", "<strong>This text contains HTML code.</strong>");
      * </code>

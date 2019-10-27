@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Transifex;
+namespace Prism\Library\Transifex;
 
 use Joomla\Utilities\ArrayHelper;
 
@@ -35,7 +35,7 @@ class Request
      * <code>
      * $url = "https://www.transifex.com/api/2/";
      *
-     * $request = new Prism\\Transifex\\Request($url);
+     * $request = new Prism\Library\\Transifex\\Request($url);
      * </code>
      *
      * @param string $url Transifex API URL
@@ -137,7 +137,7 @@ class Request
      *      "data"   => array() // Data that should be sent to Transifex servers.
      * );
      *
-     * $request = new Prism\Transifex\Request($url);
+     * $request = new Prism\Library\Transifex\Request($url);
      * $request->get($path, $options);
      * </code>
      *
@@ -157,7 +157,7 @@ class Request
      * <code>
      * $url = "https://www.transifex.com/api/2/";
      *
-     * $request = new Prism\Transifex\Request($url);
+     * $request = new Prism\Library\Transifex\Request($url);
      * $request->getUsername();
      * </code>
      *
@@ -175,7 +175,7 @@ class Request
      * $url = "https://www.transifex.com/api/2/";
      * $username = "MyTransifexUsername";
      *
-     * $request = new Prism\Transifex\Request($url);
+     * $request = new Prism\Library\Transifex\Request($url);
      * $request->setUsername($username);
      * </code>
      *
@@ -196,7 +196,7 @@ class Request
      * <code>
      * $url = "https://www.transifex.com/api/2/";
      *
-     * $request = new Prism\Transifex\Request($url);
+     * $request = new Prism\Library\Transifex\Request($url);
      * $request->getPassword();
      * </code>
      *
@@ -214,7 +214,7 @@ class Request
      * $url = "https://www.transifex.com/api/2/";
      * $password = "MyTransifexPassword";
      *
-     * $request = new Prism\Transifex\Request($url);
+     * $request = new Prism\Library\Transifex\Request($url);
      * $request->setPassword($password);
      * </code>
      *
@@ -235,7 +235,7 @@ class Request
      * <code>
      * $url = "https://www.transifex.com/api/2/";
      *
-     * $request = new Prism\Transifex\Request($url);
+     * $request = new Prism\Library\Transifex\Request($url);
      * $request->enableAuthentication();
      * </code>
      *
@@ -254,7 +254,7 @@ class Request
      * <code>
      * $url = "https://www.transifex.com/api/2/";
      *
-     * $request = new Prism\Transifex\Request($url);
+     * $request = new Prism\Library\Transifex\Request($url);
      * $request->disableAuthentication();
      * </code>
      *

@@ -1,22 +1,22 @@
 <?php
 /**
- * @package      Prism\Google
+ * @package      Prism\Library\Google
  * @subpackage   Places
  * @author       Todor Iliev
  * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Google\Places;
+namespace Prism\Library\Google\Places;
 
 use Joomla\Registry\Registry;
 use GuzzleHttp\Client as GuzzleClient;
-use Prism\Google\Exception\ApiException;
+use Prism\Library\Google\Exception\ApiException;
 
 /**
  * Client that makes request to Google Places API.
  *
- * @package     Prism\Google
+ * @package     Prism\Library\Google
  * @subpackage  Places
  */
 class Client
@@ -40,7 +40,7 @@ class Client
      *     'output' => 'json' // xml or json
      * ]);
      *
-     * $ipn = new Prism\Google\Places\Client($key, $data);
+     * $ipn = new Prism\Library\Google\Places\Client($key, $data);
      * </code>
      *
      * @param string $key

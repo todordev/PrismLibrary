@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\File\Validator;
+namespace Prism\Library\File\Validator;
 
-use Prism\Validator\Validator;
+use Prism\Library\Validator\Validator;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -43,7 +43,7 @@ class Server extends Validator
      * <code>
      * $errorCode  = 404;
      *
-     * $validator = new Prism\File\Validator\Service($errorCode);
+     * $validator = new Prism\Library\File\Validator\Service($errorCode);
      * </code>
      *
      * @param int $errorCode Error code that comes from server.
@@ -61,7 +61,7 @@ class Server extends Validator
      * <code>
      * $errorCode  = 404;
      *
-     * $validator = new Prism\File\Validator\Service($errorCode);
+     * $validator = new Prism\Library\File\Validator\Service($errorCode);
      * $validator->setErrorCode($maxFileSize);
      * </code>
      *
@@ -79,7 +79,7 @@ class Server extends Validator
      * $errorCode  = 404;
      * $ignored    = array(UPLOAD_ERR_NO_FILE, UPLOAD_ERR_EXTENSION);
      *
-     * $validator = new Prism\File\Validator\Service($errorCode);
+     * $validator = new Prism\Library\File\Validator\Service($errorCode);
      *
      * if (!$validator->isValid($ignored)) {
      * ...

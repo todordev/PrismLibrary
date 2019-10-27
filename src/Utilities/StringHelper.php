@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Utilities;
+namespace Prism\Library\Utilities;
 
 use Joomla\Utilities\ArrayHelper as JArrayHelper;
 
@@ -24,7 +24,7 @@ abstract class StringHelper
      * You can set a prefix and specify the length of the string.
      *
      * <code>
-     * $hash = Prism\Utilities\StringHelper::generateRandomString(32, "GEN");
+     * $hash = Prism\Library\Utilities\StringHelper::generateRandomString(32, "GEN");
      *
      * echo $hash;
      * </code>
@@ -61,7 +61,7 @@ abstract class StringHelper
      *     "position" => 0 // 0 for symbol on the left side, 1 for symbole on the right side.
      * );
      *
-     * $amount = Prism\Utilities\StringHelper::getAmount(100, GBP, $options);
+     * $amount = Prism\Library\Utilities\StringHelper::getAmount(100, GBP, $options);
      *
      * echo $amount;
      * </code>
@@ -118,7 +118,7 @@ abstract class StringHelper
      * <code>
      * $content = "If you can <strong>dream</strong> it, you can do it. "
      *
-     * echo Prism\Utilities\StringHelper:clean($content);
+     * echo Prism\Library\Utilities\StringHelper:clean($content);
      * </code>
      *
      * @param string $content
@@ -140,7 +140,7 @@ abstract class StringHelper
      * $length  = 25;
      * $content = "If you can dream it, you can do it."
      *
-     * echo Prism\Utilities\StringHelper::substr($content, $offset, $length);
+     * echo Prism\Library\Utilities\StringHelper::substr($content, $offset, $length);
      * </code>
      *
      * @param string $content
@@ -165,7 +165,7 @@ abstract class StringHelper
      * // String like this "name1=value1&name2=value2&name3=value3".
      * $rawPost  = file_get_contents("php://input");
      *
-     * $post = Prism\Utilities\StringHelper::parseNameValue($content);
+     * $post = Prism\Library\Utilities\StringHelper::parseNameValue($content);
      * </code>
      *
      * @param string $content
@@ -198,7 +198,7 @@ abstract class StringHelper
      * $name = 'John Dow';
      *
      * // Converted to 'john-dow'.
-     * $alias = Prism\Utilities\StringHelper::stringUrlSafe($name);
+     * $alias = Prism\Library\Utilities\StringHelper::stringUrlSafe($name);
      * </code>
      *
      * @param string $string
@@ -222,7 +222,7 @@ abstract class StringHelper
      * $id = 1;
      * $name = 'John Dow';
      *
-     * $alias = Prism\Utilities\StringHelper::generateMd5Hash($name, $id);
+     * $alias = Prism\Library\Utilities\StringHelper::generateMd5Hash($name, $id);
      * </code>
      *
      * @param string $name
@@ -256,7 +256,7 @@ abstract class StringHelper
      *     'id' => 1
      * );
      *
-     * $urlParameters = Prism\Utilities\StringHelper::generate($params);
+     * $urlParameters = Prism\Library\Utilities\StringHelper::generate($params);
      * </code>
      *
      * @param array $params

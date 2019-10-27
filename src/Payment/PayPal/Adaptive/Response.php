@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Payment\PayPal\Adaptive;
+namespace Prism\Library\Payment\PayPal\Adaptive;
 
 use Joomla\Utilities\ArrayHelper;
 

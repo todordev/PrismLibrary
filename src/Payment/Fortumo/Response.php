@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Payment\Fortumo;
+namespace Prism\Library\Payment\Fortumo;
 
 // no direct access
 defined('JPATH_PLATFORM') or die;
@@ -46,7 +46,7 @@ class Response
      * ...
      * );
      *
-     * $response = new Prism\Payment\Fortumo\Response($data);
+     * $response = new Prism\Library\Payment\Fortumo\Response($data);
      * </code>
      *
      * @param array $data
@@ -68,7 +68,7 @@ class Response
      * ...
      * );
      *
-     * $response = new Prism\Payment\Fortumo\Response();
+     * $response = new Prism\Library\Payment\Fortumo\Response();
      * $response->bind($data);
      * </code>
      *
@@ -94,7 +94,7 @@ class Response
      * ...
      * );
      *
-     * $response = new Prism\Payment\Fortumo\Response($data);
+     * $response = new Prism\Library\Payment\Fortumo\Response($data);
      * $status = $response->getStatus();
      * </code>
      *
@@ -115,7 +115,7 @@ class Response
      * ...
      * );
      *
-     * $response = new Prism\Payment\Fortumo\Response($data);
+     * $response = new Prism\Library\Payment\Fortumo\Response($data);
      * $message = $response->getMessage();
      * </code>
      *
@@ -136,7 +136,7 @@ class Response
      * ...
      * );
      *
-     * $response = new Prism\Payment\Fortumo\Response($data);
+     * $response = new Prism\Library\Payment\Fortumo\Response($data);
      * $sender = $response->getSender();
      * </code>
      *
@@ -157,7 +157,7 @@ class Response
      * ...
      * );
      *
-     * $response = new Prism\Payment\Fortumo\Response($data);
+     * $response = new Prism\Library\Payment\Fortumo\Response($data);
      * $country = $response->getCountry();
      * </code>
      *
@@ -178,7 +178,7 @@ class Response
      * ...
      * );
      *
-     * $response = new Prism\Payment\Fortumo\Response($data);
+     * $response = new Prism\Library\Payment\Fortumo\Response($data);
      * $amount = $response->getPrice();
      * </code>
      *
@@ -199,7 +199,7 @@ class Response
      * ...
      * );
      *
-     * $response = new Prism\Payment\Fortumo\Response($data);
+     * $response = new Prism\Library\Payment\Fortumo\Response($data);
      * $currency = $response->getCurrency();
      * </code>
      *
@@ -220,7 +220,7 @@ class Response
      * ...
      * );
      *
-     * $response = new Prism\Payment\Fortumo\Response($data);
+     * $response = new Prism\Library\Payment\Fortumo\Response($data);
      * $serviceId = $response->getServiceId();
      * </code>
      *
@@ -241,7 +241,7 @@ class Response
      * ...
      * );
      *
-     * $response = new Prism\Payment\Fortumo\Response($data);
+     * $response = new Prism\Library\Payment\Fortumo\Response($data);
      * $messageId = $response->getMessageId();
      * </code>
      *
@@ -262,7 +262,7 @@ class Response
      * ...
      * );
      *
-     * $response = new Prism\Payment\Fortumo\Response($data);
+     * $response = new Prism\Library\Payment\Fortumo\Response($data);
      * $keyword = $response->getKeyword();
      * </code>
      *
@@ -283,7 +283,7 @@ class Response
      * ...
      * );
      *
-     * $response = new Prism\Payment\Fortumo\Response($data);
+     * $response = new Prism\Library\Payment\Fortumo\Response($data);
      * $shortCode = $response->getShortCode();
      * </code>
      *
@@ -304,7 +304,7 @@ class Response
      * ...
      * );
      *
-     * $response = new Prism\Payment\Fortumo\Response($data);
+     * $response = new Prism\Library\Payment\Fortumo\Response($data);
      * $operator = $response->getOperator();
      * </code>
      *
@@ -325,7 +325,7 @@ class Response
      * ...
      * );
      *
-     * $response = new Prism\Payment\Fortumo\Response($data);
+     * $response = new Prism\Library\Payment\Fortumo\Response($data);
      * $billingType = $response->getBillingType();
      * </code>
      *
@@ -346,7 +346,7 @@ class Response
      * ...
      * );
      *
-     * $response = new Prism\Payment\Fortumo\Response($data);
+     * $response = new Prism\Library\Payment\Fortumo\Response($data);
      * $sig = $response->getSig();
      * </code>
      *
@@ -361,7 +361,7 @@ class Response
      * Disable test mode.
      *
      * <code>
-     * $response = new Prism\Payment\Fortumo\Response();
+     * $response = new Prism\Library\Payment\Fortumo\Response();
      * $response->disableTest();
      * </code>
      *
@@ -378,7 +378,7 @@ class Response
      * Enable test mode.
      *
      * <code>
-     * $response = new Prism\Payment\Fortumo\Response();
+     * $response = new Prism\Library\Payment\Fortumo\Response();
      * $response->disableTest();
      * </code>
      *
@@ -395,7 +395,7 @@ class Response
      * Check for enabled test mode.
      *
      * <code>
-     * $response = new Prism\Payment\Fortumo\Response();
+     * $response = new Prism\Library\Payment\Fortumo\Response();
      *
      * if (!$response->isTestMode()) {
      * ...

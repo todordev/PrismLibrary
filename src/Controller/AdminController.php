@@ -7,60 +7,59 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Controller;
+namespace Prism\Library\Controller;
 
-use Imagine\Exception\InvalidArgumentException;
+use Joomla\CMS\MVC\Controller\AdminController as JoomlaAdminController;
+use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
+use Joomla\String\StringHelper;
 use Joomla\Utilities\ArrayHelper;
 
-defined('JPATH_PLATFORM') or die;
-
 /**
- * This class contains common methods and properties.
+ * This class contains common methods and properties
+ * used in work with admin actions.
  *
  * @package      Prism
  * @subpackage   Controllers
  */
-class DefaultController extends \JControllerLegacy
+class AdminController extends JoomlaAdminController
 {
-    /**
-     * The URL option for the component.
-     *
-     * @var    string
-     * @since  12.2
-     */
-    protected $option;
-
     /**
      * A default link to the extension
      * @var string
      */
     protected $defaultLink = '';
 
-    public function __construct($config)
+    /**
+     * Admin constructor.
+     *
+     * @param                          $config
+     * @param MVCFactoryInterface|null $factory
+     * @param null                     $app
+     * @param null                     $input
+     *
+     * @throws \Exception
+     */
+    public function __construct($config, MVCFactoryInterface $factory = null, $app = null, $input = null)
     {
-        parent::__construct($config);
-
-        // Guess the option as com_NameOfController
-        if ($this->option === null) {
-            $this->option = 'com_' . strtolower($this->getName());
-        }
+        parent::__construct($config, $factory, $app, $input);
 
         $this->defaultLink = 'index.php?option=' . strtolower($this->option);
     }
 
     /**
-     *
      * Display a notice and redirect to a page
      *
-     * @param mixed  $messages Could be array or string
-     * @param string $options
-     *
+     * <code>
      * $options = array(
-     *      "view"    => $view,
-     *      "layout"  => $layout,
-     *      "id"      => $itemId,
-     *      "url_var" => $urlVar
+     *     "view"    => $view,
+     *     "layout"  => $layout,
+     *     "id"      => $itemId,
+     *     "url_var" => $urlVar
      * );
+     * </code>
+     *
+     * @param mixed $messages Could be array or string.
+     * @param array $options
      *
      * @throws \InvalidArgumentException
      */
@@ -74,18 +73,19 @@ class DefaultController extends \JControllerLegacy
     }
 
     /**
+     * Display a warning and redirect to a page.
      *
-     * Display a warning and redirect to a page
-     *
-     * @param mixed  $messages Could be array or string
-     * @param string $options
-     *
+     * <code>
      * $options = array(
      *      "view"    => $view,
      *      "layout"  => $layout,
      *      "id"      => $itemId,
      *      "url_var" => $urlVar
-     * );
+     *  );
+     * </code>
+     *
+     * @param mixed $messages Could be array or string.
+     * @param array $options
      *
      * @throws \InvalidArgumentException
      */
@@ -99,20 +99,19 @@ class DefaultController extends \JControllerLegacy
     }
 
     /**
-     *
-     * Display a error and redirect to a page
-     *
-     * @param mixed  $messages Could be array or string
-     * @param string $options
+     * Display a error and redirect to a page.
      *
      * <code>
-     * $options = array(
+     * $options =  array(
      *      "view"    => $view,
      *      "layout"  => $layout,
      *      "id"      => $itemId,
-     *      "url_var" => $urlVar
+     *       "url_var" => $urlVar
      * );
      * </code>
+     *
+     * @param mixed $messages Could be array or string.
+     * @param array $options
      *
      * @throws \InvalidArgumentException
      */
@@ -126,11 +125,7 @@ class DefaultController extends \JControllerLegacy
     }
 
     /**
-     *
      * Display a message and redirect to a page
-     *
-     * @param mixed  $messages Could be array or string
-     * @param string $options
      *
      * <code>
      * $options = array(
@@ -141,12 +136,15 @@ class DefaultController extends \JControllerLegacy
      * );
      * </code>
      *
+     * @param mixed $messages Could be array or string
+     * @param array $options
+     *
      * @throws \InvalidArgumentException
      */
     protected function displayMessage($messages, $options)
     {
         $message = $this->prepareMessage($messages);
-        $this->setMessage($message, 'message');
+        $this->setMessage($message);
 
         $link = $this->prepareRedirectLink($options);
         $this->setRedirect(\JRoute::_($link, false));
@@ -160,27 +158,26 @@ class DefaultController extends \JControllerLegacy
      *
      * @return string
      */
-    protected function prepareMessage($message)
+    protected function prepareMessage($message): string
     {
-        if (is_array($message)) {
-            $result = '';
+        $result = '';
 
+        if (is_array($message)) {
             foreach ($message as $value) {
                 if (is_object($value)) {
                     if ($value instanceof \Exception) {
-                        $result .= (string)$value->getMessage() . "\n";
+                        $result .= $value->getMessage() . "\n";
                     }
                 } else {
-                    $result .= (string)$value . "\n";
+                    $result .= $value . "\n";
                 }
-
             }
 
         } elseif (is_object($message)) {
             if ($message instanceof \Exception) {
                 $result = (string)$message->getMessage();
             } else {
-                $result = (string)$message . "\n";
+                $result = $message . "\n";
             }
 
         } else {
@@ -199,7 +196,7 @@ class DefaultController extends \JControllerLegacy
      * @throws \InvalidArgumentException
      * @return string
      */
-    protected function prepareRedirectLink($options)
+    protected function prepareRedirectLink($options): string
     {
         // Return predefined link
         $forceDirection = ArrayHelper::getValue($options, 'force_direction');
@@ -216,10 +213,10 @@ class DefaultController extends \JControllerLegacy
         unset($options['view'], $options['layout']);
 
         // Set the view value
-        if ($view !== null) {
+        if (StringHelper::strlen($view) > 0) {
             $link .= '&view=' . $view;
         }
-        if ($layout !== null) {
+        if (StringHelper::strlen($layout) > 0) {
             $link .= '&layout=' . $layout;
         }
 
@@ -236,7 +233,7 @@ class DefaultController extends \JControllerLegacy
      *
      * @return string
      */
-    protected function prepareExtraParameters(array $options)
+    protected function prepareExtraParameters(array $options): string
     {
         $uriString = '';
 
@@ -245,5 +242,13 @@ class DefaultController extends \JControllerLegacy
         }
 
         return $uriString;
+    }
+
+    /**
+     * @return string
+     */
+    public function backToDashboard(): string
+    {
+        $this->setRedirect(\JRoute::_($this->defaultLink, false));
     }
 }

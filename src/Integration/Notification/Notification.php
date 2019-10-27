@@ -1,23 +1,23 @@
 <?php
 /**
- * @package      Prism\Integration
+ * @package      Prism\Library\Integration
  * @subpackage   Notification
  * @author       Todor Iliev
  * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Integration\Notification;
+namespace Prism\Library\Integration\Notification;
 
-use Prism\Domain\Entity;
-use Prism\Domain\EntityId;
+use Prism\Library\Domain\Entity;
+use Prism\Library\Domain\EntityId;
 use Joomla\Registry\Registry;
 
 /**
  * This class provides functionality to
  * integrate extensions with Social Community notifications.
  *
- * @package      Prism\Integration
+ * @package      Prism\Library\Integration
  * @subpackage   Notification
  */
 abstract class Notification implements Entity
@@ -42,7 +42,7 @@ abstract class Notification implements Entity
      *      'url' => '...',
      * ]);
      *
-     * $notification = new Prism\Integration\Notification\Socialcommunity($options);
+     * $notification = new Prism\Library\Integration\Notification\Socialcommunity($options);
      * </code>
      *
      * @param  Registry $options

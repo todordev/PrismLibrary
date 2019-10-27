@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Integration\Notification;
+namespace Prism\Library\Integration\Notification;
 
 use Joomla\Registry\Registry;
 use Socialcommunity\Notification\Mapper;
@@ -40,7 +40,7 @@ class Socialcommunity extends Notification
      *      'target_id' => 2
      * ]);
      *
-     * $notification = new Prism\Integration\Notification\Socialcommunity($options);
+     * $notification = new Prism\Library\Integration\Notification\Socialcommunity($options);
      * </code>
      *
      * @param  Registry $options

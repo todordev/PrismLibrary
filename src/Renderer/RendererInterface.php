@@ -1,19 +1,19 @@
 <?php
 /**
- * @package         Prism\Renderer
+ * @package         Prism\Library\Renderer
  * @subpackage      Renderers
  * @author          Todor Iliev
  * @copyright       Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Renderer;
+namespace Prism\Library\Renderer;
 
 /**
  * Provides interface and functionality for objects
  * that render output by a layout.
  *
- * @package         Prism\Renderer
+ * @package         Prism\Library\Renderer
  * @subpackage      Renderers
  */
 interface RendererInterface

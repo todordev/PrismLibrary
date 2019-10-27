@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Integration\Activity;
+namespace Prism\Library\Integration\Activity;
 
 use Joomla\Registry\Registry;
 
@@ -39,7 +39,7 @@ final class Factory
      *    'url'      => "http://mydomain.com"
      * ));
      *
-     * $factory = new Prism\Integration\Activity\Factory($options);
+     * $factory = new Prism\Library\Integration\Activity\Factory($options);
      * </code>
      *
      * @param  Registry  $options Options used in the process of building the object.
@@ -63,7 +63,7 @@ final class Factory
      *    'app'      => 'my_app'
      * ));
      *
-     * $factory = new Prism\Integration\Activity\Factory($options);
+     * $factory = new Prism\Library\Integration\Activity\Factory($options);
      * $activity = $factory->create();
      * </code>
      */

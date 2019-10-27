@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Money;
+namespace Prism\Library\Money;
 
-use Prism\Domain;
+use Prism\Library\Domain;
 
 /**
  * This class provides functionality that manage currency collection.

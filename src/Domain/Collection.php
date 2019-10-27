@@ -7,7 +7,11 @@
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Domain;
+namespace Prism\Library\Domain;
+
+use ArrayAccess;
+use Countable;
+use Iterator;
 
 /**
  * This class contains methods used for managing collection of data.
@@ -15,7 +19,7 @@ namespace Prism\Domain;
  * @package         Prism
  * @subpackage      Domain
  */
-abstract class Collection implements \Iterator, \Countable, \ArrayAccess
+abstract class Collection implements Iterator, Countable, ArrayAccess
 {
     protected $items = array();
 

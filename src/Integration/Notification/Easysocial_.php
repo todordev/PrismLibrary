@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Integration\Notification;
+namespace Prism\Library\Integration\Notification;
 
-use Prism\Database\TableTrait;
+use Prism\Library\Database\TableTrait;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -55,7 +55,7 @@ class EasySocial implements NotificationInterface
      * $userId = 1;
      * $content = "....";
      *
-     * $notification = new Prism\Integration\Notification\EasySocial($userId, $content);
+     * $notification = new Prism\Library\Integration\Notification\EasySocial($userId, $content);
      * </code>
      *
      * @param  integer $userId User ID
@@ -74,7 +74,7 @@ class EasySocial implements NotificationInterface
      * $userId = 1;
      * $content = "....";
      *
-     * $notification = new Prism\Integration\Notification\EasySocial($userId, $content);
+     * $notification = new Prism\Library\Integration\Notification\EasySocial($userId, $content);
      * $notification->setDb(JFactory::getDbo());
      *
      * $notification->send();
@@ -127,7 +127,7 @@ class EasySocial implements NotificationInterface
      * $userId = 1;
      * $content = "....";
      *
-     * $notification = new Prism\Integration\Notification\EasySocial($userId, $content);
+     * $notification = new Prism\Library\Integration\Notification\EasySocial($userId, $content);
      * $notification->setDb(JFactory::getDbo());
      * $notification->send();
      *
@@ -147,7 +147,7 @@ class EasySocial implements NotificationInterface
      * Return the title of the notifications.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $title = $notification->getTitle();
      * </code>
      *
@@ -162,7 +162,7 @@ class EasySocial implements NotificationInterface
      * Return the content of the notification.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $content = $notification->getContent();
      * </code>
      *
@@ -177,7 +177,7 @@ class EasySocial implements NotificationInterface
      * Return the type of the notification.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $type = $notification->getType();
      * </code>
      *
@@ -192,7 +192,7 @@ class EasySocial implements NotificationInterface
      * Return the command of the notification.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $cmd = $notification->getCmd();
      * </code>
      *
@@ -207,7 +207,7 @@ class EasySocial implements NotificationInterface
      * Return the status of the notification.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $status = $notification->getStatus();
      * </code>
      *
@@ -222,7 +222,7 @@ class EasySocial implements NotificationInterface
      * Return a date where the notification has been created.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $date = $notification->getCreated();
      * </code>
      *
@@ -237,7 +237,7 @@ class EasySocial implements NotificationInterface
      * Return an image that is part of the notification.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $image        = $notification->getImage();
      * </code>
      *
@@ -252,7 +252,7 @@ class EasySocial implements NotificationInterface
      * Return an URL which is part of the notification.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $url          = $notification->getUrl();
      * </code>
      *
@@ -267,7 +267,7 @@ class EasySocial implements NotificationInterface
      * Return an actor ID.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $actorId      = $notification->getActorId();
      * </code>
      *
@@ -282,7 +282,7 @@ class EasySocial implements NotificationInterface
      * Return an actor type.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $actorType    = $notification->getActorType();
      * </code>
      *
@@ -297,7 +297,7 @@ class EasySocial implements NotificationInterface
      * Return a target user ID.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $targetId    = $notification->getTargetId();
      * </code>
      *
@@ -312,7 +312,7 @@ class EasySocial implements NotificationInterface
      * Return a target type.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $targetType   = $notification->getTargetType();
      * </code>
      *
@@ -327,7 +327,7 @@ class EasySocial implements NotificationInterface
      * Return a context ID.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $contextId    = $notification->getContextId();
      * </code>
      *
@@ -342,7 +342,7 @@ class EasySocial implements NotificationInterface
      * Return a context type.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $contextType  = $notification->getContextType();
      * </code>
      *
@@ -357,7 +357,7 @@ class EasySocial implements NotificationInterface
      * Return an unique item ID, which comes from EasySocial database.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $itemId  = $notification->getItemId();
      * </code>
      *
@@ -374,7 +374,7 @@ class EasySocial implements NotificationInterface
      * <code>
      * $title = "...";
      *
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $notification->setTitle($title);
      * </code>
      *
@@ -395,7 +395,7 @@ class EasySocial implements NotificationInterface
      * <code>
      * $content = "...";
      *
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $notification->setContent($content);
      * </code>
      *
@@ -416,7 +416,7 @@ class EasySocial implements NotificationInterface
      * <code>
      * $type = "...";
      *
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $notification->setType($type);
      * </code>
      *
@@ -437,7 +437,7 @@ class EasySocial implements NotificationInterface
      * <code>
      * $cmd = "...";
      *
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $notification->setCmd($cmd);
      * </code>
      *
@@ -458,7 +458,7 @@ class EasySocial implements NotificationInterface
      * <code>
      * $status = 1;
      *
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $notification->setStatus($status);
      * </code>
      *
@@ -479,7 +479,7 @@ class EasySocial implements NotificationInterface
      * <code>
      * $created = "2014-01-01";
      *
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $notification->setCreated($created);
      * </code>
      *
@@ -500,7 +500,7 @@ class EasySocial implements NotificationInterface
      * <code>
      * $image = "...";
      *
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $notification->setImage($image);
      * </code>
      *
@@ -521,7 +521,7 @@ class EasySocial implements NotificationInterface
      * <code>
      * $url = "...";
      *
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $notification->setUrl($url);
      * </code>
      *
@@ -542,7 +542,7 @@ class EasySocial implements NotificationInterface
      * <code>
      * $actorId = 1;
      *
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $notification->setActorId($actorId);
      * </code>
      *
@@ -563,7 +563,7 @@ class EasySocial implements NotificationInterface
      * <code>
      * $actorType = "...";
      *
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $notification->setActorType($actorType);
      * </code>
      *
@@ -584,7 +584,7 @@ class EasySocial implements NotificationInterface
      * <code>
      * $targetId = 1;
      *
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $notification->setTargetId($targetId);
      * </code>
      *
@@ -605,7 +605,7 @@ class EasySocial implements NotificationInterface
      * <code>
      * $targetType = "...";
      *
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $notification->setTargetType($targetType);
      * </code>
      *
@@ -626,7 +626,7 @@ class EasySocial implements NotificationInterface
      * <code>
      * $contextId = 1;
      *
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $notification->setContextId($contextId);
      * </code>
      *
@@ -647,7 +647,7 @@ class EasySocial implements NotificationInterface
      * <code>
      * $contextType = "...";
      *
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $notification->setContextType($contextType);
      * </code>
      *
@@ -668,7 +668,7 @@ class EasySocial implements NotificationInterface
      * <code>
      * $uid = 1;
      *
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $notification->setItemId($uid);
      * </code>
      *
@@ -687,7 +687,7 @@ class EasySocial implements NotificationInterface
      * Return a target user ID.
      *
      * <code>
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $targetId    = $notification->getUserId();
      * </code>
      *
@@ -704,7 +704,7 @@ class EasySocial implements NotificationInterface
      * <code>
      * $targetId = 1;
      *
-     * $notification = new Prism\Integration\Notification\EasySocial();
+     * $notification = new Prism\Library\Integration\Notification\EasySocial();
      * $notification->setUserId($targetId);
      * </code>
      *

@@ -7,13 +7,13 @@
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Database;
+namespace Prism\Library\Database;
 
-use \Prism\Database\Request\Condition;
-use \Prism\Database\Request\Limit;
-use \Prism\Database\Request\Order;
-use \Prism\Database\Request\Field;
-use \Prism\Database\Request\Request;
+use Prism\Library\Database\Request\Condition;
+use Prism\Library\Database\Request\Limit;
+use Prism\Library\Database\Request\Order;
+use Prism\Library\Database\Request\Field;
+use Prism\Library\Database\Request\Request;
 
 /**
  * Base class of Joomla Database Gateway.
@@ -76,10 +76,10 @@ abstract class JoomlaDatabaseGateway
         /** @var Condition $condition */
         foreach ($conditions as $condition) {
             if (!$condition->getOperator()) {
-                throw new \UnexpectedValueException('Please, set comparision operator for column: '.$condition->getColumn());
+                throw new \UnexpectedValueException('Please, set comparision operator for column: ' . $condition->getColumn());
             }
 
-            $columnName = $condition->getTable() ? $condition->getTable() .'.'. $condition->getColumn() : 'a.' . $condition->getColumn();
+            $columnName = $condition->getTable() ? $condition->getTable() . '.' . $condition->getColumn() : 'a.' . $condition->getColumn();
             $query->where($this->db->quoteName($columnName) . $condition->getOperator() . $this->db->quote($condition->getValue()));
         }
     }
@@ -96,8 +96,8 @@ abstract class JoomlaDatabaseGateway
 
         /** @var Order $condition */
         foreach ($orderConditions as $condition) {
-            $orderCondition  = $condition->getTable() ? $this->db->quoteName($condition->getTable() .'.'. $condition->getColumn()) : $this->db->quoteName('a.' . $condition->getColumn());
-            $orderCondition .= $condition->getDirection() ? ' '. $condition->getDirection() : '';
+            $orderCondition = $condition->getTable() ? $this->db->quoteName($condition->getTable() . '.' . $condition->getColumn()) : $this->db->quoteName('a.' . $condition->getColumn());
+            $orderCondition .= $condition->getDirection() ? ' ' . $condition->getDirection() : '';
 
             $query->order($orderCondition);
         }
@@ -124,8 +124,8 @@ abstract class JoomlaDatabaseGateway
      * Prepare list of columns that should be fetched.
      *
      * @param Request $request
-     * @param array $defaultFields
-     * @param array $aliasFields
+     * @param array   $defaultFields
+     * @param array   $aliasFields
      *
      * @return array
      */

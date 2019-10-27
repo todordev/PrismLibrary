@@ -1,20 +1,20 @@
 <?php
 /**
- * @package         Prism\Database
+ * @package         Prism\Library\Database
  * @subpackage      Joomla
  * @author          Todor Iliev
  * @copyright       Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Database\Joomla;
+namespace Prism\Library\Database\Joomla;
 
-use Prism\Database\Request\Request;
+use Prism\Library\Database\Request\Request;
 
 /**
  * Fetch methods used in Joomla database gateways.
  *
- * @package         Prism\Database
+ * @package         Prism\Library\Database
  * @subpackage      Joomla
  */
 trait FetchMethods
@@ -24,16 +24,16 @@ trait FetchMethods
      *
      * <code>
      * // Prepare fields that should be fetched.
-     * $fieldId       = new \Prism\Database\Request\Field(['column' => 'id', 'table' => 'a']);
-     * $fieldContent  = new \Prism\Database\Request\Field(['column' => 'content', 'table' => 'a']);
+     * $fieldId       = new Prism\Library\Database\Request\Field(['column' => 'id', 'table' => 'a']);
+     * $fieldContent  = new Prism\Library\Database\Request\Field(['column' => 'content', 'table' => 'a']);
      *
-     * $fields  = new \Prism\Database\Request\Fields;
+     * $fields  = new Prism\Library\Database\Request\Fields;
      * $fields
      *    ->addField($fieldId)
      *    ->addField($fieldContent);
      *
      * // Prepare database request.
-     * $databaseRequest = new \Prism\Database\Request\Request;
+     * $databaseRequest = new Prism\Library\Database\Request\Request;
      * $databaseRequest->setFields($fields);
      *
      * $itemId = 1;
@@ -71,16 +71,16 @@ trait FetchMethods
      *
      * <code>
      * // Prepare conditions.
-     * $userId      = new \Prism\Database\Request\Condition(['column' => 'user_id', 'value' => $userId, 'operator' => '=']);
-     * $createAt    = new \Prism\Database\Request\Condition(['column' => 'created_at', 'value' => '2012-10-12', 'operator' => '=']);
+     * $userId      = new Prism\Library\Database\Request\Condition(['column' => 'user_id', 'value' => $userId, 'operator' => '=']);
+     * $createAt    = new Prism\Library\Database\Request\Condition(['column' => 'created_at', 'value' => '2012-10-12', 'operator' => '=']);
      *
-     * $conditions  = new \Prism\Database\Request\Conditions;
+     * $conditions  = new Prism\Library\Database\Request\Conditions;
      * $conditions
      *  ->addCondition($userId)
      *  ->addCondition($createAt);
      *
      * // Prepare database request.
-     * $databaseRequest = new \Prism\Database\Request\Request;
+     * $databaseRequest = new Prism\Library\Database\Request\Request;
      * $databaseRequest->setConditions($conditions);
      *
      * $gateway = new JoomlaGateway(\JFactory::getDbo());

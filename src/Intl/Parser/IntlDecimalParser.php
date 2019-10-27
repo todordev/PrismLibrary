@@ -7,14 +7,14 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Intl\Parser;
+namespace Prism\Library\Intl\Parser;
 
-use Prism\Intl\Parser;
+use Prism\Library\Intl\Parser;
 
 /**
  * Formats a Money object using intl extension.
  *
- * @package      Prism\Money
+ * @package      Prism\Library\Money
  * @subpackage   Parsers
  */
 final class IntlDecimalParser implements Parser

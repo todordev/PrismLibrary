@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Integration\Profiles;
+namespace Prism\Library\Integration\Profiles;
 
-use Prism\Integration\Helper;
+use Prism\Library\Integration\Helper;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -44,7 +44,7 @@ class CommunityBuilder implements ProfilesInterface
      * <code>
      * $ids = array(1, 2, 3, 4);
      *
-     * $profiles = new Prism\Integration\Profiles\CommunityBuilder(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Integration\Profiles\CommunityBuilder(\JFactory::getDbo());
      * </code>
      *
      * @param  \JDatabaseDriver $db
@@ -67,7 +67,7 @@ class CommunityBuilder implements ProfilesInterface
      * <code>
      * $ids = array(1, 2, 3, 4);
      *
-     * $profiles = new Prism\Integration\Profiles\CommunityBuilder(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Integration\Profiles\CommunityBuilder(\JFactory::getDbo());
      * $profiles->load($ids);
      * </code>
      *
@@ -102,7 +102,7 @@ class CommunityBuilder implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Integration\Profiles\CommunityBuilder(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Integration\Profiles\CommunityBuilder(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $avatar = $profiles->getAvatar($userId);
@@ -143,7 +143,7 @@ class CommunityBuilder implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Integration\Profiles\CommunityBuilder(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Integration\Profiles\CommunityBuilder(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $link = $profiles->getLink($userId);
@@ -185,7 +185,7 @@ class CommunityBuilder implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Integration\Profiles\CommunityBuilder(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Integration\Profiles\CommunityBuilder(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $location = $profiles->getLocation($userId);
@@ -207,7 +207,7 @@ class CommunityBuilder implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Integration\Profiles\CommunityBuilder(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Integration\Profiles\CommunityBuilder(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $countryCode = $profiles->getCountryCode($userId);

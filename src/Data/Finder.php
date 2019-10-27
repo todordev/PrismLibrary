@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Data;
+namespace Prism\Library\Data;
 
 /**
  * Interface for classes that should provide functionality for fonding data.

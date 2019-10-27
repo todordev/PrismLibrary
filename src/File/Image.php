@@ -7,11 +7,11 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\File;
+namespace Prism\Library\File;
 
 use Joomla\Registry\Registry;
-use Prism\Constants;
-use Prism\Utilities\StringHelper;
+use Prism\Library\Constants;
+use Prism\Library\Utilities\StringHelper;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -37,7 +37,7 @@ class Image
      * $file        = '/tmp/picture.jpg';
      * $destinationFolder  = "/root/joomla/tmp";
      *
-     * $image = new Prism\File\Image($file);
+     * $image = new Prism\Library\File\Image($file);
      * </code>
      *
      * @param  string $file
@@ -60,7 +60,7 @@ class Image
      *    'scale'  => \JImage::SCALE_INSIDE
      * );
      *
-     * $file = new Prism\File\Image($file['tmp_path']);
+     * $file = new Prism\Library\File\Image($file['tmp_path']);
      *
      * $fileData = $file->resize($destinationFolder, $resizeOptions);
      * </code>
@@ -123,7 +123,7 @@ class Image
      *    'y'  => 100,
      * );
      *
-     * $file = new Prism\File\Image($file['tmp_path']);
+     * $file = new Prism\Library\File\Image($file['tmp_path']);
      *
      * $fileData = $file->crop($destinationFolder, $resizeOptions);
      * </code>
@@ -183,11 +183,11 @@ class Image
      * $resizeOptions = array(
      *    'filename_length'  => 16,
      *    'suffix'           => '_image',
-     *    'quality'          => Prism\Constants::QUALITY_HIGH,
+     *    'quality'          => Prism\Library\Constants::QUALITY_HIGH,
      *    'image_type'       => 'png'
      * );
      *
-     * $file     = new Prism\File\Image($file['tmp_path']);
+     * $file     = new Prism\Library\File\Image($file['tmp_path']);
      *
      * $fileData = $file->toFile($destinationFolder, $options);
      * </code>

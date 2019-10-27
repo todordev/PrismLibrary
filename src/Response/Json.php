@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Response;
+namespace Prism\Library\Response;
 
 /**
  * This class provides functionality to manage JSON response.
@@ -29,7 +29,7 @@ class Json
      * $title   = "My title...";
      * $content = "My message...";
      *
-     * $response = new Prism\Response\Json($title, $content);
+     * $response = new Prism\Library\Response\Json($title, $content);
      * </code>
      *
      * @param string $title
@@ -51,7 +51,7 @@ class Json
      * $title = "My title...";
      * $content  = "My message...";
      *
-     * $response = new Prism\Response\Json($title, $content);
+     * $response = new Prism\Library\Response\Json($title, $content);
      * $response->success();
      * </code>
      *
@@ -72,7 +72,7 @@ class Json
      * $title = "My title...";
      * $content  = "My message...";
      *
-     * $response = new Prism\Response\Json($title, $content);
+     * $response = new Prism\Library\Response\Json($title, $content);
      * $response->failure();
      * </code>
      *
@@ -93,7 +93,7 @@ class Json
      * $title = "My title...";
      * $content  = "My message...";
      *
-     * $response = new Prism\Response\Json($title, $content);
+     * $response = new Prism\Library\Response\Json($title, $content);
      * $response->warning();
      * </code>
      *
@@ -114,7 +114,7 @@ class Json
      * $title = "My title...";
      * $content  = "My message...";
      *
-     * $response = new Prism\Response\Json($title, $content);
+     * $response = new Prism\Library\Response\Json($title, $content);
      * $response->info();
      * </code>
      *
@@ -132,7 +132,7 @@ class Json
      * Return a response title.
      *
      * <code>
-     * $response = new Prism\Response\Json();
+     * $response = new Prism\Library\Response\Json();
      * $title = $response->getTitle();
      * </code>
      *
@@ -149,7 +149,7 @@ class Json
      * <code>
      * $title = "My title....";
      *
-     * $response = new Prism\Response\Json();
+     * $response = new Prism\Library\Response\Json();
      * $response->setTitle($title);
      * </code>
      *
@@ -168,7 +168,7 @@ class Json
      * Return a response text ( message ).
      *
      * <code>
-     * $response = new Prism\Response\Json();
+     * $response = new Prism\Library\Response\Json();
      * $content = $response->getText();
      * </code>
      *
@@ -187,7 +187,7 @@ class Json
      * <code>
      * $content = "My text....";
      *
-     * $response = new Prism\Response\Json();
+     * $response = new Prism\Library\Response\Json();
      * $response->setText($content);
      * </code>
      *
@@ -208,7 +208,7 @@ class Json
      * Return a response content ( message ).
      *
      * <code>
-     * $response = new Prism\Response\Json();
+     * $response = new Prism\Library\Response\Json();
      * $content = $response->getContent();
      * </code>
      *
@@ -225,7 +225,7 @@ class Json
      * <code>
      * $content = "My text....";
      *
-     * $response = new Prism\Response\Json();
+     * $response = new Prism\Library\Response\Json();
      * $response->setText($content);
      * </code>
      *
@@ -244,7 +244,7 @@ class Json
      * Return an additional data that comes from response.
      *
      * <code>
-     * $response = new Prism\Response\Json();
+     * $response = new Prism\Library\Response\Json();
      * $data = $response->getData();
      * </code>
      *
@@ -264,7 +264,7 @@ class Json
      *     "website" => "http://itprism.com"
      * );
      *
-     * $response = new Prism\Response\Json();
+     * $response = new Prism\Library\Response\Json();
      * $response->setData($url);
      * </code>
      *
@@ -283,7 +283,7 @@ class Json
      * Return a URL that should be used from the browser to redirect users to a new page.
      *
      * <code>
-     * $response = new Prism\Response\Json();
+     * $response = new Prism\Library\Response\Json();
      * $redirectUrl = $response->getRedirectUrl();
      * </code>
      *
@@ -300,7 +300,7 @@ class Json
      * <code>
      * $url = "http://itprism.com";
      *
-     * $response = new Prism\Response\Json();
+     * $response = new Prism\Library\Response\Json();
      * $response->setRedirectUrl($url);
      * </code>
      *
@@ -318,7 +318,7 @@ class Json
      * Return the parameters of the object as a JSON string.
      *
      * <code>
-     * $response = new Prism\Response\Json();
+     * $response = new Prism\Library\Response\Json();
      * $jsonResponse = $response->__toString();
      * </code>
      *

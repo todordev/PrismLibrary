@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Integration\Profile;
+namespace Prism\Library\Integration\Profile;
 
-use Prism\Database\TableImmutable;
+use Prism\Library\Database\TableImmutable;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -49,7 +49,7 @@ class Socialcommunity extends TableImmutable implements ProfileInterface, Profil
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\Socialcommunity(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\Socialcommunity(\JFactory::getDbo());
      * </code>
      *
      * @param \JDatabaseDriver $db
@@ -72,7 +72,7 @@ class Socialcommunity extends TableImmutable implements ProfileInterface, Profil
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\Socialcommunity(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\Socialcommunity(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $mapping = $profile->getMapping();
@@ -100,7 +100,7 @@ class Socialcommunity extends TableImmutable implements ProfileInterface, Profil
      *     'user_id' => $userId
      * );
      *
-     * $profile = new Prism\Integration\Profile\Socialcommunity(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\Socialcommunity(\JFactory::getDbo());
      * $profile->load($keys);
      * </code>
      *
@@ -144,7 +144,7 @@ class Socialcommunity extends TableImmutable implements ProfileInterface, Profil
      *     'user_id' => $userId
      * );
      *
-     * $profile = new Prism\Integration\Profile\Socialcommunity(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\Socialcommunity(\JFactory::getDbo());
      * $profile->load($keys);
      *
      * $link = $profile->getLink();
@@ -176,7 +176,7 @@ class Socialcommunity extends TableImmutable implements ProfileInterface, Profil
      *     'user_id' => $userId
      * );
      *
-     * $profile = new Prism\Integration\Profile\Socialcommunity(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\Socialcommunity(\JFactory::getDbo());
      * $profile->load($keys);
      *
      * $avatar = $profile->getAvatar();
@@ -213,7 +213,7 @@ class Socialcommunity extends TableImmutable implements ProfileInterface, Profil
      *     'user_id' => $userId
      * );
      *
-     * $profile = new Prism\Integration\Profile\Socialcommunity(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\Socialcommunity(\JFactory::getDbo());
      * $profile->load($keys);
      *
      * $location = $profile->getLocation();
@@ -234,7 +234,7 @@ class Socialcommunity extends TableImmutable implements ProfileInterface, Profil
      *     'user_id' => $userId
      * );
      *
-     * $profile = new Prism\Integration\Profile\Socialcommunity(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\Socialcommunity(\JFactory::getDbo());
      * $profile->load($keys);
      *
      * $countryCode = $profile->getCountryCode();
@@ -257,7 +257,7 @@ class Socialcommunity extends TableImmutable implements ProfileInterface, Profil
      *
      * $url = "/media/socialcommunity/user101;
      *
-     * $profile = new Prism\Integration\Profile\Socialcommunity(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\Socialcommunity(\JFactory::getDbo());
      * $profile->load($keys);
      *
      * $profile->setMediaUrl($url);
@@ -279,7 +279,7 @@ class Socialcommunity extends TableImmutable implements ProfileInterface, Profil
      * <code>
      * $ids = array(1, 2, 3, 4);
      *
-     * $profiles = new Prism\Integration\Profile\Socialcommunity(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Integration\Profile\Socialcommunity(\JFactory::getDbo());
      * $url = $profiles->getMediaUrl();
      * </code>
      *

@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Utilities;
+namespace Prism\Library\Utilities;
 
 // no direct access
 defined('JPATH_PLATFORM') or die;
@@ -27,7 +27,7 @@ abstract class FileHelper
      * <code>
      * $file = '../../filename.csv';
      *
-     * foreach (Prism\Utilities\FileHelper::getLine($file) as $key => $value) {
+     * foreach (Prism\Library\Utilities\FileHelper::getLine($file) as $key => $value) {
      * ...
      * }
      * </code>
@@ -53,7 +53,7 @@ abstract class FileHelper
      * Return maximum file size (in KB) that can be uploaded.
      *
      * <code>
-     * $maxFileSize = Prism\Utilities\FileHelper::getMaximumFileSize($file);
+     * $maxFileSize = Prism\Library\Utilities\FileHelper::getMaximumFileSize($file);
      * </code>
      *
      * @param int $maxFileSizeByUser Maximum file size set by user.
@@ -101,7 +101,7 @@ abstract class FileHelper
      * <code>
      * $filename = 'picture1.png';
      *
-     * if (Prism\Utilities\FileHelper::isImageExtension($filename)) {
+     * if (Prism\Library\Utilities\FileHelper::isImageExtension($filename)) {
      * // ...
      * }
      * </code>
@@ -124,7 +124,7 @@ abstract class FileHelper
      * <code>
      * $mimeType = 'image/png';
      *
-     * if (Prism\Utilities\FileHelper::isImageMime($mimeType)) {
+     * if (Prism\Library\Utilities\FileHelper::isImageMime($mimeType)) {
      * // ...
      * }
      * </code>

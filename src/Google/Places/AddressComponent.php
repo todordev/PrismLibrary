@@ -1,23 +1,23 @@
 <?php
 /**
- * @package      Prism\Google
+ * @package      Prism\Library\Google
  * @subpackage   Places
  * @author       Todor Iliev
  * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Google\Places;
+namespace Prism\Library\Google\Places;
 
-use Prism\Domain\Entity;
-use Prism\Domain\EntityId;
+use Prism\Library\Domain\Entity;
+use Prism\Library\Domain\EntityId;
 use Joomla\Registry\Registry;
-use Prism\Domain\EntityPopulating;
+use Prism\Library\Domain\EntityPopulating;
 
 /**
  * Google Place Details.
  *
- * @package     Prism\Google
+ * @package     Prism\Library\Google
  * @subpackage  Places
  *
  * @link https://developers.google.com/places/web-service/details

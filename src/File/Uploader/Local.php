@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\File\Uploader;
+namespace Prism\Library\File\Uploader;
 
-use Prism\File\UploaderInterface;
+use Prism\Library\File\UploaderInterface;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -33,7 +33,7 @@ class Local implements UploaderInterface
      * <code>
      * $myFile   = "/tmp/myfile.txt";
      *
-     * $file = new Prism\File\Uploader\Local($myFile);
+     * $file = new Prism\Library\File\Uploader\Local($myFile);
      * </code>
      *
      * @param  string $file A path to the file.
@@ -49,7 +49,7 @@ class Local implements UploaderInterface
      * <code>
      * $myFile   = "/tmp/myfile.txt";
      *
-     * $file = new Prism\File\Uploader\Local($myFile);
+     * $file = new Prism\Library\File\Uploader\Local($myFile);
      * $file->setFile($myFile);
      * </code>
      *
@@ -71,7 +71,7 @@ class Local implements UploaderInterface
      * $myFile   = "/tmp/myfile.jpg";
      * $destination   = "/images/mypic.jpg";
      *
-     * $file = new Prism\File\Uploader\Local($myFile);
+     * $file = new Prism\Library\File\Uploader\Local($myFile);
      * $file->setDestination($destination);
      * </code>
      *
@@ -122,7 +122,7 @@ class Local implements UploaderInterface
      * $myFile   = "/tmp/myfile.jpg";
      * $destination   = "/images/mypic.jpg";
      *
-     * $file = new Prism\File\Uploader\Local($myFile);
+     * $file = new Prism\Library\File\Uploader\Local($myFile);
      * $file->setDestination($destination);
      * $file->upload();
      * </code>

@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\File\Validator;
+namespace Prism\Library\File\Validator;
 
-use Prism\Validator\Validator;
+use Prism\Library\Validator\Validator;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -42,7 +42,7 @@ class Size extends Validator
      * $fileSize  = 100000;
      * $maxFileSize  = 600000;
      *
-     * $validator = new Prism\File\Validator\Size($fileSize, $maxFileSize);
+     * $validator = new Prism\Library\File\Validator\Size($fileSize, $maxFileSize);
      * </code>
      *
      * @param integer $fileSize File size in bytes ( 1024 * 1024 ).
@@ -61,7 +61,7 @@ class Size extends Validator
      * $fileSize     = 100000;
      * $maxFileSize  = 600000;
      *
-     * $validator = new Prism\File\Validator\Size($fileSize);
+     * $validator = new Prism\Library\File\Validator\Size($fileSize);
      * $validator->setMaxFileSize($maxFileSize);
      * </code>
      *
@@ -79,7 +79,7 @@ class Size extends Validator
      * $fileSize  = 100000;
      * $maxFileSize  = 600000;
      *
-     * $validator = new Prism\File\Validator\Size($fileSize, $maxFileSize);
+     * $validator = new Prism\Library\File\Validator\Size($fileSize, $maxFileSize);
      * if (!$validator->isValid()) {
      * .....
      * }

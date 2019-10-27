@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Integration\Profiles;
+namespace Prism\Library\Integration\Profiles;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -38,11 +38,11 @@ class Profiles
      *    'user_ids' => array(1,2,3,4)
      * ));
      *
-     * $factory = new Prism\Integration\Profiles\Factory($options);
+     * $factory = new Prism\Library\Integration\Profiles\Factory($options);
      *
      * $profilesAdapter = $factory->create();
      *
-     * $profiles = new Prism\Integration\Profiles\Profiles($profilesAdapter);
+     * $profiles = new Prism\Library\Integration\Profiles\Profiles($profilesAdapter);
      * </code>
      *
      * @param ProfilesInterface $profiles

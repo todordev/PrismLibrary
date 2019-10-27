@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Payment\PayPal;
+namespace Prism\Library\Payment\PayPal;
 
 use Joomla\Utilities\ArrayHelper;
 use Joomla\Registry\Registry;
@@ -47,7 +47,7 @@ class Express
      * <code>
      * $url = "https://api-3t.paypal.com/nvp";
      *
-     * $paypal = new Prism\PayPal\Express($url);
+     * $paypal = new Prism\Library\PayPal\Express($url);
      * </code>
      *
      * @param string $url
@@ -65,7 +65,7 @@ class Express
      * <code>
      * $url = "https://api-3t.paypal.com/nvp";
      *
-     * $paypal = new Prism\PayPal\Express($url);
+     * $paypal = new Prism\Library\PayPal\Express($url);
      *
      * $paypal->setOption("credentials.username", "itprism");
      * </code>
@@ -88,7 +88,7 @@ class Express
      * <code>
      * $url = "https://api-3t.paypal.com/nvp";
      *
-     * $paypal = new Prism\PayPal\Express($url);
+     * $paypal = new Prism\Library\PayPal\Express($url);
      *
      * $username = $paypal->getOption("credentials.username");
      * </code>
@@ -110,7 +110,7 @@ class Express
      * $url  = "https://api-3t.paypal.com/nvp";
      * $http = new JHttp();
      *
-     * $paypal = new Prism\PayPal\Express($url);
+     * $paypal = new Prism\Library\PayPal\Express($url);
      *
      * $paypal->setTransport($http);
      * </code>
@@ -132,7 +132,7 @@ class Express
      * <code>
      * $url  = "https://api-3t.paypal.com/nvp";
      *
-     * $paypal = new Prism\PayPal\Express($url);
+     * $paypal = new Prism\Library\PayPal\Express($url);
      *
      * $error = $paypal->getError();
      * </code>
@@ -150,7 +150,7 @@ class Express
      * <code>
      * $url  = "https://api-3t.paypal.com/nvp";
      *
-     * $paypal = new Prism\PayPal\Express($url);
+     * $paypal = new Prism\Library\PayPal\Express($url);
      *
      * $errorCode = $paypal->getErrorCode();
      * </code>
@@ -172,7 +172,7 @@ class Express
      * $options->set("credentials.username", "itprism");
      * ....
      *
-     * $paypal = new Prism\PayPal\Express($url, $options);
+     * $paypal = new Prism\Library\PayPal\Express($url, $options);
      * $paypal->setExpressCheckout();
      * </code>
      *
@@ -246,7 +246,7 @@ class Express
      * $options->set("credentials.username", "itprism");
      * ....
      *
-     * $paypal = new Prism\PayPal\Express($url, $options);
+     * $paypal = new Prism\Library\PayPal\Express($url, $options);
      * $paypal->doExpressCheckoutPayment();
      * </code>
      *
@@ -299,7 +299,7 @@ class Express
      * $options->set("credentials.username", "itprism");
      * ....
      *
-     * $paypal = new Prism\PayPal\Express($url, $options);
+     * $paypal = new Prism\Library\PayPal\Express($url, $options);
      * $paypal->doCapture();
      * </code>
      *
@@ -346,7 +346,7 @@ class Express
      * $options->set("credentials.username", "itprism");
      * ....
      *
-     * $paypal = new Prism\PayPal\Express($url, $options);
+     * $paypal = new Prism\Library\PayPal\Express($url, $options);
      * $paypal->doVoid();
      * </code>
      *

@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Integration\Profile;
+namespace Prism\Library\Integration\Profile;
 
-use Prism\Database\TableImmutable;
+use Prism\Library\Database\TableImmutable;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -41,7 +41,7 @@ class EasyProfile extends TableImmutable implements ProfileInterface, ProfileMap
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\EasyProfile(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\EasyProfile(\JFactory::getDbo());
      * </code>
      *
      * @param  \JDatabaseDriver $db
@@ -64,7 +64,7 @@ class EasyProfile extends TableImmutable implements ProfileInterface, ProfileMap
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\EasyProfile(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\EasyProfile(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $mapping = $profile->getMapping();
@@ -87,7 +87,7 @@ class EasyProfile extends TableImmutable implements ProfileInterface, ProfileMap
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\EasyProfile(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\EasyProfile(\JFactory::getDbo());
      * $profile->load($userId);
      * </code>
      *
@@ -120,7 +120,7 @@ class EasyProfile extends TableImmutable implements ProfileInterface, ProfileMap
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\EasyProfile(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\EasyProfile(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $link = $profile->getLink();
@@ -146,7 +146,7 @@ class EasyProfile extends TableImmutable implements ProfileInterface, ProfileMap
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\EasyProfile(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\EasyProfile(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $avatar = $profile->getAvatar();
@@ -182,7 +182,7 @@ class EasyProfile extends TableImmutable implements ProfileInterface, ProfileMap
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\EasyProfile(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\EasyProfile(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $location = $profile->getLocation();
@@ -201,7 +201,7 @@ class EasyProfile extends TableImmutable implements ProfileInterface, ProfileMap
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\EasyProfile(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\EasyProfile(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $countryCode = $profile->getCountryCode();

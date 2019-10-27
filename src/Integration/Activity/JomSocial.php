@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Integration\Activity;
+namespace Prism\Library\Integration\Activity;
 
-use Prism\Database\TableTrait;
+use Prism\Library\Database\TableTrait;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -67,7 +67,7 @@ class JomSocial implements ActivityInterface
      * $userId = 1;
      * $content = "...";
      *
-     * $activity = new Prism\Integration\Activity\JomSocial($userId, $content);
+     * $activity = new Prism\Library\Integration\Activity\JomSocial($userId, $content);
      * </code>
      *
      * @param  integer $userId User ID
@@ -86,7 +86,7 @@ class JomSocial implements ActivityInterface
      * $userId = 1;
      * $content = "...";
      *
-     * $activity = new Prism\Integration\Activity\JomSocial($userId, $content);
+     * $activity = new Prism\Library\Integration\Activity\JomSocial($userId, $content);
      * $activity->setDb(JFactory::getDbo());
      * $activity->store();
      * </code>
@@ -122,7 +122,7 @@ class JomSocial implements ActivityInterface
      * Return an item ID.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\JomSocial();
+     * $activity = new Prism\Library\Integration\Activity\JomSocial();
      * $id = $activity->getId();
      * </code>
      *
@@ -137,7 +137,7 @@ class JomSocial implements ActivityInterface
      * Return the content of the activity.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\JomSocial();
+     * $activity = new Prism\Library\Integration\Activity\JomSocial();
      * $content = $activity->getContent();
      * </code>
      *
@@ -152,7 +152,7 @@ class JomSocial implements ActivityInterface
      * Return a date when the activity has been created.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\JomSocial();
+     * $activity = new Prism\Library\Integration\Activity\JomSocial();
      * $created = $activity->getCreated();
      * </code>
      *
@@ -167,7 +167,7 @@ class JomSocial implements ActivityInterface
      * Return a status of the activity.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\JomSocial();
+     * $activity = new Prism\Library\Integration\Activity\JomSocial();
      * $status = $activity->getStatus();
      * </code>
      *
@@ -182,7 +182,7 @@ class JomSocial implements ActivityInterface
      * Return an actor ID.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\JomSocial();
+     * $activity = new Prism\Library\Integration\Activity\JomSocial();
      * $actorId = $activity->getUserId();
      * </code>
      *
@@ -199,7 +199,7 @@ class JomSocial implements ActivityInterface
      * <code>
      * $content = "...";
      *
-     * $activity = new Prism\Integration\Activity\JomSocial();
+     * $activity = new Prism\Library\Integration\Activity\JomSocial();
      * $activity->setContent($id);
      * </code>
      *
@@ -220,7 +220,7 @@ class JomSocial implements ActivityInterface
      * <code>
      * $created = "...";
      *
-     * $activity = new Prism\Integration\Activity\JomSocial();
+     * $activity = new Prism\Library\Integration\Activity\JomSocial();
      * $activity->setCreated($created);
      * </code>
      *
@@ -241,7 +241,7 @@ class JomSocial implements ActivityInterface
      * <code>
      * $status = "...";
      *
-     * $activity = new Prism\Integration\Activity\JomSocial();
+     * $activity = new Prism\Library\Integration\Activity\JomSocial();
      * $activity->setStatus($status);
      * </code>
      *
@@ -262,7 +262,7 @@ class JomSocial implements ActivityInterface
      * <code>
      * $actorId = 1;
      *
-     * $activity = new Prism\Integration\Activity\JomSocial();
+     * $activity = new Prism\Library\Integration\Activity\JomSocial();
      * $activity->setUserId($userId);
      * </code>
      *
@@ -283,7 +283,7 @@ class JomSocial implements ActivityInterface
      * <code>
      * $app = "...";
      *
-     * $activity = new Prism\Integration\Activity\JomSocial();
+     * $activity = new Prism\Library\Integration\Activity\JomSocial();
      * $activity->setApp($app);
      * </code>
      *

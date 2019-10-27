@@ -6,7 +6,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Validator;
+namespace Prism\Library\Validator;
 
 /**
  * This class validates IP addresses.
@@ -36,7 +36,7 @@ class Ip implements ValidatorInterface
      * <code>
      * $ip = "127.0.0.1";
      *
-     * $validator = new Prism\Validator\IP($ip);
+     * $validator = new Prism\Library\Validator\IP($ip);
      * </code>
      *
      * @param string $ip
@@ -52,7 +52,7 @@ class Ip implements ValidatorInterface
      * <code>
      * $ip = "127.0.0.1";
      *
-     * $validator = new Prism\Validator\IP($ip);
+     * $validator = new Prism\Library\Validator\IP($ip);
      *
      * if (!$validator->isValid()) {
      * ...
@@ -84,7 +84,7 @@ class Ip implements ValidatorInterface
      * $ip = "127.0.0.1";
      * $allowed = array("127.0.0.1", "169.0.0.1");
      *
-     * $validator = new Prism\Validator\IP($ip);
+     * $validator = new Prism\Library\Validator\IP($ip);
      * $validator->setAllowed($allowed);
      *
      * if (!$validator->isValid()) {

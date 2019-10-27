@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\File\Remover;
+namespace Prism\Library\File\Remover;
 
-use Prism\File\RemoverInterface;
+use Prism\Library\File\RemoverInterface;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -31,7 +31,7 @@ class Local implements RemoverInterface
      * <code>
      * $myFile   = '/tmp/myfile.jpg';
      *
-     * $file = new Prism\File\Remover\Local($myFile);
+     * $file = new Prism\Library\File\Remover\Local($myFile);
      * </code>
      *
      * @param  string $file A file location and name.
@@ -49,7 +49,7 @@ class Local implements RemoverInterface
      * <code>
      * $myFile   = '/tmp/myfile.jpg';
      *
-     * $file = new Prism\File\Remover\Local();
+     * $file = new Prism\Library\File\Remover\Local();
      * $file->setFile($myFile);
      * </code>
      *
@@ -70,7 +70,7 @@ class Local implements RemoverInterface
      * <code>
      * $myFile   = '/tmp/myfile.jpg';
      *
-     * $file = new Prism\File\Remover\Local();
+     * $file = new Prism\Library\File\Remover\Local();
      * $file->setFile($myFile);
      * </code>
      *
@@ -87,7 +87,7 @@ class Local implements RemoverInterface
      * <code>
      * $myFile   = '/tmp/myfile.jpg';
      *
-     * $file = new Prism\File\Remover\Local($myFile);
+     * $file = new Prism\Library\File\Remover\Local($myFile);
      * $file->remove();
      * </code>
      * 

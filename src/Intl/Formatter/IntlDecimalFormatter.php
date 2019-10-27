@@ -7,14 +7,14 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Intl\Formatter;
+namespace Prism\Library\Intl\Formatter;
 
-use Prism\Intl\Formatter;
+use Prism\Library\Intl\Formatter;
 
 /**
  * Formats a number using intl extension.
  *
- * @package      Prism\Money
+ * @package      Prism\Library\Money
  * @subpackage   Formatters
  */
 final class IntlDecimalFormatter implements Formatter

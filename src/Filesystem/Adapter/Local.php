@@ -7,11 +7,11 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Filesystem\Adapter;
+namespace Prism\Library\Filesystem\Adapter;
 
 use Joomla\Registry\Registry;
 use Joomla\Utilities\ArrayHelper;
-use Prism\Utilities\StringHelper;
+use Prism\Library\Utilities\StringHelper;
 
 /**
  * This class provides functionality for uploading files and
@@ -30,7 +30,7 @@ class Local
      * <code>
      * $rootFolder   = "/tmp";
      *
-     * $localFilesystem = new Prism\Filesystem\Adapters\Local($rootFolder);
+     * $localFilesystem = new Prism\Library\Filesystem\Adapters\Local($rootFolder);
      * </code>
      *
      * @param  string $rootFolder A path to the folder where the file will be stored.
@@ -48,7 +48,7 @@ class Local
      * <code>
      * $rootFolder   = "/tmp";
      *
-     * $localFilesystem = new Prism\Filesystem\Adapters\Local($rootFolder);
+     * $localFilesystem = new Prism\Library\Filesystem\Adapters\Local($rootFolder);
      * $file->upload($fileData, $options);
      * </code>
      *

@@ -7,10 +7,10 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Integration\Activity;
+namespace Prism\Library\Integration\Activity;
 
 use Gamification\Activity\Activity;
-use Prism\Database\TableTrait;
+use Prism\Library\Database\TableTrait;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -43,7 +43,7 @@ class Gamification implements ActivityInterface
      * $userId = 1;
      * $content = "...";
      *
-     * $activity = new Prism\Integration\Activity\Gamification($userId, $content);
+     * $activity = new Prism\Library\Integration\Activity\Gamification($userId, $content);
      * </code>
      *
      * @param  integer $userId User ID
@@ -62,7 +62,7 @@ class Gamification implements ActivityInterface
      * $userId = 1;
      * $content = "...";
      *
-     * $activity = new Prism\Integration\Activity\Gamification($userId, $content);
+     * $activity = new Prism\Library\Integration\Activity\Gamification($userId, $content);
      * $activity->store();
      * </code>
      */
@@ -92,7 +92,7 @@ class Gamification implements ActivityInterface
      * Return an item ID.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\Gamification();
+     * $activity = new Prism\Library\Integration\Activity\Gamification();
      * $id = $activity->getId();
      * </code>
      *
@@ -107,7 +107,7 @@ class Gamification implements ActivityInterface
      * Return the title of the activity.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\Gamification();
+     * $activity = new Prism\Library\Integration\Activity\Gamification();
      * $title = $activity->getTitle();
      * </code>
      *
@@ -122,7 +122,7 @@ class Gamification implements ActivityInterface
      * Return the content of the activity.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\Gamification();
+     * $activity = new Prism\Library\Integration\Activity\Gamification();
      * $content = $activity->getContent();
      * </code>
      *
@@ -137,7 +137,7 @@ class Gamification implements ActivityInterface
      * Return an image.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\Gamification();
+     * $activity = new Prism\Library\Integration\Activity\Gamification();
      * $image = $activity->getImage();
      * </code>
      *
@@ -152,7 +152,7 @@ class Gamification implements ActivityInterface
      * Return a URL that is part from activity.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\Gamification();
+     * $activity = new Prism\Library\Integration\Activity\Gamification();
      * $url = $activity->getUrl();
      * </code>
      *
@@ -167,7 +167,7 @@ class Gamification implements ActivityInterface
      * Return a date when the activity has been created.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\Gamification();
+     * $activity = new Prism\Library\Integration\Activity\Gamification();
      * $created = $activity->getCreated();
      * </code>
      *
@@ -182,7 +182,7 @@ class Gamification implements ActivityInterface
      * Return a status of the activity.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\Gamification();
+     * $activity = new Prism\Library\Integration\Activity\Gamification();
      * $status = $activity->getStatus();
      * </code>
      *
@@ -197,7 +197,7 @@ class Gamification implements ActivityInterface
      * Return a user ID.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\Gamification();
+     * $activity = new Prism\Library\Integration\Activity\Gamification();
      * $userId = $activity->getUserId();
      * </code>
      *
@@ -214,7 +214,7 @@ class Gamification implements ActivityInterface
      * <code>
      * $id = 1;
      *
-     * $activity = new Prism\Integration\Activity\Gamification();
+     * $activity = new Prism\Library\Integration\Activity\Gamification();
      * $activity->setId($id);
      * </code>
      *
@@ -235,7 +235,7 @@ class Gamification implements ActivityInterface
      * <code>
      * $title = "...";
      *
-     * $activity = new Prism\Integration\Activity\Gamification();
+     * $activity = new Prism\Library\Integration\Activity\Gamification();
      * $activity->setTitle($title);
      * </code>
      *
@@ -256,7 +256,7 @@ class Gamification implements ActivityInterface
      * <code>
      * $content = "...";
      *
-     * $activity = new Prism\Integration\Activity\Gamification();
+     * $activity = new Prism\Library\Integration\Activity\Gamification();
      * $activity->setContent($content);
      * </code>
      *
@@ -275,7 +275,7 @@ class Gamification implements ActivityInterface
      * Set an image.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\Gamification();
+     * $activity = new Prism\Library\Integration\Activity\Gamification();
      * $activity->setImage("http://mydomain.com/images/picture.png");
      * </code>
      *
@@ -294,7 +294,7 @@ class Gamification implements ActivityInterface
      * Set a URL.
      *
      * <code>
-     * $activity = new Prism\Integration\Activity\Gamification();
+     * $activity = new Prism\Library\Integration\Activity\Gamification();
      * $activity->setUrl("http://mydomain.com/");
      * </code>
      *
@@ -315,7 +315,7 @@ class Gamification implements ActivityInterface
      * <code>
      * $created = "...";
      *
-     * $activity = new Prism\Integration\Activity\Gamification();
+     * $activity = new Prism\Library\Integration\Activity\Gamification();
      * $activity->setCreated($created);
      * </code>
      *
@@ -336,7 +336,7 @@ class Gamification implements ActivityInterface
      * <code>
      * $status = "...";
      *
-     * $activity = new Prism\Integration\Activity\Gamification();
+     * $activity = new Prism\Library\Integration\Activity\Gamification();
      * $activity->setStatus($status);
      * </code>
      *
@@ -357,7 +357,7 @@ class Gamification implements ActivityInterface
      * <code>
      * $userId = 1;
      *
-     * $activity = new Prism\Integration\Activity\Gamification();
+     * $activity = new Prism\Library\Integration\Activity\Gamification();
      * $activity->setUserId($userId);
      * </code>
      *

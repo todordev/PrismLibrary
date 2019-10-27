@@ -7,11 +7,11 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Integration\Profiles;
+namespace Prism\Library\Integration\Profiles;
 
 use Joomla\Registry\Registry;
-use Prism\Filesystem\Helper;
-use Prism\Integration\Profiles\Adapter;
+use Prism\Library\Filesystem\Helper;
+use Prism\Library\Integration\Profiles\Adapter;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -45,7 +45,7 @@ final class Factory
      *    'user_ids' => array(1,2,3)
      * ));
      *
-     * $factory = new Prism\Integration\Profiles\Factory($options);
+     * $factory = new Prism\Library\Integration\Profiles\Factory($options);
      * </code>
      *
      * @param  Registry  $options Options used in the process of building profile object.
@@ -67,7 +67,7 @@ final class Factory
      *    'user_ids' => array(1,2,3)
      * ));
      *
-     * $factory = new Prism\Integration\Profiles\Factory($options);
+     * $factory = new Prism\Library\Integration\Profiles\Factory($options);
      * $profile = $factory->create();
      * </code>
      *

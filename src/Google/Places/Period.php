@@ -1,18 +1,18 @@
 <?php
 /**
- * @package      Prism\Google
+ * @package      Prism\Library\Google
  * @subpackage   Places
  * @author       Todor Iliev
  * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Google\Places;
+namespace Prism\Library\Google\Places;
 
 /**
  * Google Place Open Hours Period.
  *
- * @package     Prism\Google
+ * @package     Prism\Library\Google
  * @subpackage  Places
  *
  * @link https://developers.google.com/places/web-service/details

@@ -1,18 +1,18 @@
 <?php
 /**
- * @package         Prism\Database
+ * @package         Prism\Library\Database
  * @subpackage      Request
  * @author          Todor Iliev
  * @copyright       Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Database\Request;
+namespace Prism\Library\Database\Request;
 
 /**
  * Condition used for generating a query during the process of fetching data.
  *
- * @package         Prism\Database
+ * @package         Prism\Library\Database
  * @subpackage      Request
  */
 class Request
@@ -45,7 +45,7 @@ class Request
 
     public function __construct(array $request = array())
     {
-        $this->fields     = new Fields;
+        $this->fields     = new Fields();
         if (array_key_exists('fields', $request)) {
             if (is_array($request['fields'])) {
                 $this->requestFields($request['fields']);
@@ -54,7 +54,7 @@ class Request
             }
         }
 
-        $this->conditions = new Conditions;
+        $this->conditions = new Conditions();
         if (array_key_exists('conditions', $request)) {
             if (is_array($request['conditions'])) {
                 $this->addConditions($request['conditions']);
@@ -63,12 +63,12 @@ class Request
             }
         }
 
-        $this->ordering   = new Ordering;
+        $this->ordering   = new Ordering();
         if (array_key_exists('ordering', $request) && ($request['ordering'] instanceof Ordering)) {
             $this->ordering = $request['conditions'];
         }
 
-        $this->limit      = new Limit;
+        $this->limit      = new Limit();
         if (array_key_exists('limit', $request) && ($request['limit'] instanceof Limit)) {
             $this->limit = $request['limit'];
         }

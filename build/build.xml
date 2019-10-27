@@ -9,114 +9,114 @@
 	<!-- source directories -->
 	<property name="cfg.srcDir" location="${cfg.sourceDir}/src" />
 	<property name="cfg.testsDir" location="${cfg.sourceDir}/tests" />
+	<property name="cfg.mediaDir" location="${cfg.sourceDir}/media" />
 	<property name="cfg.packagesDir" location="${cfg.sourceDir}/packages" />
 	<property name="cfg.vendorSourceDir" location="${cfg.sourceDir}/vendor" />
-	<property name="cfg.vendor2SourceDir" location="${cfg.sourceDir}/vendor2" />
-	<property name="cfg.vendorDir" location="${cfg.packagesDir}/vendor" />
+	<property name="cfg.vendorDestDir" location="${cfg.packagesDir}/vendor" />
 	
-	<target name="build" depends="vendors, build_component, clean, info" />
+	<target name="build" depends="copy, build_component, clean, info" />
     
-	<target name="vendors" description="copy vendors">
-		<copy file="${cfg.vendorSourceDir}/autoload.php" todir="${cfg.vendorDir}"/>
+	<target name="copy" description="Prepare files and folders as a package">
+		<copy file="${cfg.vendorSourceDir}/autoload.php" todir="${cfg.vendorDestDir}"/>
 		
-		<copy todir="${cfg.vendorDir}/composer">
+		<copy todir="${cfg.vendorDestDir}/composer">
 			<fileset dir="${cfg.vendorSourceDir}/composer" >
 				<exclude name="installed.json" />
 				<exclude name="LICENSE" />
 			</fileset>
 	    </copy>
 		
-	    <copy todir="${cfg.vendorDir}/aws/aws-sdk-php/src">
+	    <copy todir="${cfg.vendorDestDir}/aws/aws-sdk-php/src">
 			<fileset dir="${cfg.vendorSourceDir}/aws/aws-sdk-php/src" />
 	    </copy>
 		
-		<copy todir="${cfg.vendorDir}/defuse/php-encryption/src">
+		<copy todir="${cfg.vendorDestDir}/defuse/php-encryption/src">
 			<fileset dir="${cfg.vendorSourceDir}/defuse/php-encryption/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/guzzlehttp/guzzle/src">
+		<copy todir="${cfg.vendorDestDir}/guzzlehttp/guzzle/src">
 			<fileset dir="${cfg.vendorSourceDir}/guzzlehttp/guzzle/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/guzzlehttp/promises/src">
+		<copy todir="${cfg.vendorDestDir}/guzzlehttp/promises/src">
 			<fileset dir="${cfg.vendorSourceDir}/guzzlehttp/promises/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/guzzlehttp/psr7/src">
+		<copy todir="${cfg.vendorDestDir}/guzzlehttp/psr7/src">
 			<fileset dir="${cfg.vendorSourceDir}/guzzlehttp/psr7/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/hashids/hashids/src">
+		<copy todir="${cfg.vendorDestDir}/hashids/hashids/src">
 			<fileset dir="${cfg.vendorSourceDir}/hashids/hashids/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/league/fractal/src">
+		<copy todir="${cfg.vendorDestDir}/league/fractal/src">
 			<fileset dir="${cfg.vendorSourceDir}/league/fractal/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/league/flysystem/src">
+		<copy todir="${cfg.vendorDestDir}/league/flysystem/src">
 			<fileset dir="${cfg.vendorSourceDir}/league/flysystem/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/league/flysystem-aws-s3-v3/src">
+		<copy todir="${cfg.vendorDestDir}/league/flysystem-aws-s3-v3/src">
 			<fileset dir="${cfg.vendorSourceDir}/league/flysystem-aws-s3-v3/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/psr/http-message/src">
+		<copy todir="${cfg.vendorDestDir}/psr/http-message/src">
 			<fileset dir="${cfg.vendorSourceDir}/psr/http-message/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/psr/cache/src">
+		<copy todir="${cfg.vendorDestDir}/psr/cache/src">
 			<fileset dir="${cfg.vendorSourceDir}/psr/cache/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/psr/log/Psr/Log">
+		<copy todir="${cfg.vendorDestDir}/psr/log/Psr/Log">
 			<fileset dir="${cfg.vendorSourceDir}/psr/log/Psr/Log" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/ramsey/uuid/src">
+		<copy todir="${cfg.vendorDestDir}/ramsey/uuid/src">
 			<fileset dir="${cfg.vendorSourceDir}/ramsey/uuid/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/nesbot/carbon/src">
+		<copy todir="${cfg.vendorDestDir}/nesbot/carbon/src">
 			<fileset dir="${cfg.vendorSourceDir}/nesbot/carbon/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/ramsey/uuid/src">
+		<copy todir="${cfg.vendorDestDir}/ramsey/uuid/src">
 			<fileset dir="${cfg.vendorSourceDir}/ramsey/uuid/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/ramsey/uuid/src">
+		<copy todir="${cfg.vendorDestDir}/ramsey/uuid/src">
 			<fileset dir="${cfg.vendorSourceDir}/ramsey/uuid/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/mtdowling/jmespath.php/src">
+		<copy todir="${cfg.vendorDestDir}/mtdowling/jmespath.php/src">
 			<fileset dir="${cfg.vendorSourceDir}/mtdowling/jmespath.php/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/monolog/monolog/src">
+		<copy todir="${cfg.vendorDestDir}/monolog/monolog/src">
 			<fileset dir="${cfg.vendorSourceDir}/monolog/monolog/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/facebook/graph-sdk/src">
+		<copy todir="${cfg.vendorDestDir}/facebook/graph-sdk/src">
 			<fileset dir="${cfg.vendorSourceDir}/facebook/graph-sdk/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/phpseclib/phpseclib/phpseclib">
+		<copy todir="${cfg.vendorDestDir}/phpseclib/phpseclib/phpseclib">
 			<fileset dir="${cfg.vendorSourceDir}/phpseclib/phpseclib/phpseclib" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/ircmaxell/random-lib/lib">
+		<copy todir="${cfg.vendorDestDir}/ircmaxell/random-lib/lib">
 			<fileset dir="${cfg.vendorSourceDir}/ircmaxell/random-lib/lib" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/ircmaxell/security-lib/lib">
+		<copy todir="${cfg.vendorDestDir}/ircmaxell/security-lib/lib">
 			<fileset dir="${cfg.vendorSourceDir}/ircmaxell/security-lib/lib" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/ircmaxell/password-compat/lib">
+		<copy todir="${cfg.vendorDestDir}/ircmaxell/password-compat/lib">
 			<fileset dir="${cfg.vendorSourceDir}/ircmaxell/password-compat/lib" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/google/apiclient/src">
+		<copy todir="${cfg.vendorDestDir}/google/apiclient/src">
 			<fileset dir="${cfg.vendorSourceDir}/google/apiclient/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/google/auth/src">
+		<copy todir="${cfg.vendorDestDir}/google/auth/src">
 			<fileset dir="${cfg.vendorSourceDir}/google/auth/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/google/apiclient-services/src/Google/Service/Plus">
+		<copy todir="${cfg.vendorDestDir}/google/apiclient-services/src/Google/Service/Plus">
 			<fileset dir="${cfg.vendorSourceDir}/google/apiclient-services/src/Google/Service/Plus" />
 	    </copy>
-		<copy file="${cfg.vendorSourceDir}/google/apiclient-services/src/Google/Service/Plus.php" tofile="${cfg.vendorDir}/google/apiclient-services/src/Google/Service/Plus.php"/>
-		<copy todir="${cfg.vendorDir}/myclabs/deep-copy/src">
+		<copy file="${cfg.vendorSourceDir}/google/apiclient-services/src/Google/Service/Plus.php" tofile="${cfg.vendorDestDir}/google/apiclient-services/src/Google/Service/Plus.php"/>
+		<copy todir="${cfg.vendorDestDir}/myclabs/deep-copy/src">
 			<fileset dir="${cfg.vendorSourceDir}/myclabs/deep-copy/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDir}/symfony/polyfill-mbstring">
+		<copy todir="${cfg.vendorDestDir}/symfony/polyfill-mbstring">
 			<fileset dir="${cfg.vendorSourceDir}/symfony/polyfill-mbstring" >
 				<exclude name="composer.json" />
 				<exclude name="LICENSE" />
 				<exclude name="README.md" />
 			</fileset>
 	    </copy>
-		<copy todir="${cfg.vendorDir}/symfony/polyfill-php55">
+		<copy todir="${cfg.vendorDestDir}/symfony/polyfill-php55">
 			<fileset dir="${cfg.vendorSourceDir}/symfony/polyfill-php55" >
 				<exclude name="composer.json" />
 				<exclude name="LICENSE" />
@@ -126,15 +126,16 @@
 	</target>
 	
 	<!-- build component -->
-	<target name="build_component" depends="vendors" description="packages the finally component file">
+	<target name="build_component" depends="copy" description="Packages the finally component file">
 		<zip destfile="${cfg.packagesDir}/${cfg.name}_${cfg.version}.zip">
 			<fileset dir="${cfg.srcDir}" />
-			<zipfileset dir="${cfg.vendorDir}" prefix="vendor" />
+			<zipfileset dir="${cfg.vendorDestDir}" prefix="vendor" />
+			<zipfileset dir="${cfg.mediaDir}" prefix="media" />
 		</zip>
 	</target>
     
-	<target name="clean" depends="build_component" description="remove temporary files (vendor)">
-		<delete dir="${cfg.vendorDir}" />
+	<target name="clean" depends="build_component" description="Remove temporary files and folders">
+		<delete dir="${cfg.vendorDestDir}" />
 	</target>
 	
 	<target name="info" description="prints information">

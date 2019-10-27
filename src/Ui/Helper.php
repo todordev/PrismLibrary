@@ -1,22 +1,26 @@
 <?php
 /**
- * @package      Prism
- * @subpackage   UI
+ * @package      Prism\Library\Library
+ * @subpackage   Ui
  * @author       Todor Iliev
  * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-// no direct access
-defined('JPATH_PLATFORM') or die;
+namespace Prism\Library\Ui;
+
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Uri\Uri;
 
 /**
  * Prism UI Html Helper
  *
- * @package       Prism
- * @subpackage    UI
+ * @package       Prism\Library\Library
+ * @subpackage    Ui
  */
-abstract class PrismUI
+abstract class Helper
 {
     /**
      * This parameter contains an information for loaded files.
@@ -29,7 +33,7 @@ abstract class PrismUI
      * Include jQuery plugin Remodal
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.remodal');
      * </code>
@@ -45,9 +49,9 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/remodal/remodal.min.js');
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/remodal/remodal.css');
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/remodal/remodal-default-theme.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/remodal/remodal.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/remodal/remodal.css');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/remodal/remodal-default-theme.css');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -56,7 +60,7 @@ abstract class PrismUI
      * Include jQuery plugin iziModal
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.iziModal');
      * </code>
@@ -72,8 +76,8 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/izimodal/iziModal.min.css');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/izimodal/iziModal.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/izimodal/iziModal.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/izimodal/iziModal.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -82,7 +86,7 @@ abstract class PrismUI
      * Include jQuery plugin Modaal.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.modaal');
      * </code>
@@ -98,8 +102,8 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/modaal/modaal.min.css');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/modaal/modaal.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/modaal/modaal.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/modaal/modaal.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -108,7 +112,7 @@ abstract class PrismUI
      * Include jQuery plugin Tooltipster
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.tooltipster');
      * </code>
@@ -124,13 +128,13 @@ abstract class PrismUI
             return;
         }
 
-        $document = JFactory::getDocument();
+        $document = Factory::getDocument();
 
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/tooltipster/js/tooltipster.bundle.min.js');
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/tooltipster/css/tooltipster.bundle.min.css');
+        $document->addScript(Uri::root() . 'media/lib_prism/vendor/tooltipster/js/tooltipster.bundle.min.js');
+        $document->addStyleSheet(Uri::root() . 'media/lib_prism/vendor/tooltipster/css/tooltipster.bundle.min.css');
 
         if ($theme) {
-            $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/tooltipster/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-'.$theme.'.min.css');
+            $document->addStyleSheet(Uri::root() . 'media/lib_prism/vendor/tooltipster/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-'.$theme.'.min.css');
         }
 
         self::$loaded[__METHOD__] = true;
@@ -140,7 +144,7 @@ abstract class PrismUI
      * Include Vue.js
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.vue');
      * </code>
@@ -155,7 +159,7 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/vue/vue.min.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/vue/vue.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -164,7 +168,7 @@ abstract class PrismUI
      * Include jQuery plugin AreYouSure.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.areYouSure');
      * </code>
@@ -179,7 +183,7 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/jquery.are-you-sure.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/jquery.are-you-sure.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -188,7 +192,7 @@ abstract class PrismUI
      * Include jQuery plugin is-loading
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.isLoading');
      * </code>
@@ -202,8 +206,8 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/isloading/jquery.isloading.min.js');
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/isloading/isloading.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/isloading/jquery.isloading.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/isloading/isloading.css');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -212,7 +216,7 @@ abstract class PrismUI
      * Include jQuery plugin LoadingOverlay
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.loadingOverlay');
      * </code>
@@ -228,10 +232,10 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/loadingoverlay/loadingoverlay.min.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/loadingoverlay/loadingoverlay.min.js');
 
         if ($progress) {
-            $document->addScript(JUri::root() . 'libraries/Prism/ui/loadingoverlay/loadingoverlay_progress.min.js');
+            $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/loadingoverlay/loadingoverlay_progress.min.js');
         }
 
         self::$loaded[__METHOD__] = true;
@@ -241,7 +245,7 @@ abstract class PrismUI
      * Include backend styles.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.backendStyles');
      * </code>
@@ -255,7 +259,7 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/css/backend.style.css');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/css/backend.style.css');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -264,7 +268,7 @@ abstract class PrismUI
      * Include some general styles.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.styles');
      * </code>
@@ -278,7 +282,7 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/css/styles.css');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/css/styles.css');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -287,7 +291,7 @@ abstract class PrismUI
      * Include AnimateCSS stiles.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.animateCss');
      * </code>
@@ -302,8 +306,8 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/animation/animate.min.css');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/animation/animate.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/animation/animate.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/animation/animate.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -312,7 +316,7 @@ abstract class PrismUI
      * Include Magic Animations stiles.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.magicAnimations');
      * </code>
@@ -327,7 +331,7 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/animation/magic.min.css');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/animation/magic.min.css');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -336,7 +340,7 @@ abstract class PrismUI
      * Include Sticky Kit.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.stickyKit');
      * </code>
@@ -351,7 +355,7 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/jquery.sticky-kit.min.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/jquery.sticky-kit.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -360,7 +364,7 @@ abstract class PrismUI
      * Include Readmore.js library.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.readMore');
      * </code>
@@ -375,7 +379,7 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/readmore.min.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/readmore.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -384,7 +388,7 @@ abstract class PrismUI
      * Include jQuery Expander.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.expander');
      * </code>
@@ -399,7 +403,7 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/jquery.expander.min.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/jquery.expander.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -408,7 +412,7 @@ abstract class PrismUI
      * Include Favico JS library.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.favicoJs');
      * </code>
@@ -423,7 +427,7 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/animation/favico.min.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/animation/favico.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -433,7 +437,7 @@ abstract class PrismUI
      * Types - balls, boxes, bubbles, eclipse, flip, heart, hue, meter, morph, meter, pinwheel, round, skeleton.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.cssSpin');
      * </code>
@@ -450,7 +454,7 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/csspin/csspin-'.$type.'.css');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/csspin/csspin-'.$type.'.css');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -459,7 +463,7 @@ abstract class PrismUI
      * Include jQuery PNotify library.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.pnotify');
      * </code>
@@ -473,10 +477,10 @@ abstract class PrismUI
             return;
         }
 
-        $document = JFactory::getDocument();
+        $document = Factory::getApplication()->getDocument();
 
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/pnotify/pnotify.custom.min.css');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/pnotify/pnotify.custom.min.js');
+        $document->addStyleSheet(Uri::root() . 'libraries/Prism/Ui/vendor/vendor/pnotify/pnotify.custom.min.css');
+        $document->addScript(Uri::root() . 'libraries/Prism/Ui/vendor/vendor/pnotify/pnotify.custom.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -485,7 +489,7 @@ abstract class PrismUI
      * Include Bootstrap Editable library ( build BS 2.3 ).
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.bootstrap2Editable');
      * </code>
@@ -501,8 +505,8 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/bootstrap2/editable/css/bootstrap-editable.css');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap2/editable/js/bootstrap-editable.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/bootstrap2/editable/css/bootstrap-editable.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/bootstrap2/editable/js/bootstrap-editable.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -511,7 +515,7 @@ abstract class PrismUI
      * Include Bootstrap Editable library ( build BS 3 ).
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.bootstrap3Editable');
      * </code>
@@ -527,8 +531,8 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/bootstrap3/editable/css/bootstrap-editable.css');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/editable/js/bootstrap-editable.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/bootstrap3/editable/css/bootstrap-editable.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/bootstrap3/editable/js/bootstrap-editable.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -537,7 +541,7 @@ abstract class PrismUI
      * Include Bootstrap Maxlength library.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.bootstrapMaxLength');
      * </code>
@@ -553,7 +557,7 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap-maxlength.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/bootstrap-maxlength.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -562,7 +566,7 @@ abstract class PrismUI
      * Include File Input library based on Bootstrap 2.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.bootstrap2FileInput');
      * </code>
@@ -576,8 +580,8 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/bootstrap2/fileinput/css/bootstrap-fileinput.min.css');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap2/fileinput/js/bootstrap-fileinput.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/bootstrap2/fileinput/css/bootstrap-fileinput.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/bootstrap2/fileinput/js/bootstrap-fileinput.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -586,7 +590,7 @@ abstract class PrismUI
      * Include SweetAlert2 JavaScript library.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.sweetAlert');
      * </code>
@@ -602,8 +606,8 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/sweetalert/sweetalert2.min.css');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/sweetalert/sweetalert2.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/sweetalert/sweetalert2.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/sweetalert/sweetalert2.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -612,7 +616,7 @@ abstract class PrismUI
      * Include Bootstrap Fileinput library (BS v3).
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.bootstrap3FileInput');
      * </code>
@@ -631,28 +635,28 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/css/fileinput.min.css');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/js/fileinput.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/bootstrap3/fileinput/css/fileinput.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/bootstrap3/fileinput/js/fileinput.min.js');
 
         switch ($theme) {
             case 'explorer':
-                $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/themes/explorer/theme.min.js');
-                $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/themes/explorer/theme.min.css');
+                $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/bootstrap3/fileinput/themes/explorer/theme.min.js');
+                $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/bootstrap3/fileinput/themes/explorer/theme.min.css');
                 break;
             case 'explorer-fa':
-                $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/themes/explorer-fa/theme.min.js');
-                $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/themes/explorer-fa/theme.min.css');
+                $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/bootstrap3/fileinput/themes/explorer-fa/theme.min.js');
+                $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/bootstrap3/fileinput/themes/explorer-fa/theme.min.css');
                 break;
             case 'gly':
-                $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/themes/gly/theme.min.js');
+                $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/bootstrap3/fileinput/themes/gly/theme.min.js');
                 break;
             default:
-                $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/themes/fa/theme.min.js');
+                $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/bootstrap3/fileinput/themes/fa/theme.min.js');
                 break;
         }
 
         if ($locale) {
-            $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/fileinput/js/locales/'.$locale.'.js');
+            $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/bootstrap3/fileinput/js/locales/'.$locale.'.js');
         }
 
         self::$loaded[__METHOD__] = true;
@@ -662,7 +666,7 @@ abstract class PrismUI
      * Include Bootstrap Datetime Picker Library (BS v3).
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.bootstrapDatepicker');
      * </code>
@@ -678,10 +682,10 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/datetimepicker/js/moment-with-locales.min.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/datetimepicker/js/moment-with-locales.min.js');
 
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/datetimepicker/css/bootstrap-datetimepicker.min.css');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/datetimepicker/js/bootstrap-datetimepicker.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/datetimepicker/css/bootstrap-datetimepicker.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/datetimepicker/js/bootstrap-datetimepicker.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -690,7 +694,7 @@ abstract class PrismUI
      * Include Bootstrap 2 Typeahead library.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.bootstrap2Typeahead');
      * </code>
@@ -707,7 +711,7 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap2/bootstrap-typeahead.min.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/bootstrap2/bootstrap-typeahead.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -716,7 +720,7 @@ abstract class PrismUI
      * Include Bootstrap 3 Typeahead library.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.bootstrap3Typeahead');
      * </code>
@@ -733,8 +737,8 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/bootstrap3/typeahead/css/typeahead.css');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/bootstrap3/typeahead/js/typeahead.bundle.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/bootstrap3/typeahead/css/typeahead.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/bootstrap3/typeahead/js/typeahead.bundle.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -743,7 +747,7 @@ abstract class PrismUI
      * Include jQuery AutoComplete library.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.jQueryAutoComplete');
      * </code>
@@ -758,8 +762,8 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/autocomplete/jquery.autocomplete.css');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/autocomplete/jquery.autocomplete.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/autocomplete/jquery.autocomplete.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/autocomplete/jquery.autocomplete.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -768,7 +772,7 @@ abstract class PrismUI
      * Include Select2 library.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.select2');
      * </code>
@@ -783,8 +787,8 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/select2/css/select2.min.css');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/select2/js/select2.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/select2/css/select2.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/select2/js/select2.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -793,7 +797,7 @@ abstract class PrismUI
      * Include Parsley library.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.parsley');
      * </code>
@@ -809,7 +813,7 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/parsley.min.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/parsley.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -819,7 +823,7 @@ abstract class PrismUI
      * which are used in many Prism extensions.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.joomlaHelper');
      * </code>
@@ -834,7 +838,7 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/joomla/helper.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/joomla/helper.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -843,7 +847,7 @@ abstract class PrismUI
      * This method loads a script that initializes an object used for showing messages.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.message');
      * </code>
@@ -855,8 +859,8 @@ abstract class PrismUI
             return;
         }
 
-        $document = JFactory::getDocument();
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/prism.message.js');
+        $document = Factory::getApplication()->getDocument();
+        $document->addScript(Uri::root() . 'libraries/Prism/Ui/vendor/js/prism.message.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -865,7 +869,7 @@ abstract class PrismUI
      * Include jQuery File Upload library.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.fileupload');
      * </code>
@@ -880,12 +884,12 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/fileupload/css/jquery.fileupload.css');
-//        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/fileupload/css/jquery.fileupload-ui.css');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/fileupload/css/jquery.fileupload.css');
+//        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/fileupload/css/jquery.fileupload-ui.css');
 
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/fileupload/js/jquery.ui.widget.js');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/fileupload/js/jquery.iframe-transport.js');
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/fileupload/js/jquery.fileupload.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/fileupload/js/jquery.ui.widget.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/fileupload/js/jquery.iframe-transport.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/fileupload/js/jquery.fileupload.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -894,7 +898,7 @@ abstract class PrismUI
      * Include ChartJS library.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.chartjs');
      * </code>
@@ -913,9 +917,9 @@ abstract class PrismUI
         $document = JFactory::getDocument();
 
         if (!$bundle) {
-            $document->addScript(JUri::root() . 'libraries/Prism/ui/chartjs/Chart.min.js');
+            $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/chartjs/Chart.min.js');
         } else {
-            $document->addScript(JUri::root() . 'libraries/Prism/ui/chartjs/Chart.bundle.min.js');
+            $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/chartjs/Chart.bundle.min.js');
         }
 
         self::$loaded[__METHOD__] = true;
@@ -925,7 +929,7 @@ abstract class PrismUI
      * Include MomentJs library.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.momentjs');
      * </code>
@@ -944,9 +948,9 @@ abstract class PrismUI
         $document = JFactory::getDocument();
 
         if (!$locales) {
-            $document->addScript(JUri::root() . 'libraries/Prism/ui/momentjs/moment.min.js');
+            $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/momentjs/moment.min.js');
         } else {
-            $document->addScript(JUri::root() . 'libraries/Prism/ui/momentjs/moment-with-locales.min.js');
+            $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/momentjs/moment-with-locales.min.js');
         }
 
         self::$loaded[__METHOD__] = true;
@@ -956,7 +960,7 @@ abstract class PrismUI
      * Include jQuery Cropper library.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.cropper');
      * </code>
@@ -972,8 +976,8 @@ abstract class PrismUI
 
         $document = JFactory::getDocument();
 
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/cropper/cropper.min.js');
-        $document->addStyleSheet(JUri::root() . 'libraries/Prism/ui/cropper/cropper.min.css');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/cropper/cropper.min.js');
+        $document->addStyleSheet(JUri::root() . 'libraries/Prism/Ui/vendor/cropper/cropper.min.css');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -982,7 +986,7 @@ abstract class PrismUI
      * This method loads a script that initializes Joomla! list functionality.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.joomlaList');
      * </code>
@@ -997,7 +1001,7 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/joomla/list.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/joomla/list.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -1006,7 +1010,7 @@ abstract class PrismUI
      * This method loads serializeJSON.
      *
      * <code>
-     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/ui/helpers');
+     * JHtml::addIncludePath(PRISM_PATH_LIBRARY .'/Ui/vendor/helpers');
      *
      * JHtml::_('Prism.ui.serializeJson');
      * </code>
@@ -1021,7 +1025,7 @@ abstract class PrismUI
         }
 
         $document = JFactory::getDocument();
-        $document->addScript(JUri::root() . 'libraries/Prism/ui/jquery.serializejson.min.js');
+        $document->addScript(JUri::root() . 'libraries/Prism/Ui/vendor/jquery.serializejson.min.js');
 
         self::$loaded[__METHOD__] = true;
     }
@@ -1073,7 +1077,7 @@ abstract class PrismUI
 
         // Only display the triggers once for each control.
         if (!in_array($id, $done, true)) {
-            $calendarDateFormat = Prism\Utilities\DateHelper::convertToMomentJsFormat($format);
+            $calendarDateFormat = Prism\Library\Utilities\DateHelper::convertToMomentJsFormat($format);
 
             $document = JFactory::getDocument();
             $document
@@ -1125,14 +1129,14 @@ abstract class PrismUI
 
             // Attach tabs to document
             JFactory::getDocument()
-                ->addScriptDeclaration(JLayoutHelper::render('bootstrap3.starttabsetscript', $layoutData), PRISM_PATH_LIBRARY.'/ui/layouts');
+                ->addScriptDeclaration(JLayoutHelper::render('bootstrap3.starttabsetscript', $layoutData), PRISM_PATH_LIBRARY.'/Ui/vendor/layouts');
 
             // Set static array
             static::$loaded[__METHOD__][$sig]                = true;
             static::$loaded[__METHOD__][$selector]['active'] = $opt['active'];
         }
 
-        $html = JLayoutHelper::render('bootstrap3.starttabset', $layoutData, PRISM_PATH_LIBRARY.'/ui/layouts');
+        $html = JLayoutHelper::render('bootstrap3.starttabset', $layoutData, PRISM_PATH_LIBRARY.'/Ui/vendor/layouts');
 
         return $html;
     }
@@ -1165,8 +1169,8 @@ abstract class PrismUI
         static $tabScriptLayout = null;
         static $tabLayout = null;
 
-        $tabScriptLayout = ($tabScriptLayout === null) ? new JLayoutFile('bootstrap3.addtabscript', PRISM_PATH_LIBRARY.'/ui/layouts') : $tabScriptLayout;
-        $tabLayout       = ($tabLayout === null) ? new JLayoutFile('bootstrap3.addtab', PRISM_PATH_LIBRARY.'/ui/layouts') : $tabLayout;
+        $tabScriptLayout = ($tabScriptLayout === null) ? new JLayoutFile('bootstrap3.addtabscript', PRISM_PATH_LIBRARY.'/Ui/vendor/layouts') : $tabScriptLayout;
+        $tabLayout       = ($tabLayout === null) ? new JLayoutFile('bootstrap3.addtab', PRISM_PATH_LIBRARY.'/Ui/vendor/layouts') : $tabLayout;
 
         $active = (static::$loaded['PrismUI::bootstrap3StartTabSet'][$selector]['active'] === $id) ? ' active' : '';
 
@@ -1229,8 +1233,36 @@ abstract class PrismUI
      */
     public static function date($date, $format = '', $default = '--')
     {
-        $dateValidator = new Prism\Validator\Date($date);
+        $dateValidator = new Prism\Library\Validator\Date($date);
 
         return $dateValidator->isValid() ? JHtml::_('date', $date, $format) : $default;
     }
+
+	public static function stateDefault($value, $i, $prefix = '')
+	{
+		$states = array(
+			1 => array('changeStateUndefault', 'COM_SHIPPINGCART_DEFAULT', 'COM_SHIPPINGCART_UNDEFAULT_STATE_TOOLTIP', 'publish'),
+			0 => array('changeStateDefault', 'COM_SHIPPINGCART_UNDEFAULT', 'COM_SHIPPINGCART_DEFAULT_STATE_TOOLTIP', 'unpublish'),
+		);
+
+		$currentState = $states[$value];
+
+		$active_class = 'inactive';
+		if ($value) {
+			$active_class = 'active';
+		}
+
+		// <a class="tbody-icon active hasTooltip" href="javascript:void(0);" onclick="return Joomla.listItemTask('cb0','categories.unpublish')" title="Unpublish Item"><span class="icon-publish" aria-hidden="true"></span></a>
+
+		$html[] = '<a class="tbody-icon '.$active_class.' hasTooltip"';
+
+		$html[] = ' href="javascript:void(0);" onclick="return Joomla.listItemTask(\'cb'. $i . '\',\'' . $prefix . $currentState[0] . '\')"';
+
+		$html[] = ' title="' . Text::_($currentState[1]) .'::'. Text::_($currentState[2]). '"';
+		$html[] = '>';
+		$html[] = '<span class="icon-' . $currentState[3] . '" aria-hidden="true"></span>';
+		$html[] = '</a>';
+
+		return implode("\n", $html);
+	}
 }

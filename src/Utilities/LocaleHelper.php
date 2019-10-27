@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Utilities;
+namespace Prism\Library\Utilities;
 
 // no direct access
 defined('JPATH_PLATFORM') or die;
@@ -24,7 +24,7 @@ abstract class LocaleHelper
      * Prepare number formatter.
      *
      * <code>
-     * $numberFormatter = Prism\Utilities\LocaleHelper::getNumberFormatter("#,##0.00");
+     * $numberFormatter = Prism\Library\Utilities\LocaleHelper::getNumberFormatter("#,##0.00");
      * </code>
      *
      * @param string $pattern

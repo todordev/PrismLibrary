@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Payment\Fortumo;
+namespace Prism\Library\Payment\Fortumo;
 
 // no direct access
 defined('JPATH_PLATFORM') or die;
@@ -38,7 +38,7 @@ class Validator implements ValidatorInterface
      *     "sig" => "...",
      * );
      *
-     * $validator = new Prism\Payment\Fortumo\Validator($data, $secret);
+     * $validator = new Prism\Library\Payment\Fortumo\Validator($data, $secret);
      * </code>
      *
      * @param array $data Data that comes from Fortumo servers.
@@ -59,7 +59,7 @@ class Validator implements ValidatorInterface
      *     "sig" => "...",
      * );
      *
-     * $validator = new Prism\Payment\Fortumo\Validator($data, $secret);
+     * $validator = new Prism\Library\Payment\Fortumo\Validator($data, $secret);
      *
      * if (!$validator->isValid()) {
      * ....

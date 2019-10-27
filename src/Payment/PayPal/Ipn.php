@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Payment\PayPal;
+namespace Prism\Library\Payment\PayPal;
 
 // no direct access
 defined('JPATH_PLATFORM') or die;
@@ -42,7 +42,7 @@ class Ipn
      * ...
      * );
      *
-     * $ipn = new Prism\PayPal\Ipn($url, $data);
+     * $ipn = new Prism\Library\PayPal\Ipn($url, $data);
      * </code>
      *
      * @param string $url
@@ -65,7 +65,7 @@ class Ipn
      * ...
      * );
      *
-     * $ipn = new Prism\PayPal\Ipn($url, $data);
+     * $ipn = new Prism\Library\PayPal\Ipn($url, $data);
      * $ipn->verify();
      *
      * if (!$ipn->isVerified()) {
@@ -91,7 +91,7 @@ class Ipn
      * ...
      * );
      *
-     * $ipn = new Prism\PayPal\Ipn($url, $data);
+     * $ipn = new Prism\Library\PayPal\Ipn($url, $data);
      * $ipn->verify();
      * </code>
      *
@@ -182,7 +182,7 @@ class Ipn
      * ...
      * );
      *
-     * $ipn = new Prism\PayPal\Ipn($url, $data);
+     * $ipn = new Prism\Library\PayPal\Ipn($url, $data);
      * $ipn->verify();
      *
      * if (!$ipn->isVerified()) {
@@ -209,9 +209,9 @@ class Ipn
      * ...
      * );
      *
-     * $data = Prism\PayPal\Ipn::getRawPostData();
+     * $data = Prism\Library\PayPal\Ipn::getRawPostData();
      *
-     * $ipn = new Prism\PayPal\Ipn($url, $data);
+     * $ipn = new Prism\Library\PayPal\Ipn($url, $data);
      * $ipn->verify();
      *
      * if (!$ipn->isVerified()) {

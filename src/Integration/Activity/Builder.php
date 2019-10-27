@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Integration\Activity;
+namespace Prism\Library\Integration\Activity;
 
 use Joomla\Utilities\ArrayHelper;
 
@@ -36,7 +36,7 @@ class Builder
      *    "user_id" => 1
      * );
      *
-     * $activityBuilder = new Prism\Integration\Activity\Builder($options);
+     * $activityBuilder = new Prism\Library\Integration\Activity\Builder($options);
      * </code>
      *
      * @param  array  $config Options used in the process of building profile object.
@@ -56,7 +56,7 @@ class Builder
      *    "user_id" => 1
      * );
      *
-     * $activityBuilder = new Prism\Integration\Activity\Builder($options);
+     * $activityBuilder = new Prism\Library\Integration\Activity\Builder($options);
      * $activityBuilder->build();
      *
      * $activity = $activityBuilder->getActivity();
@@ -124,7 +124,7 @@ class Builder
      *    "user_id" => 1
      * );
      *
-     * $activityBuilder = new Prism\Integration\Activity\Builder($options);
+     * $activityBuilder = new Prism\Library\Integration\Activity\Builder($options);
      * $activityBuilder->build();
      *
      * $activity = $activityBuilder->getActivity();

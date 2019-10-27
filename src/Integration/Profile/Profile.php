@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Integration\Profile;
+namespace Prism\Library\Integration\Profile;
 
-use Prism\Database\TableImmutable;
+use Prism\Library\Database\TableImmutable;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -37,7 +37,7 @@ class Profile
      *    'user_id'  => 1
      * ));
      *
-     * $factory = new Prism\Integration\Profile\Factory($options);
+     * $factory = new Prism\Library\Integration\Profile\Factory($options);
      * </code>
      *
      * @param ProfileMapper $profile
@@ -58,10 +58,10 @@ class Profile
      *    'user_id'  => 1
      * ));
      *
-     * $factory = new Prism\Integration\Profile\Factory($options, JFactory::getDbo());
+     * $factory = new Prism\Library\Integration\Profile\Factory($options, JFactory::getDbo());
      *
      * $profileAdapter = $factory->create();
-     * $profile   = new Prism\Integration\Profile\Profile($profileAdapter);
+     * $profile   = new Prism\Library\Integration\Profile\Profile($profileAdapter);
      *
      * $userId = $profile->get("user_id");
      * $userId = $profile->get("location");
@@ -91,10 +91,10 @@ class Profile
      *    'user_id'  => 1
      * ));
      *
-     * $factory = new Prism\Integration\Profile\Factory($options, JFactory::getDbo());
+     * $factory = new Prism\Library\Integration\Profile\Factory($options, JFactory::getDbo());
      *
      * $profileAdapter = $factory->create();
-     * $profile   = new Prism\Integration\Profile\Profile($profileAdapter);
+     * $profile   = new Prism\Library\Integration\Profile\Profile($profileAdapter);
      *
      * $avatar = $profile->getAvatar('small');
      * $link   = $profile->getLink();

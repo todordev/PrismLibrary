@@ -6,7 +6,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Video;
+namespace Prism\Library\Video;
 
 use Joomla\Uri\Uri;
 
@@ -32,7 +32,7 @@ class Embed
      * <code>
      * $url = "http://youtube.com/...";
      *
-     * $video = new Prism\Video\Embed($url);
+     * $video = new Prism\Library\Video\Embed($url);
      * </code>
      *
      * @param string $url
@@ -48,7 +48,7 @@ class Embed
      * <code>
      * $url = "http://youtube.com/...";
      *
-     * $video = new Prism\Video\Embed($url);
+     * $video = new Prism\Library\Video\Embed($url);
      * $video->parse();
      *
      * </code>
@@ -79,7 +79,7 @@ class Embed
      * <code>
      * $url = "http://youtube.com/...";
      *
-     * $video = new Prism\Video\Embed($url);
+     * $video = new Prism\Library\Video\Embed($url);
      * $video->parse();
      *
      * $video->getCode();
@@ -98,7 +98,7 @@ class Embed
      * <code>
      * $url = "http://youtube.com/...";
      *
-     * $video = new Prism\Video\Embed($url);
+     * $video = new Prism\Library\Video\Embed($url);
      * $video->parse();
      *
      * $video->getHtmlCode();

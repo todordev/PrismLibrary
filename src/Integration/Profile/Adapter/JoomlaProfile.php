@@ -7,10 +7,10 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Integration\Profile\Adapter;
+namespace Prism\Library\Integration\Profile\Adapter;
 
-use Prism\Database\TableImmutable;
-use Prism\Integration\Profile\ProfileMapper;
+use Prism\Library\Database\TableImmutable;
+use Prism\Library\Integration\Profile\ProfileMapper;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -48,7 +48,7 @@ class JoomlaProfile extends TableImmutable implements ProfileMapper
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\JoomlaProfile(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\JoomlaProfile(\JFactory::getDbo());
      * </code>
      *
      * @param null|\JDatabaseDriver $db
@@ -71,7 +71,7 @@ class JoomlaProfile extends TableImmutable implements ProfileMapper
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\JoomlaProfile(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\JoomlaProfile(\JFactory::getDbo());
      * $profile->load($userId);
      * </code>
      *
@@ -123,7 +123,7 @@ class JoomlaProfile extends TableImmutable implements ProfileMapper
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\JoomlaProfile(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\JoomlaProfile(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $mapping = $profile->getMapping();
@@ -157,7 +157,7 @@ class JoomlaProfile extends TableImmutable implements ProfileMapper
      *    'user_id'  => 1
      * ));
      *
-     * $factory = new Prism\Integration\Profile\Factory($options, JFactory::getDbo());
+     * $factory = new Prism\Library\Integration\Profile\Factory($options, JFactory::getDbo());
      *
      * $profileAdapter = $factory->create();
      *

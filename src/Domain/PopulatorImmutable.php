@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Domain;
+namespace Prism\Library\Domain;
 
 use Joomla\Registry\Registry;
 
@@ -29,7 +29,7 @@ trait PopulatorImmutable
      *     'position' => '0'
      * );
      *
-     * $currency  = new Prism\Money\Currency();
+     * $currency  = new Prism\Library\Money\Currency();
      * $currency->bind($data);
      * </code>
      *

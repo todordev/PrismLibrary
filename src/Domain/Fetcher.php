@@ -7,14 +7,14 @@
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Domain;
+namespace Prism\Library\Domain;
 
-use Prism\Database\Request\Request;
+use Prism\Library\Database\Request\Request;
 
 /**
  * Interface with main fetch methods.
  *
- * @package Prism\Domain
+ * @package Prism\Library\Domain
  */
 interface Fetcher
 {

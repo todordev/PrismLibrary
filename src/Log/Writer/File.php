@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Log\Writer;
+namespace Prism\Library\Log\Writer;
 
-use Prism\Log\WriterInterface;
+use Prism\Library\Log\WriterInterface;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -40,7 +40,7 @@ class File implements WriterInterface
      * <code>
      * $file = "/logs/myfile.log";
      *
-     * $writer = new Prism\Log\Writer\File($file);
+     * $writer = new Prism\Library\Log\Writer\File($file);
      * </code>
      *
      * @param string $file
@@ -83,7 +83,7 @@ class File implements WriterInterface
      * $file = "/logs/myfile.log";
      * $title = "Logged title...";
      *
-     * $writer = new Prism\Log\Writer\File($file);
+     * $writer = new Prism\Library\Log\Writer\File($file);
      * $writer->setTitle($title);
      * </code>
      *
@@ -105,7 +105,7 @@ class File implements WriterInterface
      * $file = "/logs/myfile.log";
      * $type = "PAYMENT_PROCESS";
      *
-     * $writer = new Prism\Log\Writer\File($file);
+     * $writer = new Prism\Library\Log\Writer\File($file);
      * $writer->setType($type);
      * </code>
      *
@@ -130,7 +130,7 @@ class File implements WriterInterface
      *    "currency" => "USD"
      * );
      *
-     * $writer = new Prism\Log\Writer\File($file);
+     * $writer = new Prism\Library\Log\Writer\File($file);
      * $writer->setData($data);
      * </code>
      *
@@ -152,7 +152,7 @@ class File implements WriterInterface
      * $file = "/logs/myfile.log";
      * $date = "01-01-2014";
      *
-     * $writer = new Prism\Log\Writer\File($file);
+     * $writer = new Prism\Library\Log\Writer\File($file);
      * $writer->setDate($date);
      * </code>
      *
@@ -173,7 +173,7 @@ class File implements WriterInterface
      * <code>
      * $file = "/logs/myfile.log";
      *
-     * $writer = new Prism\Log\Writer\File($file);
+     * $writer = new Prism\Library\Log\Writer\File($file);
      * $writer->store();
      * </code>
      */

@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Money;
+namespace Prism\Library\Money;
 
 /**
  * This class contains methods that are used for managing an amount.
@@ -47,7 +47,7 @@ class MoneyFormatter
      * $language         = JFactory::getLanguage();
      * $moneyFormatter   = new NumberFormatter($language->getTag(), NumberFormatter::PATTERN_DECIMAL, $this->params->get('currency_pattern'));
      *
-     * $money   = new Prism\Money\Money($moneyFormatter, $amount);
+     * $money   = new Prism\Library\Money\Money($moneyFormatter, $amount);
      * </code>
      *
      * @param \NumberFormatter $formatter
@@ -70,7 +70,7 @@ class MoneyFormatter
      * $language         = JFactory::getLanguage();
      * $moneyFormatter   = new NumberFormatter($language->getTag(), NumberFormatter::PATTERN_DECIMAL, $this->params->get('currency_pattern'));
      *
-     * $money   = new Prism\Money\Money($moneyFormatter);
+     * $money   = new Prism\Library\Money\Money($moneyFormatter);
      * $money->setCurrency($currency);
      * </code>
      *
@@ -96,7 +96,7 @@ class MoneyFormatter
      * $language         = JFactory::getLanguage();
      * $moneyFormatter   = new NumberFormatter($language->getTag(), NumberFormatter::PATTERN_DECIMAL, $this->params->get('currency_pattern'));
      *
-     * $money   = new Prism\Money\Money($moneyFormatter);
+     * $money   = new Prism\Library\Money\Money($moneyFormatter);
      * $money->setCurrency($currency);
      *
      * $currency = $money->getCurrency();
@@ -123,7 +123,7 @@ class MoneyFormatter
      * $language         = JFactory::getLanguage();
      * $moneyFormatter   = new NumberFormatter($language->getTag(), NumberFormatter::PATTERN_DECIMAL, $this->params->get('currency_pattern'));
      *
-     * $money   = new Prism\Money\Money($moneyFormatter, $amount);
+     * $money   = new Prism\Library\Money\Money($moneyFormatter, $amount);
      * $money->setCurrency($currency);
      *
      * // Return $1,500.25 or 1,500.25USD.
@@ -159,7 +159,7 @@ class MoneyFormatter
      * $language         = JFactory::getLanguage();
      * $moneyFormatter   = new NumberFormatter($language->getTag(), NumberFormatter::PATTERN_DECIMAL, $this->params->get('currency_pattern'));
      *
-     * $money   = new Prism\Money\Money($moneyFormatter, $amount);
+     * $money   = new Prism\Library\Money\Money($moneyFormatter, $amount);
      * $money->setCurrency($currency);
      *
      * // Return 1,500.25.
@@ -182,7 +182,7 @@ class MoneyFormatter
      * $language         = JFactory::getLanguage();
      * $moneyFormatter   = new NumberFormatter($language->getTag(), NumberFormatter::PATTERN_DECIMAL, $this->params->get('currency_pattern'));
      *
-     * $money   = new Prism\Money\Money($moneyFormatter);
+     * $money   = new Prism\Library\Money\Money($moneyFormatter);
      * $money->setValue($amount);
      *
      * // Will return 1500.25.
@@ -205,7 +205,7 @@ class MoneyFormatter
      * $language         = JFactory::getLanguage();
      * $moneyFormatter   = new NumberFormatter($language->getTag(), NumberFormatter::PATTERN_DECIMAL, $this->params->get('currency_pattern'));
      *
-     * $money   = new Prism\Money\Money($moneyFormatter);
+     * $money   = new Prism\Library\Money\Money($moneyFormatter);
      * $money->setValue($amount);
      * </code>
      *

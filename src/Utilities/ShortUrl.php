@@ -6,7 +6,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Utilities;
+namespace Prism\Library\Utilities;
 
 /**
  * This class provides functionality for generating short URL,
@@ -35,7 +35,7 @@ class ShortUrl
      *     "login" => "....."
      * );
      *
-     * $urlService = new Prism\ShortUrl($url, $options);
+     * $urlService = new Prism\Library\ShortUrl($url, $options);
      * </code>
      *
      * @param string $url
@@ -60,7 +60,7 @@ class ShortUrl
      *     "login" => "....."
      * );
      *
-     * $urlService = new Prism\Utilities\ShortUrl($url);
+     * $urlService = new Prism\Library\Utilities\ShortUrl($url);
      * $urlService->bind($options);
      * </code>
      *
@@ -93,7 +93,7 @@ class ShortUrl
      *     "login" => "....."
      * );
      *
-     * $urlService = new Prism\Utilities\ShortUrl($url, $options);
+     * $urlService = new Prism\Library\Utilities\ShortUrl($url, $options);
      *
      * $shortUrl = $urlService->getUrl();
      * </code>

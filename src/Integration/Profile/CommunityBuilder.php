@@ -7,10 +7,10 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Integration\Profile;
+namespace Prism\Library\Integration\Profile;
 
-use Prism\Database\TableImmutable;
-use Prism\Integration\Helper;
+use Prism\Library\Database\TableImmutable;
+use Prism\Library\Integration\Helper;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -42,7 +42,7 @@ class CommunityBuilder extends TableImmutable implements ProfileInterface
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
      * </code>
      *
      * @param  \JDatabaseDriver $db
@@ -65,7 +65,7 @@ class CommunityBuilder extends TableImmutable implements ProfileInterface
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
      * $profile->load($userId);
      * </code>
      *
@@ -99,7 +99,7 @@ class CommunityBuilder extends TableImmutable implements ProfileInterface
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $link = $profile->getLink();
@@ -137,7 +137,7 @@ class CommunityBuilder extends TableImmutable implements ProfileInterface
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $avatar = $profile->getAvatar();
@@ -172,7 +172,7 @@ class CommunityBuilder extends TableImmutable implements ProfileInterface
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $location = $profile->getLocation();
@@ -191,7 +191,7 @@ class CommunityBuilder extends TableImmutable implements ProfileInterface
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
+     * $profile = new Prism\Library\Integration\Profile\CommunityBuilder(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $countryCode = $profile->getCountryCode();
