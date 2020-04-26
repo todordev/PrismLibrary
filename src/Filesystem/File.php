@@ -7,11 +7,12 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\File;
+namespace Prism\Library\Filesystem;
 
-use Joomla\CMS\Filesystem\File as JoomlaFile;
 use Joomla\CMS\Filesystem\Path;
 use Joomla\CMS\Image\Image;
+use Prism\Library\Validator\Validation;
+use Joomla\CMS\Filesystem\File as JoomlaFile;
 
 /**
  * This class provides functionality for uploading files and
@@ -25,13 +26,18 @@ class File
     protected $file;
     protected $fileData = array();
 
+    protected $errors = array();
+    protected $errorAdditionalInformation = array();
+
+    protected $validators = array();
+
     /**
      * Initialize the object.
      *
      * <code>
      * $myFile   = "/tmp/myfile.txt";
      *
-     * $file = new Prism\Library\File\File($myFile);
+     * $file = new Prism\Library\Filesystem\File($myFile);
      * </code>
      *
      * @param  mixed $file
@@ -41,6 +47,127 @@ class File
     public function __construct($file)
     {
         $this->file = Path::clean($file);
+    }
+
+
+    /**
+     * Add an object that validates the file.
+     *
+     * <code>
+     * $validator = new Prism\Library\File\Validator\Image();
+     *
+     * $file = new Prism\Library\File\File();
+     * $file->addValidator($validator);
+     * </code>
+     *
+     * @param  Validation $validator An object that validate a file.
+     *
+     * @return self
+     */
+    public function addValidation(Validation $validator)
+    {
+        $this->validators[] = $validator;
+
+        return $this;
+    }
+
+    /**
+     * Validate the file.
+     *
+     * <code>
+     * $myFile   = "/tmp/myfile.jpg";
+     *
+     * $validator = new Prism\Library\File\Validator\Image();
+     *
+     * $file = new Prism\Library\File\File($myFile);
+     * $file->addValidator($validator);
+     *
+     * if (!$file->isValid()) {
+     * ...
+     * )
+     * </code>
+     */
+    public function isValid(): bool
+    {
+        /** @var $validator Validation */
+        foreach ($this->validators as $validator) {
+            if ($validator->fails()) {
+                $this->errors[] = $validator->getMessage();
+                $this->errorAdditionalInformation[] = $validator->getAdditionalInformation();
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Return all error messages.
+     *
+     * <code>
+     * $myFile   = "/tmp/myfile.jpg";
+     *
+     * $validator = new Prism\Library\File\Validator\Image();
+     *
+     * $file = new Prism\Library\File\Image($myFile);
+     * $file->addValidator($validator);
+     *
+     * if (!$file->isValid()) {
+     *     $errors = $file->getErrors();
+     * )
+     * </code>
+     *
+     * @return array
+     */
+    public function getErrors(): array
+    {
+        return $this->errors;
+    }
+
+    /**
+     * Return last error message.
+     *
+     * <code>
+     * $filePath  = "/tmp/myfile.jpg";
+     *
+     * $validator = new Prism\Library\File\Validator\Image();
+     *
+     * $file = new Prism\Library\File\File($filePath);
+     * $file->addValidator($validator);
+     *
+     * if (!$file->isValid()) {
+     *     echo $file->getError();
+     * )
+     * </code>
+     *
+     * @return string
+     */
+    public function getError(): string
+    {
+        return end($this->errors);
+    }
+
+    /**
+     * Return latest record from the additional information about error.
+     *
+     * <code>
+     * $filePath  = "/tmp/myfile.jpg";
+     *
+     * $validator = new Prism\Library\File\Validator\Image();
+     *
+     * $file = new Prism\Library\File\File($filePath);
+     * $file->addValidator($validator);
+     *
+     * if (!$file->isValid()) {
+     *     echo $file->getErrorAdditionalInformation();
+     * )
+     * </code>
+     *
+     * @return string
+     */
+    public function getErrorAdditionalInformation(): string
+    {
+        return end($this->errorAdditionalInformation);
     }
 
     /**
@@ -60,10 +187,10 @@ class File
      *
      * @return bool
      */
-    public function isImage()
+    public function isImage(): bool
     {
         // Check file extension and its mime type.
-        return ($this->hasImageExtension() and $this->hasImageMime());
+        return ($this->hasImageExtension() || $this->hasImageMime());
     }
 
     /**
@@ -84,7 +211,7 @@ class File
      * @return bool
      * @todo Under construction.
      */
-    public function isVideo()
+    public function isVideo(): bool
     {
         // Check file extension and its mime type.
         return false;
@@ -103,9 +230,9 @@ class File
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      *
-     * @return bool
+     * @return string
      */
-    public function getFiletype()
+    public function getFiletype(): string
     {
         $filetype = '';
         if ($this->isImage()) {
@@ -132,7 +259,7 @@ class File
      *
      * @return array
      */
-    public function extractFileData()
+    public function extractFileData(): array
     {
         // Get mime type.
         if (function_exists('finfo_open')) {
@@ -144,7 +271,7 @@ class File
         $this->fileData['filename']  = basename($this->file);
         $this->fileData['filesize']  = filesize($this->file);
         $this->fileData['filetype']  = $this->getFiletype();
-        $this->fileData['extension'] = JoomlaFile::getExt(basename($this->fileData['filename']));
+        $this->fileData['extension'] = \Joomla\CMS\Filesystem\File::getExt(basename($this->fileData['filename']));
 
         if ($this->isImage()) {
             $imageProperties = Image::getImageFileProperties($this->file);
@@ -173,12 +300,12 @@ class File
      *
      * @return bool
      */
-    public function hasImageExtension()
+    public function hasImageExtension(): bool
     {
-        $extensions     = ['jpg', 'jpeg', 'bmp', 'gif', 'png'];
+        $extensions     = array('jpg', 'jpeg', 'bmp', 'gif', 'png');
         $fileExtension  = JoomlaFile::getExt(basename($this->file));
 
-        return (($fileExtension !== null && $fileExtension !== '') && in_array($fileExtension, $extensions, true));
+        return (($fileExtension !== null and $fileExtension !== '') and in_array($fileExtension, $extensions, true));
     }
 
     /**
@@ -198,12 +325,12 @@ class File
      *
      * @return bool
      */
-    public function hasImageMime()
+    public function hasImageMime(): bool
     {
         $result = false;
 
         if (function_exists('gd_info') && extension_loaded('gd')) {
-            $mimeTypes     = ['image/png', 'image/gif', 'image/jpeg', 'image/pjpeg', 'image/bmp', 'image/x-windows-bmp'];
+            $mimeTypes    = ['image/png', 'image/gif', 'image/jpeg', 'image/pjpeg', 'image/bmp', 'image/x-windows-bmp'];
 
             if (count($this->fileData) > 0) {
                 $mimeType = $this->fileData['mime'];

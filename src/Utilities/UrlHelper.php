@@ -9,6 +9,9 @@
 
 namespace Prism\Library\Utilities;
 
+use Joomla\CMS\Filesystem\Path;
+use Joomla\CMS\Uri\Uri;
+
 defined('JPATH_PLATFORM') or die;
 
 /**
@@ -34,5 +37,17 @@ abstract class UrlHelper
         }
 
         return $result;
+    }
+
+    /**
+     * Generate URL to folder.
+     *
+     * @param string $path
+     *
+     * @return string
+     */
+    public static function generateUrlToFolder(string $path): string
+    {
+        return Uri::root() . Path::clean($path, '/');
     }
 }

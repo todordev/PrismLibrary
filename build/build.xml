@@ -9,7 +9,7 @@
 	<!-- source directories -->
 	<property name="cfg.srcDir" location="${cfg.sourceDir}/src" />
 	<property name="cfg.testsDir" location="${cfg.sourceDir}/tests" />
-	<property name="cfg.mediaDir" location="${cfg.sourceDir}/media" />
+	<property name="cfg.assetsDir" location="${cfg.sourceDir}/assets" />
 	<property name="cfg.packagesDir" location="${cfg.sourceDir}/packages" />
 	<property name="cfg.vendorSourceDir" location="${cfg.sourceDir}/vendor" />
 	<property name="cfg.vendorDestDir" location="${cfg.packagesDir}/vendor" />
@@ -29,7 +29,6 @@
 	    <copy todir="${cfg.vendorDestDir}/aws/aws-sdk-php/src">
 			<fileset dir="${cfg.vendorSourceDir}/aws/aws-sdk-php/src" />
 	    </copy>
-		
 		<copy todir="${cfg.vendorDestDir}/defuse/php-encryption/src">
 			<fileset dir="${cfg.vendorSourceDir}/defuse/php-encryption/src" />
 	    </copy>
@@ -130,7 +129,7 @@
 		<zip destfile="${cfg.packagesDir}/${cfg.name}_${cfg.version}.zip">
 			<fileset dir="${cfg.srcDir}" />
 			<zipfileset dir="${cfg.vendorDestDir}" prefix="vendor" />
-			<zipfileset dir="${cfg.mediaDir}" prefix="media" />
+			<zipfileset dir="${cfg.assetsDir}" prefix="assets" />
 		</zip>
 	</target>
     

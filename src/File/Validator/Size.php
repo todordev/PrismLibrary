@@ -24,14 +24,14 @@ class Size extends Validator
     /**
      * A maximum file size allowed for uploading.
      *
-     * @var integer
+     * @var int
      */
     protected $maxFileSize = 0;
 
     /**
      * The size of the file which will be validated.
      *
-     * @var integer
+     * @var int
      */
     protected $fileSize = 0;
 
@@ -45,8 +45,8 @@ class Size extends Validator
      * $validator = new Prism\Library\File\Validator\Size($fileSize, $maxFileSize);
      * </code>
      *
-     * @param integer $fileSize File size in bytes ( 1024 * 1024 ).
-     * @param integer $maxFileSize Maximum allowed file size in bytes ( 1024 * 1024 ).
+     * @param int $fileSize File size in bytes ( 1024 * 1024 ).
+     * @param int $maxFileSize Maximum allowed file size in bytes ( 1024 * 1024 ).
      */
     public function __construct($fileSize = 0, $maxFileSize = 0)
     {
@@ -65,7 +65,7 @@ class Size extends Validator
      * $validator->setMaxFileSize($maxFileSize);
      * </code>
      *
-     * @param integer $maxFileSize File size in bytes ( 1024 * 1024 ).
+     * @param int $maxFileSize File size in bytes ( 1024 * 1024 ).
      */
     public function setMaxFileSize($maxFileSize)
     {

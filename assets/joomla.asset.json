@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "lib_prism",
+  "version": "1.0.0",
+  "description": "Prism Library assets",
+  "license": "GPL-2.0-or-later",
+  "assets": [
+    {
+      "package": "lib_prism",
+      "name": "blueimp-fileupload",
+      "type": "preset",
+      "version": "1.0",
+      "dependencies": [
+        "jquery.ui.widget#script",
+        "jquery.iframe-transport#script",
+        "blueimp-fileupload#style",
+        "blueimp-fileupload#script"
+      ]
+    },
+    {
+      "package": "lib_prism",
+      "name": "jquery.ui.widget",
+      "type": "script",
+      "version": "1.0",
+      "dependencies": [
+        "jquery"
+      ],
+      "uri": "media/lib_prism/vendors/fileupload/js/vendor/jquery.ui.widget.js"
+    },
+    {
+      "package": "lib_prism",
+      "name": "jquery.iframe-transport",
+      "type": "script",
+      "version": "1.0",
+      "dependencies": [
+        "jquery"
+      ],
+      "uri": "media/lib_prism/vendors/fileupload/js/jquery.iframe-transport.js"
+    },
+    {
+      "package": "lib_prism",
+      "name": "blueimp-fileupload",
+      "type": "script",
+      "version": "1.0",
+      "dependencies": [
+        "jquery"
+      ],
+      "uri": "media/lib_prism/vendors/fileupload/js/jquery.fileupload.js"
+    },
+    {
+      "package": "lib_prism",
+      "name": "blueimp-fileupload",
+      "type": "style",
+      "version": "1.0",
+      "uri": "media/lib_prism/vendors/fileupload/css/jquery.fileupload.css"
+    },
+    {
+      "package": "lib_prism",
+      "name": "cropperjs",
+      "type": "script",
+      "version": "1.0",
+      "dependencies": [
+        "jquery"
+      ],
+      "uri": "media/lib_prism/vendors/cropperjs/cropper.min.js"
+    },
+    {
+      "package": "lib_prism",
+      "name": "cropperjs",
+      "type": "style",
+      "version": "1.0",
+      "uri": "media/lib_prism/vendors/cropperjs/cropper.min.css"
+    }
+  ]
+}

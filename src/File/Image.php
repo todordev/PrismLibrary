@@ -9,11 +9,14 @@
 
 namespace Prism\Library\File;
 
+use Joomla\CMS\Filesystem\Folder;
+use Joomla\CMS\Language\Text;
 use Joomla\Registry\Registry;
 use Prism\Library\Constants;
 use Prism\Library\Utilities\StringHelper;
-
-defined('JPATH_PLATFORM') or die;
+use Joomla\CMS\Image\Image as JoomlaImage;
+use Joomla\CMS\Filesystem\Path as JoomlaPath;
+use Joomla\CMS\Filesystem\File as JoomlaFile;
 
 /**
  * This class contains methods that are used for managing currency.
@@ -40,7 +43,7 @@ class Image
      * $image = new Prism\Library\File\Image($file);
      * </code>
      *
-     * @param  string $file
+     * @param string $file
      */
     public function __construct($file)
     {
@@ -65,40 +68,40 @@ class Image
      * $fileData = $file->resize($destinationFolder, $resizeOptions);
      * </code>
      *
-     * @param  string $destinationFolder The folder where the file will be stored.
-     * @param  Registry $options
+     * @param string $destinationFolder The folder where the file will be stored.
+     * @param Registry $options
      *
-     * @throws \RuntimeException
+     * @return string
      * @throws \LogicException
      * @throws \InvalidArgumentException
      * @throws \UnexpectedValueException
      *
-     * @return array
+     * @throws \RuntimeException
      */
     public function resize($destinationFolder, Registry $options)
     {
         if (!$this->file) {
-            throw new \RuntimeException(\JText::sprintf('LIB_PRISM_ERROR_FILE_NOT_FOUND_S', $this->file));
+            throw new \RuntimeException(Text::sprintf('LIB_PRISM_ERROR_FILE_NOT_FOUND_S', $this->file));
         }
 
-        if (!\JFolder::exists($destinationFolder) and !\JFolder::create($destinationFolder)) {
-            throw new \RuntimeException(\JText::sprintf('LIB_PRISM_ERROR_CANNOT_CREATE_FOLDER_S', $destinationFolder));
+        if (!Folder::exists($destinationFolder) && !Folder::create($destinationFolder)) {
+            throw new \RuntimeException(Text::sprintf('LIB_PRISM_ERROR_CANNOT_CREATE_FOLDER_S', $destinationFolder));
         }
 
         // Resize image.
-        $image = new \JImage();
+        $image = new JoomlaImage();
         $image->loadFile($this->file);
         if (!$image->isLoaded()) {
-            throw new \RuntimeException(\JText::sprintf('LIB_PRISM_ERROR_FILE_NOT_IMAGE', $this->file));
+            throw new \RuntimeException(Text::sprintf('LIB_PRISM_ERROR_FILE_NOT_IMAGE', $this->file));
         }
 
         // Resize to general size.
-        $width      = $options->get('width', 640);
-        $width      = ($width < 25) ? 25 : $width;
-        $height     = $options->get('height', 480);
-        $height     = ($height < 25) ? 25 : $height;
-        $scale      = $options->get('scale', \JImage::SCALE_INSIDE);
-        $createNew  = (bool)$options->get('create_new', Constants::NO);
+        $width = $options->get('width', 640);
+        $width = ($width < 25) ? 25 : $width;
+        $height = $options->get('height', 480);
+        $height = ($height < 25) ? 25 : $height;
+        $scale = $options->get('scale', JoomlaImage::SCALE_INSIDE);
+        $createNew = (bool)$options->get('create_new', Constants::NO);
 
         if ($createNew) {
             $image = $image->resize($width, $height, $createNew, $scale);
@@ -128,41 +131,41 @@ class Image
      * $fileData = $file->crop($destinationFolder, $resizeOptions);
      * </code>
      *
-     * @param  string $destinationFolder The folder where the file will be stored.
-     * @param  Registry $options
+     * @param string $destinationFolder The folder where the file will be stored.
+     * @param Registry $options
      *
-     * @throws \RuntimeException
+     * @return string
      * @throws \LogicException
      * @throws \InvalidArgumentException
      * @throws \UnexpectedValueException
      *
-     * @return array
+     * @throws \RuntimeException
      */
     public function crop($destinationFolder, Registry $options)
     {
         if (!$this->file) {
-            throw new \RuntimeException(\JText::sprintf('LIB_PRISM_ERROR_FILE_NOT_FOUND_S', $this->file));
+            throw new \RuntimeException(Text::sprintf('LIB_PRISM_ERROR_FILE_NOT_FOUND_S', $this->file));
         }
 
-        if (!\JFolder::exists($destinationFolder) and !\JFolder::create($destinationFolder)) {
-            throw new \RuntimeException(\JText::sprintf('LIB_PRISM_ERROR_CANNOT_CREATE_FOLDER_S', $destinationFolder));
+        if (!Folder::exists($destinationFolder) && !Folder::create($destinationFolder)) {
+            throw new \RuntimeException(Text::sprintf('LIB_PRISM_ERROR_CANNOT_CREATE_FOLDER_S', $destinationFolder));
         }
 
         // Resize image.
-        $image = new \JImage();
+        $image = new JoomlaImage();
         $image->loadFile($this->file);
         if (!$image->isLoaded()) {
-            throw new \RuntimeException(\JText::sprintf('LIB_PRISM_ERROR_FILE_NOT_IMAGE', $this->file));
+            throw new \RuntimeException(Text::sprintf('LIB_PRISM_ERROR_FILE_NOT_IMAGE', $this->file));
         }
 
         // Resize to general size.
-        $width      = $options->get('width', 200);
-        $width      = ($width < 25) ? 25 : $width;
-        $height     = $options->get('height', 200);
-        $height     = ($height < 25) ? 25 : $height;
-        $left       = (int)abs($options->get('x', 0));
-        $top        = (int)abs($options->get('y', 0));
-        $createNew  = (bool)$options->get('create_new', Constants::NO);
+        $width = $options->get('width', 200);
+        $width = ($width < 25) ? 25 : $width;
+        $height = $options->get('height', 200);
+        $height = ($height < 25) ? 25 : $height;
+        $left = (int)abs($options->get('x', 0));
+        $top = (int)abs($options->get('y', 0));
+        $createNew = (bool)$options->get('create_new', Constants::NO);
 
         if ($createNew) {
             $image = $image->crop($width, $height, $left, $top, $createNew);
@@ -192,46 +195,46 @@ class Image
      * $fileData = $file->toFile($destinationFolder, $options);
      * </code>
      *
-     * @param  string $destinationFolder The folder where the file will be stored.
-     * @param  Registry $options
+     * @param string $destinationFolder The folder where the file will be stored.
+     * @param Registry $options
      *
-     * @throws \RuntimeException
+     * @return string
      * @throws \LogicException
      * @throws \InvalidArgumentException
      * @throws \UnexpectedValueException
      *
-     * @return array
+     * @throws \RuntimeException
      */
     public function toFile($destinationFolder, Registry $options)
     {
         if (!$this->file) {
-            throw new \RuntimeException(\JText::sprintf('LIB_PRISM_ERROR_FILE_NOT_FOUND_S', $this->file));
+            throw new \RuntimeException(Text::sprintf('LIB_PRISM_ERROR_FILE_NOT_FOUND_S', $this->file));
         }
 
-        if (!\JFolder::exists($destinationFolder) and !\JFolder::create($destinationFolder)) {
-            throw new \RuntimeException(\JText::sprintf('LIB_PRISM_ERROR_CANNOT_CREATE_FOLDER_S', $destinationFolder));
+        if (!Folder::exists($destinationFolder) && !Folder::create($destinationFolder)) {
+            throw new \RuntimeException(Text::sprintf('LIB_PRISM_ERROR_CANNOT_CREATE_FOLDER_S', $destinationFolder));
         }
 
         // Resize image.
-        $image = new \JImage();
+        $image = new JoomlaImage();
         $image->loadFile($this->file);
         if (!$image->isLoaded()) {
-            throw new \RuntimeException(\JText::sprintf('LIB_PRISM_ERROR_FILE_NOT_IMAGE', $this->file));
+            throw new \RuntimeException(Text::sprintf('LIB_PRISM_ERROR_FILE_NOT_IMAGE', $this->file));
         }
 
         return $this->saveFile($image, $destinationFolder, $options);
     }
 
-    protected function saveFile(\JImage $image, $destinationFolder, Registry $options)
+    protected function saveFile(JoomlaImage $image, $destinationFolder, Registry $options): string
     {
         $imageTypes = array('png', 'jpg', 'gif');
 
-        $filename = \JFile::makeSafe(basename($this->file));
-        $ext      = \JFile::getExt($filename);
+        $filename = JoomlaFile::makeSafe(basename($this->file));
+        $ext = JoomlaFile::getExt($filename);
 
         // Set new image type.
-        $imageType  = $options->get('image_type');
-        if ($imageType and in_array($imageType, $imageTypes, true)) {
+        $imageType = $options->get('image_type');
+        if ($imageType && in_array($imageType, $imageTypes, true)) {
             $ext = $imageType;
         }
 
@@ -241,37 +244,37 @@ class Image
         }
 
         // Generate new name.
-        $newFilename   = \JFile::makeSafe(basename($options->get('filename')));
+        $newFilename = JoomlaFile::makeSafe(basename($options->get('filename')));
         $generatedName = $newFilename;
         if (!$newFilename) {
             $generatedName = StringHelper::generateRandomString($options->get('filename_length', 16));
         }
 
         // Set prefix
-        $prefix  = \JFile::makeSafe($options->get('prefix'));
+        $prefix = JoomlaFile::makeSafe($options->get('prefix'));
         if (is_string($prefix) and $prefix !== '') {
-            $generatedName = $prefix.$generatedName;
+            $generatedName = $prefix . $generatedName;
         }
 
         // Set suffix
-        $suffix  = \JFile::makeSafe($options->get('suffix'));
+        $suffix = JoomlaFile::makeSafe($options->get('suffix'));
         if (is_string($suffix) and $suffix !== '') {
             $generatedName .= $suffix;
         }
 
         // Add the extension to the file.
-        $generatedName  .= '.'.$ext;
-        $destinationFile = \JPath::clean($destinationFolder .'/'. $generatedName, '/');
+        $generatedName .= '.' . $ext;
+        $destinationFile = JoomlaPath::clean($destinationFolder . '/' . $generatedName, '/');
 
         // Resize the image.
         switch ($ext) {
             case 'png':
-                $quality    = (int)$options->get('quality', Constants::QUALITY_HIGH);
+                $quality = (int)$options->get('quality', Constants::QUALITY_HIGH);
                 $optimizationOptions = array();
                 if ($quality > 0) {
                     if ($quality > 9) {
                         $quality /= 10;
-                        $quality  = ($quality >= 10) ? 9 : $quality;
+                        $quality = ($quality >= 10) ? 9 : $quality;
                     }
 
                     $optimizationOptions = array('quality' => $quality);
@@ -282,7 +285,7 @@ class Image
 
             case 'jpg':
             case 'jpeg':
-                $quality    = (int)$options->get('quality', Constants::QUALITY_HIGH);
+                $quality = (int)$options->get('quality', Constants::QUALITY_HIGH);
                 $optimizationOptions = array();
                 if ($quality > 0) {
                     $optimizationOptions = array('quality' => $quality);
@@ -296,11 +299,6 @@ class Image
                 break;
         }
 
-        // Prepare meta data about the file.
-        $file     = new File($destinationFile);
-        $fileData = $file->extractFileData();
-        $fileData['filepath'] = $destinationFile;
-
-        return $fileData;
+        return $destinationFile;
     }
 }

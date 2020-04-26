@@ -9,9 +9,13 @@
 
 namespace Prism\Library\Filesystem\Adapter;
 
+use Joomla\CMS\Filesystem\File;
+use Joomla\CMS\Filesystem\Path;
+use Joomla\CMS\Language\Text;
 use Joomla\Registry\Registry;
 use Joomla\Utilities\ArrayHelper;
 use Prism\Library\Utilities\StringHelper;
+use RuntimeException;
 
 /**
  * This class provides functionality for uploading files and
@@ -33,13 +37,13 @@ class Local
      * $localFilesystem = new Prism\Library\Filesystem\Adapters\Local($rootFolder);
      * </code>
      *
-     * @param  string $rootFolder A path to the folder where the file will be stored.
+     * @param string $rootFolder A path to the folder where the file will be stored.
      *
      * @throws \UnexpectedValueException
      */
     public function __construct($rootFolder)
     {
-        $this->rootFolder = \JPath::clean($rootFolder);
+        $this->rootFolder = Path::clean($rootFolder);
     }
 
     /**
@@ -55,35 +59,35 @@ class Local
      * @param array $fileData
      * @param Registry $options
      *
-     * @throws \RuntimeException
+     * @return string
      * @throws \InvalidArgumentException
      * @throws \UnexpectedValueException
      *
-     * @return string
+     * @throws RuntimeException
      */
     public function upload(array $fileData, Registry $options = null)
     {
-        $options         = $options ?: new Registry;
+        $options = $options ?: new Registry();
 
-        $sourceFile      = ArrayHelper::getValue($fileData, 'tmp_name', '', 'string');
-        $filename        = \JFile::makeSafe(ArrayHelper::getValue($fileData, 'name', '', 'string'));
-        $filename        = strtolower($filename);
+        $sourceFile = ArrayHelper::getValue($fileData, 'tmp_name', '', 'string');
+        $filename = File::makeSafe(ArrayHelper::getValue($fileData, 'name', '', 'string'));
+        $filename = strtolower($filename);
         $destinationFile = '';
 
-        if ($sourceFile !== '' and $filename !== '') {
+        if ($sourceFile !== '' && $filename !== '') {
             // Generate a new file name.
             if (!$options->get('filename')) {
-                $generatedName = StringHelper::generateRandomString($options->get('filename_length', 16)) . '.' . \JFile::getExt($filename);
+                $generatedName = StringHelper::generateRandomString($options->get('filename_length', 16)) . '.' . File::getExt($filename);
             } else {
-                $generatedName = $options->get('filename'). '.' . \JFile::getExt($filename);
+                $generatedName = $options->get('filename') . '.' . File::getExt($filename);
             }
 
             // Prepare destination path and folder.
-            $destinationFile = \JPath::clean($this->rootFolder . '/' . $generatedName, '/');
+            $destinationFile = Path::clean($this->rootFolder . '/' . $generatedName, '/');
 
             // Copy the file to a folder.
-            if (!\JFile::upload($sourceFile, $destinationFile)) {
-                throw new \RuntimeException(\JText::sprintf('LIB_PRISM_ERROR_CANNOT_COPY_FILE_S', $filename . ' (' . $sourceFile . ')', $destinationFile));
+            if (!File::upload($sourceFile, $destinationFile)) {
+                throw new RuntimeException(Text::sprintf('LIB_PRISM_ERROR_CANNOT_COPY_FILE_S', $filename . ' (' . $sourceFile . ')', $destinationFile));
             }
         }
 

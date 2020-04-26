@@ -17,6 +17,10 @@ if (!defined('PRISM_PATH_UI_LAYOUTS')) {
     define('PRISM_PATH_UI_LAYOUTS', PRISM_PATH_LIBRARY . '/Ui/layouts');
 }
 
+if (!defined('PRISM_PATH_MEDIA')) {
+    define('PRISM_PATH_MEDIA', JPATH_SITE . '/media/lib_prism');
+}
+
 JLoader::registerNamespace('\\Prism\\Library', PRISM_PATH_LIBRARY, false, false, 'psr4');
 
 require_once PRISM_PATH_LIBRARY . '/vendor/autoload.php';

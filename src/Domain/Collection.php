@@ -12,18 +12,29 @@ namespace Prism\Library\Domain;
 use ArrayAccess;
 use Countable;
 use Iterator;
+use UnexpectedValueException;
 
 /**
  * This class contains methods used for managing collection of data.
  *
  * @package         Prism
  * @subpackage      Domain
+ * @deprecated  Use Laravel collection.
  */
-abstract class Collection implements Iterator, Countable, ArrayAccess
+class Collection implements Iterator, Countable, ArrayAccess
 {
-    protected $items = array();
+    /**
+     * The items contained in the collection.
+     *
+     * @var array
+     */
+    protected $items = [];
 
     protected $position = 0;
+
+    public function __construct($items = [])
+    {
+    }
 
     /**
      * Rewind the Iterator to the first element.
@@ -44,7 +55,7 @@ abstract class Collection implements Iterator, Countable, ArrayAccess
      */
     public function current()
     {
-        return array_key_exists($this->position, $this->items) ? $this->items[$this->position] : null;
+        return $this->items[$this->position] ?? null;
     }
 
     /**
@@ -99,7 +110,7 @@ abstract class Collection implements Iterator, Countable, ArrayAccess
      * @param int $offset
      * @param mixed $value
      *
-     * @return mixed
+     * @return void
      *
      * @see ArrayAccess::offsetSet()
      */
@@ -151,7 +162,7 @@ abstract class Collection implements Iterator, Countable, ArrayAccess
      */
     public function offsetGet($offset)
     {
-        return array_key_exists($offset, $this->items) ? $this->items[$offset] : null;
+        return $this->items[$offset] ?? null;
     }
 
     /**
@@ -204,5 +215,34 @@ abstract class Collection implements Iterator, Countable, ArrayAccess
     public function keyExists($offset)
     {
         return array_key_exists($offset, $this->items);
+    }
+
+    public function get($key)
+    {
+        return $this->items[$key] ?? null;
+    }
+
+    public function set($key, $value)
+    {
+        $this->items[$key] = $value;
+    }
+
+    public function keyBy($key)
+    {
+        $results = new static();
+        foreach ($this->items as $item) {
+
+            if (is_string($item->$key)) {
+                $resolvedKey = $item->$key;
+            } elseif (is_object($item->$key)) {
+                $resolvedKey = (string) $item->$key;
+            } else {
+                throw new UnexpectedValueException('Invalid key value.');
+            }
+
+            $results[$resolvedKey] = $item;
+        }
+
+        return new static($results);
     }
 }
