@@ -26,12 +26,46 @@
 			</fileset>
 	    </copy>
 		
+		<copy todir="${cfg.vendorDestDir}/illuminate">
+			<fileset dir="${cfg.vendorSourceDir}/illuminate" />
+	    </copy>
+		<copy todir="${cfg.vendorDestDir}/league/fractal/src">
+			<fileset dir="${cfg.vendorSourceDir}/league/fractal/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDestDir}/ircmaxell/password-compat/lib">
+			<fileset dir="${cfg.vendorSourceDir}/ircmaxell/password-compat/lib" />
+	    </copy>
+		<copy todir="${cfg.vendorDestDir}/symfony/polyfill-php55">
+			<fileset dir="${cfg.vendorSourceDir}/symfony/polyfill-php55" >
+				<exclude name="composer.json" />
+				<exclude name="LICENSE" />
+				<exclude name="README.md" />
+			</fileset>
+	    </copy>
+		<!--
+		<copy todir="${cfg.vendorDestDir}/symfony/polyfill-intl-idn">
+			<fileset dir="${cfg.vendorSourceDir}/symfony/polyfill-intl-idn" >
+				<exclude name="composer.json" />
+				<exclude name="LICENSE" />
+				<exclude name="README.md" />
+			</fileset>
+	    </copy>
+		<copy todir="${cfg.vendorDestDir}/mtdowling/jmespath.php/src">
+			<fileset dir="${cfg.vendorSourceDir}/mtdowling/jmespath.php/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDestDir}/hashids/hashids/src">
+			<fileset dir="${cfg.vendorSourceDir}/hashids/hashids/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDestDir}/nesbot/carbon/src">
+			<fileset dir="${cfg.vendorSourceDir}/nesbot/carbon/src" />
+	    </copy>
 	    <copy todir="${cfg.vendorDestDir}/aws/aws-sdk-php/src">
 			<fileset dir="${cfg.vendorSourceDir}/aws/aws-sdk-php/src" />
 	    </copy>
 		<copy todir="${cfg.vendorDestDir}/defuse/php-encryption/src">
 			<fileset dir="${cfg.vendorSourceDir}/defuse/php-encryption/src" />
 	    </copy>
+		
 		<copy todir="${cfg.vendorDestDir}/guzzlehttp/guzzle/src">
 			<fileset dir="${cfg.vendorSourceDir}/guzzlehttp/guzzle/src" />
 	    </copy>
@@ -40,18 +74,6 @@
 	    </copy>
 		<copy todir="${cfg.vendorDestDir}/guzzlehttp/psr7/src">
 			<fileset dir="${cfg.vendorSourceDir}/guzzlehttp/psr7/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/hashids/hashids/src">
-			<fileset dir="${cfg.vendorSourceDir}/hashids/hashids/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/league/fractal/src">
-			<fileset dir="${cfg.vendorSourceDir}/league/fractal/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/league/flysystem/src">
-			<fileset dir="${cfg.vendorSourceDir}/league/flysystem/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/league/flysystem-aws-s3-v3/src">
-			<fileset dir="${cfg.vendorSourceDir}/league/flysystem-aws-s3-v3/src" />
 	    </copy>
 		<copy todir="${cfg.vendorDestDir}/psr/http-message/src">
 			<fileset dir="${cfg.vendorSourceDir}/psr/http-message/src" />
@@ -65,35 +87,8 @@
 		<copy todir="${cfg.vendorDestDir}/ramsey/uuid/src">
 			<fileset dir="${cfg.vendorSourceDir}/ramsey/uuid/src" />
 	    </copy>
-		<copy todir="${cfg.vendorDestDir}/nesbot/carbon/src">
-			<fileset dir="${cfg.vendorSourceDir}/nesbot/carbon/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/ramsey/uuid/src">
-			<fileset dir="${cfg.vendorSourceDir}/ramsey/uuid/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/ramsey/uuid/src">
-			<fileset dir="${cfg.vendorSourceDir}/ramsey/uuid/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/mtdowling/jmespath.php/src">
-			<fileset dir="${cfg.vendorSourceDir}/mtdowling/jmespath.php/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/monolog/monolog/src">
-			<fileset dir="${cfg.vendorSourceDir}/monolog/monolog/src" />
-	    </copy>
 		<copy todir="${cfg.vendorDestDir}/facebook/graph-sdk/src">
 			<fileset dir="${cfg.vendorSourceDir}/facebook/graph-sdk/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/phpseclib/phpseclib/phpseclib">
-			<fileset dir="${cfg.vendorSourceDir}/phpseclib/phpseclib/phpseclib" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/ircmaxell/random-lib/lib">
-			<fileset dir="${cfg.vendorSourceDir}/ircmaxell/random-lib/lib" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/ircmaxell/security-lib/lib">
-			<fileset dir="${cfg.vendorSourceDir}/ircmaxell/security-lib/lib" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/ircmaxell/password-compat/lib">
-			<fileset dir="${cfg.vendorSourceDir}/ircmaxell/password-compat/lib" />
 	    </copy>
 		<copy todir="${cfg.vendorDestDir}/google/apiclient/src">
 			<fileset dir="${cfg.vendorSourceDir}/google/apiclient/src" />
@@ -115,13 +110,28 @@
 				<exclude name="README.md" />
 			</fileset>
 	    </copy>
-		<copy todir="${cfg.vendorDestDir}/symfony/polyfill-php55">
-			<fileset dir="${cfg.vendorSourceDir}/symfony/polyfill-php55" >
-				<exclude name="composer.json" />
-				<exclude name="LICENSE" />
-				<exclude name="README.md" />
-			</fileset>
+		
+		<copy todir="${cfg.vendorDestDir}/league/flysystem/src">
+			<fileset dir="${cfg.vendorSourceDir}/league/flysystem/src" />
 	    </copy>
+		<copy todir="${cfg.vendorDestDir}/league/flysystem-aws-s3-v3/src">
+			<fileset dir="${cfg.vendorSourceDir}/league/flysystem-aws-s3-v3/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDestDir}/monolog/monolog/src">
+			<fileset dir="${cfg.vendorSourceDir}/monolog/monolog/src" />
+	    </copy>
+		<copy todir="${cfg.vendorDestDir}/phpseclib/phpseclib/phpseclib">
+			<fileset dir="${cfg.vendorSourceDir}/phpseclib/phpseclib/phpseclib" />
+	    </copy>
+		<copy todir="${cfg.vendorDestDir}/ircmaxell/random-lib/lib">
+			<fileset dir="${cfg.vendorSourceDir}/ircmaxell/random-lib/lib" />
+	    </copy>
+		<copy todir="${cfg.vendorDestDir}/ircmaxell/security-lib/lib">
+			<fileset dir="${cfg.vendorSourceDir}/ircmaxell/security-lib/lib" />
+	    </copy>
+		
+		-->
+		
 	</target>
 	
 	<!-- build component -->
