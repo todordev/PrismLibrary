@@ -2,7 +2,7 @@
 /**
  * @package      Prism
  * @subpackage   Integrations\Profiles
- * @author       Todor Iliev
+ * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2017 Todor Iliev <todor@prism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */

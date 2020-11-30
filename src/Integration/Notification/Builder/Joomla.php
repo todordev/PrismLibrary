@@ -2,7 +2,7 @@
 /**
  * @package      Prism
  * @subpackage   Integrations\Profiles
- * @author       Todor Iliev
+ * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2017 Todor Iliev <todor@prism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
@@ -68,7 +68,7 @@ final class Joomla
     public function build()
     {
         $notification = null;
-        
+
         switch ($this->config->get('platform')) {
             case 'socialcommunity':
                 jimport('Socialcommunity.init');

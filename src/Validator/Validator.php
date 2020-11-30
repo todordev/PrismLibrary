@@ -3,7 +3,7 @@
  * @package         Prism
  * @subpackage      Files
  * @author          Todor Iliev
- * @copyright       Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright       Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -14,6 +14,7 @@ namespace Prism\Library\Validator;
  *
  * @package         Prism
  * @subpackage      Validators
+ * @deprecated
  */
 abstract class Validator
 {

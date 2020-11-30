@@ -2,8 +2,8 @@
 /**
  * @package      Prism
  * @subpackage   Integrations\Profiles
- * @author       Todor Iliev
- * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @author       FunFex <opensource@funfex.com>
+ * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -47,7 +47,7 @@ abstract class Helper
         /** @var $app \JApplicationSite */
 
         $option = $app->input->get('option');
-        
+
         switch ($option) {
             case 'com_jsn':
             case 'com_easysocial':

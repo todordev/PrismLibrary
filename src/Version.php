@@ -2,7 +2,7 @@
 /**
  * @package      Prism
  * @subpackage   Version
- * @author       Todor Iliev
+ * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2020 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */

@@ -2,16 +2,18 @@
 /**
  * @package      Prism
  * @subpackage   Files\Validators
- * @author       Todor Iliev
- * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @author       FunFex <opensource@funfex.com>
+ * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\File\Validator\Image;
+namespace Prism\Library\File\Filesystem\Validation;
 
-use Prism\Library\validator\Validator;
-
-defined('JPATH_PLATFORM') or die;
+use Joomla\CMS\Filesystem\File;
+use Joomla\CMS\Filesystem\Path;
+use Joomla\CMS\Image\Image;
+use Joomla\CMS\Language\Text;
+use Prism\Library\Validator\Validation;
 
 /**
  * This class provides functionality for validating an image size.
@@ -19,7 +21,7 @@ defined('JPATH_PLATFORM') or die;
  * @package      Prism
  * @subpackage   Files\Validators\Images
  */
-class Size extends Validator
+class ImageDimensions extends Validation
 {
     protected $file;
     protected $minWidth  = 0;
@@ -33,14 +35,14 @@ class Size extends Validator
      * <code>
      * $myFile     = "/tmp/myfile.jpg";
      *
-     * $validator = new PrismFileValidatorImageSize($myFile);
+     * $validator = new Prism\Library\File\Filesystem\Image\Size($myFile);
      * </code>
      *
      * @param string $file A path to the file.
      */
     public function __construct($file = '')
     {
-        $this->file = \JPath::clean($file);
+        $this->file = Path::clean($file);
     }
 
     /**
@@ -49,7 +51,7 @@ class Size extends Validator
      * <code>
      * $myFile     = "/tmp/myfile.jpg";
      *
-     * $validator = new PrismFileValidatorImageSize();
+     * $validator = new Prism\Library\File\Filesystem\Image\Size();
      * $validator->setFile($myFile);
      * </code>
      *
@@ -57,7 +59,7 @@ class Size extends Validator
      */
     public function setFile($file)
     {
-        $this->file = \JPath::clean($file);
+        $this->file = Path::clean($file);
     }
 
     /**
@@ -66,7 +68,7 @@ class Size extends Validator
      * <code>
      * $minWidth  = 200;
      *
-     * $validator = new PrismFileValidatorImageSize();
+     * $validator = new Prism\Library\File\Filesystem\Image\Size();
      * $validator->setMinWidth($minWidth);
      * </code>
      *
@@ -83,7 +85,7 @@ class Size extends Validator
      * <code>
      * $minHeight  = 200;
      *
-     * $validator = new PrismFileValidatorImageSize();
+     * $validator = new Prism\Library\File\Filesystem\Image\Size();
      * $validator->setMinHeight($minHeight);
      * </code>
      *
@@ -100,7 +102,7 @@ class Size extends Validator
      * <code>
      * $maxWidth  = 200;
      *
-     * $validator = new PrismFileValidatorImageSize();
+     * $validator = new Prism\Library\File\Filesystem\Image\Size();
      * $validator->setMaxWidth($minWidth);
      * </code>
      *
@@ -117,7 +119,7 @@ class Size extends Validator
      * <code>
      * $maxHeight  = 200;
      *
-     * $validator = new PrismFileValidatorImageSize();
+     * $validator = new Prism\Library\File\Filesystem\Image\Size();
      * $validator->setMaxHeight($maxHeight);
      * </code>
      *
@@ -134,44 +136,69 @@ class Size extends Validator
      * <code>
      * $myFile     = "/tmp/myfile.jpg";
      *
-     * $validator = new PrismFileValidatorImageSize($myFile);
+     * $validator = new Prism\Library\File\Filesystem\Image\Size($myFile);
      *
-     * if (!$validator->isValid()) {
+     * if ($validator->passes()) {
+     *     //....
+     * }
+     * </code>
+     *
+     * @return bool
+     */
+    public function passes(): bool
+    {
+        return $this->validate();
+    }
+
+    /**
+     * Validate image size.
+     *
+     * <code>
+     * $myFile     = "/tmp/myfile.jpg";
+     *
+     * $validator = new Prism\Library\File\Filesystem\Image\Size($myFile);
+     *
+     * if ($validator->fails()) {
      *     echo $validator->getMessage();
      * }
      * </code>
      *
      * @return bool
      */
-    public function isValid()
+    public function fails(): bool
     {
-        if (!\JFile::exists($this->file)) {
-            $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_DOES_NOT_EXISTS', $this->file);
+        return !$this->validate();
+    }
+
+    public function validate(): bool
+    {
+        if (!File::exists($this->file)) {
+            $this->message = Text::sprintf('LIB_PRISM_ERROR_FILE_DOES_NOT_EXISTS', $this->file);
             return false;
         }
-        $imageProperties = \JImage::getImageFileProperties($this->file);
+        $imageProperties = Image::getImageFileProperties($this->file);
 
         // Check the minimum width of the image.
-        if (($this->minWidth > 0) and ($imageProperties->width < $this->minWidth)) {
-            $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_IMAGE_MIN_WIDTH', $this->minWidth);
+        if (($this->minWidth > 0) && ($imageProperties->width < $this->minWidth)) {
+            $this->message = Text::sprintf('LIB_PRISM_ERROR_FILE_IMAGE_MIN_WIDTH', $this->minWidth);
             return false;
         }
 
         // Check the minimum height of the image.
-        if (($this->minHeight > 0) and ($imageProperties->height < $this->minHeight)) {
-            $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_IMAGE_MIN_HEIGHT', $this->minHeight);
+        if (($this->minHeight > 0) && ($imageProperties->height < $this->minHeight)) {
+            $this->message = Text::sprintf('LIB_PRISM_ERROR_FILE_IMAGE_MIN_HEIGHT', $this->minHeight);
             return false;
         }
 
         // Check the maximum width of the image.
-        if (($this->maxWidth > 0) and ($imageProperties->width > $this->maxWidth)) {
-            $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_IMAGE_MAX_WIDTH', $this->maxWidth);
+        if (($this->maxWidth > 0) && ($imageProperties->width > $this->maxWidth)) {
+            $this->message = Text::sprintf('LIB_PRISM_ERROR_FILE_IMAGE_MAX_WIDTH', $this->maxWidth);
             return false;
         }
 
         // Check the maximum height of the image.
-        if (($this->maxHeight > 0) and ($imageProperties->height > $this->maxHeight)) {
-            $this->message = \JText::sprintf('LIB_PRISM_ERROR_FILE_IMAGE_MAX_HEIGHT', $this->maxHeight);
+        if (($this->maxHeight > 0) && ($imageProperties->height > $this->maxHeight)) {
+            $this->message = Text::sprintf('LIB_PRISM_ERROR_FILE_IMAGE_MAX_HEIGHT', $this->maxHeight);
             return false;
         }
 

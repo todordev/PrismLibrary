@@ -2,8 +2,8 @@
 /**
  * @package      Prism
  * @subpackage   Money
- * @author       Todor Iliev
- * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @author       FunFex <opensource@funfex.com>
+ * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -21,24 +21,24 @@ final class Currency implements LegalTender
 {
     use HydratingImmutable;
 
-    private const SYMBOL_LEFT = 0;
-    private const SYMBOL_RIGHT  = 1;
+    public const SYMBOL_LEFT = 0;
+    public const SYMBOL_RIGHT = 1;
 
-    private $title;
+    private $name;
     private $code;
     private $symbol;
     private $position;
 
     public function __construct(array $properties = [])
     {
-        $this->title      = array_key_exists('title', $properties) ? $properties['title'] : '';
-        $this->code       = array_key_exists('code', $properties) ? $properties['code'] : '';
-        $this->symbol     = array_key_exists('symbol', $properties) ? $properties['symbol'] : '';
-        $this->position   = array_key_exists('position', $properties) ? $properties['position'] : '';
+        $this->name = array_key_exists('name', $properties) ? $properties['name'] : '';
+        $this->code = array_key_exists('code', $properties) ? $properties['code'] : '';
+        $this->symbol = array_key_exists('symbol', $properties) ? $properties['symbol'] : '';
+        $this->position = array_key_exists('position', $properties) ? $properties['position'] : '';
     }
 
     /**
-     * Return currency title.
+     * Return currency name.
      *
      * <code>
      * $data = array(
@@ -49,14 +49,14 @@ final class Currency implements LegalTender
      * );
      *
      * $currency  = new Prism\Library\Money\Currency($data);
-     * echo $currency->getTitle();
+     * echo $currency->getName();
      * </code>
      *
      * @return string
      */
-    public function getTitle(): string
+    public function getName(): string
     {
-        return $this->title;
+        return $this->name;
     }
 
     /**

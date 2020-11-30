@@ -2,12 +2,12 @@
 /**
  * @package      Prism
  * @subpackage   Files
- * @author       Todor Iliev
- * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @author       FunFex <opensource@funfex.com>
+ * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\File;
+namespace Prism\Library\Filesystem\Service;
 
 use Joomla\CMS\Filesystem\Folder;
 use Joomla\CMS\Language\Text;
@@ -24,7 +24,7 @@ use Joomla\CMS\Filesystem\File as JoomlaFile;
  * @package      Prism
  * @subpackage   Files
  */
-class Image
+class ProcessingImage
 {
     /**
      * The file that will be processed.

@@ -2,8 +2,8 @@
 /**
  * @package      ITPrism
  * @subpackage   Integrations\Profiles
- * @author       Todor Iliev
- * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @author       FunFex <opensource@funfex.com>
+ * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -159,7 +159,7 @@ class EasyProfile implements ProfilesInterface
     public function getLink($userId, $route = true)
     {
         $link = '';
-        
+
         if (array_key_exists($userId, $this->profiles)) {
             $link = \JRoute::_('index.php?option=com_jsn&view=profile&id='.$this->profiles[$userId]->slug);
         }

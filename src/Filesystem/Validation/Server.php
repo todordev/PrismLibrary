@@ -2,8 +2,8 @@
 /**
  * @package      Prism
  * @subpackage   Files\Validators
- * @author       Todor Iliev
- * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @author       FunFex <opensource@funfex.com>
+ * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -24,7 +24,7 @@ class Server extends Validation
     /**
      * An error code that comes from the server.
      *
-     * @var integer
+     * @var int
      */
     protected $errorCode;
 
@@ -32,7 +32,7 @@ class Server extends Validation
      * An array with error codes that should be ignored.
      * Those errors will not be treat as en error.
      *
-     * @var integer
+     * @var array
      */
     protected $ignored = array();
 
@@ -40,7 +40,7 @@ class Server extends Validation
      * Initialize the object.
      *
      * <code>
-     * $errorCode  = 404;
+     * $errorCode = 404;
      *
      * $validator = new Prism\Library\Filesystem\Validator\Server($errorCode);
      * </code>
@@ -48,35 +48,35 @@ class Server extends Validation
      * @param int $errorCode Error code that comes from server.
      * @param array $ignored Ignored server errors.
      */
-    public function __construct($errorCode = 0, array $ignored = array())
+    public function __construct(int $errorCode = 0, array $ignored = [])
     {
-        $this->errorCode    = $errorCode;
-        $this->ignored      = $ignored;
+        $this->errorCode = $errorCode;
+        $this->ignored = $ignored;
     }
 
     /**
-     * Set a maximum allowed file size.
+     * Set an error code that received from the server.
      *
      * <code>
-     * $errorCode  = 404;
+     * $errorCode = 404;
      *
      * $validator = new Prism\Library\Filesystem\Validator\Server($errorCode);
      * $validator->setErrorCode($maxFileSize);
      * </code>
      *
-     * @param integer $errorCode An error code.
+     * @param int $errorCode An error code.
      */
     public function setErrorCode($errorCode)
     {
-        $this->errorCode    = $errorCode;
+        $this->errorCode = $errorCode;
     }
 
     /**
      * Validate the size of the file.
      *
      * <code>
-     * $errorCode  = 404;
-     * $ignored    = array(UPLOAD_ERR_NO_FILE, UPLOAD_ERR_EXTENSION);
+     * $errorCode = 404;
+     * $ignored   = array(UPLOAD_ERR_NO_FILE, UPLOAD_ERR_EXTENSION);
      *
      * $validator = new Prism\Library\Filesystem\Validator\Server($errorCode);
      *
@@ -84,7 +84,6 @@ class Server extends Validation
      * ...
      * }
      * </code>
-     *
      *
      * @return bool
      */
@@ -98,7 +97,7 @@ class Server extends Validation
         return !$this->validate();
     }
 
-    private function validate()
+    private function validate(): bool
     {
         $result = true;
 

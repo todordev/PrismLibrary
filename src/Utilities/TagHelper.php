@@ -2,8 +2,8 @@
 /**
  * @package      Prism
  * @subpackage   Utilities
- * @author       Todor Iliev
- * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @author       FunFex <opensource@funfex.com>
+ * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -67,7 +67,7 @@ class TagHelper extends \JHelper
 
         if (!array_key_exists($hash, $this->itemTags)) {
             $this->itemTags[$hash] = array();
-            
+
             $groups = JArrayHelper::getValue($options, 'access_groups', array(), 'array');
             if (!$groups) {
                 throw new \InvalidArgumentException(\JText::_('LIB_PRISM_ERROR_INVALID_ACCESS_GROUPS'));

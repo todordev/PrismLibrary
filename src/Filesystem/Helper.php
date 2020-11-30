@@ -2,8 +2,8 @@
 /**
  * @package      Prism
  * @subpackage   Filesystem
- * @author       Todor Iliev
- * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @author       FunFex <opensource@funfex.com>
+ * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -27,7 +27,7 @@ final class Helper
      * @var Registry
      */
     private $params;
-    
+
     public function __construct(Registry $params)
     {
         $this->params = $params;

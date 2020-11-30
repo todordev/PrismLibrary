@@ -3,14 +3,14 @@
  * @package         Prism
  * @subpackage      Files
  * @author          Todor Iliev
- * @copyright       Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright       Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace Prism\Library\Validator;
 
 /**
- * This is the abstract class of validators.
+ * This is the abstract class of validations.
  *
  * @package         Prism
  * @subpackage      Validators
@@ -47,9 +47,9 @@ abstract class Validation
      *
      * @return string
      */
-    public function getMessage()
+    public function getMessage(): string
     {
-        return (string)$this->message;
+        return $this->message;
     }
 
     /**
@@ -65,8 +65,8 @@ abstract class Validation
      *
      * @return string
      */
-    public function getAdditionalInformation()
+    public function getAdditionalInformation(): string
     {
-        return (string)$this->additionalInformation;
+        return $this->additionalInformation;
     }
 }

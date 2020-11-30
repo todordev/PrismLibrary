@@ -1,9 +1,9 @@
 <?php
 /**
- * @package      Prism\Library\Library
+ * @package      Prism\Library
  * @subpackage   Ui
- * @author       Todor Iliev
- * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @author       FunFex <opensource@funfex.com>
+ * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -13,11 +13,12 @@ use Joomla\CMS\Document\HtmlDocument;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Uri\Uri;
+use Prism\Library\Ui\DTO\ItemState;
 
 /**
- * Prism UI Html Helper
+ * User Interface HTML Helper
  *
- * @package       Prism\Library\Library
+ * @package       Prism\Library
  * @subpackage    Ui
  */
 abstract class Helper
@@ -745,30 +746,33 @@ abstract class Helper
         return $dateValidator->isValid() ? JHtml::_('date', $date, $format) : $default;
     }
 
-    public static function stateDefault($value, $i, $prefix = '')
+    /**
+     * @param $value
+     * @param int $i
+     * @param array $states
+     * @param string $prefix
+     * @return string
+     */
+    public static function itemState($value, int $i, array $states, $prefix = '')
     {
-        $states = array(
-            1 => array('changeStateUndefault', 'COM_SHIPPINGCART_DEFAULT', 'COM_SHIPPINGCART_UNDEFAULT_STATE_TOOLTIP', 'publish'),
-            0 => array('changeStateDefault', 'COM_SHIPPINGCART_UNDEFAULT', 'COM_SHIPPINGCART_DEFAULT_STATE_TOOLTIP', 'unpublish'),
-        );
-
         $currentState = $states[$value];
+        /** @var ItemState */
 
-        $active_class = 'inactive';
-        if ($value) {
-            $active_class = 'active';
-        }
+        $ariaId = 'cb' . $currentState->getMethod() . $i . '-desc';
 
         // <a class="tbody-icon active hasTooltip" href="javascript:void(0);" onclick="return Joomla.listItemTask('cb0','categories.unpublish')" title="Unpublish Item"><span class="icon-publish" aria-hidden="true"></span></a>
 
-        $html[] = '<a class="tbody-icon ' . $active_class . ' hasTooltip"';
+        $html[] = '<a class="tbody-icon ' . $currentState->getActiveClass() . '"';
 
-        $html[] = ' href="javascript:void(0);" onclick="return Joomla.listItemTask(\'cb' . $i . '\',\'' . $prefix . $currentState[0] . '\')"';
+        $html[] = ' href="javascript:void(0);" onclick="return Joomla.listItemTask(\'cb' . $i . '\',\'' . $prefix . $currentState->getMethod() . '\')"';
 
-        $html[] = ' title="' . Text::_($currentState[1]) . '::' . Text::_($currentState[2]) . '"';
         $html[] = '>';
-        $html[] = '<span class="icon-' . $currentState[3] . '" aria-hidden="true"></span>';
+        $html[] = '<span class="icon-' . $currentState->getIcon() . '" aria-hidden="true"></span>';
         $html[] = '</a>';
+
+        if ($currentState->getTooltip()) {
+            $html[] = '<div role="tooltip" id="' . $ariaId . '">' . Text::_($currentState->getTooltip()) . '</div>';
+        }
 
         return implode("\n", $html);
     }
