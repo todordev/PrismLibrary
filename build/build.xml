@@ -7,144 +7,123 @@
 	<loadproperties srcfile="${cfg.configFile}" />
 	
 	<!-- source directories -->
-	<property name="cfg.srcDir" location="${cfg.sourceDir}/src" />
-	<property name="cfg.testsDir" location="${cfg.sourceDir}/tests" />
-	<property name="cfg.assetsDir" location="${cfg.sourceDir}/assets" />
-	<property name="cfg.packagesDir" location="${cfg.sourceDir}/packages" />
-	<property name="cfg.vendorSourceDir" location="${cfg.sourceDir}/vendor" />
-	<property name="cfg.vendorDestDir" location="${cfg.packagesDir}/vendor" />
+	<property name="cfg.srcDir" location="${cfg.rootDir}/src" />
+	<property name="cfg.testsDir" location="${cfg.rootDir}/tests" />
+	<property name="cfg.assetsDir" location="${cfg.rootDir}/assets" />
+	<property name="cfg.packageDir" location="${cfg.rootDir}/package" />
+	<property name="cfg.packageBuildDir" location="${cfg.rootDir}/package/build" />
+	<property name="cfg.vendorDir" location="${cfg.rootDir}/vendor" />
+	<property name="cfg.vendorDestDir" location="${cfg.packageBuildDir}/src/vendor" />
+	
+	<property name="cfg.assetsVendorDir" location="${cfg.rootDir}/node_modules" />
+	<property name="cfg.assetsVendorDestDir" location="${cfg.packageBuildDir}/assets/vendor" />
 	
 	<target name="build" depends="copy, build_component, clean, info" />
     
 	<target name="copy" description="Prepare files and folders as a package">
-		<copy file="${cfg.vendorSourceDir}/autoload.php" todir="${cfg.vendorDestDir}"/>
+	
+		<copy file="${cfg.rootDir}/lib_prism.xml" todir="${cfg.packageBuildDir}"/>
+	
+		<!-- Copy Prism Library Files -->
+		<copy todir="${cfg.packageBuildDir}/src">
+			<fileset dir="${cfg.srcDir}" />
+	    </copy>
+		
+		<!-- Copy PHP Vendor Files -->
+		<copy file="${cfg.vendorDir}/autoload.php" todir="${cfg.vendorDestDir}"/>
 		
 		<copy todir="${cfg.vendorDestDir}/composer">
-			<fileset dir="${cfg.vendorSourceDir}/composer" >
+			<fileset dir="${cfg.vendorDir}/composer" >
 				<exclude name="installed.json" />
 				<exclude name="LICENSE" />
 			</fileset>
 	    </copy>
 		
 		<copy todir="${cfg.vendorDestDir}/illuminate">
-			<fileset dir="${cfg.vendorSourceDir}/illuminate" />
+			<fileset dir="${cfg.vendorDir}/illuminate" />
 	    </copy>
 		<copy todir="${cfg.vendorDestDir}/league/fractal/src">
-			<fileset dir="${cfg.vendorSourceDir}/league/fractal/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/ircmaxell/password-compat/lib">
-			<fileset dir="${cfg.vendorSourceDir}/ircmaxell/password-compat/lib" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/symfony/polyfill-php55">
-			<fileset dir="${cfg.vendorSourceDir}/symfony/polyfill-php55" >
-				<exclude name="composer.json" />
-				<exclude name="LICENSE" />
-				<exclude name="README.md" />
-			</fileset>
-	    </copy>
-		<!--
-		<copy todir="${cfg.vendorDestDir}/symfony/polyfill-intl-idn">
-			<fileset dir="${cfg.vendorSourceDir}/symfony/polyfill-intl-idn" >
-				<exclude name="composer.json" />
-				<exclude name="LICENSE" />
-				<exclude name="README.md" />
-			</fileset>
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/mtdowling/jmespath.php/src">
-			<fileset dir="${cfg.vendorSourceDir}/mtdowling/jmespath.php/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/hashids/hashids/src">
-			<fileset dir="${cfg.vendorSourceDir}/hashids/hashids/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/nesbot/carbon/src">
-			<fileset dir="${cfg.vendorSourceDir}/nesbot/carbon/src" />
-	    </copy>
-	    <copy todir="${cfg.vendorDestDir}/aws/aws-sdk-php/src">
-			<fileset dir="${cfg.vendorSourceDir}/aws/aws-sdk-php/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/defuse/php-encryption/src">
-			<fileset dir="${cfg.vendorSourceDir}/defuse/php-encryption/src" />
+			<fileset dir="${cfg.vendorDir}/league/fractal/src" />
 	    </copy>
 		
-		<copy todir="${cfg.vendorDestDir}/guzzlehttp/guzzle/src">
-			<fileset dir="${cfg.vendorSourceDir}/guzzlehttp/guzzle/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/guzzlehttp/promises/src">
-			<fileset dir="${cfg.vendorSourceDir}/guzzlehttp/promises/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/guzzlehttp/psr7/src">
-			<fileset dir="${cfg.vendorSourceDir}/guzzlehttp/psr7/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/psr/http-message/src">
-			<fileset dir="${cfg.vendorSourceDir}/psr/http-message/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/psr/cache/src">
-			<fileset dir="${cfg.vendorSourceDir}/psr/cache/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/psr/log/Psr/Log">
-			<fileset dir="${cfg.vendorSourceDir}/psr/log/Psr/Log" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/ramsey/uuid/src">
-			<fileset dir="${cfg.vendorSourceDir}/ramsey/uuid/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/facebook/graph-sdk/src">
-			<fileset dir="${cfg.vendorSourceDir}/facebook/graph-sdk/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/google/apiclient/src">
-			<fileset dir="${cfg.vendorSourceDir}/google/apiclient/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/google/auth/src">
-			<fileset dir="${cfg.vendorSourceDir}/google/auth/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/google/apiclient-services/src/Google/Service/Plus">
-			<fileset dir="${cfg.vendorSourceDir}/google/apiclient-services/src/Google/Service/Plus" />
-	    </copy>
-		<copy file="${cfg.vendorSourceDir}/google/apiclient-services/src/Google/Service/Plus.php" tofile="${cfg.vendorDestDir}/google/apiclient-services/src/Google/Service/Plus.php"/>
-		<copy todir="${cfg.vendorDestDir}/myclabs/deep-copy/src">
-			<fileset dir="${cfg.vendorSourceDir}/myclabs/deep-copy/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/symfony/polyfill-mbstring">
-			<fileset dir="${cfg.vendorSourceDir}/symfony/polyfill-mbstring" >
-				<exclude name="composer.json" />
-				<exclude name="LICENSE" />
-				<exclude name="README.md" />
-			</fileset>
+		<!-- Copy Assets Files -->
+		<copy todir="${cfg.packageBuildDir}/assets">
+			<fileset dir="${cfg.assetsDir}" />
 	    </copy>
 		
-		<copy todir="${cfg.vendorDestDir}/league/flysystem/src">
-			<fileset dir="${cfg.vendorSourceDir}/league/flysystem/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/league/flysystem-aws-s3-v3/src">
-			<fileset dir="${cfg.vendorSourceDir}/league/flysystem-aws-s3-v3/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/monolog/monolog/src">
-			<fileset dir="${cfg.vendorSourceDir}/monolog/monolog/src" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/phpseclib/phpseclib/phpseclib">
-			<fileset dir="${cfg.vendorSourceDir}/phpseclib/phpseclib/phpseclib" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/ircmaxell/random-lib/lib">
-			<fileset dir="${cfg.vendorSourceDir}/ircmaxell/random-lib/lib" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/ircmaxell/security-lib/lib">
-			<fileset dir="${cfg.vendorSourceDir}/ircmaxell/security-lib/lib" />
-	    </copy>
+		<!-- Copy Assets Vendor Files -->
+		<copy file="${cfg.assetsVendorDir}/vue/dist/vue.min.js" todir="${cfg.assetsVendorDestDir}/vue" />
+		<copy file="${cfg.assetsVendorDir}/jquery/dist/jquery.min.js" todir="${cfg.assetsVendorDestDir}/jquery" />
+		<copy file="${cfg.assetsVendorDir}/parsleyjs/dist/parsley.min.js" todir="${cfg.assetsVendorDestDir}/parsley" />
+		<copy todir="${cfg.assetsVendorDestDir}/parsley/i18n">
+		  <fileset dir="${cfg.assetsVendorDir}/parsleyjs/dist/i18n"/>
+		</copy>
+				
+		<copy file="${cfg.assetsVendorDir}/cropperjs/dist/cropper.min.js" todir="${cfg.assetsVendorDestDir}/cropperjs" />
+		<copy file="${cfg.assetsVendorDir}/cropperjs/dist/cropper.min.css" todir="${cfg.assetsVendorDestDir}/cropperjs" />
 		
-		-->
+		<copy file="${cfg.assetsVendorDir}/gasparesganga-jquery-loading-overlay/dist/loadingoverlay.min.js" todir="${cfg.assetsVendorDestDir}/loadingoverlay" />
+		<copy file="${cfg.assetsVendorDir}/is-loading/dist/isLoading.min.js" todir="${cfg.assetsVendorDestDir}/is-loading" />
+		<copy file="${cfg.assetsVendorDir}/jquery-serializejson/jquery.serializejson.min.js" todir="${cfg.assetsVendorDestDir}/jquery-serializejson" />
+		<copy file="${cfg.assetsVendorDir}/modaal/dist/css/modaal.min.css" todir="${cfg.assetsVendorDestDir}/modaal" />
+		<copy file="${cfg.assetsVendorDir}/modaal/dist/js/modaal.min.js" todir="${cfg.assetsVendorDestDir}/modaal" />
+		<copy file="${cfg.assetsVendorDir}/moment/min/moment.min.js" todir="${cfg.assetsVendorDestDir}/moment" />
+		<copy file="${cfg.assetsVendorDir}/moment/min/locales.min.js" todir="${cfg.assetsVendorDestDir}/moment" />
+		
+		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotify.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
+		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotifyAnimate.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
+		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotifyButtons.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
+		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotifyCallbacks.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
+		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotifyCompat.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
+		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotifyConfirm.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
+		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotifyHistory.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
+		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotifyMobile.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
+		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotifyNonBlock.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
+		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotifyReference.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
+		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotifyStyleMaterial.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
+		
+		<copy file="${cfg.assetsVendorDir}/readmore-js/readmore.min.js" todir="${cfg.assetsVendorDestDir}/readmore-js" />
+		
+		<copy file="${cfg.assetsVendorDir}/remodal/dist/remodal.css" todir="${cfg.assetsVendorDestDir}/remodal" />
+		<copy file="${cfg.assetsVendorDir}/remodal/dist/remodal.min.js" todir="${cfg.assetsVendorDestDir}/remodal" />
+		<copy file="${cfg.assetsVendorDir}/remodal/dist/remodal-default-theme.css" todir="${cfg.assetsVendorDestDir}/remodal" />
+		
+		<copy file="${cfg.assetsVendorDir}/sticky-kit/dist/sticky-kit.min.js" todir="${cfg.assetsVendorDestDir}/sticky-kit" />
+		
+		<copy file="${cfg.assetsVendorDir}/sweetalert2/dist/sweetalert2.min.js" todir="${cfg.assetsVendorDestDir}/sweetalert2" />
+		<copy file="${cfg.assetsVendorDir}/sweetalert2/dist/sweetalert2.min.css" todir="${cfg.assetsVendorDestDir}/sweetalert2" />
+		
+		<copy todir="${cfg.assetsVendorDestDir}/tooltipster/css">
+		  <fileset dir="${cfg.assetsVendorDir}/tooltipster/dist/css"/>
+		</copy>
+		
+		<copy todir="${cfg.assetsVendorDestDir}/tooltipster/js">
+		  <fileset dir="${cfg.assetsVendorDir}/tooltipster/dist/js"/>
+		</copy>
+		
+		<copy todir="${cfg.assetsVendorDestDir}/fileupload/css">
+		  <fileset dir="${cfg.assetsVendorDir}/blueimp-file-upload/css"/>
+		</copy>
+		
+		<copy todir="${cfg.assetsVendorDestDir}/fileupload/img">
+		  <fileset dir="${cfg.assetsVendorDir}/blueimp-file-upload/img"/>
+		</copy>
+		
+		<copy todir="${cfg.assetsVendorDestDir}/fileupload/js">
+		  <fileset dir="${cfg.assetsVendorDir}/blueimp-file-upload/js"/>
+		</copy>
 		
 	</target>
 	
 	<!-- build component -->
 	<target name="build_component" depends="copy" description="Packages the finally component file">
-		<zip destfile="${cfg.packagesDir}/${cfg.name}_${cfg.version}.zip">
-			<fileset dir="${cfg.srcDir}" />
-			<zipfileset dir="${cfg.vendorDestDir}" prefix="vendor" />
-			<zipfileset dir="${cfg.assetsDir}" prefix="assets" />
+		<zip destfile="${cfg.packageDir}/${cfg.name}_${cfg.version}.zip">
+			<fileset dir="${cfg.packageBuildDir}" />
 		</zip>
 	</target>
     
 	<target name="clean" depends="build_component" description="Remove temporary files and folders">
-		<delete dir="${cfg.vendorDestDir}" />
+		<delete dir="${cfg.packageBuildDir}" />
 	</target>
 	
 	<target name="info" description="prints information">
