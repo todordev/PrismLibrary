@@ -9,35 +9,32 @@
 
 namespace Prism\Library\Money;
 
-use Prism\Library\Domain\PopulatorImmutable;
+use Prism\Library\Domain\HydratingImmutable;
 
 /**
  * This class contains methods that are used for managing currency.
  *
  * @package      Prism
  * @subpackage   Money
- *
- * @deprecated v1.21 Removed the populator - method bind();
- * @todo Change the code where use this class with bind();
  */
 final class Currency implements LegalTender
 {
-    use PopulatorImmutable;
+    use HydratingImmutable;
 
-    const SYMBOL_BEFORE = 0;
-    const SYMBOL_AFTER  = 1;
+    private const SYMBOL_LEFT = 0;
+    private const SYMBOL_RIGHT  = 1;
 
     private $title;
     private $code;
     private $symbol;
     private $position;
 
-    public function __construct(array $properties = array())
+    public function __construct(array $properties = [])
     {
-        $this->title    = array_key_exists('title', $properties) ? $properties['title'] : '';
-        $this->code     = array_key_exists('code', $properties) ? $properties['code'] : '';
-        $this->symbol   = array_key_exists('symbol', $properties) ? $properties['symbol'] : '';
-        $this->position = array_key_exists('position', $properties) ? $properties['position'] : '';
+        $this->title      = array_key_exists('title', $properties) ? $properties['title'] : '';
+        $this->code       = array_key_exists('code', $properties) ? $properties['code'] : '';
+        $this->symbol     = array_key_exists('symbol', $properties) ? $properties['symbol'] : '';
+        $this->position   = array_key_exists('position', $properties) ? $properties['position'] : '';
     }
 
     /**
@@ -57,7 +54,7 @@ final class Currency implements LegalTender
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -79,7 +76,7 @@ final class Currency implements LegalTender
      *
      * @return string
      */
-    public function getCode()
+    public function getCode(): string
     {
         return $this->code;
     }
@@ -101,7 +98,7 @@ final class Currency implements LegalTender
      *
      * @return string
      */
-    public function getSymbol()
+    public function getSymbol(): string
     {
         return $this->symbol;
     }
@@ -124,7 +121,7 @@ final class Currency implements LegalTender
      *
      * @return int
      */
-    public function getPosition()
+    public function getPosition(): int
     {
         return (int)$this->position;
     }
@@ -141,15 +138,15 @@ final class Currency implements LegalTender
      * );
      *
      * $currency  = new Prism\Library\Money\Currency($data);
-     * if ($currency->symbolBefore()) {
+     * if ($currency->symbolLeft()) {
      * }
      * </code>
      *
      * @return bool
      */
-    public function symbolBefore()
+    public function symbolLeft(): bool
     {
-        return (self::SYMBOL_BEFORE === $this->getPosition());
+        return (self::SYMBOL_LEFT === $this->getPosition());
     }
 
     /**
@@ -164,15 +161,15 @@ final class Currency implements LegalTender
      * );
      *
      * $currency  = new Prism\Library\Money\Currency($data);
-     * if ($currency->symbolAfter()) {
+     * if ($currency->symbolRight()) {
      * }
      * </code>
      *
      * @return bool
      */
-    public function symbolAfter()
+    public function symbolRight(): bool
     {
-        return (self::SYMBOL_AFTER === $this->getPosition());
+        return (self::SYMBOL_RIGHT === $this->getPosition());
     }
 
     /**
@@ -182,7 +179,7 @@ final class Currency implements LegalTender
      *
      * @return bool
      */
-    public function equals(LegalTender $other)
+    public function equals(LegalTender $other): bool
     {
         return $this->code === $other->getCode();
     }

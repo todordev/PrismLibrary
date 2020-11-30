@@ -46,7 +46,7 @@ class MoneyTest extends PHPUnit_Framework_TestCase
      * Test the getCurrency method.
      *
      * @return  void
-     * @covers  Money::getCurrency
+     * @covers  MoneyService::getCurrency
      */
     public function testGetCurrency()
     {

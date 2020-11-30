@@ -11,33 +11,39 @@ namespace Prism\Library\Domain;
 
 use Joomla\Registry\Registry;
 
-/**
- * Trait Populator
- * @package Prism\Library\Domain
- * @deprecated
- */
-trait Populator
+trait HydratingImmutable
 {
+    /**
+     * @var bool
+     */
+    protected $hydrated = false;
+
     /**
      * Set notification data to object parameters.
      *
      * <code>
      * $data = array(
-     *     "note"    => "...",
-     *     "image"   => "picture.png",
-     *     "url"     => "http://itprism.com/",
-     *     "user_id" => 1
+     *     'title'    => 'EURO',
+     *     'code'     => 'EUR',
+     *     'symbol'   => '€',
+     *     'position' => '0'
      * );
      *
-     * $notification   = new Gamification\Notification(\JFactory::getDbo());
-     * $notification->bind($data);
+     * $currency = new Prism\Library\Money\Currency();
+     * $currency->hydrated($data);
      * </code>
      *
      * @param array $data
      * @param array $ignored
+     *
+     * @throws BindException
      */
-    public function bind(array $data, array $ignored = array())
+    public function hydrate(array $data, array $ignored = []): void
     {
+        if ($this->hydrated) {
+            throw new BindException('The properties of this immutable object has already been initialized.');
+        }
+
         $properties = get_object_vars($this);
 
         // Parse parameters of the object if they exists.
@@ -55,5 +61,7 @@ trait Populator
                 $this->$key = $value;
             }
         }
+
+        $this->hydrated = true;
     }
 }

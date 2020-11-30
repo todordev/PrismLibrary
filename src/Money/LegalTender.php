@@ -22,6 +22,6 @@ interface LegalTender
     public function getSymbol();
     public function getPosition();
     public function equals(LegalTender $other);
-    public function symbolAfter();
-    public function symbolBefore();
+    public function symbolLeft();
+    public function symbolRight();
 }

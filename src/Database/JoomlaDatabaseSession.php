@@ -9,6 +9,7 @@
 
 namespace Prism\Library\Database;
 
+use Joomla\Database\DatabaseDriver;
 use Prism\Library\Domain\TransactionalSession;
 
 /**
@@ -21,7 +22,7 @@ class JoomlaDatabaseSession implements TransactionalSession
 {
     private $db;
 
-    public function __construct(\JDatabaseDriver $db)
+    public function __construct(DatabaseDriver $db)
     {
         $this->db = $db;
     }

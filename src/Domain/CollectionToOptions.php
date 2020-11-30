@@ -9,6 +9,11 @@
 
 namespace Prism\Library\Domain;
 
+/**
+ * Interface CollectionToOptions
+ * @package Prism\Library\Domain
+ * @deprecated
+ */
 interface CollectionToOptions
 {
     /**

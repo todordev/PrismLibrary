@@ -17,6 +17,7 @@ use Prism\Library\Database\Request\Request;
  *
  * @package         Prism\Library\Database
  * @subpackage      Joomla
+ * @deprecated
  */
 trait OrderMethod
 {

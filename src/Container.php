@@ -15,6 +15,7 @@ namespace Prism\Library;
  *
  * @package     Prism
  * @subpackage  Containers
+ * @deprecated
  */
 abstract class Container
 {

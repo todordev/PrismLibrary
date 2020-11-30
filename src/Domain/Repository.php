@@ -11,6 +11,11 @@ namespace Prism\Library\Domain;
 
 use Prism\Library\Database\Request\Request;
 
+/**
+ * @package     Prism\Library\Domain
+ *
+ * @deprecated
+ */
 abstract class Repository
 {
     /**

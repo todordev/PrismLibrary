@@ -15,6 +15,7 @@ use Prism\Library\Database\Request\Request;
  * Interface with main fetch methods.
  *
  * @package Prism\Library\Domain
+ * @deprecated
  */
 interface Fetcher
 {

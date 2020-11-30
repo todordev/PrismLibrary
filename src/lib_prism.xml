@@ -3,14 +3,14 @@
 	<name>Prism Library</name>
 	<libraryname>Prism</libraryname>
 	<author>Todor Iliev</author>
-	<authorEmail>todor@itprism.com</authorEmail>
+	<authorEmail>development@itprism.com</authorEmail>
     <authorUrl>http://itprism.com</authorUrl>
-	<copyright>Copyright (C) 2020 Todor Iliev ( ITPrism.com ). All rights reserved.</copyright>
+	<copyright>Copyright (C) 2020 ITPrism. All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3</license>
 	<packager>ITPrism</packager>
 	<packagerurl>http://itprism.com</packagerurl>
-	<version>2.0.0</version>
-	<creationDate>30 January, 2020</creationDate>
+	<version>2.0.0-alpha1</version>
+	<creationDate>26 April, 2020</creationDate>
 	<description><![CDATA[<p><a href="http://itprism.com/free-joomla-extensions/others/software-development-kit" target="_blank">Prism Library</a> is a collection of resources used in many ITPrism extensions.</p>]]></description>
     
 	<media destination="lib_prism" folder="assets">

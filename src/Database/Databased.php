@@ -9,31 +9,29 @@
 
 namespace Prism\Library\Database;
 
-use Illuminate\Database\Query\Builder as QueryBuilder;
-use Prism\Library\Database\Request\Request;
+use Joomla\Database\DatabaseDriver;
 
 /**
- * Base class of Larave Database Gateway.
+ * Base class of Joomla Database Gateway.
  *
  * @package         Prism
  * @subpackage      Database
- * @deprecated
  */
-abstract class LaravelDatabase
+trait Databased
 {
     /**
      * Database driver.
      *
-     * @var QueryBuilder
+     * @var DatabaseDriver
      */
     protected $db;
 
     /**
      * Initialize the object.
      *
-     * @param QueryBuilder $db
+     * @param DatabaseDriver $db
      */
-    public function __construct(QueryBuilder $db = null)
+    public function __construct(DatabaseDriver $db)
     {
         $this->db = $db;
     }
@@ -41,9 +39,9 @@ abstract class LaravelDatabase
     /**
      * Set database driver.
      *
-     * @param QueryBuilder $db
+     * @param DatabaseDriver $db
      */
-    public function setDb(QueryBuilder $db)
+    public function setDb(DatabaseDriver $db): void
     {
         $this->db = $db;
     }
@@ -51,12 +49,10 @@ abstract class LaravelDatabase
     /**
      * Return database driver.
      *
-     * @return QueryBuilder
+     * @return DatabaseDriver
      */
-    public function getDb()
+    public function getDb(): DatabaseDriver
     {
         return $this->db;
     }
-
-    abstract protected function getQuery(Request $request = null);
 }

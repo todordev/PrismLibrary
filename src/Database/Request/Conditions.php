@@ -14,6 +14,7 @@ namespace Prism\Library\Database\Request;
  *
  * @package         Prism\Library\Database
  * @subpackage      Conditions
+ * @deprecated
  */
 class Conditions implements \Iterator, \Countable, \ArrayAccess
 {

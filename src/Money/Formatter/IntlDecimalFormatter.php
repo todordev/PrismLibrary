@@ -75,9 +75,9 @@ final class IntlDecimalFormatter implements Formatter
         if ($currency !== null) {
             if ($currency->getSymbol()) {
                 if ($currency->getPosition() === Constants::RIGHT) {
-                    $amount .= $currency->getSymbol();
+                    $amount .= ' ' . $currency->getSymbol();
                 } else {
-                    $amount = $currency->getSymbol().$amount;
+                    $amount = $currency->getSymbol() . ' ' . $amount;
                 }
 
             } elseif ($currency->getCode()) {

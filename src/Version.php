@@ -3,7 +3,7 @@
  * @package      Prism
  * @subpackage   Version
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2020 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -29,14 +29,14 @@ class Version
      *
      * @var integer
      */
-    public $release = '1';
+    public $release = '2';
 
     /**
      * Sub Release Level
      *
      * @var integer
      */
-    public $devLevel = '22';
+    public $devLevel = '0';
 
     /**
      * Release Type
@@ -57,7 +57,7 @@ class Version
      *
      * @var string
      */
-    public $releaseDate = '30 January, 2018';
+    public $releaseDate = '30 June, 2020';
 
     /**
      * License
@@ -71,7 +71,7 @@ class Version
      *
      * @var string
      */
-    public $copyright = '&copy; 2018 Prism. All rights reserved.';
+    public $copyright = '&copy; 2020 Prism. All rights reserved.';
 
     /**
      * URL

@@ -9,27 +9,30 @@
 
 namespace Prism\Library\Database;
 
+use Joomla\Database\DatabaseDriver;
+
 /**
  * Base class of Joomla Database Gateway.
  *
  * @package         Prism
  * @subpackage      Database
+ * @deprecated
  */
 abstract class JoomlaDatabase
 {
     /**
      * Database driver.
      *
-     * @var \JDatabaseDriver
+     * @var DatabaseDriver
      */
     protected $db;
 
     /**
      * Initialize the object.
      *
-     * @param \JDatabaseDriver $db
+     * @param DatabaseDriver $db
      */
-    public function __construct(\JDatabaseDriver $db)
+    public function __construct(DatabaseDriver $db)
     {
         $this->db = $db;
     }
@@ -37,9 +40,9 @@ abstract class JoomlaDatabase
     /**
      * Set database driver.
      *
-     * @param \JDatabaseDriver $db
+     * @param DatabaseDriver $db
      */
-    public function setDb(\JDatabaseDriver $db)
+    public function setDb(DatabaseDriver $db)
     {
         $this->db = $db;
     }
@@ -47,7 +50,7 @@ abstract class JoomlaDatabase
     /**
      * Return database driver.
      *
-     * @return \JDatabaseDriver
+     * @return DatabaseDriver
      */
     public function getDb()
     {

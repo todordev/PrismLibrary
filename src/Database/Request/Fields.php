@@ -14,6 +14,7 @@ namespace Prism\Library\Database\Request;
  *
  * @package         Prism\Library\Database
  * @subpackage      Request
+ * @deprecated
  */
 class Fields implements \Iterator, \Countable, \ArrayAccess
 {

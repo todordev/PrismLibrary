@@ -11,43 +11,32 @@ namespace Prism\Library\Domain;
 
 use Joomla\Registry\Registry;
 
-trait PopulatorImmutable
+trait Hydrating
 {
-    /**
-     * @var bool
-     */
-    protected $bound = false;
-
     /**
      * Set notification data to object parameters.
      *
      * <code>
      * $data = array(
-     *     'title'    => 'EURO',
-     *     'code'     => 'EUR',
-     *     'symbol'   => '€',
-     *     'position' => '0'
+     *     "note"    => "...",
+     *     "image"   => "picture.png",
+     *     "url"     => "http://itprism.com/",
+     *     "user_id" => 1
      * );
      *
-     * $currency  = new Prism\Library\Money\Currency();
-     * $currency->bind($data);
+     * $notification   = new Gamification\Notification(\JFactory::getDbo());
+     * $notification->bind($data);
      * </code>
      *
      * @param array $data
      * @param array $ignored
-     *
-     * @throws BindException
      */
-    public function bind(array $data, array $ignored = array())
+    public function hydrate(array $data, array $ignored = array()): void
     {
-        if ($this->bound) {
-            throw new BindException('The properties of this immutable object has already been initialized.');
-        }
-
         $properties = get_object_vars($this);
 
         // Parse parameters of the object if they exists.
-        if (array_key_exists('params', $data) and array_key_exists('params', $properties) and !in_array('params', $ignored, true)) {
+        if (array_key_exists('params', $data) && array_key_exists('params', $properties) && !in_array('params', $ignored, true)) {
             if ($data['params'] instanceof Registry) {
                 $this->params = $data['params'];
             } else {
@@ -57,11 +46,9 @@ trait PopulatorImmutable
         }
 
         foreach ($data as $key => $value) {
-            if (array_key_exists($key, $properties) and !in_array($key, $ignored, true)) {
+            if (array_key_exists($key, $properties) && !in_array($key, $ignored, true)) {
                 $this->$key = $value;
             }
         }
-
-        $this->bound = true;
     }
 }

@@ -70,6 +70,12 @@
       "type": "style",
       "version": "1.0",
       "uri": "media/lib_prism/vendors/cropperjs/cropper.min.css"
+    },
+    {
+      "name": "prism.style.css",
+      "type": "style",
+      "version": "1.0",
+      "uri": "media/lib_prism/css/prism.style.css"
     }
   ]
 }

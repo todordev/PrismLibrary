@@ -20,6 +20,7 @@ use Prism\Library\Database\Request\Request;
  *
  * @package         Prism
  * @subpackage      Database
+ * @deprecated
  */
 abstract class JoomlaDatabaseGateway
 {

@@ -9,6 +9,11 @@
 
 namespace Prism\Library\Domain;
 
+/**
+ * @package     Prism\Library\Domain
+ *
+ * @deprecated
+ */
 abstract class Mapper
 {
     /**

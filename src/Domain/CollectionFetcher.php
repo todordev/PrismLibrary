@@ -11,6 +11,11 @@ namespace Prism\Library\Domain;
 
 use Prism\Library\Database\Request\Request;
 
+/**
+ * Interface CollectionFetcher
+ * @package Prism\Library\Domain
+ * @deprecated
+ */
 interface CollectionFetcher
 {
     /**

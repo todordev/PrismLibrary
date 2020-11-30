@@ -9,6 +9,11 @@
 
 namespace Prism\Library\Domain;
 
+/**
+ * Interface Gatewayed
+ * @package Prism\Library\Domain
+ * @deprecated
+ */
 interface Gatewayed
 {
     public function getGateway();
