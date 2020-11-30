@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Payment\AuthorizeNet;
+namespace Prism\Library\Prism\Payment\AuthorizeNet;
 
 // no direct access
 defined('JPATH_PLATFORM') or die;
@@ -94,7 +94,7 @@ class Form
      *     "param2" => "...",
      * );
      *
-     * $form = new Prism\Library\Payment\AuthorizeNet\Form($fields);
+     * $form = new Prism\Library\Prism\Payment\AuthorizeNet\Form($fields);
      * </code>
      *
      * @param array $fields
@@ -117,7 +117,7 @@ class Form
      *     "param2" => "...",
      * );
      *
-     * $form = new Prism\Library\Payment\AuthorizeNet\Form($fields);
+     * $form = new Prism\Library\Prism\Payment\AuthorizeNet\Form($fields);
      * echo $form->getHiddenFieldsArray();
      * </code>
      *
@@ -161,7 +161,7 @@ class Form
      *
      * $transactionKey = "...";
      *
-     * $form = new Prism\Library\Payment\AuthorizeNet\Form($fields);
+     * $form = new Prism\Library\Prism\Payment\AuthorizeNet\Form($fields);
      * $form->generateFingerprint($transactionKey);
      * </code>
      *

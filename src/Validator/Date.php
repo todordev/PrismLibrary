@@ -6,7 +6,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Validator;
+namespace Prism\Library\Prism\Validator;
 
 /**
  * This class validates date.
@@ -29,7 +29,7 @@ class Date implements ValidatorInterface
      * <code>
      * $date = "01-01-2020";
      *
-     * $validator = new Prism\Library\Validator\Date($date);
+     * $validator = new Prism\Library\Prism\Validator\Date($date);
      * </code>
      *
      * @param string $date
@@ -45,7 +45,7 @@ class Date implements ValidatorInterface
      * <code>
      * $date = "01-01-2020";
      *
-     * $validator = new Prism\Library\Validator\Date($date);
+     * $validator = new Prism\Library\Prism\Validator\Date($date);
      *
      * if (!$validator->isValid()) {
      * ...

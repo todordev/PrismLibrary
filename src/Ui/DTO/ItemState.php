@@ -1,18 +1,18 @@
 <?php
 /**
- * @package      Prism\Library
+ * @package      Prism\Library\Prism
  * @subpackage   Ui
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Ui\DTO;
+namespace Prism\Library\Prism\Ui\DTO;
 
 /**
  * Data transfer object of item state.
  *
- * @package       Prism\Library
+ * @package       Prism\Library\Prism
  * @subpackage    Ui
  */
 final class ItemState

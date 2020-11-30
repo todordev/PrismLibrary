@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Controller;
+namespace Prism\Library\Prism\Controller;
 
 use Exception;
 use Joomla\CMS\MVC\Controller\BaseController as JoomlaBaseController;

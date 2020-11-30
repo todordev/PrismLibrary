@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Payment;
+namespace Prism\Library\Prism\Payment;
 
-use Prism\Library\Domain\PropertiesMethods;
+use Prism\Library\Prism\Domain\PropertiesMethods;
 
 /**
  * The class should be used for object returned by payment plugins.
@@ -58,7 +58,7 @@ class Result
      * Set an event to be skipped during the payment process.
      *
      *<code>
-     * $paymentResult = new Prism\Library\Payment\Result();
+     * $paymentResult = new Prism\Library\Prism\Payment\Result();
      *
      * $paymentResult->skipAction(Result::EVENT_AFTER_PAYMENT_NOTIFY);
      * </code>
@@ -79,7 +79,7 @@ class Result
      * Set an action to be skipped during the payment process.
      *
      * <code>
-     * $paymentResult = new Prism\Library\Payment\Result();
+     * $paymentResult = new Prism\Library\Prism\Payment\Result();
      *
      * $paymentResult->skipAction(Result::ACTION_SEND_CONFIRMATION_MAILS);
      * </code>
@@ -100,7 +100,7 @@ class Result
      * Check if an event has been skipped.
      *
      * <code>
-     * $paymentResult = new Prism\Library\Payment\Result();
+     * $paymentResult = new Prism\Library\Prism\Payment\Result();
      *
      * if ($paymentResult->isEventSkipped(Result::EVENT_AFTER_PAYMENT_NOTIFY)) {
      * //....
@@ -124,7 +124,7 @@ class Result
      * Check if an event is active.
      *
      * <code>
-     * $paymentResult = new Prism\Library\Payment\Result();
+     * $paymentResult = new Prism\Library\Prism\Payment\Result();
      *
      * if ($paymentResult->isEventActive(Result::EVENT_AFTER_PAYMENT_NOTIFY)) {
      * //....
@@ -148,7 +148,7 @@ class Result
      * Check if an action has been skipped.
      *
      * <code>
-     * $paymentResult = new Prism\Library\Payment\Result();
+     * $paymentResult = new Prism\Library\Prism\Payment\Result();
      *
      * if ($paymentResult->isActionSkipped(Result::ACTION_SEND_CONFIRMATION_MAILS)) {
      * //....
@@ -172,7 +172,7 @@ class Result
      * Check if an action is active.
      *
      * <code>
-     * $paymentResult = new Prism\Library\Payment\Result();
+     * $paymentResult = new Prism\Library\Prism\Payment\Result();
      *
      * if ($paymentResult->isActionActive(Result::ACTION_SEND_CONFIRMATION_MAILS)) {
      * //....

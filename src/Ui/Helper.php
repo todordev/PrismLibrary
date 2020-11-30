@@ -1,24 +1,24 @@
 <?php
 /**
- * @package      Prism\Library
+ * @package      Prism\Library\Prism
  * @subpackage   Ui
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Ui;
+namespace Prism\Library\Prism\Ui;
 
 use Joomla\CMS\Document\HtmlDocument;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Uri\Uri;
-use Prism\Library\Ui\DTO\ItemState;
+use Prism\Library\Prism\Ui\DTO\ItemState;
 
 /**
  * User Interface HTML Helper
  *
- * @package       Prism\Library
+ * @package       Prism\Library\Prism
  * @subpackage    Ui
  */
 abstract class Helper
@@ -585,7 +585,7 @@ abstract class Helper
 
         // Only display the triggers once for each control.
         if (!in_array($id, $done, true)) {
-            $calendarDateFormat = Prism\Library\Utilities\DateHelper::convertToMomentJsFormat($format);
+            $calendarDateFormat = Prism\Library\Prism\Utilities\DateHelper::convertToMomentJsFormat($format);
 
             $document = JFactory::getDocument();
             $document
@@ -741,7 +741,7 @@ abstract class Helper
      */
     public static function date($date, $format = '', $default = '--')
     {
-        $dateValidator = new Prism\Library\Validator\Date($date);
+        $dateValidator = new Prism\Library\Prism\Validator\Date($date);
 
         return $dateValidator->isValid() ? JHtml::_('date', $date, $format) : $default;
     }

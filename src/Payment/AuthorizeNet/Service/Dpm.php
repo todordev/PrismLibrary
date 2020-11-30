@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Payment\AuthorizeNet\Service;
+namespace Prism\Library\Prism\Payment\AuthorizeNet\Service;
 
-use Prism\Library\Payment\AuthorizeNet\Form;
+use Prism\Library\Prism\Payment\AuthorizeNet\Form;
 use Joomla\Utilities\ArrayHelper;
 
 // no direct access
@@ -35,7 +35,7 @@ class Dpm extends Form
      *      "transaction_key"   => "...."
      * );
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm($keys);
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm($keys);
      * </code>
      *
      * @param array $keys
@@ -55,7 +55,7 @@ class Dpm extends Form
      *      "transaction_key"   => "...."
      * );
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm($keys);
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm($keys);
      * $amount = $dpm->getAmount();
      * </code>
      *
@@ -77,7 +77,7 @@ class Dpm extends Form
      *
      * $amount = 100;
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm($keys);
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm($keys);
      * $dpm->setAmount($amount);
      * </code>
      *
@@ -101,7 +101,7 @@ class Dpm extends Form
      *      "transaction_key"   => "...."
      * );
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm($keys);
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm($keys);
      * $sequence = $dpm->getSequence();
      * </code>
      *
@@ -123,7 +123,7 @@ class Dpm extends Form
      *
      * $sequence = "....";
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm($keys);
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm($keys);
      * $dpm->setSequence($sequence);
      * </code>
      *
@@ -147,7 +147,7 @@ class Dpm extends Form
      *      "transaction_key"   => "...."
      * );
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm($keys);
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm($keys);
      * $dpm->disableRelayResponse();
      * </code>
      *
@@ -169,7 +169,7 @@ class Dpm extends Form
      *      "transaction_key"   => "...."
      * );
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm($keys);
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm($keys);
      * $dpm->enableRelayResponse();
      * </code>
      *
@@ -191,7 +191,7 @@ class Dpm extends Form
      *      "transaction_key"   => "...."
      * );
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm($keys);
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm($keys);
      * $dpm->disableTestMode();
      * </code>
      *
@@ -213,7 +213,7 @@ class Dpm extends Form
      *      "transaction_key"   => "...."
      * );
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm($keys);
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm($keys);
      * $dpm->enableTestMode();
      * </code>
      *
@@ -235,7 +235,7 @@ class Dpm extends Form
      *      "transaction_key"   => "...."
      * );
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm($keys);
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm($keys);
      * $relayUrl = $dpm->getRelayUrl();
      * </code>
      *
@@ -257,7 +257,7 @@ class Dpm extends Form
      *
      * $relayURL = "....";
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm($keys);
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm($keys);
      * $dpm->setRelayUrl($amount);
      * </code>
      *
@@ -281,7 +281,7 @@ class Dpm extends Form
      *      "transaction_key"   => "...."
      * );
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm($keys);
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm($keys);
      * $apiLoginId = $dpm->getApiLoginId();
      * </code>
      *
@@ -298,7 +298,7 @@ class Dpm extends Form
      * <code>
      * $apiLoginId = "....";
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm();
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm();
      * $dpm->setApiLoginId($apiLoginId);
      * </code>
      *
@@ -322,7 +322,7 @@ class Dpm extends Form
      *      "transaction_key"   => "...."
      * );
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm($keys);
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm($keys);
      * $transactionKey = $dpm->getTransactionKey();
      * </code>
      *
@@ -339,7 +339,7 @@ class Dpm extends Form
      * <code>
      * $transactionKey = "....";
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm();
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm();
      * $dpm->setTransactionKey($transactionKey);
      * </code>
      *
@@ -363,7 +363,7 @@ class Dpm extends Form
      *      "transaction_key"   => "...."
      * );
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm($keys);
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm($keys);
      * $currency = $dpm->getCurrency();
      * </code>
      *
@@ -380,7 +380,7 @@ class Dpm extends Form
      * <code>
      * $currency = "USD";
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm();
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm();
      * $dpm->setCurrency($currency);
      * </code>
      *
@@ -404,7 +404,7 @@ class Dpm extends Form
      *      "transaction_key"   => "...."
      * );
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm($keys);
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm($keys);
      * $description = $dpm->getDescription();
      * </code>
      *
@@ -421,7 +421,7 @@ class Dpm extends Form
      * <code>
      * $description = "....";
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm();
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm();
      * $dpm->setDescription($description);
      * </code>
      *
@@ -445,7 +445,7 @@ class Dpm extends Form
      *      "transaction_key"   => "...."
      * );
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm($keys);
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm($keys);
      * $type = $dpm->getType();
      * </code>
      *
@@ -462,7 +462,7 @@ class Dpm extends Form
      * <code>
      * $type = "....";
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm();
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm();
      * $dpm->setType($type);
      * </code>
      *
@@ -486,7 +486,7 @@ class Dpm extends Form
      *      "transaction_key"   => "...."
      * );
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm($keys);
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm($keys);
      * $method = $dpm->getMethod();
      * </code>
      *
@@ -503,7 +503,7 @@ class Dpm extends Form
      * <code>
      * $method = "....";
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm();
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm();
      * $dpm->setMethod($method);
      * </code>
      *
@@ -524,7 +524,7 @@ class Dpm extends Form
      * <code>
      * $timestamp = "....";
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm();
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm();
      * $dpm->setTimestamp($timestamp);
      * </code>
      *
@@ -548,7 +548,7 @@ class Dpm extends Form
      *      "transaction_key"   => "...."
      * );
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm($keys);
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm($keys);
      * $timestamp = $dpm->getTimestamp();
      * </code>
      *
@@ -565,7 +565,7 @@ class Dpm extends Form
      * <code>
      * $custom = "....";
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm();
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm();
      * $dpm->setCustom($custom);
      * </code>
      *
@@ -589,7 +589,7 @@ class Dpm extends Form
      *      "transaction_key"   => "...."
      * );
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm($keys);
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm($keys);
      * $custom = $dpm->getCustom();
      * </code>
      *
@@ -609,7 +609,7 @@ class Dpm extends Form
      *      "transaction_key"   => "...."
      * );
      *
-     * $dpm   = new Prism\Library\Payment\AuthorizeNet\Service\Dpm($keys);
+     * $dpm   = new Prism\Library\Prism\Payment\AuthorizeNet\Service\Dpm($keys);
      * $hiddenFields = $dpm->getHiddenFields();
      * </code>
      *

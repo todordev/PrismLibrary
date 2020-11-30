@@ -6,7 +6,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Validator;
+namespace Prism\Library\Prism\Validator;
 
 /**
  * This interface describes validator methods.

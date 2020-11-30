@@ -7,7 +7,7 @@
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Helper;
+namespace Prism\Library\Prism\Helper;
 
 /**
  * Interface for helper command handler.

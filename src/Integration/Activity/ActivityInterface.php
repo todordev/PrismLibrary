@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Integration\Activity;
+namespace Prism\Library\Prism\Integration\Activity;
 
 defined('JPATH_PLATFORM') or die;
 

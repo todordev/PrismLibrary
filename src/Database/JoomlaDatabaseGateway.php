@@ -7,13 +7,13 @@
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Database;
+namespace Prism\Library\Prism\Database;
 
-use Prism\Library\Database\Request\Condition;
-use Prism\Library\Database\Request\Limit;
-use Prism\Library\Database\Request\Order;
-use Prism\Library\Database\Request\Field;
-use Prism\Library\Database\Request\Request;
+use Prism\Library\Prism\Database\Request\Condition;
+use Prism\Library\Prism\Database\Request\Limit;
+use Prism\Library\Prism\Database\Request\Order;
+use Prism\Library\Prism\Database\Request\Field;
+use Prism\Library\Prism\Database\Request\Request;
 
 /**
  * Base class of Joomla Database Gateway.

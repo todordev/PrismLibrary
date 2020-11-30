@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Data;
+namespace Prism\Library\Prism\Data;
 
 /**
  * Interface for classes that should prepare search query.

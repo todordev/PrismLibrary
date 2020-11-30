@@ -1,18 +1,18 @@
 <?php
 /**
- * @package         Prism\Library\Database
+ * @package         Prism\Library\Prism\Database
  * @subpackage      Conditions
  * @author          Todor Iliev
  * @copyright       Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Database\Request;
+namespace Prism\Library\Prism\Database\Request;
 
 /**
  * Order condition used for generating query for ordering during the process of fetching data.
  *
- * @package         Prism\Library\Database
+ * @package         Prism\Library\Prism\Database
  * @subpackage      Conditions
  * @deprecated
  */

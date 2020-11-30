@@ -7,11 +7,11 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Integration\Profiles\Adapter;
+namespace Prism\Library\Prism\Integration\Profiles\Adapter;
 
-use Prism\Library\Database;
-use Prism\Library\Integration\Profile\Adapter\JoomlaProfile as JProfile;
-use Prism\Library\Integration\Profile\Profile;
+use Prism\Library\Prism\Database;
+use Prism\Library\Prism\Integration\Profile\Adapter\JoomlaProfile as JProfile;
+use Prism\Library\Prism\Integration\Profile\Profile;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -54,7 +54,7 @@ class JoomlaProfile extends Database\Collection
      * <code>
      * $ids = array(1, 2, 3, 4);
      *
-     * $profiles = new Prism\Library\Integration\Profiles\JoomlaProfile(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Prism\Integration\Profiles\JoomlaProfile(\JFactory::getDbo());
      * $profiles->load(array('ids' => $ids));
      * </code>
      *
@@ -105,7 +105,7 @@ class JoomlaProfile extends Database\Collection
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Library\Integration\Profiles\JoomlaProfile(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Prism\Integration\Profiles\JoomlaProfile(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $location = $profiles->getLocation($userId);
@@ -133,7 +133,7 @@ class JoomlaProfile extends Database\Collection
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Library\Integration\Profiles\JoomlaProfile(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Prism\Integration\Profiles\JoomlaProfile(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $profile = $profiles->getProfile($userId);
@@ -207,7 +207,7 @@ class JoomlaProfile extends Database\Collection
      *    'user_ids' => [1,2,3,4]
      * ));
      *
-     * $factory = new Prism\Library\Integration\Profiles\Factory($options, JFactory::getDbo());
+     * $factory = new Prism\Library\Prism\Integration\Profiles\Factory($options, JFactory::getDbo());
      *
      * $profilesAdapter = $factory->create();
      *

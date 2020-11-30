@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Filesystem\Service;
+namespace Prism\Library\Prism\Filesystem\Service;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -30,7 +30,7 @@ class DetectingFileType
      * <code>
      * $mimeType = 'image/jpeg';
      *
-     * $fileType = new Prism\Library\Filesystem\Service\DetectingFileType($mimeType);
+     * $fileType = new Prism\Library\Prism\Filesystem\Service\DetectingFileType($mimeType);
      * </code>
      *
      * @param  string $mime MIME type
@@ -66,7 +66,7 @@ class DetectingFileType
      * <code>
      * $mimeType = 'image/jpeg';
      *
-     * $fileType = new Prism\Library\Filesystem\Service\DetectingFileType($mimeType);
+     * $fileType = new Prism\Library\Prism\Filesystem\Service\DetectingFileType($mimeType);
      * $type     = $fileType->getType();
      * </code>
      *
@@ -92,7 +92,7 @@ class DetectingFileType
      * <code>
      * $mimeType = 'image/jpeg';
      *
-     * $fileType  = new Prism\Library\Filesystem\Service\DetectingFileType($mimeType);
+     * $fileType  = new Prism\Library\Prism\Filesystem\Service\DetectingFileType($mimeType);
      * $iconClass = $fileType->getIcon();
      * </code>
      *
@@ -117,7 +117,7 @@ class DetectingFileType
      * $key   = 'image';
      * $iconClass = 'file-image-o';
      *
-     * $fileType     = new Prism\Library\Filesystem\Service\DetectingFileType($mimeType);
+     * $fileType     = new Prism\Library\Prism\Filesystem\Service\DetectingFileType($mimeType);
      * $oldIconClass = $fileType->setIcon($key, $iconClass);
      * </code>
      *
@@ -146,7 +146,7 @@ class DetectingFileType
      * $key   = 'pdf';
      * $types = array('application/pdf');
      *
-     * $fileType     = new Prism\Library\Filesystem\Service\DetectingFileType($mimeType);
+     * $fileType     = new Prism\Library\Prism\Filesystem\Service\DetectingFileType($mimeType);
      * $oldIconClass = $fileType->setTypes($key, $types);
      * </code>
      *
@@ -175,7 +175,7 @@ class DetectingFileType
      * $key   = 'image';
      * $type  = 'image/jpeg';
      *
-     * $fileType = new Prism\Library\Filesystem\Service\DetectingFileType($mimeType);
+     * $fileType = new Prism\Library\Prism\Filesystem\Service\DetectingFileType($mimeType);
      * $fileType->addType($key, $type);
      * </code>
      *

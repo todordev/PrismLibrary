@@ -7,7 +7,7 @@
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Helper;
+namespace Prism\Library\Prism\Helper;
 
 /**
  * Trait for helper command.
@@ -30,7 +30,7 @@ trait HelperHandlerTrait
      * Add a command that will be executed preparing an object.
      *
      * <code>
-     * $helperBus     = new Prism\Library\Helper\HelperBus($this->items);
+     * $helperBus     = new Prism\Library\Prism\Helper\HelperBus($this->items);
      * $helperBus->addCommand(new Userideas\Helper\PrepareParams(), 'prepare_params');
      * $helperBus->addCommand(new Userideas\Helper\PrepareStatuses(), 'prepare_statuses');
      * </code>
@@ -53,7 +53,7 @@ trait HelperHandlerTrait
      * <code>
      * $options = array();
      *
-     * $helperBus     = new Prism\Library\Helper\HelperBus($this->items);
+     * $helperBus     = new Prism\Library\Prism\Helper\HelperBus($this->items);
      * $helperBus->addCommand(new Userideas\Helper\PrepareParams(), 'prepare_params');
      * $helperBus->addCommand(new Userideas\Helper\PrepareStatuses(), 'prepare_statuses');
      *
@@ -76,7 +76,7 @@ trait HelperHandlerTrait
      * <code>
      * $options = array();
      *
-     * $helperBus     = new Prism\Library\Helper\HelperBus($this->items);
+     * $helperBus     = new Prism\Library\Prism\Helper\HelperBus($this->items);
      * $helperBus->addCommand(new Userideas\Helper\PrepareParams());
      * $helperBus->addCommand(new Userideas\Helper\PrepareStatuses());
      *
@@ -95,7 +95,7 @@ trait HelperHandlerTrait
      * <code>
      * $options = array();
      *
-     * $helperBus     = new Prism\Library\Helper\HelperBus($this->items);
+     * $helperBus     = new Prism\Library\Prism\Helper\HelperBus($this->items);
      * $helperBus->addCommand(new Userideas\Helper\PrepareParams());
      * $helperBus->addCommand(new Userideas\Helper\PrepareStatuses());
      * $helperBus->addCommand(new Userideas\Helper\PrepareAccess(JFactory::getUser()));

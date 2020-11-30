@@ -7,11 +7,11 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Integration\Profiles;
+namespace Prism\Library\Prism\Integration\Profiles;
 
 use Joomla\Utilities\ArrayHelper;
 use Joomla\Registry\Registry;
-use Prism\Library\Filesystem\Helper;
+use Prism\Library\Prism\Filesystem\Helper;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -38,7 +38,7 @@ class Builder
      *    "users_ids" => array(1,2,3)
      * );
      *
-     * $profilesBuilder = new Prism\Library\Integration\Profiles\Builder($options);
+     * $profilesBuilder = new Prism\Library\Prism\Integration\Profiles\Builder($options);
      * </code>
      *
      * @param  array  $config Options used in the process of building profile object.
@@ -58,7 +58,7 @@ class Builder
      *    "users_ids" => array(1,2,3)
      * );
      *
-     * $profilesBuilder = new Prism\Library\Integration\Profiles\Builder($options);
+     * $profilesBuilder = new Prism\Library\Prism\Integration\Profiles\Builder($options);
      * $profilesBuilder->build();
      *
      * $profiles = $profilesBuilder->getProfiles();
@@ -153,7 +153,7 @@ class Builder
      *    "users_ids" => array(1,2,3)
      * );
      *
-     * $profilesBuilder = new Prism\Library\Integration\Profiles\Builder($options);
+     * $profilesBuilder = new Prism\Library\Prism\Integration\Profiles\Builder($options);
      * $profilesBuilder->build();
      *
      * $profiles = $profilesBuilder->getProfiles();

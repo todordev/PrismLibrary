@@ -7,10 +7,10 @@
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Database;
+namespace Prism\Library\Prism\Database;
 
 use Illuminate\Database\Query\Builder as QueryBuilder;
-use Prism\Library\Database\Request\Request;
+use Prism\Library\Prism\Database\Request\Request;
 
 /**
  * Base class of Larave Database Gateway.

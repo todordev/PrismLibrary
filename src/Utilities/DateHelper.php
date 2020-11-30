@@ -7,14 +7,14 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Utilities;
+namespace Prism\Library\Prism\Utilities;
 
 defined('JPATH_PLATFORM') or die;
 
 /**
  * This is a class that provides functionality for managing dates.
  *
- * @package      Prism\Library\Utilities
+ * @package      Prism\Library\Prism\Utilities
  * @subpackage   Dates
  */
 abstract class DateHelper
@@ -23,7 +23,7 @@ abstract class DateHelper
      * Check if it is default SQL Date.
      *
      * <code>
-     * if (Prism\Library\Utilities\DateHelper::isDefault("1000-01-001")) {
+     * if (Prism\Library\Prism\Utilities\DateHelper::isDefault("1000-01-001")) {
      * //...
      * }
      * </code>
@@ -44,7 +44,7 @@ abstract class DateHelper
      *
      * <code>
      * // Returns "YYYY-MM-DD".
-     * $calendarFormat = Prism\Library\Utilities\DateHelper::formatCalendarDate("Y-m-d");
+     * $calendarFormat = Prism\Library\Prism\Utilities\DateHelper::formatCalendarDate("Y-m-d");
      * </code>
      *
      * @param string $format PHP Date format.

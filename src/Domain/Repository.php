@@ -7,12 +7,12 @@
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Domain;
+namespace Prism\Library\Prism\Domain;
 
-use Prism\Library\Database\Request\Request;
+use Prism\Library\Prism\Database\Request\Request;
 
 /**
- * @package     Prism\Library\Domain
+ * @package     Prism\Library\Prism\Domain
  *
  * @deprecated
  */

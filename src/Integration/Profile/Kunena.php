@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Integration\Profile;
+namespace Prism\Library\Prism\Integration\Profile;
 
-use Prism\Library\Database\TableImmutable;
+use Prism\Library\Prism\Database\TableImmutable;
 use Joomla\String\StringHelper;
 
 defined('JPATH_PLATFORM') or die;
@@ -40,7 +40,7 @@ class Kunena extends TableImmutable implements ProfileInterface, ProfileMapper
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\Kunena(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\Kunena(\JFactory::getDbo());
      * </code>
      *
      * @param \JDatabaseDriver $db
@@ -63,7 +63,7 @@ class Kunena extends TableImmutable implements ProfileInterface, ProfileMapper
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\Kunena(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\Kunena(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $mapping = $profile->getMapping();
@@ -87,7 +87,7 @@ class Kunena extends TableImmutable implements ProfileInterface, ProfileMapper
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\Kunena(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\Kunena(\JFactory::getDbo());
      * $profile->load($userId);
      * </code>
      *
@@ -116,7 +116,7 @@ class Kunena extends TableImmutable implements ProfileInterface, ProfileMapper
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\Kunena(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\Kunena(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $link = $profile->getLink();
@@ -146,7 +146,7 @@ class Kunena extends TableImmutable implements ProfileInterface, ProfileMapper
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\Kunena(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\Kunena(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $avatar = $profile->getAvatar();
@@ -181,7 +181,7 @@ class Kunena extends TableImmutable implements ProfileInterface, ProfileMapper
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\Kunena(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\Kunena(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $location = $profile->getLocation();
@@ -200,7 +200,7 @@ class Kunena extends TableImmutable implements ProfileInterface, ProfileMapper
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\Kunena(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\Kunena(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $countryCode = $profile->getCountryCode();

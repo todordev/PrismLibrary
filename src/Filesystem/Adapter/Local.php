@@ -7,14 +7,14 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Filesystem\Adapter;
+namespace Prism\Library\Prism\Filesystem\Adapter;
 
 use Joomla\CMS\Filesystem\File;
 use Joomla\CMS\Filesystem\Path;
 use Joomla\CMS\Language\Text;
 use Joomla\Registry\Registry;
 use Joomla\Utilities\ArrayHelper;
-use Prism\Library\Utilities\StringHelper;
+use Prism\Library\Prism\Utilities\StringHelper;
 use RuntimeException;
 
 /**
@@ -34,7 +34,7 @@ class Local
      * <code>
      * $rootFolder   = "/tmp";
      *
-     * $localFilesystem = new Prism\Library\Filesystem\Adapters\Local($rootFolder);
+     * $localFilesystem = new Prism\Library\Prism\Filesystem\Adapters\Local($rootFolder);
      * </code>
      *
      * @param string $rootFolder A path to the folder where the file will be stored.
@@ -52,7 +52,7 @@ class Local
      * <code>
      * $rootFolder   = "/tmp";
      *
-     * $localFilesystem = new Prism\Library\Filesystem\Adapters\Local($rootFolder);
+     * $localFilesystem = new Prism\Library\Prism\Filesystem\Adapters\Local($rootFolder);
      * $file->upload($fileData, $options);
      * </code>
      *

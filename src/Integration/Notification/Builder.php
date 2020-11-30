@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Integration\Notification;
+namespace Prism\Library\Prism\Integration\Notification;
 
 use Joomla\Registry\Registry;
 
@@ -38,7 +38,7 @@ abstract class Builder
      *      'target_id' => 2
      * ]);
      *
-     * $notification = Prism\Library\Integration\Notification\Builder::build($config, $data);
+     * $notification = Prism\Library\Prism\Integration\Notification\Builder::build($config, $data);
      * </code>
      *
      * @param  Registry  $config Options used in the process of building an object.
@@ -49,7 +49,7 @@ abstract class Builder
     public static function build(Registry $config, Registry $data)
     {
         $notification = null;
-        $class = 'Prism\Library\\Integration\\Notification\\Builder\\'.ucfirst($config->get('env'));
+        $class = 'Prism\Library\Prism\\Integration\\Notification\\Builder\\'.ucfirst($config->get('env'));
         if ($config->get('env') and class_exists($class)) {
             $builder = new $class($config, $data);
             $notification = $builder->build();

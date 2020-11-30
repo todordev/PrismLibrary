@@ -7,7 +7,7 @@
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Observer;
+namespace Prism\Library\Prism\Observer;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -50,7 +50,7 @@ abstract class Observable implements \JObservableInterface
      * Set database object.
      *
      * <code>
-     * $observableObject   = new Prism\Library\Observable();
+     * $observableObject   = new Prism\Library\Prism\Observable();
      * $observableObject->setDb(\JFactory::getDbo());
      * </code>
      *

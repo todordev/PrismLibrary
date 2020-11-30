@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Integration;
+namespace Prism\Library\Prism\Integration;
 
 use Joomla\Utilities\ArrayHelper;
 
@@ -36,7 +36,7 @@ abstract class Helper
      * Those pages should contains user ID with request parameters.
      *
      * <code>
-     * $userId = Prism\Library\Integration\Helper::getUserId();
+     * $userId = Prism\Library\Prism\Integration\Helper::getUserId();
      * </code>
      *
      * @return int
@@ -76,7 +76,7 @@ abstract class Helper
      * Get Itemid of community builder that points to user profile.
      *
      * <code>
-     * $userId = Prism\Library\Integration\Helper::getUserId();
+     * $userId = Prism\Library\Prism\Integration\Helper::getUserId();
      * </code>
      *
      * @param string $componentName

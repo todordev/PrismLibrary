@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Integration\Profiles;
+namespace Prism\Library\Prism\Integration\Profiles;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -44,7 +44,7 @@ class JomSocial implements ProfilesInterface
      * <code>
      * $ids = array(1, 2, 3, 4);
      *
-     * $profiles = new Prism\Library\Integration\Profiles\JomSocial(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Prism\Integration\Profiles\JomSocial(\JFactory::getDbo());
      * </code>
      *
      * @param  \JDatabaseDriver $db
@@ -67,7 +67,7 @@ class JomSocial implements ProfilesInterface
      * <code>
      * $ids = array(1, 2, 3, 4);
      *
-     * $profiles = new Prism\Library\Integration\Profiles\JomSocial(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Prism\Integration\Profiles\JomSocial(\JFactory::getDbo());
      * $profiles->load($ids);
      * </code>
      *
@@ -96,7 +96,7 @@ class JomSocial implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Library\Integration\Profiles\JomSocial(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Prism\Integration\Profiles\JomSocial(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $avatar = $profiles->getAvatar($userId);
@@ -137,7 +137,7 @@ class JomSocial implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Library\Integration\Profiles\JomSocial(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Prism\Integration\Profiles\JomSocial(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $link = $profiles->getLink($userId);
@@ -169,7 +169,7 @@ class JomSocial implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Library\Integration\Profiles\JomSocial(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Prism\Integration\Profiles\JomSocial(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $location = $profiles->getLocation($userId);
@@ -191,7 +191,7 @@ class JomSocial implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Library\Integration\Profiles\JomSocial(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Prism\Integration\Profiles\JomSocial(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $countryCode = $profiles->getCountryCode($userId);

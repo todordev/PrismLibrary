@@ -7,7 +7,7 @@
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Database;
+namespace Prism\Library\Prism\Database;
 
 use Joomla\Utilities\ArrayHelper;
 use Joomla\Registry\Registry;
@@ -59,7 +59,7 @@ abstract class Collection implements \Iterator, \Countable, \ArrayAccess
      * Set a database object.
      *
      * <code>
-     * $object    = new Prism\Library\Database\Collection;
+     * $object    = new Prism\Library\Prism\Database\Collection;
      *
      * $object->setDb(\JFactory::getDbo());
      * </code>

@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Filesystem;
+namespace Prism\Library\Prism\Filesystem;
 
 
 use Joomla\String\StringHelper;
@@ -174,7 +174,7 @@ class File
      * Check the file type if it is image.
      *
      * <code>
-     * $file = new Prism\Library\Filesystem\File();
+     * $file = new Prism\Library\Prism\Filesystem\File();
      *
      * if ($file->isImage()) {
      * // ...
@@ -192,7 +192,7 @@ class File
      * Check the file type if it is video.
      *
      * <code>
-     * $file = new Prism\Library\Filesystem\File();
+     * $file = new Prism\Library\Prism\Filesystem\File();
      *
      * if ($file->isVideo()) {
      * // ...

@@ -7,16 +7,16 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Money\Formatter;
+namespace Prism\Library\Prism\Money\Formatter;
 
-use Prism\Library\Constants;
-use Prism\Library\Money\Money;
-use Prism\Library\Money\Formatter;
+use Prism\Library\Prism\Constants;
+use Prism\Library\Prism\Money\Money;
+use Prism\Library\Prism\Money\Formatter;
 
 /**
  * Formats a Money object using intl extension.
  *
- * @package      Prism\Library\Money
+ * @package      Prism\Library\Prism\Money
  * @subpackage   Formatters
  */
 final class IntlDecimalFormatter implements Formatter
@@ -56,7 +56,7 @@ final class IntlDecimalFormatter implements Formatter
      * $language         = JFactory::getLanguage();
      * $moneyFormatter   = new NumberFormatter($language->getTag(), NumberFormatter::PATTERN_DECIMAL, $this->params->get('currency_pattern'));
      *
-     * $money   = new Prism\Library\Money\Money($moneyFormatter, $amount);
+     * $money   = new Prism\Library\Prism\Money\Money($moneyFormatter, $amount);
      * $money->setCurrency($currency);
      *
      * // Return $1,500.25 or 1,500.25USD.

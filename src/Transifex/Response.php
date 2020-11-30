@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Transifex;
+namespace Prism\Library\Prism\Transifex;
 
 /**
  * This class provides methods for managing Transifex Response.
@@ -26,7 +26,7 @@ class Response
      *     "property_name2" => 2
      * );
      *
-     * $response = new Prism\Library\Transifex\Response();
+     * $response = new Prism\Library\Prism\Transifex\Response();
      * $response->bind($data);
      *
      * </code>
@@ -47,7 +47,7 @@ class Response
      * Get a value of a parameter.
      *
      * <code>
-     * $response = new Prism\Library\Transifex\Response();
+     * $response = new Prism\Library\Prism\Transifex\Response();
      *
      * $response->get("property_name");
      * </code>
@@ -66,7 +66,7 @@ class Response
      * Set a value to a parameter.
      *
      * <code>
-     * $response = new Prism\Library\Transifex\Response();
+     * $response = new Prism\Library\Prism\Transifex\Response();
      *
      * $response->set("property_name", 123);
      * </code>
@@ -87,7 +87,7 @@ class Response
      * Get a value of a parameter.
      *
      * <code>
-     * $response = new Prism\Library\Transifex\Response();
+     * $response = new Prism\Library\Prism\Transifex\Response();
      *
      * echo $response->property_name;
      * </code>

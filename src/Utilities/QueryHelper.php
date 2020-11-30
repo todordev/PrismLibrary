@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Utilities;
+namespace Prism\Library\Prism\Utilities;
 
 // no direct access
 defined('JPATH_PLATFORM') or die;

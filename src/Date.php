@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library;
+namespace Prism\Library\Prism;
 
 /**
  * This is a class that provides functionality for managing dates.
@@ -21,7 +21,7 @@ class Date extends \DateTime
      * Return last date.
      *
      * <code>
-     * $date = new Prism\Library\Date();
+     * $date = new Prism\Library\Prism\Date();
      *
      * $yesterday = $date->getLastDay();
      * </code>
@@ -40,7 +40,7 @@ class Date extends \DateTime
      * Return the begin of a day.
      *
      * <code>
-     * $date = new Prism\Library\Date();
+     * $date = new Prism\Library\Prism\Date();
      *
      * $beginOfDay = $date->getBeginOfDay();
      * </code>
@@ -60,7 +60,7 @@ class Date extends \DateTime
      * Return the end of a day.
      *
      * <code>
-     * $date = new Prism\Library\Date();
+     * $date = new Prism\Library\Prism\Date();
      *
      * $endOfDay = $date->getEndOfDay();
      * </code>
@@ -84,7 +84,7 @@ class Date extends \DateTime
      * Return a day of last week.
      *
      * <code>
-     * $date = new Prism\Library\Date();
+     * $date = new Prism\Library\Prism\Date();
      *
      * $lastWeekDay = $date->getLastWeek();
      * </code>
@@ -103,7 +103,7 @@ class Date extends \DateTime
      * Return the first day of last week.
      *
      * <code>
-     * $date = new Prism\Library\Date();
+     * $date = new Prism\Library\Prism\Date();
      *
      * $beginOfWeek = $date->getBeginOfWeek();
      * </code>
@@ -122,7 +122,7 @@ class Date extends \DateTime
      * Return the last day of last week.
      *
      * <code>
-     * $date = new Prism\Library\Date();
+     * $date = new Prism\Library\Prism\Date();
      *
      * $endOfWeek = $date->getEndOfWeek();
      * </code>
@@ -141,7 +141,7 @@ class Date extends \DateTime
      * Return the first day of a month.
      *
      * <code>
-     * $date = new Prism\Library\Date();
+     * $date = new Prism\Library\Prism\Date();
      *
      * $beginOfMonth = $date->getBeginOfMonth();
      * </code>
@@ -160,7 +160,7 @@ class Date extends \DateTime
      * Return the last day of a month.
      *
      * <code>
-     * $date = new Prism\Library\Date();
+     * $date = new Prism\Library\Prism\Date();
      *
      * $endOfMonth = $date->getEndOfMonth();
      * </code>
@@ -179,7 +179,7 @@ class Date extends \DateTime
      * Return the first day of an year.
      *
      * <code>
-     * $date = new Prism\Library\Date();
+     * $date = new Prism\Library\Prism\Date();
      *
      * $beginOfYear = $date->getBeginOfYear();
      * </code>
@@ -202,7 +202,7 @@ class Date extends \DateTime
      * Return the last day of an year.
      *
      * <code>
-     * $date = new Prism\Library\Date();
+     * $date = new Prism\Library\Prism\Date();
      *
      * $endOfYear = $date->getEndOfYear();
      * </code>
@@ -225,10 +225,10 @@ class Date extends \DateTime
      * Return a period between two dates in days.
      *
      * <code>
-     * $date  = new Prism\Library\Date();
+     * $date  = new Prism\Library\Prism\Date();
      *
-     * $date1 = new Prism\Library\Date("now");
-     * $date2 = new Prism\Library\Date("01-01-2020);
+     * $date1 = new Prism\Library\Prism\Date("now");
+     * $date2 = new Prism\Library\Prism\Date("01-01-2020);
      *
      * $period = $date->getDaysPeriod($date1, $date2);
      * </code>
@@ -257,7 +257,7 @@ class Date extends \DateTime
      * <code>
      * $days   = 30;
      *
-     * $date   = new Prism\Library\Date("now");
+     * $date   = new Prism\Library\Prism\Date("now");
      *
      * $endDate = $date->calculateEndDate();
      * </code>
@@ -278,7 +278,7 @@ class Date extends \DateTime
      * Check whether the date is part of the current week.
      *
      * <code>
-     * $date   = new Prism\Library\Date("05-06-2014");
+     * $date   = new Prism\Library\Prism\Date("05-06-2014");
      *
      * if ($date->isCurrentWeekDay()) {
      * ...

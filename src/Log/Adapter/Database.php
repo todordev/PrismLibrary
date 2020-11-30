@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Log\Adapter;
+namespace Prism\Library\Prism\Log\Adapter;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -33,7 +33,7 @@ class Database implements AdapterInterface
      * <code>
      * $tableName = '#__crowdf_logs';
      *
-     * $writer = new Prism\Library\Log\Writer\Database(JFactory::getDbo(), $tableName);
+     * $writer = new Prism\Library\Prism\Log\Writer\Database(JFactory::getDbo(), $tableName);
      * </code>
      *
      * @param \JDatabaseDriver $db
@@ -58,7 +58,7 @@ class Database implements AdapterInterface
      * $tableName = '#__crowdf_logs';
      * $title = 'Logged title...';
      *
-     * $writer = new Prism\Library\Log\Writer\Database(JFactory::getDbo(), $tableName);
+     * $writer = new Prism\Library\Prism\Log\Writer\Database(JFactory::getDbo(), $tableName);
      * $writer->setTitle($title);
      * </code>
      *
@@ -80,7 +80,7 @@ class Database implements AdapterInterface
      * $tableName = '#__crowdf_logs';
      * $type = 'PAYMENT_PROCESS';
      *
-     * $writer = new Prism\Library\Log\Writer\Database(JFactory::getDbo(), $tableName);
+     * $writer = new Prism\Library\Prism\Log\Writer\Database(JFactory::getDbo(), $tableName);
      * $writer->setType($type);
      * </code>
      *
@@ -105,7 +105,7 @@ class Database implements AdapterInterface
      *    'currency' => 'USD'
      * );
      *
-     * $writer = new Prism\Library\Log\Writer\Database(JFactory::getDbo(), $tableName);
+     * $writer = new Prism\Library\Prism\Log\Writer\Database(JFactory::getDbo(), $tableName);
      * $writer->setData($data);
      * </code>
      *
@@ -127,7 +127,7 @@ class Database implements AdapterInterface
      * $tableName = '#__crowdf_logs';
      * $date = '01-01-2014';
      *
-     * $writer = new Prism\Library\Log\Writer\Database(JFactory::getDbo(), $tableName);
+     * $writer = new Prism\Library\Prism\Log\Writer\Database(JFactory::getDbo(), $tableName);
      * $writer->setDate($date);
      * </code>
      *
@@ -150,7 +150,7 @@ class Database implements AdapterInterface
      * <code>
      * $tableName = '#__crowdf_logs';
      *
-     * $writer = new Prism\Library\Log\Writer\Database(JFactory::getDbo(), $tableName);
+     * $writer = new Prism\Library\Prism\Log\Writer\Database(JFactory::getDbo(), $tableName);
      * $writer->store();
      * </code>
      */

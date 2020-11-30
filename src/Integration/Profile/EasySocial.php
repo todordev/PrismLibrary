@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Integration\Profile;
+namespace Prism\Library\Prism\Integration\Profile;
 
-use Prism\Library\Database\TableImmutable;
+use Prism\Library\Prism\Database\TableImmutable;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -47,7 +47,7 @@ class EasySocial extends TableImmutable implements ProfileInterface, ProfileMapp
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\EasySocial(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\EasySocial(\JFactory::getDbo());
      * </code>
      *
      * @param  \JDatabaseDriver $db
@@ -70,7 +70,7 @@ class EasySocial extends TableImmutable implements ProfileInterface, ProfileMapp
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\EasyProfile(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\EasyProfile(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $mapping = $profile->getMapping();
@@ -98,7 +98,7 @@ class EasySocial extends TableImmutable implements ProfileInterface, ProfileMapp
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\EasySocial(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\EasySocial(\JFactory::getDbo());
      * $profile->load($userId);
      * </code>
      *
@@ -135,7 +135,7 @@ class EasySocial extends TableImmutable implements ProfileInterface, ProfileMapp
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\EasySocial(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\EasySocial(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $link = $profile->getLink();
@@ -163,7 +163,7 @@ class EasySocial extends TableImmutable implements ProfileInterface, ProfileMapp
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\EasySocial(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\EasySocial(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $avatar = $profile->getAvatar();
@@ -221,7 +221,7 @@ class EasySocial extends TableImmutable implements ProfileInterface, ProfileMapp
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\EasySocial(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\EasySocial(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $location = $profile->getLocation();
@@ -244,7 +244,7 @@ class EasySocial extends TableImmutable implements ProfileInterface, ProfileMapp
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\EasySocial(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\EasySocial(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $countryCode = $profile->getCountryCode();

@@ -7,11 +7,11 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Domain;
+namespace Prism\Library\Prism\Domain;
 
 /**
  * Interface CollectionHydration
- * @package Prism\Library\Domain
+ * @package Prism\Library\Prism\Domain
  * @deprecated
  */
 interface CollectionHydration

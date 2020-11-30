@@ -1,23 +1,23 @@
 <?php
 /**
- * @package      Prism\Library\Google
+ * @package      Prism\Library\Prism\Google
  * @subpackage   Places
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Google\Places;
+namespace Prism\Library\Prism\Google\Places;
 
 use Joomla\Registry\Registry;
-use Prism\Library\Domain\Entity;
-use Prism\Library\Domain\EntityId;
-use Prism\Library\Domain\EntityPopulating;
+use Prism\Library\Prism\Domain\Entity;
+use Prism\Library\Prism\Domain\EntityId;
+use Prism\Library\Prism\Domain\EntityPopulating;
 
 /**
  * Google Place Details.
  *
- * @package     Prism\Library\Google
+ * @package     Prism\Library\Prism\Google
  * @subpackage  Places
  *
  * @link https://developers.google.com/places/web-service/autocomplete

@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Payment\AuthorizeNet;
+namespace Prism\Library\Prism\Payment\AuthorizeNet;
 
 // no direct access
 defined('JPATH_PLATFORM') or die;
@@ -89,7 +89,7 @@ class Response
      * ....
      * );
      *
-     * $response = new Prism\Library\Payment\AuthorizeNet\Response($data);
+     * $response = new Prism\Library\Prism\Payment\AuthorizeNet\Response($data);
      * </code>
      *
      * @param array $data Fields to set.
@@ -120,7 +120,7 @@ class Response
      * ....
      * );
      *
-     * $response = new Prism\Library\Payment\AuthorizeNet\Response($data);
+     * $response = new Prism\Library\Prism\Payment\AuthorizeNet\Response($data);
      * $apiLoginId = $response->getApiLoginId();
      * </code>
      *
@@ -137,7 +137,7 @@ class Response
      * <code>
      * $apiLoginId = "...";
      *
-     * $response = new Prism\Library\Payment\AuthorizeNet\Response();
+     * $response = new Prism\Library\Prism\Payment\AuthorizeNet\Response();
      * $response->setApiLoginId($apiLoginId);
      * </code>
      *
@@ -162,7 +162,7 @@ class Response
      * ....
      * );
      *
-     * $response = new Prism\Library\Payment\AuthorizeNet\Response($data);
+     * $response = new Prism\Library\Prism\Payment\AuthorizeNet\Response($data);
      * $md5Setting = $response->getMd5Setting();
      * </code>
      *
@@ -179,7 +179,7 @@ class Response
      * <code>
      * $md5Settings = "...";
      *
-     * $response = new Prism\Library\Payment\AuthorizeNet\Response();
+     * $response = new Prism\Library\Prism\Payment\AuthorizeNet\Response();
      * $response->setMd5Setting($md5Settings);
      * </code>
      *
@@ -204,7 +204,7 @@ class Response
      * ....
      * );
      *
-     * $response = new Prism\Library\Payment\AuthorizeNet\Response($data);
+     * $response = new Prism\Library\Prism\Payment\AuthorizeNet\Response($data);
      * if (!$response->isAuthorizeNet()) {
      * ....
      * }
@@ -233,7 +233,7 @@ class Response
      * ....
      * );
      *
-     * $response = new Prism\Library\Payment\AuthorizeNet\Response($data);
+     * $response = new Prism\Library\Prism\Payment\AuthorizeNet\Response($data);
      * $hash = $response->generateHash();
      * </code>
      *
@@ -256,7 +256,7 @@ class Response
      * ....
      * );
      *
-     * $response = new Prism\Library\Payment\AuthorizeNet\Response($data);
+     * $response = new Prism\Library\Prism\Payment\AuthorizeNet\Response($data);
      * if (!$response->isApproved()) {
      * ...
      * }
@@ -283,7 +283,7 @@ class Response
      * ....
      * );
      *
-     * $response = new Prism\Library\Payment\AuthorizeNet\Response($data);
+     * $response = new Prism\Library\Prism\Payment\AuthorizeNet\Response($data);
      * if ($response->isDeclined()) {
      * ...
      * }
@@ -310,7 +310,7 @@ class Response
      * ....
      * );
      *
-     * $response = new Prism\Library\Payment\AuthorizeNet\Response($data);
+     * $response = new Prism\Library\Prism\Payment\AuthorizeNet\Response($data);
      * if ($response->isError()) {
      * ...
      * }
@@ -337,7 +337,7 @@ class Response
      * ....
      * );
      *
-     * $response = new Prism\Library\Payment\AuthorizeNet\Response($data);
+     * $response = new Prism\Library\Prism\Payment\AuthorizeNet\Response($data);
      * if ($response->isHeld()) {
      * ...
      * }
@@ -364,7 +364,7 @@ class Response
      * ....
      * );
      *
-     * $response = new Prism\Library\Payment\AuthorizeNet\Response($data);
+     * $response = new Prism\Library\Prism\Payment\AuthorizeNet\Response($data);
      * $transactionId = $response->getTransactionId();
      * </code>
      *
@@ -381,7 +381,7 @@ class Response
      * <code>
      * $transactionId = "TXN_ID";
      *
-     * $response = new Prism\Library\Payment\AuthorizeNet\Response();
+     * $response = new Prism\Library\Prism\Payment\AuthorizeNet\Response();
      * $response->setTransactionId($transactionId);
      * </code>
      *
@@ -406,7 +406,7 @@ class Response
      * ....
      * );
      *
-     * $response = new Prism\Library\Payment\AuthorizeNet\Response($data);
+     * $response = new Prism\Library\Prism\Payment\AuthorizeNet\Response($data);
      * $amount = $response->getAmount();
      * </code>
      *
@@ -427,7 +427,7 @@ class Response
      * ....
      * );
      *
-     * $response = new Prism\Library\Payment\AuthorizeNet\Response($data);
+     * $response = new Prism\Library\Prism\Payment\AuthorizeNet\Response($data);
      * $currency = $response->getCurrency();
      * </code>
      *
@@ -448,7 +448,7 @@ class Response
      * ....
      * );
      *
-     * $response = new Prism\Library\Payment\AuthorizeNet\Response($data);
+     * $response = new Prism\Library\Prism\Payment\AuthorizeNet\Response($data);
      * $responseCode = $response->getResponseReasonCode();
      * </code>
      *
@@ -469,7 +469,7 @@ class Response
      * ....
      * );
      *
-     * $response = new Prism\Library\Payment\AuthorizeNet\Response($data);
+     * $response = new Prism\Library\Prism\Payment\AuthorizeNet\Response($data);
      * $responseReasonText = $response->getResponseReasonText();
      * </code>
      *

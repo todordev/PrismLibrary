@@ -1,22 +1,22 @@
 <?php
 /**
- * @package      Prism\Library\Google
+ * @package      Prism\Library\Prism\Google
  * @subpackage   Places
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Google\Places\Service;
+namespace Prism\Library\Prism\Google\Places\Service;
 
-use Prism\Library\Google\Places\Place;
-use Prism\Library\Google\Places\Client;
-use Prism\Library\Google\Exception\ApiException;
+use Prism\Library\Prism\Google\Places\Place;
+use Prism\Library\Prism\Google\Places\Client;
+use Prism\Library\Prism\Google\Exception\ApiException;
 
 /**
  * Google Place Details Service.
  *
- * @package     Prism\Library\Google
+ * @package     Prism\Library\Prism\Google
  * @subpackage  Places
  *
  * @link https://developers.google.com/places/web-service/autocomplete
@@ -39,7 +39,7 @@ class PlaceDetails
      *     'output' => 'json' // xml or json
      * ]);
      *
-     * $client  = new Prism\Library\Google\Places\Client($key, $options);
+     * $client  = new Prism\Library\Prism\Google\Places\Client($key, $options);
      * $service = new PlaceDetails($client);
      * </code>
      *
@@ -59,8 +59,8 @@ class PlaceDetails
      *     'output' => 'json' // xml or json
      * ]);
      *
-     * $client  = new Prism\Library\Google\Places\Client($key, $options);
-     * $service = new Prism\Library\Google\Places\Service\PlaceDetails($client);
+     * $client  = new Prism\Library\Prism\Google\Places\Client($key, $options);
+     * $service = new Prism\Library\Prism\Google\Places\Service\PlaceDetails($client);
      *
      * $params   = [
      *    'language' => 'en'

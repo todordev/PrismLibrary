@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Controller\Form;
+namespace Prism\Library\Prism\Controller\Form;
 
-use Prism\Library\Controller\FormController;
+use Prism\Library\Prism\Controller\FormController;
 use Joomla\Utilities\ArrayHelper;
 
 /**

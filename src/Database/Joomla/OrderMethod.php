@@ -1,21 +1,21 @@
 <?php
 /**
- * @package         Prism\Library\Database
+ * @package         Prism\Library\Prism\Database
  * @subpackage      Joomla
  * @author          Todor Iliev
  * @copyright       Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Database\Joomla;
+namespace Prism\Library\Prism\Database\Joomla;
 
-use Prism\Library\Database\Request\Order;
-use Prism\Library\Database\Request\Request;
+use Prism\Library\Prism\Database\Request\Order;
+use Prism\Library\Prism\Database\Request\Request;
 
 /**
  * Fetch methods for Joomla repository.
  *
- * @package         Prism\Library\Database
+ * @package         Prism\Library\Prism\Database
  * @subpackage      Joomla
  * @deprecated
  */

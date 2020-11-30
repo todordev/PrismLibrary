@@ -21,6 +21,6 @@ if (!defined('PRISM_PATH_MEDIA')) {
     define('PRISM_PATH_MEDIA', JPATH_SITE . '/media/lib_prism');
 }
 
-JLoader::registerNamespace('\\Prism\\Library', PRISM_PATH_LIBRARY, false, false, 'psr4');
+JLoader::registerNamespace('\\Prism\\Library\\Prism', PRISM_PATH_LIBRARY, false, false, 'psr4');
 
 require_once PRISM_PATH_LIBRARY . '/vendor/autoload.php';

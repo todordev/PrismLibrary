@@ -7,14 +7,14 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Integration\Notification\Builder;
+namespace Prism\Library\Prism\Integration\Notification\Builder;
 
 use Joomla\Registry\Registry;
-use Prism\Library\Integration\Notification\Socialcommunity;
-use Prism\Library\Integration\Notification\Gamification;
-use Prism\Library\Integration\Notification\Jomsocial;
-use Prism\Library\Integration\Notification\Easysocial;
-use Prism\Library\Integration\Notification\Notification;
+use Prism\Library\Prism\Integration\Notification\Socialcommunity;
+use Prism\Library\Prism\Integration\Notification\Gamification;
+use Prism\Library\Prism\Integration\Notification\Jomsocial;
+use Prism\Library\Prism\Integration\Notification\Easysocial;
+use Prism\Library\Prism\Integration\Notification\Notification;
 use Socialcommunity\Notification\Gateway\JoomlaGateway;
 
 /**
@@ -47,7 +47,7 @@ final class Joomla
      *      'target_id' => 2
      * ]);
      *
-     * $builder = Prism\Library\Integration\Notification\Builder\Joomla($config, $data);
+     * $builder = Prism\Library\Prism\Integration\Notification\Builder\Joomla($config, $data);
      * $notification = $builder->build();
      * </code>
      *

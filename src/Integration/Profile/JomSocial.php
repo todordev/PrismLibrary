@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Integration\Profile;
+namespace Prism\Library\Prism\Integration\Profile;
 
-use Prism\Library\Database\TableImmutable;
+use Prism\Library\Prism\Database\TableImmutable;
 use Joomla\String\StringHelper;
 
 defined('JPATH_PLATFORM') or die;
@@ -44,7 +44,7 @@ class JomSocial extends TableImmutable implements ProfileInterface, ProfileMappe
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\JomSocial(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\JomSocial(\JFactory::getDbo());
      * </code>
      *
      * @param  \JDatabaseDriver $db
@@ -67,7 +67,7 @@ class JomSocial extends TableImmutable implements ProfileInterface, ProfileMappe
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\JomSocial(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\JomSocial(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $mapping = $profile->getMapping();
@@ -92,7 +92,7 @@ class JomSocial extends TableImmutable implements ProfileInterface, ProfileMappe
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\JomSocial(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\JomSocial(\JFactory::getDbo());
      * $profile->load($userId);
      * </code>
      *
@@ -121,7 +121,7 @@ class JomSocial extends TableImmutable implements ProfileInterface, ProfileMappe
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\JomSocial(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\JomSocial(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $link = $profile->getLink();
@@ -151,7 +151,7 @@ class JomSocial extends TableImmutable implements ProfileInterface, ProfileMappe
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\JomSocial(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\JomSocial(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $avatar = $profile->getAvatar();
@@ -186,7 +186,7 @@ class JomSocial extends TableImmutable implements ProfileInterface, ProfileMappe
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\JomSocial(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\JomSocial(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $location = $profile->getLocation();
@@ -239,7 +239,7 @@ class JomSocial extends TableImmutable implements ProfileInterface, ProfileMappe
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\JomSocial(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\JomSocial(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $countryCode = $profile->getCountryCode();

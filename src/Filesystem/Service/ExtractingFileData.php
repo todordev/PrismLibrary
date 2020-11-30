@@ -7,11 +7,11 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Filesystem\Service;
+namespace Prism\Library\Prism\Filesystem\Service;
 
 use Joomla\CMS\Image\Image;
 use Joomla\CMS\Filesystem\File as JoomlaFile;
-use Prism\Library\Filesystem\File;
+use Prism\Library\Prism\Filesystem\File;
 
 /**
  * This class provides functionality extraction data about a file.
@@ -30,7 +30,7 @@ class ExtractingFileData
      * <code>
      * $myFile   = "/tmp/myfile.txt";
      *
-     * $file = new Prism\Library\Filesystem\ExtractingFileData($myFile);
+     * $file = new Prism\Library\Prism\Filesystem\ExtractingFileData($myFile);
      * </code>
      *
      * @param string $file
@@ -51,9 +51,9 @@ class ExtractingFileData
      * <code>
      * $myFile   = "/tmp/myfile.jpg";
      *
-     * $validator = new Prism\Library\File\Validator\Image();
+     * $validator = new Prism\Library\Prism\File\Validator\Image();
      *
-     * $file = new Prism\Library\File\Image($myFile);
+     * $file = new Prism\Library\Prism\File\Image($myFile);
      * $file->addValidator($validator);
      *
      * if (!$file->isValid()) {
@@ -74,9 +74,9 @@ class ExtractingFileData
      * <code>
      * $filePath  = "/tmp/myfile.jpg";
      *
-     * $validator = new Prism\Library\File\Validator\Image();
+     * $validator = new Prism\Library\Prism\File\Validator\Image();
      *
-     * $file = new Prism\Library\Filesystem\ExtractingFileData($filePath);
+     * $file = new Prism\Library\Prism\Filesystem\ExtractingFileData($filePath);
      * $file->addValidator($validator);
      *
      * if (!$file->isValid()) {
@@ -96,7 +96,7 @@ class ExtractingFileData
      *
      * <code>
      * $filePath = '/tmp/picture1.png';
-     * $file     = new Prism\Library\Filesystem\ExtractingFileData($filePath);
+     * $file     = new Prism\Library\Prism\Filesystem\ExtractingFileData($filePath);
      *
      * $fileData = $file->extract();
      * </code>

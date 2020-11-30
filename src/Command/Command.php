@@ -7,7 +7,7 @@
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Command;
+namespace Prism\Library\Prism\Command;
 
 /**
  * Interface for a command.

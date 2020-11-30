@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Log\Adapter;
+namespace Prism\Library\Prism\Log\Adapter;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -36,7 +36,7 @@ class File implements AdapterInterface
      * <code>
      * $file = "/logs/myfile.log";
      *
-     * $writer = new Prism\Library\Log\Writer\File($file);
+     * $writer = new Prism\Library\Prism\Log\Writer\File($file);
      * </code>
      *
      * @param string $file
@@ -79,7 +79,7 @@ class File implements AdapterInterface
      * $file = "/logs/myfile.log";
      * $title = "Logged title...";
      *
-     * $writer = new Prism\Library\Log\Writer\File($file);
+     * $writer = new Prism\Library\Prism\Log\Writer\File($file);
      * $writer->setTitle($title);
      * </code>
      *
@@ -101,7 +101,7 @@ class File implements AdapterInterface
      * $file = "/logs/myfile.log";
      * $type = "PAYMENT_PROCESS";
      *
-     * $writer = new Prism\Library\Log\Writer\File($file);
+     * $writer = new Prism\Library\Prism\Log\Writer\File($file);
      * $writer->setType($type);
      * </code>
      *
@@ -126,7 +126,7 @@ class File implements AdapterInterface
      *    "currency" => "USD"
      * );
      *
-     * $writer = new Prism\Library\Log\Writer\File($file);
+     * $writer = new Prism\Library\Prism\Log\Writer\File($file);
      * $writer->setData($data);
      * </code>
      *
@@ -148,7 +148,7 @@ class File implements AdapterInterface
      * $file = "/logs/myfile.log";
      * $date = "01-01-2014";
      *
-     * $writer = new Prism\Library\Log\Writer\File($file);
+     * $writer = new Prism\Library\Prism\Log\Writer\File($file);
      * $writer->setDate($date);
      * </code>
      *
@@ -169,7 +169,7 @@ class File implements AdapterInterface
      * <code>
      * $file = "/logs/myfile.log";
      *
-     * $writer = new Prism\Library\Log\Writer\File($file);
+     * $writer = new Prism\Library\Prism\Log\Writer\File($file);
      * $writer->store();
      * </code>
      */

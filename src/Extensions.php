@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library;
+namespace Prism\Library\Prism;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -37,7 +37,7 @@ class Extensions
      *     "com_gamification"
      * );
      *
-     * $extensions = new Prism\Library\Extensions(\JFactory::getDbo(), $extensionsNames);
+     * $extensions = new Prism\Library\Prism\Extensions(\JFactory::getDbo(), $extensionsNames);
      * </code>
      *
      * @param \JDatabaseDriver $db         Database driver.
@@ -58,7 +58,7 @@ class Extensions
      *     "com_gamification"
      * );
      *
-     * $extensions = new Prism\Library\Extensions(\JFactory::getDbo(), $extensionsNames);
+     * $extensions = new Prism\Library\Prism\Extensions(\JFactory::getDbo(), $extensionsNames);
      *
      * $enabled = $extensions->getEnabled();
      * </code>

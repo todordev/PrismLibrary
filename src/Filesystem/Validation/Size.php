@@ -7,10 +7,10 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Filesystem\Validation;
+namespace Prism\Library\Prism\Filesystem\Validation;
 
 use Joomla\CMS\Language\Text;
-use Prism\Library\Validator\Validation;
+use Prism\Library\Prism\Validator\Validation;
 
 /**
  * This class provides functionality for validating file size.
@@ -41,7 +41,7 @@ class Size extends Validation
      * $fileSize  = 100000;
      * $maxFileSize  = 600000;
      *
-     * $validator = new Prism\Library\Filesystem\Validator\Size($fileSize, $maxFileSize);
+     * $validator = new Prism\Library\Prism\Filesystem\Validator\Size($fileSize, $maxFileSize);
      * </code>
      *
      * @param integer $fileSize File size in bytes.
@@ -60,7 +60,7 @@ class Size extends Validation
      * $fileSize     = 100000;
      * $maxFileSize  = 600000;
      *
-     * $validator = new Prism\Library\Filesystem\Validator\Size($fileSize);
+     * $validator = new Prism\Library\Prism\Filesystem\Validator\Size($fileSize);
      * $validator->setMaxFileSize($maxFileSize);
      * </code>
      *
@@ -78,7 +78,7 @@ class Size extends Validation
      * $fileSize  = 100000;
      * $maxFileSize  = 600000;
      *
-     * $validator = new Prism\Library\Filesystem\Validator\Size($fileSize, $maxFileSize);
+     * $validator = new Prism\Library\Prism\Filesystem\Validator\Size($fileSize, $maxFileSize);
      * if ($validator->passes()) {
      *   //.....
      * }
@@ -98,7 +98,7 @@ class Size extends Validation
      * $fileSize  = 100000;
      * $maxFileSize  = 600000;
      *
-     * $validator = new Prism\Library\Filesystem\Validator\Size($fileSize, $maxFileSize);
+     * $validator = new Prism\Library\Prism\Filesystem\Validator\Size($fileSize, $maxFileSize);
      * if ($validator->fails()) {
      *   echo $this->getMessage();
      * }

@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Integration\Profile;
+namespace Prism\Library\Prism\Integration\Profile;
 
-use Prism\Library\Database\TableImmutable;
+use Prism\Library\Prism\Database\TableImmutable;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -39,7 +39,7 @@ class Gravatar extends TableImmutable implements ProfileInterface, ProfileMapper
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\Gravatar(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\Gravatar(\JFactory::getDbo());
      * </code>
      *
      * @param  \JDatabaseDriver $db
@@ -62,7 +62,7 @@ class Gravatar extends TableImmutable implements ProfileInterface, ProfileMapper
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\Gravatar(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\Gravatar(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $mapping = $profile->getMapping();
@@ -84,7 +84,7 @@ class Gravatar extends TableImmutable implements ProfileInterface, ProfileMapper
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\Gravatar(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\Gravatar(\JFactory::getDbo());
      * $profile->load($userId);
      * </code>
      *
@@ -115,7 +115,7 @@ class Gravatar extends TableImmutable implements ProfileInterface, ProfileMapper
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\Gravatar(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\Gravatar(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $link = $profile->getLink();
@@ -136,7 +136,7 @@ class Gravatar extends TableImmutable implements ProfileInterface, ProfileMapper
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\Gravatar(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\Gravatar(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $avatar = $profile->getAvatar();
@@ -166,7 +166,7 @@ class Gravatar extends TableImmutable implements ProfileInterface, ProfileMapper
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\Gravatar(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\Gravatar(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $location = $profile->getLocation();
@@ -185,7 +185,7 @@ class Gravatar extends TableImmutable implements ProfileInterface, ProfileMapper
      * <code>
      * $userId = 1;
      *
-     * $profile = new Prism\Library\Integration\Profile\Gravatar(\JFactory::getDbo());
+     * $profile = new Prism\Library\Prism\Integration\Profile\Gravatar(\JFactory::getDbo());
      * $profile->load($userId);
      *
      * $countryCode = $profile->getCountryCode();

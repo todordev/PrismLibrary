@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Integration\Notification;
+namespace Prism\Library\Prism\Integration\Notification;
 
 defined('JPATH_PLATFORM') or die;
 

@@ -1,18 +1,18 @@
 <?php
 /**
- * @package      Prism\Library\Google
+ * @package      Prism\Library\Prism\Google
  * @subpackage   Places
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Google\Places;
+namespace Prism\Library\Prism\Google\Places;
 
 /**
  * Google Place Details.
  *
- * @package     Prism\Library\Google
+ * @package     Prism\Library\Prism\Google
  * @subpackage  Places
  *
  * @link https://developers.google.com/places/web-service/details

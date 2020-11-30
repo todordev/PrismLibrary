@@ -7,13 +7,13 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\File\Filesystem\Validation;
+namespace Prism\Library\Prism\File\Filesystem\Validation;
 
 use Joomla\CMS\Filesystem\File;
 use Joomla\CMS\Filesystem\Path;
 use Joomla\CMS\Image\Image;
 use Joomla\CMS\Language\Text;
-use Prism\Library\Validator\Validation;
+use Prism\Library\Prism\Validator\Validation;
 
 /**
  * This class provides functionality for validating an image size.
@@ -35,7 +35,7 @@ class ImageDimensions extends Validation
      * <code>
      * $myFile     = "/tmp/myfile.jpg";
      *
-     * $validator = new Prism\Library\File\Filesystem\Image\Size($myFile);
+     * $validator = new Prism\Library\Prism\File\Filesystem\Image\Size($myFile);
      * </code>
      *
      * @param string $file A path to the file.
@@ -51,7 +51,7 @@ class ImageDimensions extends Validation
      * <code>
      * $myFile     = "/tmp/myfile.jpg";
      *
-     * $validator = new Prism\Library\File\Filesystem\Image\Size();
+     * $validator = new Prism\Library\Prism\File\Filesystem\Image\Size();
      * $validator->setFile($myFile);
      * </code>
      *
@@ -68,7 +68,7 @@ class ImageDimensions extends Validation
      * <code>
      * $minWidth  = 200;
      *
-     * $validator = new Prism\Library\File\Filesystem\Image\Size();
+     * $validator = new Prism\Library\Prism\File\Filesystem\Image\Size();
      * $validator->setMinWidth($minWidth);
      * </code>
      *
@@ -85,7 +85,7 @@ class ImageDimensions extends Validation
      * <code>
      * $minHeight  = 200;
      *
-     * $validator = new Prism\Library\File\Filesystem\Image\Size();
+     * $validator = new Prism\Library\Prism\File\Filesystem\Image\Size();
      * $validator->setMinHeight($minHeight);
      * </code>
      *
@@ -102,7 +102,7 @@ class ImageDimensions extends Validation
      * <code>
      * $maxWidth  = 200;
      *
-     * $validator = new Prism\Library\File\Filesystem\Image\Size();
+     * $validator = new Prism\Library\Prism\File\Filesystem\Image\Size();
      * $validator->setMaxWidth($minWidth);
      * </code>
      *
@@ -119,7 +119,7 @@ class ImageDimensions extends Validation
      * <code>
      * $maxHeight  = 200;
      *
-     * $validator = new Prism\Library\File\Filesystem\Image\Size();
+     * $validator = new Prism\Library\Prism\File\Filesystem\Image\Size();
      * $validator->setMaxHeight($maxHeight);
      * </code>
      *
@@ -136,7 +136,7 @@ class ImageDimensions extends Validation
      * <code>
      * $myFile     = "/tmp/myfile.jpg";
      *
-     * $validator = new Prism\Library\File\Filesystem\Image\Size($myFile);
+     * $validator = new Prism\Library\Prism\File\Filesystem\Image\Size($myFile);
      *
      * if ($validator->passes()) {
      *     //....
@@ -156,7 +156,7 @@ class ImageDimensions extends Validation
      * <code>
      * $myFile     = "/tmp/myfile.jpg";
      *
-     * $validator = new Prism\Library\File\Filesystem\Image\Size($myFile);
+     * $validator = new Prism\Library\Prism\File\Filesystem\Image\Size($myFile);
      *
      * if ($validator->fails()) {
      *     echo $validator->getMessage();

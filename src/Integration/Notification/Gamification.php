@@ -7,10 +7,10 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Integration\Notification;
+namespace Prism\Library\Prism\Integration\Notification;
 
 use Gamification\Notification\Notification;
-use Prism\Library\Database\TableTrait;
+use Prism\Library\Prism\Database\TableTrait;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -42,7 +42,7 @@ class Gamification implements NotificationInterface
      * $userId = 1;
      * $message = "....";
      *
-     * $notification = new Prism\Library\Integration\Notification\Gamification($userId, $message);
+     * $notification = new Prism\Library\Prism\Integration\Notification\Gamification($userId, $message);
      * </code>
      *
      * @param  int $userId User ID
@@ -61,7 +61,7 @@ class Gamification implements NotificationInterface
      * $userId = 1;
      * $note = "....";
      *
-     * $notification = new Prism\Library\Integration\Notification\Gamification($userId, $note);
+     * $notification = new Prism\Library\Prism\Integration\Notification\Gamification($userId, $note);
      * $notification->send();
      * </code>
      *
@@ -100,7 +100,7 @@ class Gamification implements NotificationInterface
      * $userId = 1;
      * $content = "....";
      *
-     * $notification = new Prism\Library\Integration\Notification\Gamification($userId, $content);
+     * $notification = new Prism\Library\Prism\Integration\Notification\Gamification($userId, $content);
      * $notification->setDb(JFactory::getDbo());
      * $notification->send();
      *
@@ -120,7 +120,7 @@ class Gamification implements NotificationInterface
      * Return the title of the object where the URL points.
      *
      * <code>
-     * $notification = new Prism\Library\Integration\Notification\Gamification();
+     * $notification = new Prism\Library\Prism\Integration\Notification\Gamification();
      * $title = $notification->getTitle();
      * </code>
      *
@@ -135,7 +135,7 @@ class Gamification implements NotificationInterface
      * Return the content of the notification.
      *
      * <code>
-     * $notification = new Prism\Library\Integration\Notification\Gamification();
+     * $notification = new Prism\Library\Prism\Integration\Notification\Gamification();
      * $content = $notification->getContent();
      * </code>
      *
@@ -150,7 +150,7 @@ class Gamification implements NotificationInterface
      * Return an image that is part of the notification.
      *
      * <code>
-     * $notification = new Prism\Library\Integration\Notification\Gamification();
+     * $notification = new Prism\Library\Prism\Integration\Notification\Gamification();
      * $image        = $notification->getImage();
      * </code>
      *
@@ -165,7 +165,7 @@ class Gamification implements NotificationInterface
      * Return an URL which is part of the notification.
      *
      * <code>
-     * $notification = new Prism\Library\Integration\Notification\Gamification();
+     * $notification = new Prism\Library\Prism\Integration\Notification\Gamification();
      * $url          = $notification->getUrl();
      * </code>
      *
@@ -180,7 +180,7 @@ class Gamification implements NotificationInterface
      * Return a date where the notification has been created.
      *
      * <code>
-     * $notification = new Prism\Library\Integration\Notification\Gamification();
+     * $notification = new Prism\Library\Prism\Integration\Notification\Gamification();
      * $date = $notification->getCreated();
      * </code>
      *
@@ -195,7 +195,7 @@ class Gamification implements NotificationInterface
      * Return the status of the notification.
      *
      * <code>
-     * $notification = new Prism\Library\Integration\Notification\Gamification();
+     * $notification = new Prism\Library\Prism\Integration\Notification\Gamification();
      * $status = $notification->getStatus();
      * </code>
      *
@@ -210,7 +210,7 @@ class Gamification implements NotificationInterface
      * Return the ID of the user receiver.
      *
      * <code>
-     * $notification = new Prism\Library\Integration\Notification\Gamification();
+     * $notification = new Prism\Library\Prism\Integration\Notification\Gamification();
      * $userId       = $notification->getUserId();
      * </code>
      *
@@ -227,7 +227,7 @@ class Gamification implements NotificationInterface
      * <code>
      * $id = 1;
      *
-     * $notification = new Prism\Library\Integration\Notification\Gamification();
+     * $notification = new Prism\Library\Prism\Integration\Notification\Gamification();
      * $notification->setId($id);
      * </code>
      *
@@ -248,7 +248,7 @@ class Gamification implements NotificationInterface
      * <code>
      * $title = "...";
      *
-     * $notification = new Prism\Library\Integration\Notification\Gamification();
+     * $notification = new Prism\Library\Prism\Integration\Notification\Gamification();
      * $notification->setTitle($title);
      * </code>
      *
@@ -269,7 +269,7 @@ class Gamification implements NotificationInterface
      * <code>
      * $note = "...";
      *
-     * $notification = new Prism\Library\Integration\Notification\Gamification();
+     * $notification = new Prism\Library\Prism\Integration\Notification\Gamification();
      * $notification->setContent($note);
      * </code>
      *
@@ -290,7 +290,7 @@ class Gamification implements NotificationInterface
      * <code>
      * $image = "...";
      *
-     * $notification = new Prism\Library\Integration\Notification\Gamification();
+     * $notification = new Prism\Library\Prism\Integration\Notification\Gamification();
      * $notification->setImage($image);
      * </code>
      *
@@ -311,7 +311,7 @@ class Gamification implements NotificationInterface
      * <code>
      * $url = "...";
      *
-     * $notification = new Prism\Library\Integration\Notification\Gamification();
+     * $notification = new Prism\Library\Prism\Integration\Notification\Gamification();
      * $notification->setUrl($url);
      * </code>
      *
@@ -332,7 +332,7 @@ class Gamification implements NotificationInterface
      * <code>
      * $created = "...";
      *
-     * $notification = new Prism\Library\Integration\Notification\Gamification();
+     * $notification = new Prism\Library\Prism\Integration\Notification\Gamification();
      * $notification->setCreated($created);
      * </code>
      *
@@ -351,7 +351,7 @@ class Gamification implements NotificationInterface
      * <code>
      * $status = 1;
      *
-     * $notification = new Prism\Library\Integration\Notification\Gamification();
+     * $notification = new Prism\Library\Prism\Integration\Notification\Gamification();
      * $notification->setStatus($status);
      * </code>
      *
@@ -372,7 +372,7 @@ class Gamification implements NotificationInterface
      * <code>
      * $userId = 1;
      *
-     * $notification = new Prism\Library\Integration\Notification\Gamification();
+     * $notification = new Prism\Library\Prism\Integration\Notification\Gamification();
      * $notification->setUserId($userId);
      * </code>
      *

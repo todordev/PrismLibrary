@@ -1,18 +1,18 @@
 <?php
 /**
- * @package         Prism\Library\Database
+ * @package         Prism\Library\Prism\Database
  * @subpackage      Request
  * @author          Todor Iliev
  * @copyright       Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Database\Request;
+namespace Prism\Library\Prism\Database\Request;
 
 /**
  * Condition used for generating a query during the process of fetching data.
  *
- * @package         Prism\Library\Database
+ * @package         Prism\Library\Prism\Database
  * @subpackage      Request
  * @deprecated
  */

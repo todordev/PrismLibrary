@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Filesystem\Service;
+namespace Prism\Library\Prism\Filesystem\Service;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Filesystem\Path;
@@ -15,8 +15,8 @@ use Joomla\CMS\Filesystem\File;
 use Joomla\CMS\Language\Text;
 use Joomla\Registry\Registry;
 use Joomla\Utilities\ArrayHelper;
-use Prism\Library\Utilities\StringHelper;
-use Prism\Library\Validator\Validation;
+use Prism\Library\Prism\Utilities\StringHelper;
+use Prism\Library\Prism\Validator\Validation;
 use RuntimeException;
 
 /**
@@ -43,7 +43,7 @@ class UploadingFile
      * // Retrieve file details from uploaded file, sent from upload form.
      * $fileData = Factory::getApplication()->input->files->get('file_upload');
      *
-     * $uploadService = new Prism\Library\Filesystem\Service\UploadFile($fileData);
+     * $uploadService = new Prism\Library\Prism\Filesystem\Service\UploadFile($fileData);
      * </code>
      *
      * @param array $file
@@ -61,9 +61,9 @@ class UploadingFile
      * Add an object that validates uploaded file.
      *
      * <code>
-     * $validation = new Prism\Library\Filesystem\Validation\Image();
+     * $validation = new Prism\Library\Prism\Filesystem\Validation\Image();
      *
-     * $uploadService = new Prism\Library\Filesystem\Service\UploadFile();
+     * $uploadService = new Prism\Library\Prism\Filesystem\Service\UploadFile();
      * $uploadService->addValidation($validation);
      * </code>
      *
@@ -82,9 +82,9 @@ class UploadingFile
      * Process validations.
      *
      * <code>
-     * $validation = new Prism\Library\Filesystem\Validation\Image();
+     * $validation = new Prism\Library\Prism\Filesystem\Validation\Image();
      *
-     * $uploadService = new Prism\Library\Filesystem\Service\UploadFile();
+     * $uploadService = new Prism\Library\Prism\Filesystem\Service\UploadFile();
      * $uploadService->addValidation($validation);
      *
      * $uploadService->validate();
@@ -105,9 +105,9 @@ class UploadingFile
      * Validate the file.
      *
      * <code>
-     * $validation = new Prism\Library\Filesystem\Validation\Image();
+     * $validation = new Prism\Library\Prism\Filesystem\Validation\Image();
      *
-     * $uploadService = new Prism\Library\Filesystem\Service\UploadFile();
+     * $uploadService = new Prism\Library\Prism\Filesystem\Service\UploadFile();
      * $uploadService->addValidation($validation);
      * $uploadService->validate();
      *
@@ -129,9 +129,9 @@ class UploadingFile
      * Check for errors.
      *
      * <code>
-     * $validation = new Prism\Library\Filesystem\Validation\Image();
+     * $validation = new Prism\Library\Prism\Filesystem\Validation\Image();
      *
-     * $uploadService = new Prism\Library\Filesystem\Service\UploadFile();
+     * $uploadService = new Prism\Library\Prism\Filesystem\Service\UploadFile();
      * $uploadService->addValidation($validation);
      * $uploadService->validate();
      *
@@ -149,9 +149,9 @@ class UploadingFile
      * Return all error messages.
      *
      * <code>
-     * $validation = new Prism\Library\Filesystem\Validation\Image();
+     * $validation = new Prism\Library\Prism\Filesystem\Validation\Image();
      *
-     * $uploadService = new Prism\Library\Filesystem\Service\UploadFile();
+     * $uploadService = new Prism\Library\Prism\Filesystem\Service\UploadFile();
      * $uploadService->addValidation($validation);
      * $uploadService->validate();
      *
@@ -173,9 +173,9 @@ class UploadingFile
      * <code>
      * $filePath  = "/tmp/myfile.jpg";
      *
-     * $validator = new Prism\Library\File\Validator\Image();
+     * $validator = new Prism\Library\Prism\File\Validator\Image();
      *
-     * $file = new Prism\Library\File\File($filePath);
+     * $file = new Prism\Library\Prism\File\File($filePath);
      * $file->addValidator($validator);
      *
      * if (!$file->isValid()) {
@@ -196,9 +196,9 @@ class UploadingFile
      * <code>
      * $filePath  = "/tmp/myfile.jpg";
      *
-     * $validator = new Prism\Library\File\Validator\Image();
+     * $validator = new Prism\Library\Prism\File\Validator\Image();
      *
-     * $file = new Prism\Library\File\File($filePath);
+     * $file = new Prism\Library\Prism\File\File($filePath);
      * $file->addValidator($validator);
      *
      * if (!$file->isValid()) {
@@ -218,7 +218,7 @@ class UploadingFile
      *
      * <code>
      * $temporaryFolder = Path::clean(Factory::getApplication()->get('tmp_path'));
-     * $uploadService = new Prism\Library\Filesystem\Service\UploadFile();
+     * $uploadService = new Prism\Library\Prism\Filesystem\Service\UploadFile();
      *
      * $uploadService->setDestinationFolder($temporaryFolder);
      * </code>
@@ -241,7 +241,7 @@ class UploadingFile
      * $options->set('filename', 'my_new_file');
      *
      * $temporaryFolder = Path::clean(Factory::getApplication()->get('tmp_path'));
-     * $uploadService = new Prism\Library\Filesystem\Service\UploadFile();
+     * $uploadService = new Prism\Library\Prism\Filesystem\Service\UploadFile();
      *
      * $uploadService->setDestinationFolder($temporaryFolder);
      *

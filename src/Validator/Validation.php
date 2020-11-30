@@ -7,7 +7,7 @@
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Validator;
+namespace Prism\Library\Prism\Validator;
 
 /**
  * This is the abstract class of validations.
@@ -38,7 +38,7 @@ abstract class Validation
      * Return error message.
      *
      * <code>
-     * $validator = new Prism\Library\Validator\Validator;
+     * $validator = new Prism\Library\Prism\Validator\Validator;
      *
      * if (!$validator->isValid()) {
      *     echo $validator->getMessage();
@@ -56,7 +56,7 @@ abstract class Validation
      * Return additional information about error.
      *
      * <code>
-     * $validator = new Prism\Library\Validator\Validator;
+     * $validator = new Prism\Library\Prism\Validator\Validator;
      *
      * if (!$validator->isValid()) {
      *     echo $validator->getAdditionalInformation();

@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Integration\Profile;
+namespace Prism\Library\Prism\Integration\Profile;
 
-use Prism\Library\Database\TableImmutable;
+use Prism\Library\Prism\Database\TableImmutable;
 
 defined('JPATH_PLATFORM') or die;
 

@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Utilities;
+namespace Prism\Library\Prism\Utilities;
 
 // no direct access
 defined('JPATH_PLATFORM') or die;
@@ -26,7 +26,7 @@ abstract class ItemHelper
      * Fetch and filter the IDs of the items.
      *
      * <code>
-     * $userIds = Prism\Library\Utilities\ItemHelper::fetchIds($items, "user_id");
+     * $userIds = Prism\Library\Prism\Utilities\ItemHelper::fetchIds($items, "user_id");
      * </code>
      *
      * @param array  $items

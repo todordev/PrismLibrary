@@ -1,19 +1,19 @@
 <?php
 /**
- * @package         Prism\Library\Renderer
+ * @package         Prism\Library\Prism\Renderer
  * @subpackage      Renderers
  * @author          Todor Iliev
  * @copyright       Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license         GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Renderer;
+namespace Prism\Library\Prism\Renderer;
 
 /**
  * Provides interface and functionality for objects
  * that render output by a layout.
  *
- * @package         Prism\Library\Renderer
+ * @package         Prism\Library\Prism\Renderer
  * @subpackage      Renderers
  */
 interface RendererInterface

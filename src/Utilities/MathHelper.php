@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Utilities;
+namespace Prism\Library\Prism\Utilities;
 
 /**
  * This class contains methods that are used for handling numbers.
@@ -22,7 +22,7 @@ abstract class MathHelper
      *
      * <code>
      * // Displays 10 ( 10% )
-     * echo Prism\Library\Utilities\MathHelper::calculatePercentage(100, 1000);
+     * echo Prism\Library\Prism\Utilities\MathHelper::calculatePercentage(100, 1000);
      *
      * </code>
      *
@@ -55,7 +55,7 @@ abstract class MathHelper
      * $amount = "100"; // $100
      *
      * // Displays 10.00 ( $10.00 )
-     * echo Prism\Library\Utilities\MathHelper::calculateValueFromPercent($fee, $amount);;
+     * echo Prism\Library\Prism\Utilities\MathHelper::calculateValueFromPercent($fee, $amount);;
      * </code>
      *
      * @param float $percent
@@ -85,7 +85,7 @@ abstract class MathHelper
      * <code>
      * $values = array(10, 10);
      *
-     * echo Prism\Library\Utilities\MathHelper::calculateTotal($values);
+     * echo Prism\Library\Prism\Utilities\MathHelper::calculateTotal($values);
      * </code>
      *
      * @param array  $values
@@ -121,7 +121,7 @@ abstract class MathHelper
      * <code>
      * $values = 5; // 5MB
      *
-     * echo Prism\Library\Utilities\MathHelper::convertToBytes($values, 'MB');
+     * echo Prism\Library\Prism\Utilities\MathHelper::convertToBytes($values, 'MB');
      * </code>
      *
      * @param int  $value
@@ -154,7 +154,7 @@ abstract class MathHelper
      * <code>
      * $values = 5242880; // 5MB
      *
-     * echo Prism\Library\Utilities\MathHelper::convertFromBytes($values, 'MB');
+     * echo Prism\Library\Prism\Utilities\MathHelper::convertFromBytes($values, 'MB');
      * </code>
      *
      * @param int  $bytes

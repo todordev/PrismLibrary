@@ -7,9 +7,9 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Money;
+namespace Prism\Library\Prism\Money;
 
-use Prism\Library\Domain\HydratingImmutable;
+use Prism\Library\Prism\Domain\HydratingImmutable;
 
 /**
  * This class contains methods that are used for managing currency.
@@ -48,7 +48,7 @@ final class Currency implements LegalTender
      *     'position' => '0'
      * );
      *
-     * $currency  = new Prism\Library\Money\Currency($data);
+     * $currency  = new Prism\Library\Prism\Money\Currency($data);
      * echo $currency->getName();
      * </code>
      *
@@ -70,7 +70,7 @@ final class Currency implements LegalTender
      *     'position' => '0'
      * );
      *
-     * $currency  = new Prism\Library\Money\Currency($data);
+     * $currency  = new Prism\Library\Prism\Money\Currency($data);
      * echo $currency->getCode();
      * </code>
      *
@@ -92,7 +92,7 @@ final class Currency implements LegalTender
      *     'position' => '0'
      * );
      *
-     * $currency  = new Prism\Library\Money\Currency($data);
+     * $currency  = new Prism\Library\Prism\Money\Currency($data);
      * echo $currency->getSymbol();
      * </code>
      *
@@ -114,7 +114,7 @@ final class Currency implements LegalTender
      *     'position' => '0'
      * );
      *
-     * $currency  = new Prism\Library\Money\Currency($data);
+     * $currency  = new Prism\Library\Prism\Money\Currency($data);
      * if (0 === $currency->getPosition()) {
      * }
      * </code>
@@ -137,7 +137,7 @@ final class Currency implements LegalTender
      *     'position' => '0'
      * );
      *
-     * $currency  = new Prism\Library\Money\Currency($data);
+     * $currency  = new Prism\Library\Prism\Money\Currency($data);
      * if ($currency->symbolLeft()) {
      * }
      * </code>
@@ -160,7 +160,7 @@ final class Currency implements LegalTender
      *     'position' => '0'
      * );
      *
-     * $currency  = new Prism\Library\Money\Currency($data);
+     * $currency  = new Prism\Library\Prism\Money\Currency($data);
      * if ($currency->symbolRight()) {
      * }
      * </code>

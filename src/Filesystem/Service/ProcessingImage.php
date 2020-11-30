@@ -7,13 +7,13 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Filesystem\Service;
+namespace Prism\Library\Prism\Filesystem\Service;
 
 use Joomla\CMS\Filesystem\Folder;
 use Joomla\CMS\Language\Text;
 use Joomla\Registry\Registry;
-use Prism\Library\Constants;
-use Prism\Library\Utilities\StringHelper;
+use Prism\Library\Prism\Constants;
+use Prism\Library\Prism\Utilities\StringHelper;
 use Joomla\CMS\Image\Image as JoomlaImage;
 use Joomla\CMS\Filesystem\Path as JoomlaPath;
 use Joomla\CMS\Filesystem\File as JoomlaFile;
@@ -40,7 +40,7 @@ class ProcessingImage
      * $file        = '/tmp/picture.jpg';
      * $destinationFolder  = "/root/joomla/tmp";
      *
-     * $image = new Prism\Library\File\Image($file);
+     * $image = new Prism\Library\Prism\File\Image($file);
      * </code>
      *
      * @param string $file
@@ -63,7 +63,7 @@ class ProcessingImage
      *    'scale'  => \JImage::SCALE_INSIDE
      * );
      *
-     * $file = new Prism\Library\File\Image($file['tmp_path']);
+     * $file = new Prism\Library\Prism\File\Image($file['tmp_path']);
      *
      * $fileData = $file->resize($destinationFolder, $resizeOptions);
      * </code>
@@ -126,7 +126,7 @@ class ProcessingImage
      *    'y'  => 100,
      * );
      *
-     * $file = new Prism\Library\File\Image($file['tmp_path']);
+     * $file = new Prism\Library\Prism\File\Image($file['tmp_path']);
      *
      * $fileData = $file->crop($destinationFolder, $resizeOptions);
      * </code>
@@ -186,11 +186,11 @@ class ProcessingImage
      * $resizeOptions = array(
      *    'filename_length'  => 16,
      *    'suffix'           => '_image',
-     *    'quality'          => Prism\Library\Constants::QUALITY_HIGH,
+     *    'quality'          => Prism\Library\Prism\Constants::QUALITY_HIGH,
      *    'image_type'       => 'png'
      * );
      *
-     * $file     = new Prism\Library\File\Image($file['tmp_path']);
+     * $file     = new Prism\Library\Prism\File\Image($file['tmp_path']);
      *
      * $fileData = $file->toFile($destinationFolder, $options);
      * </code>

@@ -1,18 +1,18 @@
 <?php
 /**
- * @package      Prism\Library\Utilities
+ * @package      Prism\Library\Prism\Utilities
  * @subpackage   Array
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Utilities;
+namespace Prism\Library\Prism\Utilities;
 
 /**
  * This class provides functionality for handling arrays.
  *
- * @package      Prism\Library\Utilities
+ * @package      Prism\Library\Prism\Utilities
  * @subpackage   Array
  */
 abstract class ArrayHelper
@@ -21,7 +21,7 @@ abstract class ArrayHelper
      * Return array with IDs extracted from items.
      *
      * <code>
-     * $userIds = Prism\Library\Utilities\ArrayHelper::getIds($items);
+     * $userIds = Prism\Library\Prism\Utilities\ArrayHelper::getIds($items);
      * </code>
      *
      * @param array  $items

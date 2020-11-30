@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Collection;
+namespace Prism\Library\Prism\Collection;
 
 interface CollectionHydration
 {

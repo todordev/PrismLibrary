@@ -7,12 +7,12 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Filesystem\Validation;
+namespace Prism\Library\Prism\Filesystem\Validation;
 
 use Joomla\CMS\Filesystem\File;
 use Joomla\CMS\Filesystem\Path;
 use Joomla\CMS\Language\Text;
-use Prism\Library\Validator\Validation;
+use Prism\Library\Prism\Validator\Validation;
 use Joomla\String\StringHelper;
 
 /**
@@ -37,7 +37,7 @@ class Image extends Validation
      * $myFile     = '/tmp/myfile.tmp';
      * $filename   = 'myfile.jpg';
      *
-     * $validator = new Prism\Library\Filesystem\Validation\Image($myFile, $fileName);
+     * $validator = new Prism\Library\Prism\Filesystem\Validation\Image($myFile, $fileName);
      * </code>
      *
      * @param string $file A path to the file.
@@ -57,7 +57,7 @@ class Image extends Validation
      * <code>
      * $myFile     = '/tmp/myfile.jpg';
      *
-     * $validator = new Prism\Library\Filesystem\Validation\Image();
+     * $validator = new Prism\Library\Prism\Filesystem\Validation\Image();
      * $validator->setFile($myFile);
      * </code>
      *
@@ -79,7 +79,7 @@ class Image extends Validation
      * <code>
      * $filename  = 'myfile.jpg';
      *
-     * $validator = new Prism\Library\Filesystem\Validation\Image();
+     * $validator = new Prism\Library\Prism\Filesystem\Validation\Image();
      * $validator->setFilename($filename);
      * </code>
      *
@@ -99,7 +99,7 @@ class Image extends Validation
      * <code>
      * $mimeTypes  = array('image/jpeg', 'image/gif');
      *
-     * $validator = new Prism\Library\Filesystem\Validation\Image();
+     * $validator = new Prism\Library\Prism\Filesystem\Validation\Image();
      * $validator->setMimeTypes($mimeTypes);
      * </code>
      *
@@ -119,7 +119,7 @@ class Image extends Validation
      * <code>
      * $imageExtensions  = array('jpg', 'png');
      *
-     * $validator = new Prism\Library\Filesystem\Validation\Image();
+     * $validator = new Prism\Library\Prism\Filesystem\Validation\Image();
      * $validator->setImageExtensions($imageExtensions);
      * </code>
      *
@@ -140,7 +140,7 @@ class Image extends Validation
      * $myFile     = '/tmp/myfile.jpg';
      * $fileName   = 'myfile.jpg';
      *
-     * $validator = new Prism\Library\Filesystem\Validation\Image($myFile, $fileName);
+     * $validator = new Prism\Library\Prism\Filesystem\Validation\Image($myFile, $fileName);
      *
      * if ($validator->passes()) {
      *     // ....
@@ -164,7 +164,7 @@ class Image extends Validation
      * $myFile     = '/tmp/myfile.jpg';
      * $fileName   = 'myfile.jpg';
      *
-     * $validator = new Prism\Library\Filesystem\Validation\Image($myFile, $fileName);
+     * $validator = new Prism\Library\Prism\Filesystem\Validation\Image($myFile, $fileName);
      *
      * if ($validator->fails()) {
      *     echo $validator->getMessage();

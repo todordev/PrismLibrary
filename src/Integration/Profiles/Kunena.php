@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Integration\Profiles;
+namespace Prism\Library\Prism\Integration\Profiles;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -42,7 +42,7 @@ class Kunena implements ProfilesInterface
      * <code>
      * $ids = array(1, 2, 3, 4);
      *
-     * $profiles = new Prism\Library\Integration\Profiles\Kunena(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Prism\Integration\Profiles\Kunena(\JFactory::getDbo());
      * </code>
      *
      * @param  \JDatabaseDriver $db
@@ -65,7 +65,7 @@ class Kunena implements ProfilesInterface
      * <code>
      * $ids = array(1, 2, 3, 4);
      *
-     * $profiles = new Prism\Library\Integration\Profiles\Kunena(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Prism\Integration\Profiles\Kunena(\JFactory::getDbo());
      * $profiles->load($ids);
      * </code>
      *
@@ -95,7 +95,7 @@ class Kunena implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Library\Integration\Profiles\Kunena(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Prism\Integration\Profiles\Kunena(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $avatar = $profiles->getAvatar($userId);
@@ -136,7 +136,7 @@ class Kunena implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Library\Integration\Profiles\Kunena(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Prism\Integration\Profiles\Kunena(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $link = $profiles->getLink($userId);
@@ -168,7 +168,7 @@ class Kunena implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Library\Integration\Profiles\Kunena(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Prism\Integration\Profiles\Kunena(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $location = $profiles->getLocation($userId);
@@ -190,7 +190,7 @@ class Kunena implements ProfilesInterface
      * $ids = array(1, 2, 3, 4);
      * $userId = 1;
      *
-     * $profiles = new Prism\Library\Integration\Profiles\Kunena(\JFactory::getDbo());
+     * $profiles = new Prism\Library\Prism\Integration\Profiles\Kunena(\JFactory::getDbo());
      * $profiles->load($ids);
      *
      * $countryCode = $profiles->getCountryCode($userId);

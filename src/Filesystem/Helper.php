@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Filesystem;
+namespace Prism\Library\Prism\Filesystem;
 
 use Joomla\Registry\Registry;
 use League\Flysystem\Filesystem;
@@ -39,7 +39,7 @@ final class Helper
      * <code>
      * $params = JComponentHelper::getParams('com_magicgallery');
      *
-     * $filesystemHelper  = new Prism\Library\Filesystem\Helper($params);
+     * $filesystemHelper  = new Prism\Library\Prism\Filesystem\Helper($params);
      * $storageFilesystem = $filesystemHelper->getFilesystem();
      * </code>
      *
@@ -78,7 +78,7 @@ final class Helper
      * <code>
      * $params = JComponentHelper::getParams('com_magicgallery');
      *
-     * $filesystemHelper  = new Prism\Library\Filesystem\Helper($params);
+     * $filesystemHelper  = new Prism\Library\Prism\Filesystem\Helper($params);
      * $temporaryFolder   = $filesystemHelper->getTemporaryMediaFolder();
      * </code>
      *
@@ -99,7 +99,7 @@ final class Helper
      * <code>
      * $params = JComponentHelper::getParams('com_magicgallery');
      *
-     * $filesystemHelper   = new Prism\Library\Filesystem\Helper($params);
+     * $filesystemHelper   = new Prism\Library\Prism\Filesystem\Helper($params);
      * $temporaryFolderUri = $filesystemHelper->getTemporaryMediaFolderUri();
      * </code>
      *
@@ -118,7 +118,7 @@ final class Helper
      * <code>
      * $params = JComponentHelper::getParams('com_magicgallery');
      *
-     * $filesystemHelper   = new Prism\Library\Filesystem\Helper($params);
+     * $filesystemHelper   = new Prism\Library\Prism\Filesystem\Helper($params);
      * $mediaFolder = $filesystemHelper->getMediaFolder();
      * </code>
      *
@@ -154,7 +154,7 @@ final class Helper
      * <code>
      * $params = JComponentHelper::getParams('com_magicgallery');
      *
-     * $filesystemHelper  = new Prism\Library\Filesystem\Helper($params);
+     * $filesystemHelper  = new Prism\Library\Prism\Filesystem\Helper($params);
      * $mediaFolderUri    = $filesystemHelper->getMediaFolderUri();
      * </code>
      *
@@ -204,7 +204,7 @@ final class Helper
      * <code>
      * $params = JComponentHelper::getParams('com_magicgallery');
      *
-     * $filesystemHelper   = new Prism\Library\Filesystem\Helper($params);
+     * $filesystemHelper   = new Prism\Library\Prism\Filesystem\Helper($params);
      * if ($filesystemHelper->isLocal()) {
      * //....
      * }

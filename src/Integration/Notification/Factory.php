@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Integration\Notification;
+namespace Prism\Library\Prism\Integration\Notification;
 
 use Joomla\Registry\Registry;
 
@@ -39,7 +39,7 @@ final class Factory
      *    'url'      => "http://mydomain.com"
      * ));
      *
-     * $factory = new Prism\Library\Integration\Notification\Factory($options);
+     * $factory = new Prism\Library\Prism\Integration\Notification\Factory($options);
      * </code>
      *
      * @param  Registry  $options Options used in the process of building the object.
@@ -61,7 +61,7 @@ final class Factory
      *    'url'      => "http://mydomain.com"
      * ));
      *
-     * $factory      = new Prism\Library\Integration\Notification\Factory($options);
+     * $factory      = new Prism\Library\Prism\Integration\Notification\Factory($options);
      * $notification = $factory->create();
      * </code>
      */

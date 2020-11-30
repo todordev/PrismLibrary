@@ -7,10 +7,10 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Filesystem\Validation;
+namespace Prism\Library\Prism\Filesystem\Validation;
 
 use Joomla\CMS\Language\Text;
-use Prism\Library\Validator\Validation;
+use Prism\Library\Prism\Validator\Validation;
 
 /**
  * This class provides functionality for validating a file,
@@ -42,7 +42,7 @@ class Server extends Validation
      * <code>
      * $errorCode = 404;
      *
-     * $validator = new Prism\Library\Filesystem\Validator\Server($errorCode);
+     * $validator = new Prism\Library\Prism\Filesystem\Validator\Server($errorCode);
      * </code>
      *
      * @param int $errorCode Error code that comes from server.
@@ -60,7 +60,7 @@ class Server extends Validation
      * <code>
      * $errorCode = 404;
      *
-     * $validator = new Prism\Library\Filesystem\Validator\Server($errorCode);
+     * $validator = new Prism\Library\Prism\Filesystem\Validator\Server($errorCode);
      * $validator->setErrorCode($maxFileSize);
      * </code>
      *
@@ -78,7 +78,7 @@ class Server extends Validation
      * $errorCode = 404;
      * $ignored   = array(UPLOAD_ERR_NO_FILE, UPLOAD_ERR_EXTENSION);
      *
-     * $validator = new Prism\Library\Filesystem\Validator\Server($errorCode);
+     * $validator = new Prism\Library\Prism\Filesystem\Validator\Server($errorCode);
      *
      * if (!$validator->isValid($ignored)) {
      * ...

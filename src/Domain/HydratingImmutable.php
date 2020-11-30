@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Domain;
+namespace Prism\Library\Prism\Domain;
 
 use Joomla\Registry\Registry;
 
@@ -29,7 +29,7 @@ trait HydratingImmutable
      *     'position' => '0'
      * );
      *
-     * $currency = new Prism\Library\Money\Currency();
+     * $currency = new Prism\Library\Prism\Money\Currency();
      * $currency->hydrated($data);
      * </code>
      *

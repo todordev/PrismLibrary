@@ -7,7 +7,7 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Utilities;
+namespace Prism\Library\Prism\Utilities;
 
 // no direct access
 defined('JPATH_PLATFORM') or die;
@@ -25,7 +25,7 @@ abstract class UserHelper
      *
      * <code>
      * $userId = 1;
-     * $numberFormatter = Prism\Library\Utilities\UserHelper::getName($userId);
+     * $numberFormatter = Prism\Library\Prism\Utilities\UserHelper::getName($userId);
      * </code>
      *
      * @param int $userId
