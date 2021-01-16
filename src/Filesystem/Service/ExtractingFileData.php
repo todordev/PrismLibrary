@@ -111,20 +111,25 @@ class ExtractingFileData
         $file = new File();
 
         // Get mime type.
+        $mimeType = '';
         if (function_exists('finfo_open')) {
             $finfo = finfo_open(FILEINFO_MIME_TYPE);
-            $file->setMime(finfo_file($finfo, $this->file));
+            $mimeType = finfo_file($finfo, $this->file);
             finfo_close($finfo);
         }
 
-        $file->setFileName(basename($this->file));
-        $file->setFileSize(filesize($this->file));
-        $file->setExtension(JoomlaFile::getExt($this->fileData['filename']));
+        $file->setFilepath($this->file);
+        $file->setFilename(basename($this->file));
+        $file->setFilesize(filesize($this->file));
+        $file->setExtension(JoomlaFile::getExt($this->file));
+        $file->setMime($mimeType);
 
-        $fileTypeDetector = new DetectingFileType($this->fileData['mime']);
-        $file->setFileType($fileTypeDetector->getType());
+        $fileTypeDetector = new DetectingFileType($mimeType);
+        $file->setFiletype($fileTypeDetector->getType());
 
-        if ($file->hasImageExtension() && $file->isImage()) {
+        $fileAnalyzer = new FileAnalyzer($file);
+
+        if ($fileAnalyzer->isImage()) {
             $imageProperties = Image::getImageFileProperties($this->file);
 
             $file->setAttributes(
@@ -135,6 +140,8 @@ class ExtractingFileData
                 ]
             );
         }
+
+
 
         return $file;
     }

@@ -35,7 +35,7 @@ class DetectingFileType
      *
      * @param  string $mime MIME type
      */
-    public function __construct($mime)
+    public function __construct(string $mime)
     {
         $this->mime = $mime;
 
@@ -45,7 +45,8 @@ class DetectingFileType
             'video'      => ['video/mp4'],
             'word'       => ['text/rtf', 'application/msword'],
             'excel'      => ['application/excel'],
-            'pdf'        => ['application/pdf']
+            'pdf'        => ['application/pdf'],
+            'archive'    => ['application/zip', 'application/x-7z-compressed', 'application/x-tar', 'application/vnd.rar', 'application/gzip', 'application/x-bzip', 'application/x-bzip2']
         ];
 
         $this->icons = [

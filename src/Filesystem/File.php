@@ -9,81 +9,84 @@
 
 namespace Prism\Library\Prism\Filesystem;
 
-
-use Joomla\String\StringHelper;
+use Prism\Library\Prism\Domain\ExtractingToArray;
 
 class File
 {
-    protected $filePath;
-    protected $fileName;
-    protected $fileSize;
-    protected $extension;
-    protected $fileType;
-    protected $mime;
-    protected $attributes = [];
+    use ExtractingToArray;
 
-    public function __construct(array $fileData = [])
+    protected string $relative_path;
+    protected string $filename;
+    protected string $filepath;
+    protected string $filetype;
+    protected int $filesize;
+    protected string $extension;
+    protected string $mime;
+    protected array $attributes;
+
+    public function __construct(array $data = [])
     {
-        $this->filePath = array_key_exists('filepath', $fileData) ? (string)$fileData['filepath'] : '';
-        $this->fileName = array_key_exists('filename', $fileData) ? (string)$fileData['filename'] : '';
-        $this->fileSize = array_key_exists('filesize', $fileData) ? (int)$fileData['filesize'] : 0;
-        $this->extension = array_key_exists('extension', $fileData) ? (string)$fileData['extension'] : '';
-        $this->fileType = array_key_exists('filetype', $fileData) ? (string)$fileData['filetype'] : '';
-        $this->mime = array_key_exists('mime', $fileData) ? (string)$fileData['mime'] : '';
-        $this->attributes = array_key_exists('attributes', $fileData) ? (array)$fileData['attributes'] : [];
+        $this->relative_path = array_key_exists('relative_path', $data) ? (string)$data['relative_path'] : '';
+        $this->filename = array_key_exists('filename', $data) ? (string)$data['filename'] : '';
+        $this->filepath = array_key_exists('filepath', $data) ? (string)$data['filepath'] : '';
+        $this->filetype = array_key_exists('filetype', $data) ? (string)$data['filetype'] : '';
+        $this->filesize = array_key_exists('filesize', $data) ? (int)$data['filesize'] : 0;
+        $this->extension = array_key_exists('extension', $data) ? (string)$data['extension'] : '';
+        $this->mime = array_key_exists('mime', $data) ? (string)$data['mime'] : '';
+        $this->attributes = array_key_exists('attributes', $data) ? (array)$data['attributes'] : [];
     }
 
     /**
      * @return string
      */
-    public function getFilePath(): string
+    public function getFilepath(): string
     {
-        return $this->filePath;
+        return $this->filepath;
     }
 
     /**
-     * @param string $filePath
+     * @param string $filepath
      * @return File
      */
-    public function setFilePath(string $filePath): File
+    public function setFilepath(string $filepath): File
     {
-        $this->filePath = $filePath;
+        $this->filepath = $filepath;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getFileName(): string
+    public function getFilename(): string
     {
-        return $this->fileName;
+        return $this->filename;
     }
 
     /**
-     * @param string $fileName
+     * @param string $filename
      * @return File
      */
-    public function setFileName(string $fileName): File
+    public function setFilename(string $filename): File
     {
-        $this->fileName = $fileName;
+        $this->filename = $filename;
         return $this;
     }
 
     /**
      * @return int
      */
-    public function getFileSize(): int
+    public function getFilesize(): int
     {
-        return $this->fileSize;
+        return $this->filesize;
     }
 
     /**
-     * @param int $fileSize
+     * @param int $filesize
      * @return File
      */
-    public function setFileSize(int $fileSize): File
+    public function setFilesize(int $filesize): File
     {
-        $this->fileSize = $fileSize;
+        $this->filesize = $filesize;
         return $this;
     }
 
@@ -108,18 +111,18 @@ class File
     /**
      * @return string
      */
-    public function getFileType(): string
+    public function getFiletype(): string
     {
-        return $this->fileType;
+        return $this->filetype;
     }
 
     /**
-     * @param string $fileType
+     * @param string $filetype
      * @return File
      */
-    public function setFileType(string $fileType): File
+    public function setFiletype(string $filetype): File
     {
-        $this->fileType = $fileType;
+        $this->filetype = $filetype;
         return $this;
     }
 
@@ -142,6 +145,24 @@ class File
     }
 
     /**
+     * @return string
+     */
+    public function getRelativePath(): string
+    {
+        return $this->relative_path;
+    }
+
+    /**
+     * @param string $relative_path
+     * @return File
+     */
+    public function setRelativePath(string $relative_path): File
+    {
+        $this->relative_path = $relative_path;
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function getAttributes(): array
@@ -157,52 +178,5 @@ class File
     {
         $this->attributes = $attributes;
         return $this;
-    }
-
-    /**
-     * Check if the file extension belongs to image.
-     *
-     * @return bool
-     */
-    public function hasImageExtension(): bool
-    {
-        $extensions     = ['jpg', 'jpeg', 'webp', 'gif', 'png'];
-        return ($this->extension && in_array($this->extension, $extensions, true));
-    }
-
-    /**
-     * Check the file type if it is image.
-     *
-     * <code>
-     * $file = new Prism\Library\Prism\Filesystem\File();
-     *
-     * if ($file->isImage()) {
-     * // ...
-     * }
-     * </code>
-     *
-     * @return bool
-     */
-    public function isImage(): bool
-    {
-        return strcmp($this->fileType, 'image') === 0;
-    }
-
-    /**
-     * Check the file type if it is video.
-     *
-     * <code>
-     * $file = new Prism\Library\Prism\Filesystem\File();
-     *
-     * if ($file->isVideo()) {
-     * // ...
-     * }
-     * </code>
-     *
-     * @return bool
-     */
-    public function isVideo(): bool
-    {
-        return strcmp($this->fileType, 'video') === 0;
     }
 }

@@ -15,12 +15,12 @@ namespace Prism\Library\Prism\Response;
  * @package      Prism
  * @subpackage   Responses
  */
-class Json
+final class Json
 {
-    protected $success = true;
-    protected $message = array();
-    protected $data;
-    protected $redirectUrl;
+    protected bool $success = false;
+    protected array $message = [];
+    protected array $data = [];
+    protected string $redirectUrl = '';
 
     /**
      * Initialize the object.
@@ -32,14 +32,14 @@ class Json
      * $response = new Prism\Library\Prism\Response\Json($title, $content);
      * </code>
      *
-     * @param string $title
      * @param string $content
+     * @param string $title
      */
-    public function __construct($title = '', $content = '')
+    public function __construct(string $content, string $title = '')
     {
         $this->message = array(
-            'title'     => $title,
             'content'   => $content,
+            'title'     => $title,
             'type'      => '',
         );
     }
@@ -138,68 +138,25 @@ class Json
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->message['title'];
     }
 
     /**
      * Set a response title to the object.
-     *
      * <code>
      * $title = "My title....";
-     *
      * $response = new Prism\Library\Prism\Response\Json();
      * $response->setTitle($title);
      * </code>
      *
      * @param string $title
-     *
      * @return self
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->message['title'] = $title;
-
-        return $this;
-    }
-
-    /**
-     * Return a response text ( message ).
-     *
-     * <code>
-     * $response = new Prism\Library\Prism\Response\Json();
-     * $content = $response->getText();
-     * </code>
-     *
-     * @return string
-     *
-     * @deprecated v1.19.5
-     */
-    public function getText()
-    {
-        return $this->getContent();
-    }
-
-    /**
-     * Set a response text to the object.
-     *
-     * <code>
-     * $content = "My text....";
-     *
-     * $response = new Prism\Library\Prism\Response\Json();
-     * $response->setText($content);
-     * </code>
-     *
-     * @param string $content
-     *
-     * @return self
-     *
-     * @deprecated v1.19.5 Use setContent
-     */
-    public function setText($content)
-    {
-        $this->setContent($content);
 
         return $this;
     }
@@ -214,26 +171,23 @@ class Json
      *
      * @return string
      */
-    public function getContent()
+    public function getContent(): string
     {
         return $this->message['content'];
     }
 
     /**
      * Set a response content to the object.
-     *
      * <code>
      * $content = "My text....";
-     *
      * $response = new Prism\Library\Prism\Response\Json();
      * $response->setText($content);
      * </code>
      *
      * @param string $content
-     *
      * @return self
      */
-    public function setContent($content)
+    public function setContent(string $content)
     {
         $this->message['content'] = $content;
 
@@ -250,29 +204,26 @@ class Json
      *
      * @return array
      */
-    public function getData()
+    public function getData(): array
     {
         return $this->data;
     }
 
     /**
      * Set an additional data that comes from the server.
-     *
      * <code>
      * $data = array(
      *     "name" => "John Dow",
      *     "website" => "http://itprism.com"
      * );
-     *
      * $response = new Prism\Library\Prism\Response\Json();
      * $response->setData($url);
      * </code>
      *
      * @param array $data
-     *
      * @return self
      */
-    public function setData($data)
+    public function setData(array $data)
     {
         $this->data = $data;
 
@@ -287,7 +238,7 @@ class Json
      * $redirectUrl = $response->getRedirectUrl();
      * </code>
      *
-     * @return array
+     * @return string
      */
     public function getRedirectUrl()
     {
@@ -304,10 +255,10 @@ class Json
      * $response->setRedirectUrl($url);
      * </code>
      *
-     * @param $url
+     * @param string $url
      * @return self
      */
-    public function setRedirectUrl($url)
+    public function setRedirectUrl(string $url)
     {
         $this->redirectUrl = $url;
 
@@ -319,37 +270,30 @@ class Json
      *
      * <code>
      * $response = new Prism\Library\Prism\Response\Json();
-     * $jsonResponse = $response->__toString();
+     * $jsonResponse = (string)$response;
      * </code>
      *
      * @return string
+     * @throws \JsonException
      */
-    public function __toString()
+    public function __toString(): string
     {
-        $response = array(
+        $response = [
             'success' => $this->success
-        );
+        ];
 
         if ($this->message['content']) {
             $response['message'] = $this->message;
-
-            // Remove this when I am ready to remove deprecated code.
-            $response['text']    = $this->message['content'];
-            if ($this->message['title']) {
-                $response['title'] = $this->message['title'];
-            } else {
-                unset($this->message['title']);
-            }
         }
 
-        if ($this->data !== null) {
+        if (count($this->data) > 0) {
             $response['data'] = $this->data;
         }
 
-        if ($this->redirectUrl !== null) {
+        if ($this->redirectUrl) {
             $response['redirect_url'] = $this->redirectUrl;
         }
 
-        return (string)json_encode($response);
+        return (string)json_encode($response, JSON_THROW_ON_ERROR);
     }
 }

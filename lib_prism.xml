@@ -2,17 +2,19 @@
 <extension type="library" version="4.0" method="upgrade">
 	<name>Prism Library</name>
 	<libraryname>Prism</libraryname>
-	<author>Todor Iliev</author>
-	<authorEmail>dev@funfex.com</authorEmail>
+	<author>FunFex</author>
+	<authorEmail>opensource@funfex.com</authorEmail>
     <authorUrl>https://funfex.com</authorUrl>
-	<copyright>Copyright (C) 2020 FunFex LTD. All rights reserved.</copyright>
+	<copyright>Copyright (C) 2021 FunFex LTD. All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3</license>
 	<packager>FunFex</packager>
 	<packagerurl>https://funfex.com</packagerurl>
-	<version>2.0.0-alpha2</version>
-	<creationDate>26 April, 2020</creationDate>
+	<version>2.0.0-alpha3</version>
+	<creationDate>16 January, 2021</creationDate>
 	<description>Prism Library is a collection of resources used in the most of FunFex extensions.</description>
     
+	<namespace>Prism\Library\Prism</namespace>
+	
 	<media destination="lib_prism" folder="assets">
         <folder>css</folder>
         <folder>images</folder>
@@ -21,13 +23,15 @@
     </media>
 	
 	<files folder="src">
-		<folder>Collection</folder>
-	    <folder>Command</folder>
+		<folder>Constant</folder>
 	    <folder>Container</folder>
+		<folder>Contract</folder>
 	    <folder>Controller</folder>
 	    <folder>Data</folder>
         <folder>Database</folder>
         <folder>Domain</folder>
+        <folder>Exception</folder>
+        <folder>Extension</folder>
         <folder>Filesystem</folder>
         <folder>Google</folder>
 		<folder>Helper</folder>
@@ -40,18 +44,13 @@
         <folder>Payment</folder>
         <folder>Renderer</folder>
         <folder>Response</folder>
-        <folder>Transifex</folder>
         <folder>Ui</folder>
-        <folder>Utilities</folder>
-        <folder>Validator</folder>
+        <folder>Utility</folder>
+        <folder>Validation</folder>
         <folder>vendor</folder>
         <folder>Video</folder>
         <folder>Xml</folder>
         
-        <file>Constants.php</file>
-        <file>Container.php</file>
-        <file>Date.php</file>
-        <file>Extensions.php</file>
         <file>init.php</file>
 		<file>Version.php</file>
 	</files>

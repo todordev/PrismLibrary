@@ -9,26 +9,26 @@
 
 namespace Prism\Library\Prism\Xml;
 
+use SimpleXMLElement;
+
 /**
  * This class extends the native PHP class Simple XML.
  *
  * @package      Prism
  * @subpackage   XML
  */
-class Simple extends \SimpleXMLElement
+class Simple extends SimpleXMLElement
 {
     /**
      * Include a CDATA element to an XML content.
-     *
      * <code>
      * $sxml = new Prism\Library\Prism\Xml\Simple();
-     *
      * $sxml->addCData("<strong>This text contains HTML code.</strong>");
      * </code>
      *
      * @param string $cdataText
      */
-    public function addCData($cdataText)
+    public function addCData(string $cdataText)
     {
         $node = dom_import_simplexml($this);
         $no   = $node->ownerDocument;
@@ -39,17 +39,14 @@ class Simple extends \SimpleXMLElement
      * Adds a child with $value inside CDATA.
      *
      * @param string $name
-     * @param mixed  $value
-     *
+     * @param string $value
      * <code>
      * $sxml = new Prism\Library\Prism\Xml\Simple();
-     *
      * $sxml->addChildCData("body", "<strong>This text contains HTML code.</strong>");
      * </code>
-     *
-     * @return \SimpleXMLElement
+     * @return SimpleXMLElement
      */
-    public function addChildCData($name, $value = null)
+    public function addChildCData(string $name, string $value = '')
     {
         $newChild = $this->addChild($name);
 

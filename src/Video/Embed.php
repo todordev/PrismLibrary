@@ -16,6 +16,7 @@ use Joomla\Uri\Uri;
  *
  * @package      Prism
  * @subpackage   Video
+ * @todo It should be reworked.
  */
 class Embed
 {
@@ -23,8 +24,8 @@ class Embed
     protected $code;
     protected $service;
 
-    protected $patternYouTube = '#(?<=(?:v|i)=)[a-zA-Z0-9-]+(?=&)|(?<=(?:v|i)\/)[^&\n]+|(?<=embed\/)[^"&\n]+|(?<=(?:v|i)=)[^&\n]+|(?<=youtu.be\/)[^&\n]+#';
-    protected $patternVimeo = '#^.*(vimeo\.com\/)((channels\/[A-z]+\/)|(groups\/[A-z]+\/videos\/))?([0-9]+)#';
+    protected string $patternYouTube = '#(?<=(?:v|i)=)[a-zA-Z0-9-]+(?=&)|(?<=(?:v|i)\/)[^&\n]+|(?<=embed\/)[^"&\n]+|(?<=(?:v|i)=)[^&\n]+|(?<=youtu.be\/)[^&\n]+#';
+    protected string $patternVimeo = '#^.*(vimeo\.com\/)((channels\/[A-z]+\/)|(groups\/[A-z]+\/videos\/))?([0-9]+)#';
 
     /**
      * Initialize the object.
@@ -37,7 +38,7 @@ class Embed
      *
      * @param string $url
      */
-    public function __construct($url)
+    public function __construct(string $url)
     {
         $this->url = $url;
     }
@@ -53,7 +54,7 @@ class Embed
      *
      * </code>
      */
-    public function parse()
+    public function parse(): void
     {
         $uri  = new Uri($this->url);
         $host = $uri->getHost();
@@ -87,7 +88,7 @@ class Embed
      *
      * @return string
      */
-    public function getCode()
+    public function getCode(): string
     {
         return $this->code;
     }

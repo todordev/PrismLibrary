@@ -6,20 +6,95 @@
   "license": "GPL-2.0-or-later",
   "assets": [
     {
-      "package": "lib_prism",
-      "name": "blueimp-fileupload",
+      "name": "prism.pnotify",
+      "type": "script",
+      "uri": "media/lib_prism/vendor/pnotify/core/PNotify.js"
+    },
+    {
+      "name": "prism.pnotify",
+      "type": "style",
+      "uri": "media/lib_prism/vendor/pnotify/core/PNotify.css"
+    },
+    {
+      "name": "prism.pnotify",
+      "type": "style",
+      "uri": "media/lib_prism/vendor/pnotify/core/PNotify.css"
+    },
+    {
+      "name": "prism.pnotify.bootstrap4",
+      "type": "script",
+      "uri": "media/lib_prism/vendor/pnotify/bootstrap4/PNotifyBootstrap4.js"
+    },
+    {
+      "name": "prism.pnotify.bootstrap4",
+      "type": "style",
+      "uri": "media/lib_prism/vendor/pnotify/bootstrap4/PNotifyBootstrap4.css"
+    },
+    {
+      "name": "prism.pnotify.bootstrap4",
       "type": "preset",
       "version": "1.0",
       "dependencies": [
-        "jquery.ui.widget#script",
-        "jquery.iframe-transport#script",
-        "blueimp-fileupload#style",
-        "blueimp-fileupload#script"
+        "prism.pnotify.bootstrap4#script",
+        "prism.pnotify.bootstrap4#style"
+      ]
+    },
+
+    {
+      "name": "prism.pnotify.brighttheme",
+      "type": "style",
+      "uri": "media/lib_prism/vendor/pnotify/core/BrightTheme.css"
+    },
+
+    {
+      "name": "prism.pnotify.mobile",
+      "type": "script",
+      "uri": "media/lib_prism/vendor/pnotify/mobile/PNotifyMobile.js",
+      "dependencies": [
+        "prism.pnotify#script",
+        "prism.pnotify#style"
       ]
     },
     {
-      "package": "lib_prism",
-      "name": "jquery.ui.widget",
+      "name": "prism.pnotify.mobile",
+      "type": "style",
+      "uri": "media/lib_prism/vendor/pnotify/mobile/PNotifyMobile.css",
+      "dependencies": [
+        "prism.pnotify#script",
+        "prism.pnotify#style"
+      ]
+    },
+    {
+      "name": "prism.pnotify",
+      "type": "preset",
+      "version": "1.0",
+      "dependencies": [
+        "prism.pnotify#script",
+        "prism.pnotify#style"
+      ]
+    },
+    {
+      "name": "prism.pnotify.mobile",
+      "type": "preset",
+      "version": "1.0",
+      "dependencies": [
+        "prism.pnotify.mobile#script",
+        "prism.pnotify.mobile#style"
+      ]
+    },
+    {
+      "name": "prism.blueimp-fileupload",
+      "type": "preset",
+      "version": "1.0",
+      "dependencies": [
+        "prism.jquery.ui.widget#script",
+        "prism.jquery.iframe-transport#script",
+        "prism.blueimp-fileupload#style",
+        "prism.blueimp-fileupload#script"
+      ]
+    },
+    {
+      "name": "prism.jquery.ui.widget",
       "type": "script",
       "version": "1.0",
       "dependencies": [
@@ -28,8 +103,7 @@
       "uri": "media/lib_prism/vendors/fileupload/js/vendor/jquery.ui.widget.js"
     },
     {
-      "package": "lib_prism",
-      "name": "jquery.iframe-transport",
+      "name": "prism.jquery.iframe-transport",
       "type": "script",
       "version": "1.0",
       "dependencies": [
@@ -38,8 +112,7 @@
       "uri": "media/lib_prism/vendors/fileupload/js/jquery.iframe-transport.js"
     },
     {
-      "package": "lib_prism",
-      "name": "blueimp-fileupload",
+      "name": "prism.blueimp-fileupload",
       "type": "script",
       "version": "1.0",
       "dependencies": [
@@ -48,15 +121,13 @@
       "uri": "media/lib_prism/vendors/fileupload/js/jquery.fileupload.js"
     },
     {
-      "package": "lib_prism",
-      "name": "blueimp-fileupload",
+      "name": "prism.blueimp-fileupload",
       "type": "style",
       "version": "1.0",
       "uri": "media/lib_prism/vendors/fileupload/css/jquery.fileupload.css"
     },
     {
-      "package": "lib_prism",
-      "name": "cropperjs",
+      "name": "prism.cropperjs",
       "type": "script",
       "version": "1.0",
       "dependencies": [
@@ -65,8 +136,7 @@
       "uri": "media/lib_prism/vendors/cropperjs/cropper.min.js"
     },
     {
-      "package": "lib_prism",
-      "name": "cropperjs",
+      "name": "prism.cropperjs",
       "type": "style",
       "version": "1.0",
       "uri": "media/lib_prism/vendors/cropperjs/cropper.min.css"
@@ -76,6 +146,12 @@
       "type": "style",
       "version": "1.0",
       "uri": "media/lib_prism/css/prism.style.css"
+    },
+    {
+      "name": "prism.core",
+      "type": "script",
+      "version": "1.0",
+      "uri": "media/lib_prism/js/prism.js"
     }
   ]
 }

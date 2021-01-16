@@ -44,13 +44,13 @@ class Size extends Validation
      * $validator = new Prism\Library\Prism\Filesystem\Validator\Size($fileSize, $maxFileSize);
      * </code>
      *
-     * @param integer $fileSize File size in bytes.
-     * @param integer $maxFileSize Maximum allowed file size in bytes.
+     * @param int $fileSize File size in bytes.
+     * @param int $maxFileSize Maximum allowed file size in bytes.
      */
-    public function __construct($fileSize = 0, $maxFileSize = 0)
+    public function __construct(int $fileSize = 0, int $maxFileSize = 0)
     {
-        $this->fileSize = (int)$fileSize;
-        $this->maxFileSize = (int)$maxFileSize;
+        $this->fileSize = $fileSize;
+        $this->maxFileSize = $maxFileSize;
     }
 
     /**
@@ -64,11 +64,11 @@ class Size extends Validation
      * $validator->setMaxFileSize($maxFileSize);
      * </code>
      *
-     * @param integer $maxFileSize File size in bytes ( 1024 * 1024 ).
+     * @param int $maxFileSize File size in bytes.
      */
-    public function setMaxFileSize($maxFileSize)
+    public function setMaxFileSize(int $maxFileSize): void
     {
-        $this->maxFileSize = (int)$maxFileSize;
+        $this->maxFileSize = $maxFileSize;
     }
 
     /**
@@ -144,8 +144,8 @@ class Size extends Validation
                 round($postMaxSize / $KB),
                 round($memoryLimit / $KB)
             );
-            $this->message = Text::_('LIB_PRISM_ERROR_WARNFILETOOLARGE');
 
+            $this->message = Text::_('LIB_PRISM_ERROR_WARNFILETOOLARGE');
             return false;
         }
 
@@ -156,8 +156,8 @@ class Size extends Validation
                 round($this->fileSize / $KB),
                 round($this->maxFileSize / $KB)
             );
-            $this->message = Text::_('LIB_PRISM_ERROR_WARNFILETOOLARGE');
 
+            $this->message = Text::_('LIB_PRISM_ERROR_WARNFILETOOLARGE');
             return false;
         }
 

@@ -16,16 +16,16 @@ namespace Prism\Library\Prism\Container;
  */
 final class LayoutContainer
 {
-    private $items = [];
+    private array $items = [];
 
-    public function set($key, $value)
+    public function set(string $key, $value)
     {
         $this->items[$key] = $value;
 
         return $this;
     }
 
-    public function get($key, $default = null)
+    public function get(string $key, $default = null)
     {
         return $this->items[$key] ?? $default;
     }

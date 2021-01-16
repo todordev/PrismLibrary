@@ -3,7 +3,7 @@
  * @package      Prism
  * @subpackage   Version
  * @author       FunFex <opensource@funfex.com>
- * @copyright    Copyright (C) 2020 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -22,77 +22,77 @@ class Version
      *
      * @var string
      */
-    public $product = 'Prism Library';
+    public string $product = 'Prism Library';
 
     /**
      * Main Release Level
      *
-     * @var integer
+     * @var int
      */
-    public $release = '2';
+    public int $release = 2;
 
     /**
      * Sub Release Level
      *
-     * @var integer
+     * @var int
      */
-    public $devLevel = '0';
+    public int $devLevel = 0;
 
     /**
      * Release Type
      *
-     * @var integer
+     * @var string
      */
-    public $releaseType = 'Lite';
+    public string $releaseType = 'Lite';
 
     /**
      * Development Status
      *
      * @var string
      */
-    public $devStatus = 'Stable';
+    public string $devStatus = 'Stable';
 
     /**
      * Date
      *
      * @var string
      */
-    public $releaseDate = '30 June, 2020';
+    public string $releaseDate = '31 January, 2021';
 
     /**
      * License
      *
      * @var string
      */
-    public $license = '<a href="http://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank">GNU/GPLv3</a>';
+    public string $license = '<a href="http://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank">GNU/GPLv3</a>';
 
     /**
      * Copyright Text
      *
      * @var string
      */
-    public $copyright = '&copy; 2020 Prism. All rights reserved.';
+    public string $copyright = '&copy; 2021 FenFex. All rights reserved.';
 
     /**
      * URL
      *
      * @var string
      */
-    public $url = '<a href="http://itprism.com/free-joomla-extensions/others/software-development-kit" target="_blank">Prism Library</a>';
+    public string $url = '<a href="http://funfex.com/joomla-extensions/dev/software-development-kit" target="_blank">Prism Library</a>';
 
     /**
      * Developer
      *
      * @var string
      */
-    public $developer = '<a href="http://itprism.com" target="_blank">ITPrism</a>';
+    public string $developer = '<a href="http://funfex.com" target="_blank">FunFex</a>';
 
     /**
      *  Build long format of the version text.
      *
      * @return string Long format version.
      */
-    public function getLongVersion()
+    public function getLongVersion(): string
     {
         return
             $this->product . ' ' . $this->release . '.' . $this->devLevel . ' ' .
@@ -104,7 +104,7 @@ class Version
      *
      * @return string Medium format version.
      */
-    public function getMediumVersion()
+    public function getMediumVersion(): string
     {
         return
             $this->release . '.' . $this->devLevel . ' ' .
@@ -116,7 +116,7 @@ class Version
      *
      * @return string Short version format.
      */
-    public function getShortVersion()
+    public function getShortVersion(): string
     {
         return $this->release . '.' . $this->devLevel;
     }
