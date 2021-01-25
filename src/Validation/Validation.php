@@ -1,10 +1,9 @@
 <?php
 /**
- * @package         Prism
- * @subpackage      Files
- * @author       FunFex <opensource@funfex.com>
- * @copyright       Copyright (C) 2020 FunFex LTD. All rights reserved.
- * @license         GNU General Public License version 3 or later; see LICENSE.txt
+ * @package     Prism\Library\Prism\Validation
+ * @author      FunFex <opensource@funfex.com>
+ * @copyright   Copyright (C) 2021 FunFex LTD. All rights reserved.
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace Prism\Library\Prism\Validation;
@@ -12,24 +11,16 @@ namespace Prism\Library\Prism\Validation;
 /**
  * This is the abstract class of validations.
  *
- * @package         Prism
- * @subpackage      Validations
+ * @package    Prism\Library\Prism\Validation
  */
 abstract class Validation
 {
     /**
      * Error message.
      *
-     * @var string
+     * @var ErrorMessage
      */
-    protected string $message = '';
-
-    /**
-     * Additional information about error.
-     *
-     * @var string
-     */
-    protected string $additionalInformation = '';
+    protected ErrorMessage $errorMessage;
 
     abstract public function passes(): bool;
     abstract public function fails(): bool;
@@ -41,32 +32,14 @@ abstract class Validation
      * $ipValidation = new Prism\Library\Prism\Validation\Ip;
      *
      * if (!$ipValidation->passes()) {
-     *     echo $ipValidation->getMessage();
+     *     echo $ipValidation->errorMessage();
      * }
      * </code>
      *
-     * @return string
+     * @return ErrorMessage
      */
-    public function getMessage(): string
+    public function getErrorMessage(): ErrorMessage
     {
-        return $this->message;
-    }
-
-    /**
-     * Return additional information about error.
-     *
-     * <code>
-     * $ipValidation = new Prism\Library\Prism\Validation\Ip;
-     *
-     * if ($ipValidation->fails()) {
-     *     echo $ipValidation->getAdditionalInformation();
-     * }
-     * </code>
-     *
-     * @return string
-     */
-    public function getAdditionalInformation(): string
-    {
-        return $this->additionalInformation;
+        return $this->errorMessage;
     }
 }

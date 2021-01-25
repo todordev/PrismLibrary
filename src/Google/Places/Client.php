@@ -3,7 +3,7 @@
  * @package      Prism\Library\Prism\Google
  * @subpackage   Places
  * @author       FunFex <opensource@funfex.com>
- * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
+ * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -60,7 +60,7 @@ class Client
         if (!in_array($this->options->get('method'), ['get', 'post'], true)) {
             $this->options->set('method', 'get');
         }
-            
+
         $this->httpClient = new GuzzleClient([
             'base_uri' => $this->baseUrl
         ]);
@@ -83,7 +83,7 @@ class Client
                 'key' => $this->api_key,
             ],
         ];
-        
+
         if (strcmp($method, 'post') === 0) {
             $options = array_merge(['body' => json_encode($params)], $options);
         } else { // Method GET

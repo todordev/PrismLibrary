@@ -3,7 +3,7 @@
  * @package      Prism\Library\Prism
  * @subpackage   Constant
  * @author       FunFex <opensource@funfex.com>
- * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
+ * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 

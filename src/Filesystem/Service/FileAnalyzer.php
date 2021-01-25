@@ -8,28 +8,31 @@
 
 namespace Prism\Library\Prism\Filesystem\Service;
 
-use Joomla\CMS\Filesystem\File as JoomlaFile;
-use Prism\Library\Prism\Filesystem\File;
+use Joomla\CMS\Filesystem\File;
+use Prism\Library\Prism\Filesystem\Dto\FileAnalyzeRequest;
 
 final class FileAnalyzer
 {
-    private File $file;
+    private string $filePath;
+    private string $mimeType;
     private array $imageExtensions;
     private array $imageMime;
 
     /**
      * Initialize the object.
-     *
      * <code>
-     * $file = new Prism\Library\Prism\Filesystem\File();
-     * $analyzer = new Prism\Library\Prism\Filesystem\Service\FileAnalyzer($file);
+     * $filePath = '/var/www/mysite/images/logo.png';
+     * $mimeType = 'image/png';
+     * $analyzer = new FileAnalyzer($filePath, $mimeType);
      * </code>
      *
-     * @param File $file
+     * @param FileAnalyzeRequest $request
      */
-    public function __construct(File $file)
+    public function __construct(FileAnalyzeRequest $request)
     {
-        $this->file = $file;
+        $this->filePath = $request->getFilePath();
+        $this->mimeType = $request->getMimeType();
+
         $this->imageExtensions = ['jpg', 'jpeg', 'webp', 'gif', 'png'];
         $this->imageMime = ['image/png', 'image/gif', 'image/jpeg', 'image/pjpeg', 'image/webp'];
     }
@@ -37,8 +40,9 @@ final class FileAnalyzer
     /**
      * Check if the file extension belongs to image.
      * <code>
-     * $file = new Prism\Library\Prism\Filesystem\File();
-     * $analyzer = new Prism\Library\Prism\Filesystem\Service\FileAnalyzer($file);
+     * $filePath = '/var/www/mysite/images/logo.png';
+     * $mimeType = 'image/png';
+     * $analyzer = new FileAnalyzer($filePath, $mimeType);
      *
      * $analyzer->hasImageExtension();
      * </code>
@@ -47,15 +51,17 @@ final class FileAnalyzer
      */
     public function hasImageExtension(): bool
     {
-        return ($this->file->getExtension() && in_array($this->file->getExtension(), $this->imageExtensions, true));
+        $extension = File::getExt(basename($this->filePath));
+        return ($extension && in_array($extension, $this->imageExtensions, true));
     }
 
     /**
      * Check if the the MIME type of the file is an MIME of image.
      *
      * <code>
-     * $file = new Prism\Library\Prism\Filesystem\File();
-     * $analyzer = new Prism\Library\Prism\Filesystem\Service\FileAnalyzer($file);
+     * $filePath = '/var/www/mysite/images/logo.png';
+     * $mimeType = 'image/png';
+     * $analyzer = new FileAnalyzer($filePath, $mimeType);
      *
      * $analyzer->hasImageMimeType();
      * </code>
@@ -64,15 +70,16 @@ final class FileAnalyzer
      */
     public function hasImageMimeType(): bool
     {
-        return ($this->file->getMime() && in_array($this->file->getMime(), $this->imageMime, true));
+        return ($this->mimeType && in_array($this->mimeType, $this->imageMime, true));
     }
 
     /**
      * Check if the file is an image.
      *
      * <code>
-     * $file = new Prism\Library\Prism\Filesystem\File();
-     * $analyzer = new Prism\Library\Prism\Filesystem\Service\FileAnalyzer($file);
+     * $filePath = '/var/www/mysite/images/logo.png';
+     * $mimeType = 'image/png';
+     * $analyzer = new FileAnalyzer($filePath, $mimeType);
      *
      * $analyzer->isImage();
      * </code>

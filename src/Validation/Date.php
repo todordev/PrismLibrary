@@ -2,7 +2,7 @@
 /**
  * @package      Prism
  * @subpackage   Validations
- * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
+ * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -29,7 +29,7 @@ class Date extends Validation
     /**
      * Initialize the object.
      * <code>
-     * $date = "01-01-2020";
+     * $date = "01-01-2021";
      * $dateValidation = new Prism\Library\Prism\Validation\Date($date);
      * </code>
      *
@@ -44,7 +44,7 @@ class Date extends Validation
      * Validate a date.
      *
      * <code>
-     * $date = "01-01-2020";
+     * $date = "01-01-2021";
      *
      * $dateValidation = new Prism\Library\Prism\Validation\Date($date);
      *

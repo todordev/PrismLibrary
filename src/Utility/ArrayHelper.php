@@ -3,11 +3,14 @@
  * @package      Prism\Library\Prism\Utility
  * @subpackage   Array
  * @author       FunFex <opensource@funfex.com>
- * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
+ * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace Prism\Library\Prism\Utility;
+
+use Joomla\Database\ParameterType;
+use Prism\Library\Prism\Constant\Type;
 
 /**
  * This class provides functionality for handling arrays.
@@ -15,7 +18,7 @@ namespace Prism\Library\Prism\Utility;
  * @package      Prism\Library\Prism\Utility
  * @subpackage   Array
  */
-abstract class ArrayHelper
+final class ArrayHelper
 {
     /**
      * Return array with IDs extracted from items.
@@ -29,14 +32,14 @@ abstract class ArrayHelper
      *
      * @return array
      */
-    public static function getIds(array $items, $column = 'id')
+    public static function getIds(array $items, $column = 'id'): array
     {
         $result = array();
 
         foreach ($items as $item) {
-            if (is_object($item) and isset($item->$column)) {
+            if (is_object($item) && isset($item->$column)) {
                 $result[] = (int)$item->$column;
-            } elseif (is_array($item) and array_key_exists($column, $item)) {
+            } elseif (is_array($item) && array_key_exists($column, $item)) {
                 $result[] = (int)$item[$column];
             }
         }
@@ -53,21 +56,20 @@ abstract class ArrayHelper
      * @param array $items
      * @param mixed $value The value that we will search.
      * @param string $column The column where we will search.
-     *
      * @return mixed
      */
-    public static function find(array $items, $value, $column)
+    public static function find(array $items, mixed $value, string $column)
     {
         $result = null;
 
         foreach ($items as $item) {
             if (is_array($item)) {
-                if (array_key_exists($column, $item) and ($value == $item[$column])) {
+                if (array_key_exists($column, $item) && ($value === $item[$column])) {
                     $result = $item;
                     break;
                 }
             } elseif (is_object($item)) {
-                if (property_exists($item, $column) and ($value == $item->$column)) {
+                if (property_exists($item, $column) && ($value === $item->$column)) {
                     $result = $item;
                     break;
                 }
@@ -83,20 +85,19 @@ abstract class ArrayHelper
      * @param array $items
      * @param mixed $value The value that we will search.
      * @param string $column The column where we will search.
-     *
      * @return array
      */
-    public static function findAll(array $items, $value, $column)
+    public static function findAll(array $items, mixed $value, string $column): array
     {
         $results = array();
 
         foreach ($items as $item) {
             if (is_array($item)) {
-                if (array_key_exists($column, $item) and ($value == $item[$column])) {
+                if (array_key_exists($column, $item) && ($value === $item[$column])) {
                     $results[] = $item;
                 }
             } elseif (is_object($item)) {
-                if (property_exists($item, $column) and ($value == $item->$column)) {
+                if (property_exists($item, $column) && ($value === $item->$column)) {
                     $results[] = $item;
                 }
             }
@@ -123,24 +124,24 @@ abstract class ArrayHelper
      *
      * @return array
      */
-    public static function toOptions(array $items, array $options = array())
+    public static function toOptions(array $items, array $options = array()): array
     {
         $key = array_key_exists('key', $options) ? $options['key'] : 'id';
         $text = array_key_exists('text', $options) ? $options['text'] : 'title';
         $suffix = array_key_exists('suffix', $options) ? $options['suffix'] : '';
 
-        $results = array();
+        $results = [];
 
         foreach ($items as $item) {
             if (is_array($item)) {
-                if ($suffix !== '' and (array_key_exists($suffix, $item) and $item[$suffix] !== '')) {
-                    $results[] = array('value' => $item[$key], 'text' => $item[$text] . ' ['.$item[$suffix].']');
+                if ($suffix !== '' && (array_key_exists($suffix, $item) && $item[$suffix] !== '')) {
+                    $results[] = array('value' => $item[$key], 'text' => $item[$text] . ' [' . $item[$suffix] . ']');
                 } else {
                     $results[] = array('value' => $item[$key], 'text' => $item[$text]);
                 }
             } elseif (is_object($item)) {
-                if ($suffix !== '' and (isset($item->$suffix) and $item->$suffix !== '')) {
-                    $results[] = array('value' => $item->$key, 'text' => $item->$text . ' ['.$item->$suffix.']');
+                if ($suffix !== '' && (isset($item->$suffix) && $item->$suffix !== '')) {
+                    $results[] = array('value' => $item->$key, 'text' => $item->$text . ' [' . $item->$suffix . ']');
                 } else {
                     $results[] = array('value' => $item->$key, 'text' => $item->$text);
                 }
@@ -158,15 +159,15 @@ abstract class ArrayHelper
      *
      * @return array
      */
-    public function getValues(array $items, $column = 'id')
+    public static function getValues(array $items, $column = 'id'): array
     {
         $keys = array();
 
         foreach ($items as $item) {
             if (is_array($item)) {
-                $keys[] = array_key_exists($column, $item) ? $item[$column] : null;
+                $keys[] = $item[$column] ?? null;
             } elseif (is_object($item)) {
-                $keys[] = isset($item->$column) ? $item->$column : null;
+                $keys[] = $item->$column ?? null;
             }
         }
 
@@ -181,18 +182,67 @@ abstract class ArrayHelper
      *
      * @return array
      */
-    public function toArrayByColumn(array $items, $column)
+    public static function toArrayByColumn(array $items, string $column): array
     {
-        $results = array();
+        $results = [];
 
         foreach ($items as $item) {
-            if (is_array($item) and array_key_exists($column, $item)) {
+            if (is_array($item) && array_key_exists($column, $item)) {
                 $results[$item[$column]][] = $item;
-            } elseif (is_object($item) and property_exists($column, $item)) {
+            } elseif (is_object($item) && property_exists($column, $item)) {
                 $results[$item->$column][] = $item;
             }
         }
 
         return $results;
+    }
+
+    /**
+     * Clean an array by value type.
+     *
+     * @param array $items
+     * @param string $type
+     *
+     * @return array
+     */
+    public static function clean(array $items, string $type = Type::STRING): array
+    {
+        foreach ($items as $key => $item) {
+            switch ($type) {
+                case 'integer':
+                case 'int':
+                    if (!is_int($item)) {
+                        unset($items[$key]);
+                    }
+                    break;
+
+                case 'array':
+                    if (!is_array($item)) {
+                        unset($items[$key]);
+                    }
+                    break;
+
+                case 'boolean':
+                case 'bool':
+                    if (!is_bool($item)) {
+                        unset($items[$key]);
+                    }
+                    break;
+
+                case 'object':
+                    if (!is_object($item)) {
+                        unset($items[$key]);
+                    }
+                    break;
+
+                default: // string
+                    if (!is_string($item)) {
+                        unset($items[$key]);
+                    }
+                    break;
+            }
+        }
+
+        return $items;
     }
 }

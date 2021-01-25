@@ -1,0 +1,52 @@
+<?php
+/**
+ * @package      Prism\Library\Prism\Category
+ * @subpackage   Dto
+ * @author       FunFex <opensource@funfex.com>
+ * @copyright    Copyright (C) FunFex LTD. All rights reserved.
+ * @license      GNU General Public License version 3 or later; see LICENSE.txt
+ */
+
+namespace Prism\Library\Prism\Category\Dto;
+
+/**
+ * Request filters used to fetch collection of categories by a repository.
+ *
+ * @package      Prism\Library\Prism\Category
+ * @subpackage   Dto
+ */
+final class CategoryCollectionFilters
+{
+    private int $state;
+    private int $limit;
+    private int $offset;
+    private array $extensions;
+
+    public function __construct(int $state, int $limit = 0, int $offset = 0, array $extensions = [])
+    {
+        $this->state = $state;
+        $this->limit = $limit;
+        $this->offset = $offset;
+        $this->extensions = $extensions;
+    }
+
+    public function state(): int
+    {
+        return $this->state;
+    }
+
+    public function limit(): int
+    {
+        return $this->limit;
+    }
+
+    public function offset(): int
+    {
+        return $this->offset;
+    }
+
+    public function extensions(): array
+    {
+        return $this->extensions;
+    }
+}

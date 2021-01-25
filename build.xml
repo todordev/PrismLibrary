@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="prism" default="build" basedir=".">
-	<description>Prism Library Ant Build File</description>
-
-	<!-- load variables from configuration file -->
-	<property name="cfg.configFile" location="antconfig.txt" />
-	<loadproperties srcfile="${cfg.configFile}" />
+<project name="lib_prism" default="build" basedir=".">
+	<description>Prism Library Package Builder</description>
+	
+	<loadfile property="version" srcfile="VERSION" />
 	
 	<!-- source directories -->
-	<property name="cfg.srcDir" location="${cfg.rootDir}/src" />
-	<property name="cfg.testsDir" location="${cfg.rootDir}/tests" />
-	<property name="cfg.assetsDir" location="${cfg.rootDir}/assets" />
-	<property name="cfg.packageDir" location="${cfg.rootDir}/package" />
-	<property name="cfg.packageBuildDir" location="${cfg.rootDir}/package/build" />
-	<property name="cfg.vendorDir" location="${cfg.rootDir}/vendor" />
+	<property name="cfg.srcDir" location="${basedir}/src" />
+	<property name="cfg.testsDir" location="${basedir}/tests" />
+	<property name="cfg.assetsDir" location="${basedir}/assets" />
+	<property name="cfg.buildDir" location="${basedir}/build" />
+	<property name="cfg.packageBuildDir" location="${basedir}/build/package" />
+	<property name="cfg.vendorDir" location="${basedir}/vendor" />
 	<property name="cfg.vendorDestDir" location="${cfg.packageBuildDir}/src/vendor" />
 	
-	<property name="cfg.assetsVendorDir" location="${cfg.rootDir}/node_modules" />
+	<property name="cfg.assetsVendorDir" location="${basedir}/node_modules" />
 	<property name="cfg.assetsVendorDestDir" location="${cfg.packageBuildDir}/assets/vendor" />
 	
 	<target name="build" depends="copy, build_component, clean, info" />
     
 	<target name="copy" description="Prepare files and folders as a package">
 	
-		<copy file="${cfg.rootDir}/lib_prism.xml" todir="${cfg.packageBuildDir}"/>
+		<copy file="${basedir}/lib_prism.xml" todir="${cfg.packageBuildDir}"/>
 	
 		<!-- Copy Prism Library Files -->
 		<copy todir="${cfg.packageBuildDir}/src">
@@ -52,8 +50,7 @@
 	    </copy>
 		
 		<!-- Copy Assets Vendor Files -->
-		<copy file="${cfg.assetsVendorDir}/vue/dist/vue.min.js" todir="${cfg.assetsVendorDestDir}/vue" />
-		<copy file="${cfg.assetsVendorDir}/jquery/dist/jquery.min.js" todir="${cfg.assetsVendorDestDir}/jquery" />
+		<copy file="${cfg.assetsVendorDir}/vue/dist/vue.esm-browser.prod.js" todir="${cfg.assetsVendorDestDir}/vue" />
 		<copy file="${cfg.assetsVendorDir}/parsleyjs/dist/parsley.min.js" todir="${cfg.assetsVendorDestDir}/parsley" />
 		<copy todir="${cfg.assetsVendorDestDir}/parsley/i18n">
 		  <fileset dir="${cfg.assetsVendorDir}/parsleyjs/dist/i18n"/>
@@ -61,37 +58,17 @@
 				
 		<copy file="${cfg.assetsVendorDir}/cropperjs/dist/cropper.min.js" todir="${cfg.assetsVendorDestDir}/cropperjs" />
 		<copy file="${cfg.assetsVendorDir}/cropperjs/dist/cropper.min.css" todir="${cfg.assetsVendorDestDir}/cropperjs" />
-		
-		<copy file="${cfg.assetsVendorDir}/gasparesganga-jquery-loading-overlay/dist/loadingoverlay.min.js" todir="${cfg.assetsVendorDestDir}/loadingoverlay" />
 		<copy file="${cfg.assetsVendorDir}/is-loading/dist/isLoading.min.js" todir="${cfg.assetsVendorDestDir}/is-loading" />
-		<copy file="${cfg.assetsVendorDir}/jquery-serializejson/jquery.serializejson.min.js" todir="${cfg.assetsVendorDestDir}/jquery-serializejson" />
 		<copy file="${cfg.assetsVendorDir}/modaal/dist/css/modaal.min.css" todir="${cfg.assetsVendorDestDir}/modaal" />
 		<copy file="${cfg.assetsVendorDir}/modaal/dist/js/modaal.min.js" todir="${cfg.assetsVendorDestDir}/modaal" />
 		<copy file="${cfg.assetsVendorDir}/moment/min/moment.min.js" todir="${cfg.assetsVendorDestDir}/moment" />
 		<copy file="${cfg.assetsVendorDir}/moment/min/locales.min.js" todir="${cfg.assetsVendorDestDir}/moment" />
-		
-		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotify.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
-		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotifyAnimate.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
-		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotifyButtons.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
-		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotifyCallbacks.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
-		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotifyCompat.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
-		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotifyConfirm.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
-		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotifyHistory.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
-		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotifyMobile.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
-		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotifyNonBlock.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
-		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotifyReference.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
-		<copy file="${cfg.assetsVendorDir}/pnotify/dist/es/PNotifyStyleMaterial.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
-		
+		<copy file="${cfg.assetsVendorDir}/@pnotify/core/dist/PNotify.js" todir="${cfg.assetsVendorDestDir}/pnotify" />
+		<copy file="${cfg.assetsVendorDir}/@pnotify/core/dist/PNotify.css" todir="${cfg.assetsVendorDestDir}/pnotify" />
 		<copy file="${cfg.assetsVendorDir}/readmore-js/readmore.min.js" todir="${cfg.assetsVendorDestDir}/readmore-js" />
-		
-		<copy file="${cfg.assetsVendorDir}/remodal/dist/remodal.css" todir="${cfg.assetsVendorDestDir}/remodal" />
-		<copy file="${cfg.assetsVendorDir}/remodal/dist/remodal.min.js" todir="${cfg.assetsVendorDestDir}/remodal" />
-		<copy file="${cfg.assetsVendorDir}/remodal/dist/remodal-default-theme.css" todir="${cfg.assetsVendorDestDir}/remodal" />
-		
-		<copy file="${cfg.assetsVendorDir}/sticky-kit/dist/sticky-kit.min.js" todir="${cfg.assetsVendorDestDir}/sticky-kit" />
-		
 		<copy file="${cfg.assetsVendorDir}/sweetalert2/dist/sweetalert2.min.js" todir="${cfg.assetsVendorDestDir}/sweetalert2" />
 		<copy file="${cfg.assetsVendorDir}/sweetalert2/dist/sweetalert2.min.css" todir="${cfg.assetsVendorDestDir}/sweetalert2" />
+		<copy file="${cfg.assetsVendorDir}/js-loading-overlay/dist/js-loading-overlay.min.js" todir="${cfg.assetsVendorDestDir}/js-loading-overlay" />
 		
 		<copy todir="${cfg.assetsVendorDestDir}/tooltipster/css">
 		  <fileset dir="${cfg.assetsVendorDir}/tooltipster/dist/css"/>
@@ -117,7 +94,7 @@
 	
 	<!-- build component -->
 	<target name="build_component" depends="copy" description="Packages the finally component file">
-		<zip destfile="${cfg.packageDir}/${cfg.name}_${cfg.version}.zip">
+		<zip destfile="${cfg.buildDir}/${ant.project.name}_v${version}.zip">
 			<fileset dir="${cfg.packageBuildDir}" />
 		</zip>
 	</target>
@@ -127,7 +104,7 @@
 	</target>
 	
 	<target name="info" description="prints information">
-		<echo message="Project: ${cfg.name}" />
+		<echo message="Project: ${ant.project.name}" />
 		<tstamp>
 			<format property="buildtime" pattern="yyyy-MM-dd'T'HH:mm:ss" />
 		</tstamp>

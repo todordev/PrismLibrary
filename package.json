@@ -6,22 +6,18 @@
     "test": "tests"
   },
   "dependencies": {
-    "animate.css": "^4.1.1",
     "blueimp-file-upload": "^10.0",
     "cropperjs": "^1.5",
-    "gasparesganga-jquery-loading-overlay": "^2.0",
+    "js-loading-overlay": "^1.2",
     "is-loading": "^2.0",
-    "jquery": "^3.5",
-    "jquery-serializejson": "^3.0",
     "modaal": "^0.4",
     "moment": "^2.0",
     "parsleyjs": "^2.0",
     "pnotify": "^5.0",
     "readmore-js": "^2.0",
-    "remodal": "^1.0",
-    "sweetalert2": "^10.0",
+    "sweetalert2": "^10.13",
     "tooltipster": "^4.0",
-    "vue": "^3.0.4"
+    "vue": "^3.0"
   },
   "devDependencies": {},
   "scripts": {

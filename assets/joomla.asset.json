@@ -16,11 +16,6 @@
       "uri": "media/lib_prism/vendor/pnotify/core/PNotify.css"
     },
     {
-      "name": "prism.pnotify",
-      "type": "style",
-      "uri": "media/lib_prism/vendor/pnotify/core/PNotify.css"
-    },
-    {
       "name": "prism.pnotify.bootstrap4",
       "type": "script",
       "uri": "media/lib_prism/vendor/pnotify/bootstrap4/PNotifyBootstrap4.js"
@@ -152,6 +147,16 @@
       "type": "script",
       "version": "1.0",
       "uri": "media/lib_prism/js/prism.js"
+    },
+    {
+      "name": "prism.sweetalert2",
+      "type": "script",
+      "uri": "media/lib_prism/vendor/sweetalert2/sweetalert2.min.js"
+    },
+    {
+      "name": "prism.sweetalert2",
+      "type": "style",
+      "uri": "media/lib_prism/vendor/sweetalert2/sweetalert2.min.css"
     }
   ]
 }

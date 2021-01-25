@@ -1,99 +1,86 @@
 <?php
 /**
- * @package      Prism
- * @subpackage   Files
+ * @package      Prism\Library\Prism\Filesystem
  * @author       FunFex <opensource@funfex.com>
- * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
+ * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace Prism\Library\Prism\Filesystem;
 
-use Prism\Library\Prism\Domain\ExtractingToArray;
-
 class File
 {
-    use ExtractingToArray;
-
-    protected string $relative_path;
-    protected string $filename;
-    protected string $filepath;
-    protected string $filetype;
-    protected int $filesize;
+    protected string $name;
+    protected FilePath $path;
+    protected string $type;
+    protected int $size;
     protected string $extension;
     protected string $mime;
     protected array $attributes;
 
-    public function __construct(array $data = [])
+    public function __construct(string $name)
     {
-        $this->relative_path = array_key_exists('relative_path', $data) ? (string)$data['relative_path'] : '';
-        $this->filename = array_key_exists('filename', $data) ? (string)$data['filename'] : '';
-        $this->filepath = array_key_exists('filepath', $data) ? (string)$data['filepath'] : '';
-        $this->filetype = array_key_exists('filetype', $data) ? (string)$data['filetype'] : '';
-        $this->filesize = array_key_exists('filesize', $data) ? (int)$data['filesize'] : 0;
-        $this->extension = array_key_exists('extension', $data) ? (string)$data['extension'] : '';
-        $this->mime = array_key_exists('mime', $data) ? (string)$data['mime'] : '';
-        $this->attributes = array_key_exists('attributes', $data) ? (array)$data['attributes'] : [];
+        $this->name = $name;
     }
 
     /**
-     * @return string
+     * @return FilePath
      */
-    public function getFilepath(): string
+    public function path(): FilePath
     {
-        return $this->filepath;
+        return $this->path;
     }
 
     /**
-     * @param string $filepath
+     * @param FilePath $path
      * @return File
      */
-    public function setFilepath(string $filepath): File
+    public function setFilepath(FilePath $path): File
     {
-        $this->filepath = $filepath;
+        $this->path = $path;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getFilename(): string
+    public function name(): string
     {
-        return $this->filename;
+        return $this->name;
     }
 
     /**
-     * @param string $filename
+     * @param string $name
      * @return File
      */
-    public function setFilename(string $filename): File
+    public function setName(string $name): File
     {
-        $this->filename = $filename;
+        $this->name = $name;
         return $this;
     }
 
     /**
      * @return int
      */
-    public function getFilesize(): int
+    public function size(): int
     {
-        return $this->filesize;
+        return $this->size;
     }
 
     /**
-     * @param int $filesize
+     * @param int $size
      * @return File
      */
-    public function setFilesize(int $filesize): File
+    public function setFilesize(int $size): File
     {
-        $this->filesize = $filesize;
+        $this->size = $size;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getExtension(): string
+    public function extension(): string
     {
         return $this->extension;
     }
@@ -111,25 +98,25 @@ class File
     /**
      * @return string
      */
-    public function getFiletype(): string
+    public function type(): string
     {
-        return $this->filetype;
+        return $this->type;
     }
 
     /**
-     * @param string $filetype
+     * @param string $type
      * @return File
      */
-    public function setFiletype(string $filetype): File
+    public function setType(string $type): File
     {
-        $this->filetype = $filetype;
+        $this->type = $type;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getMime(): string
+    public function mime(): string
     {
         return $this->mime;
     }
@@ -145,27 +132,9 @@ class File
     }
 
     /**
-     * @return string
-     */
-    public function getRelativePath(): string
-    {
-        return $this->relative_path;
-    }
-
-    /**
-     * @param string $relative_path
-     * @return File
-     */
-    public function setRelativePath(string $relative_path): File
-    {
-        $this->relative_path = $relative_path;
-        return $this;
-    }
-
-    /**
      * @return array
      */
-    public function getAttributes(): array
+    public function attributes(): array
     {
         return $this->attributes;
     }

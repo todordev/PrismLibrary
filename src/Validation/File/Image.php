@@ -1,34 +1,32 @@
 <?php
 /**
- * @package      Prism
- * @subpackage   Files\Validators
+ * @package      Prism\Library\Prism\Validation\File
  * @author       FunFex <opensource@funfex.com>
- * @copyright    Copyright (C) 2020 FunFex LTD. All rights reserved.
+ * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Prism\Filesystem\Validation;
+namespace Prism\Library\Prism\Validation\File;
 
 use Joomla\CMS\Filesystem\File;
 use Joomla\CMS\Filesystem\Path;
 use Joomla\CMS\Language\Text;
-use Prism\Library\Prism\Validator\Validation;
 use Joomla\String\StringHelper;
+use Prism\Library\Prism\Validation\Validation;
 
 /**
  * This class provides functionality for validating an image
  * by MIME type and file extensions.
  *
- * @package      Prism
- * @subpackage   Files\Validators
+ * @package      Prism\Library\Prism\Validation\File
  */
 class Image extends Validation
 {
-    protected $file;
-    protected $filename;
+    protected string $file;
+    protected string $filename;
 
-    protected $mimeTypes;
-    protected $imageExtensions;
+    protected array $mimeTypes;
+    protected array $imageExtensions;
 
     /**
      * Initialize the object.
