@@ -10,6 +10,8 @@
 namespace Prism\Library\Prism\Database\Dto;
 
 use Prism\Library\Prism\Domain\Identifier\Identifier;
+use Prism\Library\Prism\Contract\Database\ItemRequest;
+use Prism\Library\Prism\Contract\Database\ColumnsSelector;
 
 /**
  * Requst to a repository to fetch an item by identifier.
@@ -17,7 +19,7 @@ use Prism\Library\Prism\Domain\Identifier\Identifier;
  * @package      Prism\Library\Prism\Database
  * @subpackage   Dto
  */
-final class ItemByIdRequest implements ItemRequest
+final class ItemByIdRequest implements ItemRequest, ColumnsSelector
 {
     private Identifier $identifier;
     private array $columns;

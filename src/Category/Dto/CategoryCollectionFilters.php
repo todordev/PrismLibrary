@@ -9,13 +9,15 @@
 
 namespace Prism\Library\Prism\Category\Dto;
 
+use Prism\Library\Prism\Contract\Database\CollectionFilters;
+
 /**
  * Request filters used to fetch collection of categories by a repository.
  *
  * @package      Prism\Library\Prism\Category
  * @subpackage   Dto
  */
-final class CategoryCollectionFilters
+final class CategoryCollectionFilters implements CollectionFilters
 {
     private int $state;
     private int $limit;
@@ -30,22 +32,22 @@ final class CategoryCollectionFilters
         $this->extensions = $extensions;
     }
 
-    public function state(): int
+    public function getState(): int
     {
         return $this->state;
     }
 
-    public function limit(): int
+    public function getLimit(): int
     {
         return $this->limit;
     }
 
-    public function offset(): int
+    public function getOffset(): int
     {
         return $this->offset;
     }
 
-    public function extensions(): array
+    public function getExtensions(): array
     {
         return $this->extensions;
     }

@@ -7,7 +7,8 @@
  * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-use Prism\Money\Currency;
+use Joomla\Tests\Unit\UnitTestCase;
+use Prism\Library\Prism\Money\Currency;
 
 /**
  * Test class for Prism\UnitTest.
@@ -15,7 +16,7 @@ use Prism\Money\Currency;
  * @package     Prism\UnitTest
  * @subpackage  Money
  */
-class CurrencyTest extends PHPUnit_Framework_TestCase
+class CurrencyTest extends UnitTestCase
 {
     /**
      * @var    Currency
@@ -26,13 +27,13 @@ class CurrencyTest extends PHPUnit_Framework_TestCase
      * Test the getTitle method.
      *
      * @return  void
-     * @covers  Currency::getTitle
+     * @covers  Currency::getName
      */
-    public function testGetTitle()
+    public function testGetName()
     {
         $this->assertEquals(
             'EURO',
-            $this->object->getTitle()
+            $this->object->getName()
         );
     }
 
@@ -73,7 +74,7 @@ class CurrencyTest extends PHPUnit_Framework_TestCase
     public function testGetPosition()
     {
         $this->assertEquals(
-            Currency::SYMBOL_BEFORE,
+            Currency::SYMBOL_LEFT,
             $this->object->getPosition()
         );
     }
@@ -82,22 +83,22 @@ class CurrencyTest extends PHPUnit_Framework_TestCase
      * Test the symbolBefore method.
      *
      * @return  void
-     * @covers  Currency::symbolBefore
+     * @covers  Currency::symbolLeft
      */
-    public function testSymbolBefore()
+    public function testSymbolLeft()
     {
-        $this->assertTrue($this->object->symbolBefore());
+        $this->assertTrue($this->object->symbolLeft());
     }
 
     /**
      * Test the symbolAfter method.
      *
      * @return  void
-     * @covers  Currency::symbolAfter
+     * @covers  Currency::symbolRight
      */
-    public function testSymbolAfter()
+    public function testSymbolRight()
     {
-        $this->assertFalse($this->object->symbolAfter());
+        $this->assertFalse($this->object->symbolRight());
     }
 
     /**
@@ -105,16 +106,19 @@ class CurrencyTest extends PHPUnit_Framework_TestCase
      *
      * @return  void
      * @covers  Currency::equals
+     * @throws  Prism\Library\Prism\Domain\HydrationException
      */
     public function testEquals()
     {
         $currency = new Currency();
-        $currency->bind([
-            'title' => 'American Dollar',
-            'code' => 'USD',
-            'symbol' => '$',
-            'position' => '0',
-        ]);
+        $currency->hydrate(
+            [
+                'name' => 'American Dollar',
+                'code' => 'USD',
+                'symbol' => '$',
+                'position' => '0',
+            ]
+        );
 
         $this->assertFalse($this->object->equals($currency));
     }
@@ -123,17 +127,16 @@ class CurrencyTest extends PHPUnit_Framework_TestCase
      * Test the symbolBefore method.
      *
      * @return  void
-     * @covers  Currency::bind
-     *
-     * @expectedException Prism\Domain\BindException
+     * @covers  Currency::hydrate
      */
     public function testBindException()
     {
-        $data = array(
+        $data = [
             'code' => 'USD'
-        );
+        ];
 
-        $this->object->bind($data);
+        $this->expectException(Prism\Library\Prism\Domain\HydrationException::class);
+        $this->object->hydrate($data);
     }
 
     /**
@@ -141,16 +144,17 @@ class CurrencyTest extends PHPUnit_Framework_TestCase
      * This method is called before a test is executed.
      *
      * @return  void
+     * @throws  Prism\Library\Prism\Domain\HydrationException
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
-        $jsonData = file_get_contents(PATH_PRISM_LIBRARY_TESTS_STUBS_DATA.DIRECTORY_SEPARATOR.'currency.json');
-        $data     = json_decode($jsonData, true);
+        $jsonData = file_get_contents(PATH_PRISM_LIBRARY_TESTS_DATA . '/currency.json');
+        $data = json_decode($jsonData, true);
 
         $this->object = new Currency();
-        $this->object->bind($data);
+        $this->object->hydrate($data);
     }
 
     /**
@@ -158,10 +162,9 @@ class CurrencyTest extends PHPUnit_Framework_TestCase
      * This method is called after a test is executed.
      *
      * @return void
-     *
      * @see     PHPUnit_Framework_TestCase::tearDown()
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->object);
         parent::tearDown();

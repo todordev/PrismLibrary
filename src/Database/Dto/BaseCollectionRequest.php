@@ -9,22 +9,26 @@
 
 namespace Prism\Library\Prism\Database\Dto;
 
+use Prism\Library\Prism\Contract\Database\ColumnsSelector;
+use Prism\Library\Prism\Contract\Database\CollectionFilters;
+use Prism\Library\Prism\Contract\Database\CollectionRequest;
+
 /**
  * Base request for retrieving collection from repository.
  *
  * @package      Prism\Library\Prism\Database
  * @subpackage   Dto
  */
-final class BaseCollectionRequest implements CollectionRequest
+final class BaseCollectionRequest implements CollectionRequest, ColumnsSelector
 {
     private array $identifiers;
     private array $columns;
-    private ?BaseCollectionFilters $filters;
+    private ?CollectionFilters $filters;
 
     public function __construct(
         array $identifiers,
         array $columns = [],
-        BaseCollectionFilters $filters = null
+        CollectionFilters $filters = null
     ) {
 
         $this->identifiers = $identifiers;
@@ -42,7 +46,7 @@ final class BaseCollectionRequest implements CollectionRequest
         return $this->columns;
     }
 
-    public function getFilters(): ?BaseCollectionFilters
+    public function getFilters(): ?CollectionFilters
     {
         return $this->filters;
     }

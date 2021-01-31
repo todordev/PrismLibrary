@@ -1,27 +1,26 @@
 <?php
+/**
+ * Prepares a minimalist framework for unit testing.
+ *
+ * @package    Joomla.UnitTest
+ *
+ * @copyright  Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ * @link       http://www.phpunit.de/manual/current/en/installation.html
+ */
 
-define('PATH_PRISM_LIBRARY_TESTS', __DIR__);
+$packageFolder = '/pkg_prism';
+$rootDirectory = substr(getcwd(), 0, (-1 * strlen($packageFolder)));
 
-define('PATH_JOOMLA_LIBRARIES', str_replace(DIRECTORY_SEPARATOR.'Prism'.DIRECTORY_SEPARATOR.'tests', '', PATH_PRISM_LIBRARY_TESTS));
+if (!defined('JPATH_BASE')) {
+    define('JPATH_BASE', $rootDirectory);
+}
 
-define('PATH_PRISM_LIBRARY', PATH_JOOMLA_LIBRARIES.DIRECTORY_SEPARATOR.'Prism');
-define('PATH_PRISM_LIBRARY_VENDOR', PATH_PRISM_LIBRARY.DIRECTORY_SEPARATOR.'vendor');
-define('PATH_PRISM_LIBRARY_TESTS_UNIT', PATH_PRISM_LIBRARY_TESTS .DIRECTORY_SEPARATOR.'unit');
-define('PATH_PRISM_LIBRARY_TESTS_STUBS_DATA', PATH_PRISM_LIBRARY_TESTS_UNIT .DIRECTORY_SEPARATOR.'stubs'. DIRECTORY_SEPARATOR .'data');
+// Load Joomla! tests bootstrap.
+require_once JPATH_BASE . '/tests/Unit/bootstrap.php';
 
-define('PATH_JOOMLA_ROOT', str_replace(DIRECTORY_SEPARATOR.'libraries', '', PATH_JOOMLA_LIBRARIES));
-define('PATH_JOOMLA_TESTS', PATH_JOOMLA_ROOT .DIRECTORY_SEPARATOR. 'tests');
-define('PATH_JOOMLA_TESTS_UNIT', PATH_JOOMLA_TESTS .DIRECTORY_SEPARATOR.'unit');
+define('PATH_PRISM_LIBRARY_TESTS', JPATH_ROOT . $packageFolder . '/tests');
+define('PATH_PRISM_LIBRARY_TESTS_DATA', PATH_PRISM_LIBRARY_TESTS . '/Unit/data');
 
-spl_autoload_register(function ($class) {
-    if (strpos($class, 'Prism') === 0) {
-        $file = PATH_JOOMLA_LIBRARIES .DIRECTORY_SEPARATOR. $class .'.php';
-
-        if (file_exists($file)) {
-            require_once $file;
-        }
-    }
-});
-
-// Include the main bootstrap and config file.
-require_once PATH_JOOMLA_TESTS_UNIT .DIRECTORY_SEPARATOR. 'bootstrap.php';
+JLoader::registerNamespace('\\Prism\\Library\\Prism', JPATH_ROOT . '/libraries/Prism', false, false, 'psr4');
+JLoader::registerNamespace('\\Prism\\Test\\Prism', PATH_PRISM_LIBRARY_TESTS, false, false, 'psr4');

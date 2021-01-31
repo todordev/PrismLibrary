@@ -9,22 +9,26 @@
 
 namespace Prism\Library\Prism\Category\Dto;
 
+use Prism\Library\Prism\Contract\Database\ColumnsSelector;
+use Prism\Library\Prism\Contract\Database\CollectionRequest;
+use Prism\Library\Prism\Contract\Database\CollectionFilters;
+
 /**
  * Request to a repository to fetch collection of categories.
  *
  * @package      Prism\Library\Prism\Category
  * @subpackage   Dto
  */
-final class CategoryCollectionRequest
+final class CategoryCollectionRequest implements CollectionRequest, ColumnsSelector
 {
     private array $identifiers;
     private array $columns;
-    private ?CategoryCollectionFilters $filters;
+    private ?CollectionFilters $filters;
 
     public function __construct(
         array $identifiers,
         array $columns = [],
-        CategoryCollectionFilters $filters = null
+        CollectionFilters $filters = null
     ) {
 
         $this->identifiers = $identifiers;
@@ -32,17 +36,17 @@ final class CategoryCollectionRequest
         $this->filters = $filters;
     }
 
-    public function identifiers(): array
+    public function getIdentifiers(): array
     {
         return $this->identifiers;
     }
 
-    public function columns(): array
+    public function getColumns(): array
     {
         return $this->columns;
     }
 
-    public function filters(): ?CategoryCollectionFilters
+    public function getFilters(): ?CollectionFilters
     {
         return $this->filters;
     }

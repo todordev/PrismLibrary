@@ -1,40 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <extension type="library" version="4.0" method="upgrade">
-	<name>Prism Library</name>
-	<libraryname>Prism</libraryname>
-	<author>FunFex</author>
-	<authorEmail>opensource@funfex.com</authorEmail>
+    <name>Prism Library</name>
+    <libraryname>Prism</libraryname>
+    <author>FunFex</author>
+    <authorEmail>opensource@funfex.com</authorEmail>
     <authorUrl>https://funfex.com</authorUrl>
-	<copyright>Copyright (C) 2021 FunFex LTD. All rights reserved.</copyright>
-	<license>http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3</license>
-	<packager>FunFex</packager>
-	<packagerurl>https://funfex.com</packagerurl>
-	<version>2.0.0-alpha3</version>
-	<creationDate>16 January, 2021</creationDate>
-	<description>Prism Library is a collection of resources used in the most of FunFex extensions.</description>
-    
-	<namespace>Prism\Library\Prism</namespace>
-	
-	<media destination="lib_prism" folder="assets">
+    <copyright>Copyright (C) 2021 FunFex LTD. All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3</license>
+    <packager>FunFex</packager>
+    <packagerurl>https://funfex.com</packagerurl>
+    <version>2.0.0-alpha3</version>
+    <creationDate>16 January, 2021</creationDate>
+    <description>Prism Library is a collection of resources used in the most of FunFex extensions.</description>
+
+    <namespace>Prism\Library\Prism</namespace>
+
+    <media destination="lib_prism" folder="assets">
         <folder>css</folder>
         <folder>images</folder>
         <folder>js</folder>
         <folder>vendor</folder>
     </media>
-	
-	<files folder="src">
-		<folder>Constant</folder>
-	    <folder>Container</folder>
-		<folder>Contract</folder>
-	    <folder>Controller</folder>
-	    <folder>Data</folder>
+
+    <files folder="src">
+        <folder>Authorization</folder>
+        <folder>Category</folder>
+        <folder>Command</folder>
+        <folder>Constant</folder>
+        <folder>Container</folder>
+        <folder>Contract</folder>
+        <folder>Controller</folder>
+        <folder>Data</folder>
         <folder>Database</folder>
         <folder>Domain</folder>
         <folder>Exception</folder>
         <folder>Extension</folder>
         <folder>Filesystem</folder>
         <folder>Google</folder>
-		<folder>Helper</folder>
         <folder>Integration</folder>
         <folder>Intl</folder>
         <folder>language</folder>
@@ -42,6 +44,7 @@
         <folder>Money</folder>
         <folder>Observer</folder>
         <folder>Payment</folder>
+        <folder>Pipeline</folder>
         <folder>Renderer</folder>
         <folder>Response</folder>
         <folder>Ui</folder>
@@ -50,11 +53,11 @@
         <folder>vendor</folder>
         <folder>Video</folder>
         <folder>Xml</folder>
-        
-        <file>init.php</file>
-		<file>Version.php</file>
-	</files>
-	
+
+        <file>autoload.php</file>
+        <file>Version.php</file>
+    </files>
+
     <updateservers>
         <server type="extension" priority="1" name="Prism Library">http://cdn.itprism.com/updates/prism-library.xml</server>
     </updateservers>

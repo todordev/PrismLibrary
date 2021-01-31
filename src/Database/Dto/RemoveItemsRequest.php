@@ -12,8 +12,8 @@ namespace Prism\Library\Prism\Database\Dto;
 /**
  * Request to a repository to remove an item.
  *
- * @package      Prism\Library\Prism\Database
- * @subpackage   Dto
+ * @package  Prism\Library\Prism\Database\Dto
+ * @todo under construction
  */
 final class RemoveItemsRequest
 {

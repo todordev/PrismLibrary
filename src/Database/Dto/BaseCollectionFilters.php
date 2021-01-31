@@ -9,6 +9,8 @@
 
 namespace Prism\Library\Prism\Database\Dto;
 
+use Prism\Library\Prism\Contract\Database\CollectionFilters;
+
 /**
  * Base request filters for retrieving collection from a repository.
  *

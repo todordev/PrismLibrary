@@ -1,7 +1,6 @@
 <?php
 /**
  * @package      Prism
- * @subpackage   Initialization
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
@@ -21,6 +20,6 @@ if (!defined('PRISM_PATH_MEDIA')) {
     define('PRISM_PATH_MEDIA', JPATH_SITE . '/media/lib_prism');
 }
 
-JLoader::registerNamespace('\\Prism\\Library\\Prism', PRISM_PATH_LIBRARY, false, false, 'psr4');
+JLoader::registerNamespace('\\Prism\\Library\\Prism', PRISM_PATH_LIBRARY);
 
-require_once PRISM_PATH_LIBRARY . '/vendor/autoload.php';
+require_once 'vendor/autoload.php';

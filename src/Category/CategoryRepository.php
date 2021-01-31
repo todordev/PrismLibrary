@@ -34,9 +34,9 @@ final class CategoryRepository
 
     /**
      * @param ItemByIdRequest $request
-     * @return Category|null
+     * @return CategoryEntity|null
      */
-    public function fetchById(ItemByIdRequest $request): ?Category
+    public function fetchById(ItemByIdRequest $request): ?CategoryEntity
     {
         return $this->mapper->fetchById($request);
     }
