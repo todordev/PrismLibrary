@@ -1,7 +1,6 @@
 <?php
 /**
- * @package      Prism
- * @subpackage   Video
+ * @package      Prism\Library\Prism\Video
  * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
@@ -14,14 +13,13 @@ use Joomla\Uri\Uri;
  * This class provides functionality for parsing video URLs
  * and generating HTML code that can be used for embedding into websites.
  *
- * @package      Prism
- * @subpackage   Video
+ * @package Prism\Library\Prism\Video
  * @todo It should be reworked.
  */
-class Embed
+final class Embed
 {
-    protected $url;
-    protected $code;
+    protected string $url;
+    protected string $code;
     protected $service;
 
     protected string $patternYouTube = '#(?<=(?:v|i)=)[a-zA-Z0-9-]+(?=&)|(?<=(?:v|i)\/)[^&\n]+|(?<=embed\/)[^"&\n]+|(?<=(?:v|i)=)[^&\n]+|(?<=youtu.be\/)[^&\n]+#';
@@ -60,14 +58,14 @@ class Embed
         $host = $uri->getHost();
 
         // Youtube
-        if ((false !== strpos($host, 'youtu')) and preg_match($this->patternYouTube, $this->url, $matches)) {
+        if ((str_contains($host, 'youtu')) && preg_match($this->patternYouTube, $this->url, $matches)) {
             $this->code    = $matches[0];
             $this->service = 'youtube';
             return;
         }
 
         // Vimeo
-        if ((false !== strpos($host, 'vimeo')) and preg_match($this->patternVimeo, $this->url, $matches)) {
+        if ((str_contains($host, 'vimeo')) && preg_match($this->patternVimeo, $this->url, $matches)) {
             $this->code    = $matches[5];
             $this->service = 'vimeo';
             return;

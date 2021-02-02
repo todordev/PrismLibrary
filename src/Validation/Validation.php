@@ -11,7 +11,7 @@ namespace Prism\Library\Prism\Validation;
 /**
  * This is the abstract class of validations.
  *
- * @package    Prism\Library\Prism\Validation
+ * @package Prism\Library\Prism\Validation
  */
 abstract class Validation
 {

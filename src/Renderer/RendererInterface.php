@@ -25,5 +25,5 @@ interface RendererInterface
      *
      * @return  string  A string containing the html for the element.
      */
-    public function render(array $data = array());
+    public function render(array $data = array()): string;
 }

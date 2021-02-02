@@ -10,8 +10,6 @@
 	<property name="cfg.assetsDir" location="${basedir}/assets" />
 	<property name="cfg.buildDir" location="${basedir}/build" />
 	<property name="cfg.packageBuildDir" location="${basedir}/build/package" />
-	<property name="cfg.vendorDir" location="${basedir}/vendor" />
-	<property name="cfg.vendorDestDir" location="${cfg.packageBuildDir}/src/vendor" />
 	
 	<property name="cfg.assetsVendorDir" location="${basedir}/node_modules" />
 	<property name="cfg.assetsVendorDestDir" location="${cfg.packageBuildDir}/assets/vendor" />
@@ -25,23 +23,6 @@
 		<!-- Copy Prism Library Files -->
 		<copy todir="${cfg.packageBuildDir}/src">
 			<fileset dir="${cfg.srcDir}" />
-	    </copy>
-		
-		<!-- Copy PHP Vendor Files -->
-		<copy file="${cfg.vendorDir}/autoload.php" todir="${cfg.vendorDestDir}"/>
-		
-		<copy todir="${cfg.vendorDestDir}/composer">
-			<fileset dir="${cfg.vendorDir}/composer" >
-				<exclude name="installed.json" />
-				<exclude name="LICENSE" />
-			</fileset>
-	    </copy>
-		
-		<copy todir="${cfg.vendorDestDir}/illuminate">
-			<fileset dir="${cfg.vendorDir}/illuminate" />
-	    </copy>
-		<copy todir="${cfg.vendorDestDir}/league/fractal/src">
-			<fileset dir="${cfg.vendorDir}/league/fractal/src" />
 	    </copy>
 		
 		<!-- Copy Assets Files -->

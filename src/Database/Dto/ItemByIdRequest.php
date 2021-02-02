@@ -25,6 +25,13 @@ final class ItemByIdRequest implements ItemRequest, ColumnsSelector
     private array $columns;
     private ?ItemFilters $filters;
 
+    /**
+     * ItemByIdRequest constructor.
+     *
+     * @param Identifier $identifier
+     * @param array $columns
+     * @param ItemFilters|null $filters
+     */
     public function __construct(Identifier $identifier, array $columns = [], ItemFilters $filters = null)
     {
         $this->identifier = $identifier;

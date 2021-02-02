@@ -1,7 +1,6 @@
 <?php
 /**
- * @package      Prism
- * @subpackage   Money
+ * @package      Prism\Library\Prism\Intl\Formatter
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
@@ -14,8 +13,7 @@ use Prism\Library\Prism\Intl\Formatter;
 /**
  * Formats a number using intl extension.
  *
- * @package      Prism\Library\Prism\Money
- * @subpackage   Formatters
+ * @package Prism\Library\Prism\Intl\Formatter
  */
 final class IntlDecimalFormatter implements Formatter
 {
@@ -32,10 +30,7 @@ final class IntlDecimalFormatter implements Formatter
         $this->formatter  = $formatter;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function format($value)
+    public function format(float $value): string
     {
         return (string)$this->formatter->format($value);
     }

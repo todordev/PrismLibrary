@@ -1,7 +1,6 @@
 <?php
 /**
- * @package      Prism
- * @subpackage   Utility
+ * @package      Prism\Library\Prism\Utility
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
@@ -9,15 +8,15 @@
 
 namespace Prism\Library\Prism\Utility;
 
-use Joomla\Utility\ArrayHelper as JArrayHelper;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Filter\OutputFilter;
 
 /**
  * This class contains methods that are used for handling strings.
  *
- * @package     Prism
- * @subpackage  Utility
+ * @package Prism\Library\Prism\Utility
  */
-abstract class StringHelper
+final class StringHelper
 {
     /**
      * The method generates random string.
@@ -29,12 +28,12 @@ abstract class StringHelper
      * echo $hash;
      * </code>
      *
-     * @param integer $length The length of the string, that will be generated.
+     * @param int $length The length of the string, that will be generated.
      * @param string  $prefix A prefix, which will be added at the beginning of the string.
      *
      * @return string
      */
-    public static function generateRandomString($length = 10, $prefix = '')
+    public static function generateRandomString(int $length = 10, string $prefix = ''): string
     {
         // Generate string
         $hash = md5(uniqid(time() + mt_rand(), true));
@@ -49,82 +48,16 @@ abstract class StringHelper
     }
 
     /**
-     * Generate a string of amount based on location.
-     * The method uses PHP NumberFormatter ( Internationalization Functions ).
-     * If the internationalization library is not loaded, the method generates a simple string ( 100 USD, 500 EUR,... )
-     *
-     * <code>
-     * $options = array(
-     *     "intl" => true",
-     *     "locale" => "en_GB",
-     *     "symbol" => "£",
-     *     "position" => 0 // 0 for symbol on the left side, 1 for symbole on the right side.
-     * );
-     *
-     * $amount = Prism\Library\Prism\Utility\StringHelper::getAmount(100, GBP, $options);
-     *
-     * echo $amount;
-     * </code>
-     *
-     * @param float $amount Amount value.
-     * @param string $currency Currency Code ( GBP, USD, EUR,...)
-     * @param array $options Options - "intl", "locale", "symbol",...
-     *
-     * @throws \InvalidArgumentException
-     * @return string
-     *
-     * @deprecated 1.19
-     */
-    public static function getAmount($amount, $currency, array $options = array())
-    {
-        $useIntl   = JArrayHelper::getValue($options, 'intl', false, 'bool');
-        $locale    = JArrayHelper::getValue($options, 'locale');
-        $symbol    = JArrayHelper::getValue($options, 'symbol');
-        $position  = JArrayHelper::getValue($options, 'position', 0, 'int');
-
-        // Use PHP Intl library.
-        if ($useIntl and extension_loaded('intl')) { // Generate currency string using PHP NumberFormatter ( Internationalization Functions )
-
-            // Get current locale code.
-            if (!$locale) {
-                $lang   = \JFactory::getLanguage();
-                $locale = $lang->getName();
-            }
-
-            $numberFormat = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
-            $result       = $numberFormat->formatCurrency($amount, $currency);
-
-        } else { // Generate a custom currency string.
-
-            if ($symbol !== null and $symbol !== '') { // Symbol
-
-                if (0 === $position) { // Symbol at the beginning.
-                    $result = $symbol . $amount;
-                } else { // Symbol at end.
-                    $result = $amount . $symbol;
-                }
-
-            } else { // Code
-                $result = $amount . $currency;
-            }
-        }
-
-        return $result;
-    }
-
-    /**
      * Clean tags, spaces and newlines.
-     *
      * <code>
      * $content = "If you can <strong>dream</strong> it, you can do it. "
-     *
      * echo Prism\Library\Prism\Utility\StringHelper:clean($content);
      * </code>
      *
      * @param string $content
      * @return string
      */
-    public static function clean($content)
+    public static function clean(string $content): string
     {
         $content = strip_tags($content);
         $content = trim(preg_replace('/\r|\n/', ' ', $content));
@@ -149,7 +82,7 @@ abstract class StringHelper
      *
      * @return string
      */
-    public static function substr($content, $offset, $length)
+    public static function substr(string $content, int $offset, int $length): string
     {
         $pos     = strpos($content, ' ', $length);
         $content = substr($content, $offset, $pos);
@@ -172,7 +105,7 @@ abstract class StringHelper
      *
      * @return array
      */
-    public static function parseNameValue($content)
+    public static function parseNameValue(string $content): array
     {
         $result = array();
 
@@ -193,26 +126,29 @@ abstract class StringHelper
 
     /**
      * Convert a string to new one that can be used in the URL.
-     *
      * <code>
      * $name = 'John Dow';
-     *
      * // Converted to 'john-dow'.
-     * $alias = Prism\Library\Prism\Utility\StringHelper::stringUrlSafe($name);
+     * $alias = StringHelper::stringUrlSafe($name);
      * </code>
      *
      * @param string $string
-     *
      * @return string
+     * @throws \Exception
      */
     public static function stringUrlSafe($string)
     {
-        $config = \JFactory::getConfig();
-        if ((int)$config->get('unicodeslugs') === 1) {
-            return \JFilterOutput::stringUrlUnicodeSlug($string);
-        } else {
-            return \JFilterOutput::stringURLSafe($string);
+        $app = Factory::getApplication();
+        if (!$app) {
+            throw new \Exception('The application object does not exist.');
         }
+
+        $config = $app->getConfig();
+        if ((int)$config->get('unicodeslugs') === 1) {
+            return OutputFilter::stringUrlUnicodeSlug($string);
+        }
+
+        return OutputFilter::stringURLSafe($string);
     }
 
     /**
@@ -222,15 +158,15 @@ abstract class StringHelper
      * $id = 1;
      * $name = 'John Dow';
      *
-     * $alias = Prism\Library\Prism\Utility\StringHelper::generateMd5Hash($name, $id);
+     * $alias = StringHelper::generateMd5Hash($name, $id);
      * </code>
      *
      * @param string $name
-     * @param mixed $value
+     * @param int|float|string|array $value
      *
      * @return string
      */
-    public static function generateMd5Hash($name, $value)
+    public static function generateMd5Hash(string $name, int | float | string | array $value): string
     {
         if (is_array($value)) {
             $result = '';
@@ -239,12 +175,12 @@ abstract class StringHelper
                     continue;
                 }
 
-                $result .= trim($key).':'.trim($v);
+                $result .= trim($key) . ':' . trim($v);
             }
             $value = $result;
         }
 
-        return md5($name.':'.$value);
+        return md5($name . ':' . $value);
     }
 
     /**
@@ -260,10 +196,9 @@ abstract class StringHelper
      * </code>
      *
      * @param array $params
-     *
      * @return string
      */
-    public static function generateUrlParams($params)
+    public static function generateUrlParams(array $params): string
     {
         $result = '';
         foreach ($params as $key => $param) {
@@ -279,7 +214,7 @@ abstract class StringHelper
      * <code>
      * $htmlString = '<a href="https://funfex.com"'>FunFex.com</a>';
      *
-     * Prism\Library\Prism\Utility\StringHelper::stripTagsAndSpaces($htmlString);
+     * $cleanText = StringHelper::stripTagsAndSpaces($htmlString);
      * </code>
      *
      * @param $string

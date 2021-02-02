@@ -1,7 +1,6 @@
 <?php
 /**
- * @package      Prism
- * @subpackage   Utility
+ * @package      Prism\Library\Prism\Utility
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
@@ -9,36 +8,31 @@
 
 namespace Prism\Library\Prism\Utility;
 
-// no direct access
-defined('JPATH_PLATFORM') or die;
+use Generator;
 
 /**
  * This class contains methods that are used for working with files.
  *
- * @package     Prism
- * @subpackage  Utility
+ * @package Prism\Library\Prism\Utility
  */
-abstract class FileHelper
+final class FileHelper
 {
     /**
      * Return line that reads from file.
      * It uses PHP generators to do that.
-     *
      * <code>
      * $file = '../../filename.csv';
-     *
-     * foreach (Prism\Library\Prism\Utility\FileHelper::getLine($file) as $key => $value) {
+     * foreach (FileHelper::getLine($file) as $key => $value) {
      * ...
      * }
      * </code>
      *
-     * @param string  $file
-     *
-     * @return \Iterator
+     * @param string $file
+     * @return Generator
      */
-    public static function getLine($file)
+    public static function getLine(string $file): Generator
     {
-        $f = fopen($file, 'r');
+        $f = fopen($file, 'rb');
 
         try {
             while ($line = fgets($f)) {
@@ -47,97 +41,5 @@ abstract class FileHelper
         } finally {
             fclose($f);
         }
-    }
-
-    /**
-     * Return maximum file size (in KB) that can be uploaded.
-     *
-     * <code>
-     * $maxFileSize = Prism\Library\Prism\Utility\FileHelper::getMaximumFileSize($file);
-     * </code>
-     *
-     * @param int $maxFileSizeByUser Maximum file size set by user.
-     * @param string $format Format that will be returned - MB or KB.
-     *
-     * @return int
-     * @deprecated
-     */
-    public static function getMaximumFileSize($maxFileSizeByUser = 0, $format = 'KB')
-    {
-        $values = array();
-        $KB = 1024 * 1024;
-
-        if ($maxFileSizeByUser > 0) {
-            $values[] = $maxFileSizeByUser * $KB;
-        }
-
-        // Verify file size
-        $uploadMaxFileSize  = (int)ini_get('upload_max_filesize');
-        if ($uploadMaxFileSize > 0) {
-            $values[] = $uploadMaxFileSize * $KB;
-        }
-
-        $postMaxSize  = (int)ini_get('post_max_size');
-        if ($postMaxSize > 0) {
-            $values[] = $postMaxSize * $KB;
-        }
-
-        $memoryLimit = (int)ini_get('memory_limit');
-        if ($memoryLimit !== -1) {
-            $memoryLimit *= $KB;
-        }
-
-        if ($memoryLimit > 0) {
-            $values[] = $memoryLimit;
-        }
-
-        $result = min($values);
-
-        return (($result > 0.0) and (strcmp($format, 'MB') === 0)) ? $result / $KB : $result;
-    }
-
-    /**
-     * Check if the file name has extension of an image.
-     *
-     * <code>
-     * $filename = 'picture1.png';
-     *
-     * if (Prism\Library\Prism\Utility\FileHelper::isImageExtension($filename)) {
-     * // ...
-     * }
-     * </code>
-     *
-     * @param string $filename
-     *
-     * @return bool
-     */
-    public static function isImageExtension($filename)
-    {
-        $extensions     = array('jpg', 'jpeg', 'bmp', 'gif', 'png');
-        $fileExtension  = \JFile::getExt($filename);
-
-        return (($fileExtension !== null and $fileExtension !== '') and in_array($fileExtension, $extensions, true));
-    }
-
-    /**
-     * Check if a mime type is an image.
-     *
-     * <code>
-     * $mimeType = 'image/png';
-     *
-     * if (Prism\Library\Prism\Utility\FileHelper::isImageMime($mimeType)) {
-     * // ...
-     * }
-     * </code>
-     *
-     * @param string $mimeType
-     *
-     * @return bool
-     */
-    public static function isImageMime($mimeType)
-    {
-        $mimeTypes     = array('image/png', 'image/gif', 'image/jpeg', 'image/pjpeg', 'image/bmp', 'image/x-windows-bmp');
-
-        return (($mimeType !== null and $mimeType !== '') and in_array($mimeType, $mimeTypes, true));
     }
 }

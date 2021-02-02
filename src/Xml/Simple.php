@@ -1,7 +1,6 @@
 <?php
 /**
- * @package      Prism
- * @subpackage   XML
+ * @package      Prism\Library\Prism\Xml
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
@@ -14,8 +13,7 @@ use SimpleXMLElement;
 /**
  * This class extends the native PHP class Simple XML.
  *
- * @package      Prism
- * @subpackage   XML
+ * @package  Prism\Library\Prism\Xml
  */
 class Simple extends SimpleXMLElement
 {
@@ -46,7 +44,7 @@ class Simple extends SimpleXMLElement
      * </code>
      * @return SimpleXMLElement
      */
-    public function addChildCData(string $name, string $value = '')
+    public function addChildCData(string $name, string $value = ''): SimpleXMLElement
     {
         $newChild = $this->addChild($name);
 

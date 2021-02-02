@@ -11,8 +11,7 @@ namespace Prism\Library\Prism\Response;
 /**
  * This class provides functionality to manage JSON response.
  *
- * @package      Prism
- * @subpackage   Responses
+ * @package  Prism\Library\Prism\Response
  */
 final class JsonResponse
 {

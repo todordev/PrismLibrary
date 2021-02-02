@@ -21,7 +21,7 @@ interface Formatter
      *
      * @return string
      */
-    public function format(Money $money);
+    public function format(Money $money): string;
 
     /**
      * Formats an amount as currency string.
@@ -30,5 +30,5 @@ interface Formatter
      *
      * @return string
      */
-    public function formatCurrency(Money $money);
+    public function formatCurrency(Money $money): string;
 }

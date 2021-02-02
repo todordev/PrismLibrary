@@ -22,7 +22,7 @@ trait PropertiesMethods
      *
      * @return  array
      */
-    public function getProperties()
+    public function getProperties(): array
     {
         $vars = get_object_vars($this);
 

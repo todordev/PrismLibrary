@@ -36,10 +36,9 @@ final class IntlDecimalParser implements Parser
      * Parse decimal value.
      *
      * @param string $amount
-     *
      * @return string
      */
-    public function parse($amount)
+    public function parse(string $amount): string
     {
         return $this->parser->parse($amount, \NumberFormatter::TYPE_DOUBLE);
     }

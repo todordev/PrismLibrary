@@ -1,7 +1,6 @@
 <?php
 /**
- * @package      Prism
- * @subpackage   Money
+ * @package      Prism\Library\Prism\Money
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
@@ -22,6 +21,6 @@ interface LegalTender
     public function getSymbol();
     public function getPosition();
     public function equals(LegalTender $other);
-    public function symbolLeft();
-    public function symbolRight();
+    public function isSymbolLeft();
+    public function isSymbolRight();
 }

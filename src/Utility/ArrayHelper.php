@@ -1,7 +1,6 @@
 <?php
 /**
  * @package      Prism\Library\Prism\Utility
- * @subpackage   Array
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
@@ -9,27 +8,20 @@
 
 namespace Prism\Library\Prism\Utility;
 
-use Joomla\Database\ParameterType;
 use Prism\Library\Prism\Constant\Type;
 
 /**
  * This class provides functionality for handling arrays.
  *
- * @package      Prism\Library\Prism\Utility
- * @subpackage   Array
+ * @package Prism\Library\Prism\Utility
  */
 final class ArrayHelper
 {
     /**
      * Return array with IDs extracted from items.
      *
-     * <code>
-     * $userIds = Prism\Library\Prism\Utility\ArrayHelper::getIds($items);
-     * </code>
-     *
      * @param array  $items
      * @param string $column
-     *
      * @return array
      */
     public static function getIds(array $items, $column = 'id'): array

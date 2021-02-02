@@ -18,8 +18,7 @@ interface Parser
      * Parse an amount.
      *
      * @param string $amount
-     *
      * @return float
      */
-    public function parse($amount);
+    public function parse(string $amount): float;
 }

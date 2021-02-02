@@ -1,7 +1,6 @@
 <?php
 /**
- * @package      Prism
- * @subpackage   Filesystem\Adapters
+ * @package      Prism\Library\Prism\Filesystem\Storage
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
@@ -14,6 +13,7 @@ use Prism\Library\Prism\Contract\Filesystem\RemoveRequest;
 use Prism\Library\Prism\Contract\Filesystem\Storage;
 use Prism\Library\Prism\Contract\Filesystem\StoreResponse;
 use Prism\Library\Prism\Filesystem\Dto\LocalStoreRequest;
+use Prism\Library\Prism\Filesystem\Dto\MoveRequest;
 use Prism\Library\Prism\Filesystem\Dto\UploadResponse;
 use Prism\Library\Prism\Filesystem\Path;
 use Joomla\CMS\Filesystem\File as JoomlaFile;
@@ -23,8 +23,7 @@ use Joomla\CMS\Filesystem\Path as JoomlaPath;
  * This class provides functionality for uploading files and
  * delete files in local filesystem.
  *
- * @package      Prism
- * @subpackage   Filesystem\Adapters
+ * @package Prism\Library\Prism\Filesystem\Storage
  */
 class LocalStorage implements Storage
 {
@@ -80,13 +79,26 @@ class LocalStorage implements Storage
     public function remove(RemoveRequest $request): void
     {
         $source = JoomlaPath::clean(
-            $this->storageFolder->getStoragePath() . '/' .
-            $request->getPath()->getRelativePath() . '/' .
-            $request->getFilename()
+            $this->storageFolder->getStoragePath() . '/' . $request->getRelativePath() . '/' . $request->getFilename()
         );
 
         if (JoomlaFile::exists($source)) {
             JoomlaFile::delete($source);
+        }
+    }
+
+    public function move(MoveRequest $request): void
+    {
+        $source = JoomlaPath::clean(
+            $this->storageFolder->getStoragePath() . '/' . $request->getRelativePath() . '/' . $request->getFilename()
+        );
+
+        $target = JoomlaPath::clean(
+            $this->storageFolder->getStoragePath() . '/' . $request->getNewRelativePath() . '/' . $request->getFilename()
+        );
+
+        if (JoomlaFile::exists($source)) {
+            JoomlaFile::move($source, $target);
         }
     }
 }

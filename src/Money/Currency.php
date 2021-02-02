@@ -9,8 +9,6 @@
 
 namespace Prism\Library\Prism\Money;
 
-use Prism\Library\Prism\Domain\HydratingImmutable;
-
 /**
  * This class contains methods that are used for managing currency.
  *
@@ -19,22 +17,20 @@ use Prism\Library\Prism\Domain\HydratingImmutable;
  */
 final class Currency implements LegalTender
 {
-    use HydratingImmutable;
-
     public const SYMBOL_LEFT = 0;
     public const SYMBOL_RIGHT = 1;
 
-    private $name;
-    private $code;
-    private $symbol;
-    private $position;
+    private string $name;
+    private string $code;
+    private string $symbol;
+    private int $position;
 
-    public function __construct(array $properties = [])
+    public function __construct(string $name, string $code, string $symbol, int $position)
     {
-        $this->name = array_key_exists('name', $properties) ? $properties['name'] : '';
-        $this->code = array_key_exists('code', $properties) ? $properties['code'] : '';
-        $this->symbol = array_key_exists('symbol', $properties) ? $properties['symbol'] : '';
-        $this->position = array_key_exists('position', $properties) ? $properties['position'] : '';
+        $this->name = $name;
+        $this->code = $code;
+        $this->symbol = $symbol;
+        $this->position = $position;
     }
 
     /**
@@ -123,7 +119,7 @@ final class Currency implements LegalTender
      */
     public function getPosition(): int
     {
-        return (int)$this->position;
+        return $this->position;
     }
 
     /**
@@ -138,13 +134,13 @@ final class Currency implements LegalTender
      * );
      *
      * $currency  = new Prism\Library\Prism\Money\Currency($data);
-     * if ($currency->symbolLeft()) {
+     * if ($currency->isSymbolLeft()) {
      * }
      * </code>
      *
      * @return bool
      */
-    public function symbolLeft(): bool
+    public function isSymbolLeft(): bool
     {
         return (self::SYMBOL_LEFT === $this->getPosition());
     }
@@ -161,13 +157,13 @@ final class Currency implements LegalTender
      * );
      *
      * $currency  = new Prism\Library\Prism\Money\Currency($data);
-     * if ($currency->symbolRight()) {
+     * if ($currency->isSymbolRight()) {
      * }
      * </code>
      *
      * @return bool
      */
-    public function symbolRight(): bool
+    public function isSymbolRight(): bool
     {
         return (self::SYMBOL_RIGHT === $this->getPosition());
     }

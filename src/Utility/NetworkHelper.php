@@ -1,7 +1,6 @@
 <?php
 /**
- * @package      Prism
- * @subpackage   Utility
+ * @package      Prism\Library\Prism\Utility
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
@@ -12,10 +11,9 @@ namespace Prism\Library\Prism\Utility;
 /**
  * This class contains methods that are used for handling strings.
  *
- * @package     Prism
- * @subpackage  Utility
+ * @package Prism\Library\Prism\Utility
  */
-abstract class NetworkHelper
+final class NetworkHelper
 {
     /**
      * Retrieves the best guess of the client's actual IP address.
@@ -24,17 +22,17 @@ abstract class NetworkHelper
      *
      * @return string
      */
-    public static function getIpAddress()
+    public static function getIpAddress(): string
     {
         // check for shared internet/ISP IP
-        if (!empty($_SERVER['HTTP_CLIENT_IP']) and self::isValidIp($_SERVER['HTTP_CLIENT_IP'])) {
+        if (!empty($_SERVER['HTTP_CLIENT_IP']) && self::isValidIp($_SERVER['HTTP_CLIENT_IP'])) {
             return $_SERVER['HTTP_CLIENT_IP'];
         }
 
         // check for IPs passing through proxies
         if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             // check if multiple ips exist in var
-            if (strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ',') !== false) {
+            if (str_contains($_SERVER['HTTP_X_FORWARDED_FOR'], ',')) {
                 $ipList = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
                 foreach ($ipList as $ip) {
                     if (self::isValidIp($ip)) {
@@ -48,24 +46,24 @@ abstract class NetworkHelper
             }
         }
 
-        if (!empty($_SERVER['HTTP_X_FORWARDED']) and self::isValidIp($_SERVER['HTTP_X_FORWARDED'])) {
+        if (!empty($_SERVER['HTTP_X_FORWARDED']) && self::isValidIp($_SERVER['HTTP_X_FORWARDED'])) {
             return $_SERVER['HTTP_X_FORWARDED'];
         }
 
-        if (!empty($_SERVER['HTTP_X_CLUSTER_CLIENT_IP']) and self::isValidIp($_SERVER['HTTP_X_CLUSTER_CLIENT_IP'])) {
+        if (!empty($_SERVER['HTTP_X_CLUSTER_CLIENT_IP']) && self::isValidIp($_SERVER['HTTP_X_CLUSTER_CLIENT_IP'])) {
             return $_SERVER['HTTP_X_CLUSTER_CLIENT_IP'];
         }
 
-        if (!empty($_SERVER['HTTP_FORWARDED_FOR']) and self::isValidIp($_SERVER['HTTP_FORWARDED_FOR'])) {
+        if (!empty($_SERVER['HTTP_FORWARDED_FOR']) && self::isValidIp($_SERVER['HTTP_FORWARDED_FOR'])) {
             return $_SERVER['HTTP_FORWARDED_FOR'];
         }
 
-        if (!empty($_SERVER['HTTP_FORWARDED']) and self::isValidIp($_SERVER['HTTP_FORWARDED'])) {
+        if (!empty($_SERVER['HTTP_FORWARDED']) && self::isValidIp($_SERVER['HTTP_FORWARDED'])) {
             return $_SERVER['HTTP_FORWARDED'];
         }
 
         // return unreliable ip since all else failed
-        if (!empty($_SERVER['REMOTE_ADDR']) and self::isValidIp($_SERVER['REMOTE_ADDR'])) {
+        if (!empty($_SERVER['REMOTE_ADDR']) && self::isValidIp($_SERVER['REMOTE_ADDR'])) {
             return $_SERVER['REMOTE_ADDR'];
         }
 
@@ -78,12 +76,11 @@ abstract class NetworkHelper
      *
      * @param string $ipAddress
      * @param bool $additionalCheck
-     *
      * @return bool
      */
-    public static function isValidIp($ipAddress, $additionalCheck = false)
+    public static function isValidIp(string $ipAddress, bool $additionalCheck = false): bool
     {
-        if (strpos($ipAddress, ':') === false) { // IPv4
+        if (!str_contains($ipAddress, ':')) { // IPv4
             if (strtolower($ipAddress) === 'unknown') {
                 return false;
             }
@@ -145,7 +142,7 @@ abstract class NetworkHelper
      *
      * @return string
      */
-    public static function getCurlVersion()
+    public static function getCurlVersion(): string
     {
         $version = '--';
 
@@ -162,7 +159,7 @@ abstract class NetworkHelper
      *
      * @return string
      */
-    public static function getOpenSslVersion()
+    public static function getOpenSslVersion(): string
     {
         $openSSLVersion = '--';
 

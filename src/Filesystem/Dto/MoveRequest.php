@@ -11,23 +11,26 @@ namespace Prism\Library\Prism\Filesystem\Dto;
 use Prism\Library\Prism\Contract\Filesystem\RemoveRequest;
 
 /**
- * Request to local storage for removing a file.
+ * Request to local storage for move a file.
  *
  * @package Prism\Library\Prism\Filesystem\Dto
  */
-final class DeleteRequest implements RemoveRequest
+final class MoveRequest implements RemoveRequest
 {
     private string $filename;
     private string $relativePath;
+    private string $newRelativePath;
 
     /**
      * @param string $filename
      * @param string $relativePath
+     * @param string $newRelativePath
      */
-    public function __construct(string $filename, string $relativePath)
+    public function __construct(string $filename, string $relativePath, string $newRelativePath)
     {
         $this->filename = $filename;
         $this->relativePath = $relativePath;
+        $this->newRelativePath = $newRelativePath;
     }
 
     /**
@@ -44,5 +47,13 @@ final class DeleteRequest implements RemoveRequest
     public function getRelativePath(): string
     {
         return $this->relativePath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNewRelativePath(): string
+    {
+        return $this->newRelativePath;
     }
 }

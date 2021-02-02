@@ -12,8 +12,9 @@ namespace Prism\Library\Prism\Filesystem\Service;
 use Joomla\CMS\Filesystem\Folder;
 use Joomla\CMS\Language\Text;
 use Joomla\Registry\Registry;
-use Prism\Library\Prism\Constants;
-use Prism\Library\Prism\Utilities\StringHelper;
+use Prism\Library\Prism\Constant\Generic;
+use Prism\Library\Prism\Constant\Image;
+use Prism\Library\Prism\Utility\StringHelper;
 use Joomla\CMS\Image\Image as JoomlaImage;
 use Joomla\CMS\Filesystem\Path as JoomlaPath;
 use Joomla\CMS\Filesystem\File as JoomlaFile;
@@ -31,54 +32,46 @@ class ProcessingImage
      *
      * @var string
      */
-    protected $file;
+    protected string $file;
 
     /**
      * Initialize the object.
-     *
      * <code>
      * $file        = '/tmp/picture.jpg';
      * $destinationFolder  = "/root/joomla/tmp";
-     *
      * $image = new Prism\Library\Prism\File\Image($file);
      * </code>
      *
      * @param string $file
      */
-    public function __construct($file)
+    public function __construct(string $file)
     {
         $this->file = $file;
     }
 
     /**
      * Resize the temporary file to new one.
-     *
      * <code>
      * $file = $this->input->files->get('media', array(), 'array');
      * $destinationFolder = "/root/joomla/tmp";
-     *
      * $resizeOptions = array(
      *    'width'  => $options['thumb_width'],
      *    'height' => $options['thumb_height'],
      *    'scale'  => \JImage::SCALE_INSIDE
      * );
-     *
      * $file = new Prism\Library\Prism\File\Image($file['tmp_path']);
-     *
      * $fileData = $file->resize($destinationFolder, $resizeOptions);
      * </code>
      *
      * @param string $destinationFolder The folder where the file will be stored.
      * @param Registry $options
-     *
      * @return string
      * @throws \LogicException
      * @throws \InvalidArgumentException
      * @throws \UnexpectedValueException
-     *
      * @throws \RuntimeException
      */
-    public function resize($destinationFolder, Registry $options)
+    public function resize(string $destinationFolder, Registry $options)
     {
         if (!$this->file) {
             throw new \RuntimeException(Text::sprintf('LIB_PRISM_ERROR_FILE_NOT_FOUND_S', $this->file));
@@ -101,7 +94,7 @@ class ProcessingImage
         $height = $options->get('height', 480);
         $height = ($height < 25) ? 25 : $height;
         $scale = $options->get('scale', JoomlaImage::SCALE_INSIDE);
-        $createNew = (bool)$options->get('create_new', Constants::NO);
+        $createNew = (bool)$options->get('create_new', Generic::NO);
 
         if ($createNew) {
             $image = $image->resize($width, $height, $createNew, $scale);
@@ -114,34 +107,28 @@ class ProcessingImage
 
     /**
      * Crop an image.
-     *
      * <code>
      * $file = $this->input->files->get('media', array(), 'array');
      * $destinationFolder = "/root/joomla/tmp";
-     *
      * $resizeOptions = array(
      *    'width'  => $options['thumb_width'],
      *    'height' => $options['thumb_height'],
      *    'x'  => 100,
      *    'y'  => 100,
      * );
-     *
      * $file = new Prism\Library\Prism\File\Image($file['tmp_path']);
-     *
      * $fileData = $file->crop($destinationFolder, $resizeOptions);
      * </code>
      *
      * @param string $destinationFolder The folder where the file will be stored.
      * @param Registry $options
-     *
      * @return string
      * @throws \LogicException
      * @throws \InvalidArgumentException
      * @throws \UnexpectedValueException
-     *
      * @throws \RuntimeException
      */
-    public function crop($destinationFolder, Registry $options)
+    public function crop(string $destinationFolder, Registry $options)
     {
         if (!$this->file) {
             throw new \RuntimeException(Text::sprintf('LIB_PRISM_ERROR_FILE_NOT_FOUND_S', $this->file));
@@ -165,7 +152,7 @@ class ProcessingImage
         $height = ($height < 25) ? 25 : $height;
         $left = (int)abs($options->get('x', 0));
         $top = (int)abs($options->get('y', 0));
-        $createNew = (bool)$options->get('create_new', Constants::NO);
+        $createNew = (bool)$options->get('create_new', Generic::NO);
 
         if ($createNew) {
             $image = $image->crop($width, $height, $left, $top, $createNew);
@@ -178,34 +165,28 @@ class ProcessingImage
 
     /**
      * Save the image file. It could be converted to another image type.
-     *
      * <code>
      * $file = $this->input->files->get('media', array(), 'array');
      * $destinationFolder = "/root/joomla/tmp";
-     *
      * $resizeOptions = array(
      *    'filename_length'  => 16,
      *    'suffix'           => '_image',
      *    'quality'          => Prism\Library\Prism\Constants::QUALITY_HIGH,
      *    'image_type'       => 'png'
      * );
-     *
      * $file     = new Prism\Library\Prism\File\Image($file['tmp_path']);
-     *
      * $fileData = $file->toFile($destinationFolder, $options);
      * </code>
      *
      * @param string $destinationFolder The folder where the file will be stored.
      * @param Registry $options
-     *
      * @return string
      * @throws \LogicException
      * @throws \InvalidArgumentException
      * @throws \UnexpectedValueException
-     *
      * @throws \RuntimeException
      */
-    public function toFile($destinationFolder, Registry $options)
+    public function toFile(string $destinationFolder, Registry $options): string
     {
         if (!$this->file) {
             throw new \RuntimeException(Text::sprintf('LIB_PRISM_ERROR_FILE_NOT_FOUND_S', $this->file));
@@ -240,7 +221,7 @@ class ProcessingImage
 
         // Check for valid file extensions.
         if (!in_array($ext, $imageTypes, true)) {
-            throw new \RuntimeException(\JText::sprintf('LIB_PRISM_ERROR_IMAGE_EXTENSION', $this->file));
+            throw new \RuntimeException(Text::sprintf('LIB_PRISM_ERROR_IMAGE_EXTENSION', $this->file));
         }
 
         // Generate new name.
@@ -269,7 +250,7 @@ class ProcessingImage
         // Resize the image.
         switch ($ext) {
             case 'png':
-                $quality = (int)$options->get('quality', Constants::QUALITY_HIGH);
+                $quality = (int)$options->get('quality', Image::QUALITY_HIGH);
                 $optimizationOptions = array();
                 if ($quality > 0) {
                     if ($quality > 9) {
@@ -285,7 +266,7 @@ class ProcessingImage
 
             case 'jpg':
             case 'jpeg':
-                $quality = (int)$options->get('quality', Constants::QUALITY_HIGH);
+                $quality = (int)$options->get('quality', Image::QUALITY_HIGH);
                 $optimizationOptions = array();
                 if ($quality > 0) {
                     $optimizationOptions = array('quality' => $quality);

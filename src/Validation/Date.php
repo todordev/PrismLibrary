@@ -1,7 +1,6 @@
 <?php
 /**
- * @package      Prism
- * @subpackage   Validations
+ * @package      Prism\Library\Prism\Validation
  * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
@@ -14,8 +13,7 @@ use Exception;
 /**
  * This class validates date.
  *
- * @package      Prism
- * @subpackage   Validations
+ * @package Prism\Library\Prism\Validation
  */
 class Date extends Validation
 {
@@ -91,6 +89,9 @@ class Date extends Validation
         return (bool)checkdate($month, $day, $year);
     }
 
+    /**
+     * @return bool
+     */
     public function fails(): bool
     {
         return !$this->passes();

@@ -18,8 +18,7 @@ interface Formatter
      * Formats an amount as decimal string.
      *
      * @param float $value
-     *
      * @return string
      */
-    public function format($value);
+    public function format(float $value): string;
 }

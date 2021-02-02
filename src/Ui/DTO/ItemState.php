@@ -1,55 +1,47 @@
 <?php
 /**
- * @package      Prism\Library\Prism
- * @subpackage   Ui
+ * @package  Prism\Library\Prism\Ui\Dto
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace Prism\Library\Prism\Ui\DTO;
+namespace Prism\Library\Prism\Ui\Dto;
 
 /**
  * Data transfer object of item state.
  *
- * @package       Prism\Library\Prism
- * @subpackage    Ui
+ * @package  Prism\Library\Prism\Ui\Dto
  */
 final class ItemState
 {
-    private $method;
-    private $tooltip;
-    private $icon;
-    private $activeClass;
+    private string $method;
+    private string $tooltip;
+    private string $icon;
+    private string $activeClass;
 
     /**
      * ItemState constructor.
-     * @param array $data
+     *
+     * @param string $method
+     * @param string $tooltip
+     * @param string $icon
+     * @param string $activeClass
      */
-    public function __construct(array $data = [])
+    public function __construct(string $method, string $tooltip, string $icon, string $activeClass)
     {
-        $this->method = array_key_exists('method', $data) ? (string)$data['method'] : '';
-        $this->tooltip = array_key_exists('tooltip', $data) ? (string)$data['tooltip'] : '';
-        $this->icon = array_key_exists('icon', $data) ? (string)$data['icon'] : '';
-        $this->activeClass = array_key_exists('active_class', $data) ? (string)$data['active_class'] : '';
+        $this->method = $method;
+        $this->tooltip = $tooltip;
+        $this->icon = $icon;
+        $this->activeClass = $activeClass;
     }
 
     /**
      * @return string
      */
-    public function getMethod()
+    public function getMethod(): string
     {
         return $this->method;
-    }
-
-    /**
-     * @param string $method
-     * @return ItemState
-     */
-    public function setMethod($method)
-    {
-        $this->method = $method;
-        return $this;
     }
 
     /**
@@ -61,48 +53,18 @@ final class ItemState
     }
 
     /**
-     * @param string $tooltip
-     * @return ItemState
-     */
-    public function setTooltip(string $tooltip): ItemState
-    {
-        $this->tooltip = $tooltip;
-        return $this;
-    }
-
-    /**
      * @return string
      */
-    public function getIcon()
+    public function getIcon(): string
     {
         return $this->icon;
     }
 
     /**
-     * @param string $icon
-     * @return ItemState
-     */
-    public function setIcon($icon)
-    {
-        $this->icon = $icon;
-        return $this;
-    }
-
-    /**
      * @return string
      */
-    public function getActiveClass()
+    public function getActiveClass(): string
     {
         return $this->activeClass;
-    }
-
-    /**
-     * @param string $activeClass
-     * @return ItemState
-     */
-    public function setActiveClass($activeClass)
-    {
-        $this->activeClass = $activeClass;
-        return $this;
     }
 }

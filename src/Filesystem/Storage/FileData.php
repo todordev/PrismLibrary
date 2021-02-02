@@ -1,7 +1,6 @@
 <?php
 /**
- * @package      Prism
- * @subpackage   Filesystem\Adapters
+ * @package      Prism\Library\Prism\Filesystem\Storage
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
@@ -11,7 +10,7 @@ namespace Prism\Library\Prism\Filesystem\Storage;
 
 /**
  * Information about a file that should be provided to the storage repository.
- * @package      Prism\Library\Prism\Filesystem\Storage
+ * @package Prism\Library\Prism\Filesystem\Storage
  */
 final class FileData
 {

@@ -18,8 +18,7 @@ interface Parser
      * Parse an amount from decimal string.
      *
      * @param string $amount
-     *
      * @return string
      */
-    public function parse($amount);
+    public function parse(string $amount): string;
 }

@@ -1,7 +1,6 @@
 <?php
 /**
- * @package      Prism
- * @subpackage   Version
+ * @package      Prism\Library\Prism
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
@@ -12,8 +11,7 @@ namespace Prism\Library\Prism;
 /**
  * Prism Library version information
  *
- * @package      Prism
- * @subpackage   Version
+ * @package Prism\Library\Prism
  */
 class Version
 {
@@ -71,7 +69,7 @@ class Version
      *
      * @var string
      */
-    public string $copyright = '&copy; 2021 FenFex. All rights reserved.';
+    public string $copyright = 'FenFex LTD. All rights reserved.';
 
     /**
      * URL

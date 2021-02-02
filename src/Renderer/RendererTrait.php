@@ -1,20 +1,21 @@
 <?php
 /**
- * @package         Prism\Library\Prism\Renderer
- * @subpackage      Renderers
+ * @package      Prism\Library\Prism\Renderer
  * @author       FunFex <opensource@funfex.com>
- * @copyright       Copyright (C) 2021 FunFex LTD. All rights reserved.
- * @license         GNU General Public License version 3 or later; see LICENSE.txt
+ * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
+ * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace Prism\Library\Prism\Renderer;
+
+use Joomla\CMS\Layout\FileLayout;
+use Joomla\CMS\Layout\LayoutInterface;
 
 /**
  * Provides interface and functionality for objects
  * that render output by a layout.
  *
- * @package         Prism\Library\Prism\Renderer
- * @subpackage      Renderers
+ * @package Prism\Library\Prism\Renderer
  */
 trait RendererTrait
 {
@@ -23,108 +24,80 @@ trait RendererTrait
      *
      * @var string
      */
-    protected $layout = '';
+    protected string $layout = '';
 
     /**
      * The paths from where the system will load the layout of the element.
      *
-     * @var string
+     * @var array
      */
-    protected $layoutPaths = array();
+    protected array $layoutPaths = [];
 
     /**
      * State of debug functionality.
      *
-     * @var string
+     * @var bool
      */
-    protected $debug  = false;
+    protected bool $debug  = false;
 
     /**
      * Set a layout.
-     *
      * <code>
      * $keys = array(
      *       'user_id'  => 1,
      *       'group_id' => 2
      * );
      * $progressBadges = Gamification\User\Progress\ProgressBadges(\JFactory::getDbo, $keys);
-     *
      * $progressBar    = new Gamification\User\ProgressBar($progressBadges);
      * $progressBar->setLayout('other.progressbar');
      * </code>
      *
      * @param string $layout
-     *
-     * @return string
      */
-    public function setLayout($layout)
+    public function setLayout(string $layout): void
     {
         $this->layout = $layout;
-
-        return $this;
     }
 
     /**
      * Set a layout.
-     *
      * <code>
      * $keys = array(
      *       'user_id'  => 1,
      *       'group_id' => 2
      * );
      * $progressBadges = Gamification\User\Progress\ProgressBadges(\JFactory::getDbo, $keys);
-     *
      * $progressBar    = new Gamification\User\ProgressBar($progressBadges);
      * $progressBar->setLayout('other.progressbar');
      * </code>
      *
      * @param string $fullPath
-     *
-     * @return string
      */
-    public function addLayoutPath($fullPath)
+    public function addLayoutPath(string $fullPath): void
     {
         $this->layoutPaths[] = $fullPath;
-
-        return $this;
     }
 
     /**
      * Render specific layout of this element.
-     *
      * <code>
      * $data = array();
-     *
      * $keys = array(
      *       'user_id'  => 1,
      *       'group_id' => 2
      * );
      * $progressBadges = Gamification\User\Progress\ProgressBadges(\JFactory::getDbo, $keys);
-     *
      * $progressBar    = new Gamification\User\ProgressBar($progressBadges);
      * $progressBar->renderLayout('element.progressbar', $data);
      * </code>
      *
-     * @param   string  $layoutId  Layout identifier
-     * @param   array   $data      Optional data for the layout
-     *
+     * @param string $layout Layout identifier
+     * @param array $data Optional data for the layout
      * @return  string
      */
-    public function renderLayout($layoutId, array $data = array())
+    public function renderLayout(string $layout, array $data = array()): string
     {
-        $data = array_merge($this->getLayoutData(), $data);
-
-        return $this->getRenderer($layoutId)->render($data);
-    }
-
-    /**
-     * Method to get the data to be passed to the layout for rendering.
-     *
-     * @return  array
-     */
-    protected function getLayoutData()
-    {
-        return array();
+        return $this->getRenderer($layout)->render($data);
     }
 
     /**
@@ -132,7 +105,7 @@ trait RendererTrait
      *
      * @return  array
      */
-    protected function getLayoutPaths()
+    protected function getLayoutPaths(): array
     {
         return $this->layoutPaths;
     }
@@ -140,13 +113,13 @@ trait RendererTrait
     /**
      * Get the renderer
      *
-     * @param   string  $layoutId  Id to load
+     * @param   string  $layout  Id to load
      *
-     * @return  \JLayout
+     * @return  LayoutInterface
      */
-    protected function getRenderer($layoutId = 'default')
+    protected function getRenderer($layout = 'default'): LayoutInterface
     {
-        $renderer = new \JLayoutFile($layoutId);
+        $renderer = new FileLayout($layout);
 
         $renderer->setDebug($this->isDebugEnabled());
 
@@ -164,7 +137,7 @@ trait RendererTrait
      *
      * @return  boolean
      */
-    protected function isDebugEnabled()
+    protected function isDebugEnabled(): bool
     {
         return (bool)$this->debug;
     }
@@ -174,7 +147,7 @@ trait RendererTrait
      *
      * @return  boolean
      */
-    public function enableDebug()
+    public function enableDebug(): bool
     {
         return $this->debug = true;
     }
@@ -184,7 +157,7 @@ trait RendererTrait
      *
      * @return  boolean
      */
-    public function disableDebug()
+    public function disableDebug(): bool
     {
         return $this->debug = false;
     }

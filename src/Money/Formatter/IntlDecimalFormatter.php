@@ -1,7 +1,6 @@
 <?php
 /**
- * @package      Prism
- * @subpackage   Money
+ * @package      Prism\Library\Prism\Money\Formatter
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
@@ -9,8 +8,8 @@
 
 namespace Prism\Library\Prism\Money\Formatter;
 
-use Prism\Library\Prism\Constants;
 use Prism\Library\Prism\Money\Money;
+use Prism\Library\Prism\Constant\Generic;
 use Prism\Library\Prism\Money\Formatter;
 
 /**
@@ -24,7 +23,7 @@ final class IntlDecimalFormatter implements Formatter
     /**
      * @var \NumberFormatter
      */
-    private $formatter;
+    private \NumberFormatter $formatter;
 
     /**
      * @param \NumberFormatter $formatter
@@ -35,9 +34,10 @@ final class IntlDecimalFormatter implements Formatter
     }
 
     /**
-     * {@inheritdoc}
+     * @param Money $money
+     * @return string
      */
-    public function format(Money $money)
+    public function format(Money $money): string
     {
         return $this->formatter->format($money->getAmount());
     }
@@ -67,21 +67,21 @@ final class IntlDecimalFormatter implements Formatter
      *
      * @return string
      */
-    public function formatCurrency(Money $money)
+    public function formatCurrency(Money $money): string
     {
         $amount   = $this->formatter->format($money->getAmount());
         $currency = $money->getCurrency();
 
         if ($currency !== null) {
             if ($currency->getSymbol()) {
-                if ($currency->getPosition() === Constants::RIGHT) {
+                if ($currency->getPosition() === Generic::RIGHT) {
                     $amount .= ' ' . $currency->getSymbol();
                 } else {
                     $amount = $currency->getSymbol() . ' ' . $amount;
                 }
 
             } elseif ($currency->getCode()) {
-                $amount .= ' '. $currency->getCode();
+                $amount .= ' ' . $currency->getCode();
             }
         }
 

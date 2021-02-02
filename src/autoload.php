@@ -21,5 +21,3 @@ if (!defined('PRISM_PATH_MEDIA')) {
 }
 
 JLoader::registerNamespace('\\Prism\\Library\\Prism', PRISM_PATH_LIBRARY);
-
-require_once 'vendor/autoload.php';

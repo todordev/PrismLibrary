@@ -37,12 +37,12 @@ trait HydratingImmutable
      *
      * @param array $data
      * @param array $ignored
-     * @throws HydrationException
+     * @throws \ErrorException
      */
     public function hydrate(array $data, array $ignored = []): void
     {
         if ($this->hydrated) {
-            throw new HydrationException('The properties of this immutable object has already been initialized.');
+            throw new \ErrorException('The properties of this immutable object has already been initialized.');
         }
 
         $reflect = new ReflectionClass($this);

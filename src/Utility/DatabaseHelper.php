@@ -9,26 +9,24 @@
 
 namespace Prism\Library\Prism\Utility;
 
+use Joomla\Database\DatabaseDriver;
+
 /**
  * This class provides methods used for interaction with database servers.
  *
- * @package     Prism
- * @subpackage  Utility
+ * @package Prism\Library\Prism\Utility
  */
-abstract class DatabaseHelper
+final class DatabaseHelper
 {
     /**
      * Check if it is MariaDB server.
      *
-     * @param   \JDatabaseDriver $db
-     *
+     * @param   DatabaseDriver $db
      * @return  bool
-     *
-     * @throws \RuntimeException
      */
-    public static function isMariaDB(\JDatabaseDriver $db)
+    public static function isMariaDB(DatabaseDriver $db)
     {
-        $query = 'SHOW VARIABLES LIKE '. $db->quote('version');
+        $query = 'SHOW VARIABLES LIKE ' . $db->quote('version');
 
         $db->setQuery($query);
 
@@ -36,7 +34,7 @@ abstract class DatabaseHelper
 
         $isMariaDb = false;
         if (array_key_exists(1, $result)) {
-            $isMariaDb = (false !== strpos($result[1], 'MariaDB'));
+            $isMariaDb = str_contains($result[1], 'MariaDB');
         }
 
         return $isMariaDb;
@@ -47,11 +45,10 @@ abstract class DatabaseHelper
      *
      * @param string $tableName
      * @param string $prefix
-     *
      * @return string
      */
-    public static function prefix($tableName, $prefix)
+    public static function prefix(string $tableName, string $prefix): string
     {
-        return (string)str_replace('#__', $prefix, $tableName);
+        return str_replace('#__', $prefix, $tableName);
     }
 }

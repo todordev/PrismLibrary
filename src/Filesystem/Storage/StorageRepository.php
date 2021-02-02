@@ -1,7 +1,6 @@
 <?php
 /**
- * @package      Prism
- * @subpackage   Files
+ * @package      Prism\Library\Prism\Filesystem\Storage
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
@@ -17,16 +16,16 @@ use Prism\Library\Prism\Contract\Filesystem\StoreResponse;
 use Prism\Library\Prism\Filesystem\Dto\LocalSafeFileOptions;
 use Prism\Library\Prism\Filesystem\Dto\LocalStoreRequest;
 use Prism\Library\Prism\Contract\Filesystem\Storage;
+use Prism\Library\Prism\Filesystem\Dto\MoveRequest;
 use Prism\Library\Prism\Utility\StringHelper;
 use Prism\Library\Prism\Validation\ErrorMessage;
 use Prism\Library\Prism\Validation\Validation;
 
 /**
- * This class provides functionality for uploading a file and
- * validating the process.
+ * This class provides functionality for storing,
+ * moving, removing and validating a file.
  *
- * @package      Prism
- * @subpackage   Filesystem
+ * @package Prism\Library\Prism\Filesystem\Storage
  */
 class StorageRepository
 {
@@ -88,9 +87,20 @@ class StorageRepository
         return $this->storage->store($localStorageRequest);
     }
 
+    /**
+     * @param RemoveRequest $request
+     */
     public function remove(RemoveRequest $request): void
     {
         $this->storage->remove($request);
+    }
+
+    /**
+     * @param MoveRequest $request
+     */
+    public function move(MoveRequest $request): void
+    {
+        $this->storage->move($request);
     }
 
     /**

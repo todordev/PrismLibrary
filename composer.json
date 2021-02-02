@@ -1,32 +1,28 @@
 {
     "name": "itprism/prism-library",
-    "description": "Prism library used in all ITPrism projects.",
-    "keywords": ["library", "itprism", "joomla"],
+    "description": "Prism library used in all FunFex projects.",
+    "keywords": ["library", "funfex", "joomla"],
     "license": "GNU/GPL-3.0",
 	"homepage": "https://github.com/ITPrism/PrismLibrary",
     "type": "library",
 	"minimum-stability": "stable",
     "require": {
-		"php": ">=7.2",
-        "hashids/hashids": "^4.1",
-        "league/fractal": "^0.19",
-        "illuminate/support": "^8.0",
-        "illuminate/pipeline": "^8.0",
+		"php": ">=8.0",
 		"ext-json": "*",
         "ext-simplexml": "*"
     },
 	"require-dev": {
-		"phpunit/phpunit": "^8.5"
+		"phpunit/phpunit": "^9.5"
     },
 	"autoload": {
         "psr-4": {
-            "Prism\\": "src/"
+            "Prism\\Library\\Prism\\": "src/"
         }
     },
 	"authors": [
         {
-            "name": "Todor",
-            "email": "support@itprism.com"
+            "name": "FunFex",
+            "email": "opensource@funfex.com"
         }
     ]
 }

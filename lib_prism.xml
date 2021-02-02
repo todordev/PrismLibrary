@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<extension type="library" version="4.0" method="upgrade">
+<extension type="library" method="upgrade">
     <name>Prism Library</name>
     <libraryname>Prism</libraryname>
-    <author>FunFex</author>
+    <author>FunFex LTD.</author>
     <authorEmail>opensource@funfex.com</authorEmail>
     <authorUrl>https://funfex.com</authorUrl>
     <copyright>Copyright (C) 2021 FunFex LTD. All rights reserved.</copyright>
     <license>http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3</license>
-    <packager>FunFex</packager>
+    <packager>FunFex LTD.</packager>
     <packagerurl>https://funfex.com</packagerurl>
     <version>2.0.0-alpha3</version>
-    <creationDate>16 January, 2021</creationDate>
+    <creationDate>31 January, 2021</creationDate>
     <description>Prism Library is a collection of resources used in the most of FunFex extensions.</description>
 
     <namespace>Prism\Library\Prism</namespace>
@@ -59,6 +59,6 @@
     </files>
 
     <updateservers>
-        <server type="extension" priority="1" name="Prism Library">http://cdn.itprism.com/updates/prism-library.xml</server>
+        <server type="extension" priority="1" name="Prism Library">https://cdn.funfex.com/updates/prism-library.xml</server>
     </updateservers>
 </extension>

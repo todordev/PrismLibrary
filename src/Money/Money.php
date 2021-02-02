@@ -1,7 +1,6 @@
 <?php
 /**
- * @package      Prism
- * @subpackage   Money
+ * @package      Prism\Library\Prism\Money
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
@@ -12,8 +11,7 @@ namespace Prism\Library\Prism\Money;
 /**
  * This class contains methods that are used for managing an amount.
  *
- * @package      Prism
- * @subpackage   Money
+ * @package Prism\Library\Prism\Money
  */
 final class Money
 {
@@ -27,24 +25,22 @@ final class Money
     /**
      * Currency object.
      *
-     * @var Currency
+     * @var LegalTender
      */
-    private $currency;
+    private LegalTender $currency;
 
     /**
      * Initialize the object.
-     *
      * <code>
      * $amount = 1,500.25;
-     *
      * $currency = new Currency();
      * $money    = new Prism\Library\Prism\Money\Money($amount, $currency);
      * </code>
      *
-     * @param mixed       $amount
+     * @param string|int|float $amount
      * @param LegalTender $currency
      */
-    public function __construct($amount, LegalTender $currency)
+    public function __construct(string | int | float $amount, LegalTender $currency)
     {
         $this->amount   = $amount;
         $this->currency = $currency;
@@ -60,49 +56,27 @@ final class Money
      * $currency = $money->getCurrency();
      * </code>
      *
-     * @return Currency|null
+     * @return LegalTender
      */
-    public function getCurrency()
+    public function getCurrency(): LegalTender
     {
         return $this->currency;
     }
 
     /**
      * Get the amount value.
-     *
      * <code>
      * $amount   = 1,500.25;
-     *
      * $currency = new Currency();
      * $money    = new Prism\Library\Prism\Money\Money($amount, $currency);
-     *
      * echo $money->getAmount();
      * </code>
      *
-     * @return float
+     * @return float|int|string
      */
-    public function getAmount()
+    public function getAmount(): float | int | string
     {
         return $this->amount;
-    }
-
-    /**
-     * Set an amount returning a new Money object because it is immutable.
-     *
-     * <code>
-     * $currency = new Currency();
-     * $money    = new Prism\Library\Prism\Money\Money(1,500.25, $currency);
-     *
-     * $money2   = $money->setAmount(1,000.00);
-     * </code>
-     *
-     * @param float $amount
-     *
-     * @return Money
-     */
-    public function setAmount($amount)
-    {
-        return new self($amount, $this->currency);
     }
 
     /**
@@ -112,7 +86,7 @@ final class Money
      *
      * @return bool
      */
-    public function isSameCurrency(Money $other)
+    public function equalCurrency(Money $other): bool
     {
         return $this->currency->equals($other->getCurrency());
     }
@@ -124,8 +98,8 @@ final class Money
      *
      * @return bool
      */
-    public function equals(Money $other)
+    public function equal(Money $other): bool
     {
-        return ($this->isSameCurrency($other) && $this->getAmount() === $other->getAmount());
+        return ($this->equalCurrency($other) && $this->getAmount() === $other->getAmount());
     }
 }

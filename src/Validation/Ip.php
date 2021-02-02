@@ -1,7 +1,6 @@
 <?php
 /**
- * @package      Prism
- * @subpackage   Validations
+ * @package      Prism\Library\Prism\Validation
  * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
@@ -11,8 +10,7 @@ namespace Prism\Library\Prism\Validation;
 /**
  * This class validates IP addresses.
  *
- * @package      Prism
- * @subpackage   Validations
+ * @package Prism\Library\Prism\Validation
  */
 class Ip extends Validation
 {
@@ -77,6 +75,9 @@ class Ip extends Validation
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function fails(): bool
     {
         return !$this->passes();

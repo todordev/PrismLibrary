@@ -8,8 +8,6 @@
 
 namespace Prism\Library\Prism\Contract\Filesystem;
 
-use Prism\Library\Prism\Filesystem\Path;
-
 /**
  * Interface of file removing requests.
  *
@@ -18,5 +16,5 @@ use Prism\Library\Prism\Filesystem\Path;
 interface RemoveRequest
 {
     public function getFilename(): string;
-    public function getPath(): Path;
+    public function getRelativePath(): string;
 }

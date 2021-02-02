@@ -1,7 +1,6 @@
 <?php
 /**
- * @package      Prism
- * @subpackage   Container
+ * @package      Prism\Library\Prism\Container
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
@@ -18,7 +17,7 @@ final class LayoutContainer
 {
     private array $items = [];
 
-    public function set(string $key, $value)
+    public function set(string $key, $value): LayoutContainer
     {
         $this->items[$key] = $value;
 

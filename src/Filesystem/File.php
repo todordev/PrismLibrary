@@ -11,7 +11,7 @@ namespace Prism\Library\Prism\Filesystem;
 class File
 {
     protected string $name;
-    protected FilePath $path;
+    protected Path $path;
     protected string $type;
     protected int $size;
     protected string $extension;
@@ -24,18 +24,18 @@ class File
     }
 
     /**
-     * @return FilePath
+     * @return Path
      */
-    public function path(): FilePath
+    public function path(): Path
     {
         return $this->path;
     }
 
     /**
-     * @param FilePath $path
+     * @param Path $path
      * @return File
      */
-    public function setFilepath(FilePath $path): File
+    public function setPath(Path $path): File
     {
         $this->path = $path;
         return $this;

@@ -1,7 +1,6 @@
 <?php
 /**
- * @package      Prism
- * @subpackage   Money
+ * @package  Prism\Library\Prism\Intl\Parser
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
@@ -14,8 +13,7 @@ use Prism\Library\Prism\Intl\Parser;
 /**
  * Formats a Money object using intl extension.
  *
- * @package      Prism\Library\Prism\Money
- * @subpackage   Parsers
+ * @package  Prism\Library\Prism\Intl\Parser
  */
 final class IntlDecimalParser implements Parser
 {
@@ -29,17 +27,16 @@ final class IntlDecimalParser implements Parser
      */
     public function __construct(\NumberFormatter $parser)
     {
-        $this->parser  = $parser;
+        $this->parser = $parser;
     }
 
     /**
      * Parse decimal value.
      *
      * @param string $amount
-     *
      * @return float
      */
-    public function parse($amount)
+    public function parse(string $amount): float
     {
         return (float)$this->parser->parse($amount, \NumberFormatter::TYPE_DOUBLE);
     }

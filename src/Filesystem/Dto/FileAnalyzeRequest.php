@@ -8,8 +8,6 @@
 
 namespace Prism\Library\Prism\Filesystem\Dto;
 
-use Prism\Library\Prism\Filesystem\Path;
-
 /**
  * Request to the service that will analyze a file.
  *

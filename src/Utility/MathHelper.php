@@ -1,7 +1,6 @@
 <?php
 /**
- * @package      Prism
- * @subpackage   Utility
+ * @package      Prism\Library\Prism\Utility
  * @author       FunFex <opensource@funfex.com>
  * @copyright    Copyright (C) 2021 FunFex LTD. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
@@ -12,35 +11,28 @@ namespace Prism\Library\Prism\Utility;
 /**
  * This class contains methods that are used for handling numbers.
  *
- * @package     Prism
- * @subpackage  Utility
+ * @package Prism\Library\Prism\Utility
  */
-abstract class MathHelper
+final class MathHelper
 {
     /**
-     * Calculate percentage from two values.
-     *
+     * Calculate X is what percent of Y.
      * <code>
      * // Displays 10 ( 10% )
-     * echo Prism\Library\Prism\Utility\MathHelper::calculatePercentage(100, 1000);
-     *
+     * echo MathHelper::calculatePercentage(100, 1000);
      * </code>
      *
-     * @param float $value1
-     * @param float $value2
-     * @param int   $decimalPoint
-     *
-     * @return float $result
+     * @param float|int $x
+     * @param float|int $y
+     * @param int $decimalPoint
+     * @return float | int
      */
-    public static function calculatePercentage($value1, $value2, $decimalPoint = 2)
+    public static function calculatePercentage(float | int $x, float | int $y, int $decimalPoint = 2): float | int
     {
-        $value1 = (float)$value1;
-        $value2 = (float)$value2;
-
         $result = 0.0;
 
-        if (($value1 !== 0.0) and ($value2 !== 0.0)) {
-            $value  = ($value1 / $value2) * 100;
+        if (($x > 0) && ($y > 0)) {
+            $value  = ($x / $y) * 100;
             $result = round($value, $decimalPoint);
         }
 
@@ -48,30 +40,23 @@ abstract class MathHelper
     }
 
     /**
-     * Calculate a value from percent.
-     *
+     * Calculate percent of value.
      * <code>
      * $fee = "10"; // 10%
      * $amount = "100"; // $100
-     *
-     * // Displays 10.00 ( $10.00 )
-     * echo Prism\Library\Prism\Utility\MathHelper::calculateValueFromPercent($fee, $amount);;
+     * echo MathHelper::calculateValueFromPercent($fee, $amount);;
      * </code>
      *
-     * @param float $percent
-     * @param float $value
-     * @param int   $decimalPoint
-     *
-     * @return float
+     * @param float|int $percent
+     * @param float|int $value
+     * @param int $decimalPoint
+     * @return float | int
      */
-    public static function calculateValueFromPercent($percent, $value, $decimalPoint = 2)
+    public static function calculateValueFromPercent(float | int $percent, float | int $value, $decimalPoint = 2): float | int
     {
-        $percent = (float)$percent;
-        $value   = (float)$value;
-
         $result = 0.0;
 
-        if (($percent !== 0.0) and ($value !== 0.0)) {
+        if (($percent > 0) && ($value > 0)) {
             $value  = ($percent / 100) * $value;
             $result = round($value, $decimalPoint);
         }
@@ -83,9 +68,9 @@ abstract class MathHelper
      * Calculate total value.
      *
      * <code>
-     * $values = array(10, 10);
+     * $values = [10, 10];
      *
-     * echo Prism\Library\Prism\Utility\MathHelper::calculateTotal($values);
+     * echo MathHelper::calculateTotal($values);
      * </code>
      *
      * @param array  $values
@@ -94,7 +79,7 @@ abstract class MathHelper
      *
      * @return float
      */
-    public static function calculateTotal($values, $action = 'M', $decimalPoint = 2)
+    public static function calculateTotal(array $values, string $action = 'M', int $decimalPoint = 2)
     {
         $result = (float)array_shift($values);
 
@@ -127,25 +112,19 @@ abstract class MathHelper
      * @param int  $value
      * @param string $from
      *
-     * @return int
+     * @return float | int
      */
-    public static function convertToBytes($value, $from)
+    public static function convertToBytes(int $value, string $from): float | int
     {
         $from   = strtoupper($from);
-        switch ($from) {
-            case 'KB':
-                return $value * 1024;
-            case 'MB':
-                return $value * pow(1024, 2);
-            case 'GB':
-                return $value * pow(1024, 3);
-            case 'TB':
-                return $value * pow(1024, 4);
-            case 'PB':
-                return $value * pow(1024, 5);
-            default:
-                return $value;
-        }
+        return match ($from) {
+            'KB' => $value * 1024,
+            'MB' => $value * (1024 ** 2),
+            'GB' => $value * (1024 ** 3),
+            'TB' => $value * (1024 ** 4),
+            'PB' => $value * (1024 ** 5),
+            default => $value
+        };
     }
 
     /**
@@ -154,15 +133,15 @@ abstract class MathHelper
      * <code>
      * $values = 5242880; // 5MB
      *
-     * echo Prism\Library\Prism\Utility\MathHelper::convertFromBytes($values, 'MB');
+     * echo MathHelper::convertFromBytes($values, 'MB');
      * </code>
      *
-     * @param int  $bytes
+     * @param int $bytes
      * @param int $precision
      *
-     * @return int
+     * @return float | int
      */
-    public static function convertFromBytes($bytes, $precision = 2)
+    public static function convertFromBytes(int $bytes, int $precision = 2): float | int
     {
         $units = array('B', 'KB', 'MB', 'GB', 'TB');
 
